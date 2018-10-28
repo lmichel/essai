@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VODML>
+	<MODEL>
+		<NAME>LMTS</NAME>
+		<URL>https://volute.g-vo.org/svn/trunk/projects/time-domain/time-series/vodml-lite/models/lm_timeseries.vo-dml.xml
+		</URL>
+	</MODEL>
+	<GLOBALS ID="_MyFirstGlobal">
+	</GLOBALS>
+
+	<TEMPLATES tableref="ndgnsolidgdea">
+		<INSTANCE dmrole='root'>
+			<INSTANCE dmrole='timeseries:TimeSerie.dataSet'>
+				<VALUE dmrole='timeseries:dataset.DataSet.calib_level' ref='calibLevel' />
+				<VALUE dmrole='timeseries:dataset.DataSet.creator' ref='creat' />
+				<VALUE dmrole='timeseries:dataset.DataSet.contributor' ref='cont' />
+				<VALUE dmrole='timeseries:dataset.DataSet.publisher_did' ref='pubDID' />
+				<VALUE dmrole='timeseries:dataset.DataSet.target' ref='targ' />
+			</INSTANCE>
+
+			<INSTANCE dmrole='timeseries:TimeSerie.spaceFrame' tableref='coosys' />
+			<INSTANCE dmrole='timeseries:TimeSerie.timeFrame' tableref='coosys' />
+			<INSTANCE dmrole='timeseries:TimeSerie.filter' tableref='coosys' />
+			<INSTANCE dmrole='timeseries:TimeSerie.refPosition'
+				tableref='char' />
+
+			<INSTANCE dmrole='timeseries:TimeSerie.dependantModelDescriptor'>
+				<VALUE dmrole='timeseries:dataset.DependantModelDescriptor.name'
+					value='Laurent'></VALUE>
+				<VALUE dmrole='timeseries:dataset.DependantModelDescriptor.ivoid'
+					value='ivo://vodml/lite/laurent'></VALUE>
+				<VALUE dmrole='timeseries:dataset.DependantModelDescriptor.url'
+					value='http://vodml/lite/laurent'></VALUE>
+			</INSTANCE>
+
+			<!-- COLLECTION dmrole="timeseries:TimeSerie.pointsJ"> <INSTANCE dmrole="timeseries:data.PointJ" 
+				tableref="data" /> </COLLECTION> <COLLECTION dmrole="timeseries:TimeSerie.pointsH"> 
+				<INSTANCE dmrole="timeseries:data.PointH" tableref="data" /> </COLLECTION> 
+				<COLLECTION dmrole="timeseries:TimeSerie.pointsK"> <INSTANCE dmrole="timeseries:data.PointK" 
+				tableref="data" /> </COLLECTION> <COLLECTION dmrole="timeseries:TimeSerie.pointsL"> 
+				<INSTANCE dmrole="timeseries:data.PointL" tableref="data" /> </COLLECTION> 
+				<COLLECTION dmrole="timeseries:TimeSerie.pointsM"> <INSTANCE dmrole="timeseries:data.PointM" 
+				tableref="data" /> </COLLECTION -->
+			<COLLECTION dmrole="timeseries:TimeSerie.points"
+				arraysise="4">
+				<COLLECTION dmrole="timeseries:TimeSerie.points">
+					<INSTANCE dmrole="timeseries:data.Point" tableref="data" />
+				</COLLECTION>
+				<COLLECTION dmrole="timeseries:TimeSerie.points">
+					<INSTANCE dmrole="timeseries:data.Point" tableref="data" />
+				</COLLECTION>
+				<COLLECTION dmrole="timeseries:TimeSerie.points">
+					<INSTANCE dmrole="timeseries:data.Point" tableref="data" />
+				</COLLECTION>
+				<COLLECTION dmrole="timeseries:TimeSerie.points">
+					<INSTANCE dmrole="timeseries:data.Point" tableref="data" />
+				</COLLECTION>
+				<COLLECTION dmrole="timeseries:TimeSerie.points">
+					<INSTANCE dmrole="timeseries:data.Point" tableref="data" />
+				</COLLECTION>
+			</COLLECTION>
+		</INSTANCE>
+	</TEMPLATES>
+</VODML>
