@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vo-dml:model xmlns:vo-dml="http://www.ivoa.net/xml/VODML/v1"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ivoa.net/xml/VODML/v1 http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/xsd/vo-dml-v1.0.xsd">
+  <name>ts</name>
+  <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+  <uri/>
+  <title>IVOA Time Series Model</title>
+  <author>IVOA TDIG</author>
+  <version>0.1</version>
+  <lastModified>2018-09-19T11:10:58</lastModified>
+  <import>
+    <name>ivoa</name>
+    <url>http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml</url>
+    <documentationURL>http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/models/ivoa/vo-dml/IVOA-v1.0.html</documentationURL>
+  </import>
+  <import>
+    <name>cube</name>
+    <url>../../models/Cube-1.0.vo-dml.xml</url>
+    <documentationURL>http://volute.g-vo.org/svn/trunk/projects/dm/Cube/vo-dml/Cube-1.0.html</documentationURL>
+  </import>
+  <import>
+    <name>meas</name>
+    <url>http://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_meas-v2.0.vo-dml.xml</url>
+    <documentationURL>http://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_meas-v2.0.html</documentationURL>
+  </import>
+  <import>
+    <name>coords</name>
+    <url>http://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_coords-v2.0.vo-dml.xml</url>
+    <documentationURL>http://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_coords-v2.0.html</documentationURL>
+  </import>
+  <import>
+    <name>photdm</name>
+    <url>../../models/PhotDM-alt.vo-dml.xml</url>
+    <documentationURL>http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml-org/models/photdm-alt/PhotDM-alt.html</documentationURL>
+  </import>
+  <dataType abstract="true">
+    <vodml-id>PhotometricCoord</vodml-id>
+    <name>PhotometricCoord</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>coords:Coordinate</vodml-ref>
+    </extends>
+  </dataType>
+
+  <dataType>
+    <vodml-id>Flux</vodml-id>
+    <name>Flux</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>ts:PhotometricCoord</vodml-ref>
+    </extends>
+  </dataType>
+
+  <dataType>
+    <vodml-id>Magnitude</vodml-id>
+    <name>Magnitude</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>ts:PhotometricCoord</vodml-ref>
+    </extends>
+  </dataType>
+
+  <objectType>
+    <vodml-id>SimpleTimeSeries</vodml-id>
+    <name>SimpleTimeSeries</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>cube:SparseCube</vodml-ref>
+    </extends>
+    <constraint>
+      <description>One Observable MUST have TimeMeasure; dependent=FALSE </description>
+    </constraint>
+  </objectType>
+
+  <objectType>
+    <vodml-id>TimeSeriesOfProduct</vodml-id>
+    <name>TimeSeriesOfProduct</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>ts:SimpleTimeSeries</vodml-ref>
+    </extends>
+    <constraint xsi:type="vo-dml:SubsettedRole">
+      <role>
+        <vodml-ref>cube:SparseCube.data</vodml-ref>
+      </role>
+      <datatype>
+        <vodml-ref>ts:Record</vodml-ref>
+      </datatype>
+    </constraint>
+  </objectType>
+
+  <objectType>
+    <vodml-id>Record</vodml-id>
+    <name>Record</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>cube:NDPoint</vodml-ref>
+    </extends>
+    <reference>
+      <vodml-id>Record.dataProduct</vodml-id>
+      <name>dataProduct</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>cube:DataProduct</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </reference>
+  </objectType>
+
+  <objectType>
+    <vodml-id>PhotometricMeasure</vodml-id>
+    <name>PhotometricMeasure</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>meas:CoordMeasure</vodml-ref>
+    </extends>
+    <constraint xsi:type="vo-dml:SubsettedRole">
+      <role>
+        <vodml-ref>meas:CoordMeasure.error</vodml-ref>
+      </role>
+      <datatype>
+        <vodml-ref>meas:Error1D</vodml-ref>
+      </datatype>
+    </constraint>
+    <constraint xsi:type="vo-dml:SubsettedRole">
+      <role>
+        <vodml-ref>meas:CoordMeasure.coord</vodml-ref>
+      </role>
+      <datatype>
+        <vodml-ref>ts:PhotometricCoord</vodml-ref>
+      </datatype>
+    </constraint>
+    <reference>
+      <vodml-id>PhotometricMeasure.filter</vodml-id>
+      <name>filter</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>photdm:PhotCal</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </reference>
+  </objectType>
+
+</vo-dml:model>

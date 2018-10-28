@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vo-dml:model xmlns:vo-dml="http://www.ivoa.net/xml/VODML/v1"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ivoa.net/xml/VODML/v1 file:///data/vao/staff/mcd/docs/models/dm/vo-dml/xsd/vo-dml-v1.xsd">
+  <name>ts</name>
+  <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+  <uri/>
+  <title/>
+  <version>0.x</version>
+  <lastModified>2018-03-15T11:59:22</lastModified>
+  <import>
+    <name>ivoa</name>
+    <url>https://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/models/ivoa/vo-dml/IVOA-v1.0.vo-dml.xml</url>
+    <documentationURL>https://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/models/ivoa/vo-dml/IVOA-v1.0.html</documentationURL>
+  </import>
+  <import>
+    <name>cube</name>
+    <url>https://volute.g-vo.org/svn/trunk/projects/dm/Cube/vo-dml/Cube-1.0.vo-dml.xml</url>
+    <documentationURL>https://volute.g-vo.org/svn/trunk/projects/dm/Cube/vo-dml/Cube-1.0.html</documentationURL>
+  </import>
+  <objectType>
+    <vodml-id>SimpleTimeSeries</vodml-id>
+    <name>SimpleTimeSeries</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>cube:SparseCube</vodml-ref>
+    </extends>
+    <constraint xsi:type="vo-dml:SubsettedRole">
+      <role>
+        <vodml-ref>cube:SparseCube.data</vodml-ref>
+      </role>
+      <datatype>
+        <vodml-ref>ts:TSPoint</vodml-ref>
+      </datatype>
+    </constraint>
+  </objectType>
+
+  <objectType>
+    <vodml-id>SampleTime</vodml-id>
+    <name>SampleTime</name>
+    <description>Need to define different Time axis type for other TimeSeries data products.
+(VO-DML) composition rule.</description>
+    <extends>
+      <vodml-ref>cube:MeasurementAxis</vodml-ref>
+    </extends>
+    <constraint>
+      <description>dependent=False</description>
+    </constraint>
+    <constraint xsi:type="vo-dml:SubsettedRole">
+      <role>
+        <vodml-ref>cube:MeasurementAxis.measure</vodml-ref>
+      </role>
+      <datatype>
+        <vodml-ref>coord:TimeMeasure</vodml-ref>
+      </datatype>
+    </constraint>
+  </objectType>
+
+  <objectType>
+    <vodml-id>TSPoint</vodml-id>
+    <name>TSPoint</name>
+    <description>Series of Observables.. 
+  Measurements</description>
+    <extends>
+      <vodml-ref>cube:NDPoint</vodml-ref>
+    </extends>
+    <composition>
+      <vodml-id>TSPoint.timeAxis</vodml-id>
+      <name>timeAxis</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ts:SampleTime</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </composition>
+  </objectType>
+
+
+
+  <package>
+    <vodml-id>spec</vodml-id>
+    <name>spec</name>
+    <description>This would be defined in Spectral(?) model.  Reference to PhotometryFilter (meta)data is provenance on LuminosityMeasure creation. 
+Should be to PhotometryFilter spec from Photometry Model.  Putting this here as placeholder</description>
+    <enumeration>
+      <vodml-id>spec.LuminosityType</vodml-id>
+      <name>LuminosityType</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <literal>
+        <vodml-id>spec.LuminosityType.magnitude</vodml-id>
+        <name>magnitude</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      </literal>
+      <literal>
+        <vodml-id>spec.LuminosityType.flux</vodml-id>
+        <name>flux</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      </literal>
+    </enumeration>
+
+    <dataType abstract="true">
+      <vodml-id>domain.space.RefLocation</vodml-id>
+      <name>RefLocation</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    </dataType>
+
+    <objectType abstract="true">
+      <vodml-id>spec.LuminosityMeasure</vodml-id>
+      <name>LuminosityMeasure</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <attribute>
+        <vodml-id>spec.LuminosityMeasure.type</vodml-id>
+        <name>type</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ts:spec.LuminosityType</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>1</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </attribute>
+      <reference>
+        <vodml-id>spec.LuminosityMeasure.photProv</vodml-id>
+        <name>photProv</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ts:spec.PhotProv</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>0</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </reference>
+    </objectType>
+
+    <objectType>
+      <vodml-id>spec.PhotProv</vodml-id>
+      <name>PhotProv</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <attribute>
+        <vodml-id>spec.PhotProv.filter</vodml-id>
+        <name>filter</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ivoa:anyURI</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>1</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </attribute>
+      <attribute>
+        <vodml-id>spec.PhotProv.waveEff</vodml-id>
+        <name>waveEff</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ivoa:RealQuantity</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>0</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </attribute>
+      <attribute>
+        <vodml-id>spec.PhotProv.waveMin</vodml-id>
+        <name>waveMin</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ivoa:RealQuantity</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>0</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </attribute>
+      <attribute>
+        <vodml-id>spec.PhotProv.waveMax</vodml-id>
+        <name>waveMax</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ivoa:RealQuantity</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>0</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </attribute>
+    </objectType>
+
+  </package>
+
+</vo-dml:model>

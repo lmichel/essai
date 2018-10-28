@@ -25,7 +25,10 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-    compile files('libs/savot.jar')
+    compile files('libs/savot-4.0.0-kxml.jar')
+    compile files('libs/savot-4.0.0.jar')
+    compile group: 'net.sf.kxml', name: 'kxml2', version: '2.3.0'
+    
 }
 
 test {
