@@ -1,8 +1,8 @@
 # vodml-lite-mapping
 
-This goal of this project is to investigate the possibility of simplifying the syntax of the VO-DML mapping in VOTable.
-It s currently based on the SimpleTimeSeries data model (10/2018).
-This model still being in development,some physical quantities used in the project could be obsolete.
+The goal of this project is to investigate the possibility of simplifying the syntax of the VO-DML mapping in VOTable and to make it more flexible to be usable over a large variety of datasets.
+It is currently based on the SimpleTimeSeries data model (10/2018).
+This model is still in development,some physical quantities used in the project could be obsolete.
 
 You can get more about our mapping sntax on the [wiki](https://github.com/lmichel/vodml-lite-mapping/wiki)
 
