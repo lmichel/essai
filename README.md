@@ -11,7 +11,7 @@ The Python submodule can transform a VODML model into a set of mapping component
 These components must be rearranged by hand to build the final mapping block
 ```bash
 % cd vodml-lite-mapping/mapping-factory/python/
-% python transform8ts.py
+% python transform_ts.py
 ```
 ## Annotated VOTable Processing
 The test package contains multiple VOTable which have been used for the developpement.
