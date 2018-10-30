@@ -57,14 +57,18 @@ public class LiteMappingParserTsmodelFilterTest {
 		assertEquals(1,rs.size() );
 		rs = liteMappingParser.getNodesByRole("observable");
 		MappingElement me = rs.get(1);
-		assertEquals(83, me.getLength() );
+		assertEquals(85, me.getLength() );
 		MappingElement point = me.getContentElement(0);
 		
 		MappingElement timeFrame = point.getOneSubelementByRole("coords:Coordinate.frame");
 		assertEquals("TCB", timeFrame.getOneSubelementByRole("coords:domain.time.TimeFrame.timescale").getStringValue() );
 
 		MappingElement pe = point.getOneSubelementByRole("photdm:Access.reference");
+<<<<<<< HEAD
 		assertEquals("http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.BP",pe.toString() );
+=======
+		assertEquals("http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.G",pe.toString() );
+>>>>>>> branch 'master' of git@github.com:lmichel/vodml-lite-mapping.git
 
 		List<MappingElement> mesures = point.getSubelementsByRole("meas:CoordMeasure.coord");
 		String t="";
@@ -78,8 +82,13 @@ public class LiteMappingParserTsmodelFilterTest {
 				mag = x.getStringValue();
 			} 
 		}
+<<<<<<< HEAD
 		assertEquals("1705.9440504175118", t);
 		assertEquals("15.64539174200359", mag);
+=======
+		assertEquals("1705.9437360200984", t);
+		assertEquals("14.76056670662418", mag);
+>>>>>>> branch 'master' of git@github.com:lmichel/vodml-lite-mapping.git
 	}
 
 }
