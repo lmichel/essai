@@ -5,15 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import exceptions.MappingClassException;
-import exceptions.MappingException;
 import mapping.GroupByProcessor;
 import mapping.MappingElement;
 import mapping.MappingModel;
 import votable.VotableModel;
-
-import java.util.Set;
 
 /**
  * Model for a template mapping
@@ -30,7 +27,7 @@ public class TemplateModel {
 	/**
 	 * All lowest level elements
 	 */
-	private Set<MappingElement> mappingElements = new HashSet<>();
+	private List<MappingElement> mappingElements = new ArrayList<>();
 	/**
 	 * Pointer the model root element (drmrole==root or dmrole==modelname)
 	 * Can be null
@@ -50,7 +47,7 @@ public class TemplateModel {
 	 * @param tableId
 	 * @param mappingElements
 	 */
-	public TemplateModel(String tableId, Set<MappingElement> mappingElements){
+	public TemplateModel(String tableId, List<MappingElement> mappingElements){
 		this.mappingElements = mappingElements;
 		this.tableId = tableId;
 	}
@@ -58,7 +55,7 @@ public class TemplateModel {
 	/**
 	 * @return
 	 */
-	public Set<MappingElement> getMappingElements() {
+	public List<MappingElement> getMappingElements() {
 		return this.mappingElements;
 	}
 	/**
@@ -124,7 +121,7 @@ public class TemplateModel {
 	 * @throws Exception when not applicable (or any other error)
 	 */
 	public List<MappingElement> getElementsByRole(String role) throws Exception{
-		Set<MappingElement> retour = new HashSet<>();
+		List<MappingElement> retour = new ArrayList<>();
 
 		for( MappingElement mappingElement: this.mappingElements){
 			if( role.equalsIgnoreCase(mappingElement.getVodmlRole()) ) {
@@ -132,7 +129,7 @@ public class TemplateModel {
 			}
 			retour.addAll(mappingElement.getSubelementsByRole(role));
 		}
-		return new ArrayList<>(retour);
+		return retour;
 	}
 
 	/**
@@ -142,7 +139,7 @@ public class TemplateModel {
 	 * @throws Exception when not applicable (or any other error)
 	 */
 	public List<MappingElement> getElementsById(String vodmlid) throws Exception{
-		Set<MappingElement> retour = new HashSet<>();
+		List<MappingElement> retour = new ArrayList<>();
 
 		for( MappingElement mappingElement: this.mappingElements){
 			if( mappingElement.hasVodmlId(vodmlid)  ) {
@@ -150,7 +147,7 @@ public class TemplateModel {
 			}
 			retour.addAll(mappingElement.getSubelementsByVodmlId(vodmlid));
 		}
-		return new ArrayList<>(retour);
+		return retour;
 	}
 
 	/**

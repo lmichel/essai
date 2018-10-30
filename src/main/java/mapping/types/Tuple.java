@@ -4,7 +4,7 @@
 package mapping.types;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,7 +100,7 @@ public class Tuple extends Type{
 	 */
 	@Override
 	public List<MappingElement> getSubelementsByRole(String role) throws Exception {
-		final Set<MappingElement> retour = new HashSet<>();
+		final Set<MappingElement> retour = new LinkedHashSet<>();
 		for(final String key: this.getKeySet()){
 			final MappingElement element = this.getContentElement(key);
 			if( !element.isLeaf() ){
@@ -117,7 +117,7 @@ public class Tuple extends Type{
 	
 	@Override
 	public List<MappingElement> getSubelementsByVodmlId(String vodmlId) throws Exception{
-		final Set<MappingElement> retour = new HashSet<>();
+		final Set<MappingElement> retour = new LinkedHashSet<>();
 		for(final String key: this.getKeySet()){
 			final MappingElement element = this.getContentElement(key);
 			if( !element.isLeaf() ){
@@ -138,7 +138,7 @@ public class Tuple extends Type{
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<MappingElement> getSubelementsByClass(Class classe) throws Exception {
-		final Set<MappingElement> retour = new HashSet<>();
+		final Set<MappingElement> retour = new LinkedHashSet<>();
 		for(final String key: this.getKeySet()){
 			final MappingElement element = this.getContentElement(key);
 			if( element.getClass().equals(classe) ){
@@ -154,7 +154,7 @@ public class Tuple extends Type{
 	 */
 	@Override
 	public List<MappingElement> getSubelementsWithRef() throws Exception{
-		final Set<MappingElement> retour = new HashSet<>();
+		final Set<MappingElement> retour = new LinkedHashSet<>();
 		for(final String key: this.getKeySet()){
 			final MappingElement element = this.getContentElement(key);
 			if( element.getElementRef() != null ){

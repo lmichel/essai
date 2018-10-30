@@ -4,7 +4,7 @@
 package mapping.types;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -104,7 +104,7 @@ public class Array<T extends MappingElement > extends Type{
 	 */
 	@Override
 	public List<MappingElement> getSubelementsByRole(String role) throws Exception {
-		final Set<MappingElement> retour = new HashSet<>();
+		final Set<MappingElement> retour = new LinkedHashSet<>();
 		for(final MappingElement element: this.values){
 
 			if( !element.isLeaf() && element.getNodeId() != null){
@@ -122,7 +122,7 @@ public class Array<T extends MappingElement > extends Type{
 	 */
 	@Override
 	public List<MappingElement> getSubelementsByVodmlId(String vodmlId) throws Exception{
-		final Set<MappingElement> retour = new HashSet<>();
+		final Set<MappingElement> retour = new LinkedHashSet<>();
 		for(final MappingElement element: this.values){
 			if( !element.isLeaf() && element.getNodeId() != null){
 				if( element.hasVodmlId(vodmlId) ){
@@ -140,7 +140,7 @@ public class Array<T extends MappingElement > extends Type{
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<MappingElement> getSubelementsByClass(Class classe) throws Exception {
-		final Set<MappingElement> retour = new HashSet<>();
+		final Set<MappingElement> retour = new LinkedHashSet<>();
 		for(final MappingElement element: this.values){
 			if( element.getClass().equals(classe)) {
 				retour.add(element);
@@ -154,7 +154,7 @@ public class Array<T extends MappingElement > extends Type{
 	 */
 	@Override
 	public List<MappingElement> getSubelementsWithRef() throws Exception{
-		final Set<MappingElement> retour = new HashSet<>();
+		final Set<MappingElement> retour = new LinkedHashSet<>();
 		for(final MappingElement element: this.values){
 			if( element.getElementRef() != null) {
 				retour.add(element);

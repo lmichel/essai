@@ -3,8 +3,10 @@ package parser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -202,7 +204,7 @@ public class VodmlBlockParser {
 	private void parseTemplate(final Node templateNode) throws Exception{
 		final String tableRef = this.getNodeAttribute(templateNode, "tableref");
 		this.printParsedNode("template " + tableRef);
-		final Set<MappingElement> templateMapping = new HashSet<>();
+		final List<MappingElement> templateMapping = new ArrayList<>();
 		final TemplateModel templateModel = new TemplateModel(tableRef, templateMapping);
 		this.templates.put(tableRef,templateModel );
 		this.indent++;
@@ -252,7 +254,7 @@ public class VodmlBlockParser {
 	private void parseGlobals(final Node templateNode) throws Exception{
 		final String tableRef = "globals";
 		this.printParsedNode("template globals");
-		final Set<MappingElement> templateMapping = new HashSet<>();
+		final List<MappingElement> templateMapping = new ArrayList<>();
 		final TemplateModel templateModel = new TemplateModel(tableRef, templateMapping);
 		this.indent++;
 		MappingElement mappingRoot = null;
