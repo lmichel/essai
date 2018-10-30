@@ -167,7 +167,7 @@
 				ID="filterRP">
 				<INSTANCE dmrole="photdm:PhotCal.photometryFilter" dmtype="photdm:PhotometryFilter">
 					<INSTANCE dmrole="photdm:PhotometryFilter.access" dmtype="photdm:Access">
-						<VALUE dmrole="photdm:Access.reference" value="http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0." />
+						<VALUE dmrole="photdm:Access.reference" value="http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.RP" />
 						<VALUE dmrole="photdm:Access.format" value="xml" />
 					</INSTANCE>
 				</INSTANCE>
