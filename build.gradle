@@ -31,6 +31,12 @@ dependencies {
     
 }
 
+sourceSets {
+   test {
+    resources.srcDir file('src/test/java')
+  }
+}
+
 test {
-    useJUnit()
+       useJUnit()
 }
