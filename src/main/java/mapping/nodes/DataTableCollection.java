@@ -5,15 +5,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import exceptions.MappingClassException;
 import exceptions.MissingResourceException;
 import exceptions.UnconsistantResourceException;
 import mapping.MappingElement;
 import mapping.MappingFilter;
-import votable.RowDataSchema;
-import votable.TableModel;
 import mapping.types.Array;
 import mapping.types.Tuple;
+import votable.RowDataSchema;
+import votable.TableModel;
 
 /**
  * This class handle the content of a <ARRAY> element

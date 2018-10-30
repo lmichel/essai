@@ -1,22 +1,20 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import mapping.MappingElement;
-import mapping.nodes.DataTableCollection;
 import parser.TemplateModel;
 import parser.VodmlBlockParser;
-import votable.VotableModel;
 import test.parser.Parser;
-import test.parser.SavotWraper;
+import votable.VotableModel;
 
 public class VodmlBlockParserMultiInstanceTest {
 	VotableModel votableModel;
@@ -25,7 +23,7 @@ public class VodmlBlockParserMultiInstanceTest {
 	@Before
 	public void setUp() throws Exception {
 		String fileName = "/test/xml/annot_nontable_coll.xml";
-		URL url = SavotWraper.class.getResource(fileName);
+		URL url = VodmlBlockParserMultiInstanceTest.class.getResource(fileName);
 		String sampleName =url.getFile();;
 		this.votableModel = new VotableModel(sampleName);
 		treeBuilder = new VodmlBlockParser(Parser.class.getResourceAsStream(fileName));

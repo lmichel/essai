@@ -17,14 +17,13 @@ import mapping.nodes.Instance;
 import mapping.types.Textual;
 import votable.RowDataSchema;
 import votable.TableModel;
-import test.parser.SavotWraper;
 
 public class RowDataSchemaTest {
 	public static TableModel tableModel;
 
 	@BeforeClass
 	public static void setUp() throws Exception {
-		String sampleName = SavotWraper.class.getResource("/test/xml/gaia_multicol.xml").getFile();;
+		String sampleName = RowDataSchemaTest.class.getResource("/test/xml/gaia_multicol.xml").getFile();;
 		SavotPullParser parser = new SavotPullParser(sampleName, SavotPullEngine.FULLREAD, false);
 		SavotVOTable voTable = parser.getVOTable();
 		voTable.getResources();

@@ -1,34 +1,20 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.awt.HeadlessException;
-
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import cds.savot.model.ResourceSet;
-import cds.savot.model.SavotResource;
-import cds.savot.model.SavotTable;
-import cds.savot.model.SavotVOTable;
-import cds.savot.pull.SavotPullEngine;
-import cds.savot.pull.SavotPullParser;
 import exceptions.MappingException;
-import mapping.MappingElement;
-import mapping.types.Array;
-import mapping.types.Textual;
 import votable.ColumnPattern;
-import votable.TableModel;
 import votable.VotableModel;
-import test.parser.SavotWraper;
 
 public class VotableModelTest {
 	public static VotableModel votableModel;
 
 	@BeforeClass
 	public static void setUp() throws Exception {
-		String sampleName = SavotWraper.class.getResource("/test/xml/gaia_multicol.xml").getFile();;
+		String sampleName = VotableModelTest.class.getResource("/test/xml/gaia_multicol.xml").getFile();;
 		votableModel = new VotableModel(sampleName);
 	}
 

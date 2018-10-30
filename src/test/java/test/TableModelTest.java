@@ -1,10 +1,7 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.awt.HeadlessException;
-
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,23 +11,17 @@ import cds.savot.model.SavotTable;
 import cds.savot.model.SavotVOTable;
 import cds.savot.pull.SavotPullEngine;
 import cds.savot.pull.SavotPullParser;
-import mapping.MappingElement;
 import mapping.MappingFilter;
 import mapping.nodes.Instance;
-import mapping.types.Array;
-import mapping.types.Textual;
-import votable.ColumnFilter;
-import votable.ColumnPattern;
 import votable.RowDataSchema;
 import votable.TableModel;
-import test.parser.SavotWraper;
 
 public class TableModelTest {
 	public static TableModel tableModel;
 
 	@BeforeClass
 	public static void setUp() throws Exception {
-		String sampleName = SavotWraper.class.getResource("/test/xml/gaia_multicol.xml").getFile();;
+		String sampleName = TableModelTest.class.getResource("/test/xml/gaia_multicol.xml").getFile();;
 		SavotPullParser parser = new SavotPullParser(sampleName, SavotPullEngine.FULLREAD, false);
 		SavotVOTable voTable = parser.getVOTable();
 		voTable.getResources();

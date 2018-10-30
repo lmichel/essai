@@ -1,23 +1,15 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import mapping.MappingElement;
-import mapping.nodes.DataTableCollection;
 import parser.LiteMappingParser;
-import parser.TemplateModel;
-import parser.VodmlBlockParser;
-import votable.VotableModel;
-import test.parser.Parser;
 import test.parser.SavotWraper;
 
 public class LiteMappingParserTsmodelFilterTest {
@@ -25,7 +17,7 @@ public class LiteMappingParserTsmodelFilterTest {
 
 	@BeforeClass
 	static public void setUp() throws Exception {
-		URL url = SavotWraper.class.getResource("/test/xml/annot_tsmodel_filter.xml");
+		URL url = LiteMappingParserTsmodelFilterTest.class.getResource("/test/xml/annot_tsmodel_filter.xml");
 		String sampleName =url.getFile();;
 		liteMappingParser = new LiteMappingParser(sampleName);
 	}
@@ -53,8 +45,8 @@ public class LiteMappingParserTsmodelFilterTest {
 			assertEquals(3,dataCollection.getLength() );
 			List<MappingElement> observables = dataCollection.getSubelementsByRole("observable");
 			assertEquals(3,observables.size() );
-			assertEquals(83,observables.get(0).getLength() );
-			assertEquals(85,observables.get(1).getLength() );
+			assertEquals(85,observables.get(0).getLength() );
+			assertEquals(83,observables.get(1).getLength() );
 		}
 	}
 
@@ -65,14 +57,14 @@ public class LiteMappingParserTsmodelFilterTest {
 		assertEquals(1,rs.size() );
 		rs = liteMappingParser.getNodesByRole("observable");
 		MappingElement me = rs.get(1);
-		assertEquals(85, me.getLength() );
+		assertEquals(83, me.getLength() );
 		MappingElement point = me.getContentElement(0);
 		
 		MappingElement timeFrame = point.getOneSubelementByRole("coords:Coordinate.frame");
 		assertEquals("TCB", timeFrame.getOneSubelementByRole("coords:domain.time.TimeFrame.timescale").getStringValue() );
 
 		MappingElement pe = point.getOneSubelementByRole("photdm:Access.reference");
-		assertEquals("http://svo/filterG",pe.toString() );
+		assertEquals("http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.RP",pe.toString() );
 
 		List<MappingElement> mesures = point.getSubelementsByRole("meas:CoordMeasure.coord");
 		String t="";
@@ -86,8 +78,8 @@ public class LiteMappingParserTsmodelFilterTest {
 				mag = x.getStringValue();
 			} 
 		}
-		assertEquals("1705.9437360200984", t);
-		assertEquals("15.216574774452164", mag);
+		assertEquals("1705.9441391177577", t);
+		assertEquals("14.76056670662418", mag);
 	}
 
 }

@@ -1,11 +1,9 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
-import java.util.Set;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,15 +13,12 @@ import cds.savot.model.SavotTable;
 import cds.savot.model.SavotVOTable;
 import cds.savot.pull.SavotPullEngine;
 import cds.savot.pull.SavotPullParser;
-import exceptions.MissingResourceException;
 import exceptions.UnconsistantResourceException;
-import mapping.MappingElement;
 import mapping.nodes.DataTableCollection;
 import mapping.nodes.Instance;
 import mapping.types.Array;
 import mapping.types.Textual;
 import votable.TableModel;
-import test.parser.SavotWraper;
 
 
 public class DataTableCollectionTest {
@@ -32,7 +27,7 @@ public class DataTableCollectionTest {
 
 	@BeforeClass
 	public static  void setUp() throws Exception {
-		String sampleName = SavotWraper.class.getResource("/test/xml/gaia_multicol.xml").getFile();;
+		String sampleName = DataTableCollectionTest.class.getResource("/test/xml/gaia_multicol.xml").getFile();;
 		SavotPullParser parser = new SavotPullParser(sampleName, SavotPullEngine.FULLREAD, false);
 		SavotVOTable voTable = parser.getVOTable();
 		voTable.getResources();

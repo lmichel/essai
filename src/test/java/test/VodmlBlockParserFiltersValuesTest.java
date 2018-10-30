@@ -25,7 +25,7 @@ public class VodmlBlockParserFiltersValuesTest {
 	@Before
 	public void setUp() throws Exception {
 		String resourceName = "/test/xml/annot_multiband_filter.xml";
-		URL url = SavotWraper.class.getResource(resourceName);
+		URL url = VodmlBlockParserFiltersValuesTest.class.getResource(resourceName);
 		String sampleName = url.getFile();;
 		this.votableModel = new VotableModel(sampleName);
 		treeBuilder = new VodmlBlockParser(Parser.class.getResourceAsStream(resourceName));

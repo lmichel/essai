@@ -9,7 +9,6 @@ import java.util.List;
 
 import mapping.MappingElement;
 import parser.LiteMappingParser;
-import test.parser.SavotWraper;
 
 /**
  * This is an example of using the JAVA API to extract data from an annotated VOTable
@@ -62,7 +61,7 @@ public class TimeSeriesExample {
 	 * @throws Exception
 	 */
 	private void initParser() throws Exception {
-		URL url = SavotWraper.class.getResource(VOTABLE_RESOURCE);
+		URL url = TimeSeriesExample.class.getResource(VOTABLE_RESOURCE);
 		String sampleName =url.getFile();
 		liteMappingParser = new LiteMappingParser(sampleName);
 	}

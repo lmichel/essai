@@ -1,30 +1,22 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import mapping.MappingElement;
-import mapping.nodes.DataTableCollection;
 import parser.LiteMappingParser;
-import parser.TemplateModel;
-import parser.VodmlBlockParser;
-import votable.VotableModel;
-import test.parser.Parser;
-import test.parser.SavotWraper;
 
 public class LiteMappingParserGlobalsTest {
 	LiteMappingParser liteMappingParser;
 
 	@Before
 	public void setUp() throws Exception {
-		URL url = SavotWraper.class.getResource("/test/xml/annot_multiband_globals.xml");
+		URL url = LiteMappingParserGlobalsTest.class.getResource("/test/xml/annot_multiband_globals.xml");
 		String sampleName =url.getFile();;
 		this.liteMappingParser = new LiteMappingParser(sampleName);
 	}

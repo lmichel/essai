@@ -24,8 +24,8 @@ import mapping.nodes.Instance;
 import mapping.nodes.MultiInstanceCollection;
 import mapping.types.Array;
 import mapping.types.Textual;
-import votable.TableModel;
 import test.parser.SavotWraper;
+import votable.TableModel;
 
 
 public class MultiInstanceCollectionTest {
