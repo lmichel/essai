@@ -57,7 +57,7 @@ public class LiteMappingParserTsmodelFilterTest {
 		assertEquals(1,rs.size() );
 		rs = liteMappingParser.getNodesByRole("observable");
 		MappingElement me = rs.get(1);
-		assertEquals(85, me.getLength() );
+		assertEquals(83, me.getLength() );
 		MappingElement point = me.getContentElement(0);
 		
 		MappingElement timeFrame = point.getOneSubelementByRole("coords:Coordinate.frame");
