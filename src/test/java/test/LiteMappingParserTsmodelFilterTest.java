@@ -57,14 +57,14 @@ public class LiteMappingParserTsmodelFilterTest {
 		assertEquals(1,rs.size() );
 		rs = liteMappingParser.getNodesByRole("observable");
 		MappingElement me = rs.get(1);
-		assertEquals(83, me.getLength() );
+		assertEquals(85, me.getLength() );
 		MappingElement point = me.getContentElement(0);
 		
 		MappingElement timeFrame = point.getOneSubelementByRole("coords:Coordinate.frame");
 		assertEquals("TCB", timeFrame.getOneSubelementByRole("coords:domain.time.TimeFrame.timescale").getStringValue() );
 
 		MappingElement pe = point.getOneSubelementByRole("photdm:Access.reference");
-		assertEquals("http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.RP",pe.toString() );
+		assertEquals("http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.G",pe.toString() );
 
 		List<MappingElement> mesures = point.getSubelementsByRole("meas:CoordMeasure.coord");
 		String t="";
@@ -78,7 +78,7 @@ public class LiteMappingParserTsmodelFilterTest {
 				mag = x.getStringValue();
 			} 
 		}
-		assertEquals("1705.9441391177577", t);
+		assertEquals("1705.9437360200984", t);
 		assertEquals("14.76056670662418", mag);
 	}
 
