@@ -11,7 +11,7 @@ import mapping.MappingElement;
 import votable.TableModel;
 
 /**
- * This type of collection implemeng the <SET> element
+ * This type of collection implemeng the SET element
  * .. work in porgress
  * @author laurentmichel
  *

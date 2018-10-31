@@ -20,7 +20,7 @@ import mapping.nodes.MappingNode;
  
  * One can get a set of elements by giving one role a list of roles, each one being a path element in the model.
  * <code>
- * Set<MappingElement> sel = root.getElementsByRole("role1");
+ * Set[MappingElement] sel = root.getElementsByRole("role1");
  * </code>
  * In this case the MappingElements are returned in a flat set independently from their original context.
  * This is the most convenient way to get model nodes when they are unique or to get in one shot all similar

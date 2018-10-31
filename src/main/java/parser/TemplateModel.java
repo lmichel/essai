@@ -134,7 +134,7 @@ public class TemplateModel {
 
 	/**
 	 * Returns of flat set of all sub-elements of the given role (vodml)
-	 * @param role
+	 * @param vodmlid
 	 * @return 
 	 * @throws Exception when not applicable (or any other error)
 	 */
@@ -152,7 +152,6 @@ public class TemplateModel {
 
 	/**
 	 * Returns of flat set of all sub-elements having a reference to another element
-	 * @param classe Java class
 	 * @return
 	 * @throws Exception 	
 	 */

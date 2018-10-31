@@ -15,14 +15,13 @@ import votable.RowDataSchema;
 import votable.TableModel;
 
 /**
- * This class handle the content of a <ARRAY> element
+ * This class handle the content of a ARRAY element
  * It does not contain data.
  * This is a facade implementing a {@link MappingElement} API to the {@link TableModel}
  * Its content is a single {@link Instance} used a template fo the generation of row instances
  * 
  * @author laurentmichel
  *
- * @param <T>
  */
 public class DataTableCollection extends MappingNode
 {
@@ -58,9 +57,8 @@ public class DataTableCollection extends MappingNode
 		super(vodmlId, role, name);
 	}
 	/**
-	 * @param id
+	 * @param vodmlId
 	 * @param role
-	 * @param name
 	 * @throws UnconsistantResourceException 
 	 */
 	public DataTableCollection(final String vodmlId, final String role) throws UnconsistantResourceException {

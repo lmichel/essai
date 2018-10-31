@@ -28,7 +28,7 @@ MappingLiteParser mappingLiteParser = new MappingLiteParser("myVoTable");
 
 if( mappingLiteParser.implements("SimeSeries) {
     MappingElement collection = mappingLiteParser.getFirstChildrenByRole("dm:Photometry.Points");
-    for( int i=0 ; i<collection.getLength() ; i++){
+    for( int i=0 ; i$lt;collection.getLength() ; i++){
 	    MappingElement point = collection.getValue(i);
 	    double time = point.getValue("dm:Photometry.Point.Time");
 	    double magnitude = point.getValue("dm:Photometry.Point.Mag");
@@ -158,7 +158,7 @@ public class LiteMappingParser {
 	}
 
 	/**
-	 * Return all implemented models in the <VODML> block
+	 * Return all implemented models in the VODML block
 	 * TODO implement it
 	 * @return
 	 */
@@ -167,7 +167,7 @@ public class LiteMappingParser {
 	}
 
 	/**
-	 * Return true if the model named modelName is referenced in the <VODML> block
+	 * Return true if the model named modelName is referenced in the VODML block
 	 * TODO implement it
 	 * @param modelName
 	 * @return

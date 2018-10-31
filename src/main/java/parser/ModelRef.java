@@ -7,17 +7,17 @@ package parser;
  */
 public class ModelRef {
 	/**
-	 * Name as it can be found in <MODEL>
+	 * Name as it can be found in MODEL
 	 */
 	public final String name;
 	/**
-	 * URI as it can be found in <MODEL>
+	 * URI as it can be found in MODEL
 	 */
 	public final String uri;
 	
 	/**
 	 * @param name
-	 * @param url
+	 * @param uri
 	 */
 	public ModelRef(String name, String uri) {
 		super();

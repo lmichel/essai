@@ -23,7 +23,7 @@ import mapping.types.Textual;
 
 /**
  * API over SAvot making easier the random acces to any data 
- * in a given <TABLE> of a VOTable.
+ * in a given TABLE of a VOTable.
  * TableModel is an in-memory processor
  * 
  * @author michel
@@ -35,23 +35,23 @@ public class TableModel implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * <TABLE> name
+	 * TABLE name
 	 */
 	public final String name;
 	/**
-	 * <TABLE> identifier
+	 * TABLE identifier
 	 */
 	public final String id;
 	/**
-	 * <FIELD> list modeled by Savot
+	 * FIELD list modeled by Savot
 	 */
 	private  List<SavotField> fields = new ArrayList<>();
 	/**
-	 * <FIELD> list modeled by Savot
+	 * FIELD list modeled by Savot
 	 */
 	private  List<SavotParam> params = new ArrayList<>();
 	/**
-	 * Set if <TR> elements modeled by Savot
+	 * Set if TR elements modeled by Savot
 	 */
 	private TRSet dataRows;
 
@@ -67,7 +67,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Extract the <FIELD> from the <TABLE>
+	 * Extract the FIELD from the TABLE
 	 * @param table
 	 */
 	private void setFields(final SavotTable table) {
@@ -80,7 +80,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Extract the <PARAM> from the <TABLE>
+	 * Extract the PARAM from the TABLE
 	 * @param table
 	 */
 	private void setParams(final SavotTable table) {
@@ -93,7 +93,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Extract the <TR> set from the <TABLE>
+	 * Extract the TR set from the TABLE
 	 * @param table
 	 */
 	private void setData(final SavotTable table){
@@ -113,7 +113,7 @@ public class TableModel implements Serializable{
 	}*/
 
 	/**
-	 * Return the Savot <FIELD> selected by its rank (column number)
+	 * Return the Savot FIELD selected by its rank (column number)
 	 * @param index
 	 * @return
 	 */
@@ -122,7 +122,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Return the Savot <PARAM> selected by its rank (not really usefull)
+	 * Return the Savot PARAM selected by its rank (not really usefull)
 	 * @param index
 	 * @return
 	 */
@@ -131,7 +131,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Return the Savot <FIELD> index (colmun number) by its name
+	 * Return the Savot FIELD index (colmun number) by its name
 	 * @param name
 	 * @return
 	 */
@@ -147,7 +147,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Return the Savot <FIELD> index (colmun number) by its ID
+	 * Return the Savot FIELD index (colmun number) by its ID
 	 * @param id
 	 * @return
 	 */
@@ -163,7 +163,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Return the Savot <FIELD> index (colmun number) by its ID or its name if no ID matches
+	 * Return the Savot FIELD index (colmun number) by its ID or its name if no ID matches
 	 * @param id
 	 * @return
 	 */
@@ -176,7 +176,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Return the Savot <FIELD> by its ID or its name if no ID matches
+	 * Return the Savot FIELD by its ID or its name if no ID matches
 	 * @param id
 	 * @return
 	 */
@@ -189,7 +189,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Return the Savot <PARAM> index by its name
+	 * Return the Savot PARAM index by its name
 	 * @param name
 	 * @return
 	 */
@@ -205,7 +205,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Return the Savot <PARAM> index by its ID
+	 * Return the Savot PARAM index by its ID
 	 * @param id
 	 * @return
 	 */
@@ -221,7 +221,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Return the Savot <PARAM> index by its ID or its name if no ID matches
+	 * Return the Savot PARAM index by its ID or its name if no ID matches
 	 * @param id
 	 * @return
 	 */
@@ -234,7 +234,7 @@ public class TableModel implements Serializable{
 	}
 
 	/**
-	 * Return the Savot <PARAM> by its ID or its name if no ID matches
+	 * Return the Savot PARAM by its ID or its name if no ID matches
 	 * @param id
 	 * @return
 	 */
@@ -246,7 +246,7 @@ public class TableModel implements Serializable{
 		return (retour  != -1)? this.getParam(retour): null;
 	}
 	/**
-	 * Return the <PARAM> value by its ID or its name if no ID matches
+	 * Return the PARAM value by its ID or its name if no ID matches
 	 * @param id
 	 * @return
 	 */

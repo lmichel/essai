@@ -41,7 +41,7 @@ public class RowDataSchema implements Serializable{
 	 */
 	private final Map<Integer, String> columnRoles = new LinkedHashMap<>();
 	/**
-	 * Map keys are the columns numbers (starting at 0) and values are the template component {@linkplain Textual or 
+	 * Map keys are the columns numbers (starting at 0) and values are the template component {@linkplain Textual} or 
 	 * {@link Numerical} which must be set with the column values
 	 */
 	private final Map<Integer, Textual> columnMapping = new LinkedHashMap<>();

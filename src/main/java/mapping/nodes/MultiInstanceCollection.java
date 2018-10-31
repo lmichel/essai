@@ -13,8 +13,8 @@ import votable.TableModel;
 import mapping.types.Array;
 
 /**
- * THis MappingElement handle the content of a <COMPOSITION> element
- * The content is an {@link Array} of anything <T>
+ * THis MappingElement handle the content of a COMPOSITION element
+ * The content is an {@link Array} of T instances
  * @author laurentmichel
  *
  */
@@ -24,7 +24,7 @@ public class MultiInstanceCollection<T extends MappingElement> extends MappingNo
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Array containing the data of type <T>
+	 * Array containing T instances
 	 */
 	protected Array<T> content;
 
@@ -40,7 +40,6 @@ public class MultiInstanceCollection<T extends MappingElement> extends MappingNo
 	/**
 	 * @param vodmlId
 	 * @param role
-	 * @param name
 	 * @throws UnconsistantResourceException 
 	 */
 	public MultiInstanceCollection(final String vodmlId, final String role) throws UnconsistantResourceException {
@@ -64,7 +63,7 @@ public class MultiInstanceCollection<T extends MappingElement> extends MappingNo
 	}
 
 	/**
-	 * Add an instance of the <T> class to the content
+	 * Add an instance of the T to the content
 	 * @param value
 	 * @throws UnconsistantResourceException 
 	 */

@@ -18,7 +18,7 @@ public class Textual extends Type{
 	private String content;
 	
 	/**
-	 * @param Content
+	 * @param content
 	 */
 	public Textual(final String content) {
 		super();
@@ -27,7 +27,7 @@ public class Textual extends Type{
 	
 	/**
 	 * Store a double as String
-	 * @param Content
+	 * @param content
 	 */
 	public Textual(final double content) {
 		super();
@@ -36,7 +36,7 @@ public class Textual extends Type{
 	
 	/**
 	 * Store a long as String
-	 * @param Content
+	 * @param content
 	 */
 	public Textual(final long content) {
 		super();

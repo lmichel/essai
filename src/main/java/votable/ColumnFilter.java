@@ -9,7 +9,7 @@ import mapping.MappingElement;
 import mapping.types.Array;
 
 /**
- * Filter on a set of data read <TABLEDATA> row
+ * Filter on a set of data read TABLEDATA row
  * @author michel
  *
  */

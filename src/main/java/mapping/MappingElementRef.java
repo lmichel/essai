@@ -41,8 +41,7 @@ public class MappingElementRef  implements Serializable{
     }
     /**
      * Constructor for the case where  the reference is a ref=
-     * @param tableID
-     * @param dmRole
+     * @param elementRef
      */
     public MappingElementRef(final String elementRef){
     	this.tableRef = null;

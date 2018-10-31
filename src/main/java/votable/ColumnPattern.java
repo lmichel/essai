@@ -12,8 +12,8 @@ import exceptions.MissingResourceException;
 /**
  * Column binding the model ordering of the quantities with the column ordering.
  * This is done by an order list of {@link ColumnRef}
- * Colmumn values ca eithe be read in the <TABLEDATA> or in a <PARAM> or somewhere 
- * in the <VODML> block. In this case the value is the same for all table rows
+ * Colmumn values ca eithe be read in the TABLEDATA or in a PARAM or somewhere 
+ * in the VODML block. In this case the value is the same for all table rows
  * 
  * @author michel
  *
@@ -41,14 +41,13 @@ public class ColumnPattern implements Serializable{
 	/**
 	 * Add a column reference in BY_POS mode without role
 	 * @param index
-	 * @param role
 	 */
 	public void addColumnRef(int index){
 		this.pattern.add(new ColumnRef(index, "no-role"));
 	}
 	/**
 	 * Add a column reference in BY_VAL mode
-	 * @param index
+	 * @param value
 	 * @param role
 	 */
 	public void addColumnRef(String value, String role){
@@ -56,8 +55,7 @@ public class ColumnPattern implements Serializable{
 	}
 	/**
 	 * Add a column reference in BY_VAL mode without role
-	 * @param index
-	 * @param role
+	 * @param value
 	 */
 	public void addColumnRef(String value){
 		this.pattern.add(new ColumnRef(value,  "no-role"));
@@ -79,7 +77,7 @@ public class ColumnPattern implements Serializable{
 	 * Return the column reference having the given role.
 	 * Note that the column index of the returned ColumnRef is 
 	 * this of the raw data. It  not not this of the mapped data
-	 * @param index
+	 * @param role
 	 * @return the column reference having the given role
 	 */	
 	public ColumnRef getColumRefByRole(String role){

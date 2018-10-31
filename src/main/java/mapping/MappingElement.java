@@ -10,6 +10,7 @@ import java.util.Map;
 
 import exceptions.MappingClassException;
 import exceptions.UnconsistantResourceException;
+import mapping.nodes.DataTableCollection;
 import mapping.nodes.MappingNode;
 import mapping.nodes.MappingNodeId;
 import mapping.types.Array;
@@ -23,7 +24,7 @@ import votable.TableModel;
  * add
  * The mapping elements has 2 branches:
  * - The {@link MappingNode} which have an DM identifiers
- * - The {@link Type} which are containers for simple value(s)
+ * - The {@link mapping.types.Type} which are containers for simple value(s)
  * 
  * All Exception are thrown in order to delegate the processing odf any sort 
  * of error to the upper level software
@@ -123,7 +124,7 @@ public abstract class MappingElement implements Serializable{
 	}
 	/**
 	 * Check if the element is a leag of the mapping hierarchy.
-	 * The leaf must be a subclass of {@link Type}
+	 * The leaf must be a subclass of {@link mapping.types.Type}
 	 * @return True if it is a leaf
 	 * @throws Exception when not applicable (or any other error)
 	 */
@@ -215,7 +216,6 @@ public abstract class MappingElement implements Serializable{
 	
 	/**
 	 * Returns of flat set of all sub-elements having a reference to another element
-	 * @param classe Java class
 	 * @return
 	 * @throws Exception when not applicable (or any other error)
 	 */
@@ -225,7 +225,7 @@ public abstract class MappingElement implements Serializable{
 	
 	/**
 	 * Returns of flat set of all sub-elements of the given vodmlid
-	 * @param role
+	 * @param vomdmlid
 	 * @return 
 	 * @throws Exception when not applicable (or any other error)
 	 */
@@ -246,7 +246,8 @@ public abstract class MappingElement implements Serializable{
 
 	/**
 	 * Set the value of the Type instance located with key with value
-	 * @param startWith
+	 * @param key
+	 * @param value
 	 * @throws Exception
 	 */
 	public void setAtomicTypeValue(String key, String value) throws Exception {
@@ -298,7 +299,7 @@ public abstract class MappingElement implements Serializable{
 	}
 	
 	/**
-	 * To be applied on {@link Collection} or {@link Array}
+	 * To be applied on {@link DataTableCollection} or {@link mapping.types.Array}
 	 * @param groupByKey dmrole of the column used by the group by
 	 * @return a map with the groupByKey columns values as keys
 	 * @throws Exception when not applicable (or any other error)

@@ -19,14 +19,14 @@ import mapping.nodes.Instance;
 
 /**
  * API over SAvot making easier the random acces to any data 
- * of any <TABLE> in a VOTable.
+ * of any TABLE in a VOTable.
  * TableModel is an in-memory processor
  * 
  * @author michel
  *
  */public class VotableModel {
 	/**
-	 * Map of the parsed <TABLE>
+	 * Map of the parsed TABLE
 	 * ID or names are used as key.
 	 */
 	private final Map<String, TableModel> tables = new LinkedHashMap<>();
@@ -78,7 +78,7 @@ import mapping.nodes.Instance;
 	}
 
 	/**
-	 * Return the Savot <FIELD> of the table idtable selected by its rank
+	 * Return the Savot FIELD of the table idtable selected by its rank
 	 * @param idtable
 	 * @param index
 	 * @return
@@ -90,7 +90,7 @@ import mapping.nodes.Instance;
 	}
 
 	/**
-	 * Return the Savot <PARAM> of the table idtable selected by its rank (not really usefull)
+	 * Return the Savot PARAM of the table idtable selected by its rank (not really usefull)
 	 * @param idtable
 	 * @param index
 	 * @return
@@ -102,7 +102,7 @@ import mapping.nodes.Instance;
 	}
 
 	/**
-	 * Return the index of the Savot <FIELD> of the table tableid  by its name 
+	 * Return the index of the Savot FIELD of the table tableid  by its name 
 	 * @param idtable
 	 * @param name
 	 * @return
@@ -115,7 +115,7 @@ import mapping.nodes.Instance;
 	
 
 	/**
-	 * Return the index of the Savot <FIELD> of the table tableid  by its ID 
+	 * Return the index of the Savot FIELD of the table tableid  by its ID 
 	 * @param idtable
 	 * @param id
 	 * @return
@@ -127,7 +127,7 @@ import mapping.nodes.Instance;
 	}
 	
 	/**
-	 * Return the index of the Savot <FIELD> of the table tableid  by its ID or its name if no ID matches
+	 * Return the index of the Savot FIELD of the table tableid  by its ID or its name if no ID matches
 	 * @param idtable
 	 * @param id
 	 * @return
@@ -139,7 +139,7 @@ import mapping.nodes.Instance;
 	}
 	
 	/**
-	 * Return the Savot <FIELD> of the table tableid  by its ID or its name if no ID matches
+	 * Return the Savot FIELD of the table tableid  by its ID or its name if no ID matches
 	 * @param idtable
 	 * @param id
 	 * @return
@@ -151,7 +151,7 @@ import mapping.nodes.Instance;
 	}
 	
 	/**
-	 * Return the index of the  Savot <PARAM> of table idtable by its name
+	 * Return the index of the  Savot PARAM of table idtable by its name
 	 * @param idtable
 	 * @param name
 	 * @return
@@ -164,7 +164,7 @@ import mapping.nodes.Instance;
 	
 
 	/**
-	 * Return the index of the  Savot <PARAM> of table idtable by its ID
+	 * Return the index of the  Savot PARAM of table idtable by its ID
 	 * @param idtable
 	 * @param id
 	 * @return
@@ -176,7 +176,7 @@ import mapping.nodes.Instance;
 	}
 	
 	/**
-	 * Return the index of the  Savot <PARAM> of table idtable by its ID or its name if no ID matches
+	 * Return the index of the  Savot PARAM of table idtable by its ID or its name if no ID matches
 	 * @param idtable
 	 * @param id
 	 * @return

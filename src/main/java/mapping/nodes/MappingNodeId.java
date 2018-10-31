@@ -45,7 +45,7 @@ public class MappingNodeId implements Serializable{
 	private MappingElementRef mappingElementRef;
 
 	/**
-	 * @param id element identifier
+	 * @param vodmlId element identifier
 	 * @param role VO-DML role
 	 * @param name Element name 
 	 * @throws UnconsistantResourceException 
@@ -62,7 +62,7 @@ public class MappingNodeId implements Serializable{
 	
 	/**
 	 * Name is set with default values
-	 * @param id element identifier
+	 * @param vodmlId element identifier
 	 * @param role VO-DML role
 	 * @throws UnconsistantResourceException 
 	 */
@@ -104,7 +104,7 @@ public class MappingNodeId implements Serializable{
 		return this.role.equalsIgnoreCase(role);
 	}
 	/**
-	 * @param role
+	 * @param id
 	 * @return true if the instance id matches id
 	 */
 	public boolean hasVodmlId(final String id){

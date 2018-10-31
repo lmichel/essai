@@ -36,41 +36,40 @@ import mapping.types.Textual;
 
 
 /**
- * Parser of the <VODML> block
+ * Parser of the VODML block
  * - Build a set of {@link TemplateModel}, one for each annotated table
  * - Does not read the VOTABLE
  * - Does not set the values
  * - Does not resolve cross-template references
- * - Does not read <GLOBALS>
- * - Does not support <TEMPLATES> with mode the one child
- * TODO parse <TEMPLATES> without dmrol=root element
- * TODO parse <TEMPLATES> with mutiple children
+ * - Does not read GLOBALS
+ * - Does not support TEMPLATES with mode the one child
+ * TODO parse TEMPLATES without dmrol=root element
+ * TODO parse TEMPLATES with mutiple children
  * 
  * @author laurentmichel
  *
  */
 public class VodmlBlockParser {
 	/**
-	 * Avatar for <COLLECTION>
+	 * Avatar for COLLECTION
 	 */
 	public static final String COLLECTION ="COLLECTION";
 	public static final String SET ="SET";
 	public static final String ARRAY ="ARRAY";
 	public static final String COMPOSITION ="COMPOSITION";
 	/**
-	 * Avatar for <INSTANCE>
+	 * Avatar for INSTANCE
 	 */
 	public static final String INSTANCE ="INSTANCE";
 	/**
-	 * Avatar for <VALUE>
+	 * Avatar for VALUE
 	 */
 	public static final String VALUE ="VALUE";
 	/**
-	 * Avatar for <FILTER>
 	 */
 	public static final String FILTER ="FILTER";
 	/**
-	 * Avatar for <... groupby=... >
+	 * Avatar for SET... groupby=... 
 	 */
 	public static final String GROUPBY ="groupby";
 	/**
@@ -86,7 +85,7 @@ public class VodmlBlockParser {
 	 */
 	private int indent=0;
 	/**
-	 * Map of parsed template. Key are the <TABLE> ID
+	 * Map of parsed template. Key are the TABLE ID
 	 */
 	public Map<String, TemplateModel> templates = new LinkedHashMap<>();
 
@@ -102,7 +101,7 @@ public class VodmlBlockParser {
 
 	/**
 	 * Construtor based on a InputStream
-	 * @param filename
+	 * @param stream
 	 * @throws Exception
 	 */
 	public VodmlBlockParser(final InputStream stream)throws Exception{
@@ -195,10 +194,10 @@ public class VodmlBlockParser {
 				nodeName.equalsIgnoreCase(ARRAY));
 	}
 	/**
-	 * Parse a <TEMPLATE> block and add it to stored template set
+	 * Parse a TEMPLATES block and add it to stored template set
 	 * In the current version, we supposed that the template has only one root element
 	 * TODO split in simpler methods
-	 * @param templateNode <TEMPLATES> XML node
+	 * @param templateNode TEMPLATES XML node
 	 * @throws Exception 
 	 */
 	private void parseTemplate(final Node templateNode) throws Exception{
@@ -246,8 +245,8 @@ public class VodmlBlockParser {
 	}
 
 	/**
-	 * Parse the <GLOBALS> block and add it to stored template set
-	 * @param templateNode <TEMPLATES> XML node
+	 * Parse the GLOBALS block and add it to stored template set
+	 * @param templateNode TEMPLATES XML node
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("rawtypes")
@@ -278,8 +277,8 @@ public class VodmlBlockParser {
 
 
 	/**
-	 * Parse the <INSTANCE> node and add it to mappingElement 
-	 * @param instanceNode <INSTANCE> node
+	 * Parse the INSTANCE node and add it to mappingElement 
+	 * @param instanceNode INSTANCE node
 	 * @param mappingElement Parent of instanceNode
 	 * @return
 	 * @throws Exception
@@ -320,8 +319,8 @@ public class VodmlBlockParser {
 
 
 	/**
-	 * Parse the <FILTER> node and give it to mappingElement 
-	 * @param filterNode <FILTER> xml node
+	 * Parse the FILTER node and give it to mappingElement 
+	 * @param filterNode FILTER xml node
 	 * @return a {@link MappingFilter} instance
 	 * @throws Exception
 	 */
@@ -334,8 +333,8 @@ public class VodmlBlockParser {
 		return new MappingFilter(key, value);
 	}
 	/**
-	 * Parse the <COLLECTION> node and add it to mappingElement 
-	 * @param instanceNode <COLLECTION> node
+	 * Parse the COLLECTION node and add it to mappingElement 
+	 * @param instanceNode COLLECTION node
 	 * @param mappingElement Parent of instanceNode
 	 * @throws Exception 
 	 */
@@ -441,10 +440,10 @@ public class VodmlBlockParser {
 	}
 
 	/**
-	 * Parse the <COLLECTION> node and add it to mappingElement 
-	 * The values won't be read in <TABLEDATA> but as a set in <INSTANCE> enclosed
-	 * in <COLLECTION>
-	 * @param instanceNode <COLLECTION> node
+	 * Parse the COLLECTION node and add it to mappingElement 
+	 * The values won't be read in TABLEDATA but as a set in INSTANCE enclosed
+	 * in COLLECTION
+	 * @param instanceNode COLLECTION node
 	 * @param mappingElement Parent of instanceNode
 	 * @throws Exception
 	 */
@@ -479,8 +478,8 @@ public class VodmlBlockParser {
 
 
 	/**
-	 * Parse the <VALUE> node and add it to mappingElement 
-	 * @param instanceNode <VALUE> node
+	 * Parse the VALUE node and add it to mappingElement 
+	 * @param instanceNode VALUE node
 	 * @param mappingElement Parent of instanceNode
 	 * @throws Exception
 	 */
@@ -511,7 +510,7 @@ public class VodmlBlockParser {
 
 	/**
 	 * Entry point of the TreeBuilder. 
-	 * Parse the <TEMPLATES> one by onee
+	 * Parse the TEMPLATES one by onee
 	 * @throws Exception
 	 */
 	public void parse() throws Exception {

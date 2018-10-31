@@ -40,7 +40,6 @@ public class Instance extends MappingNode {
 	/**
 	 * @param vodmlId
 	 * @param role
-	 * @param name
 	 * @throws UnconsistantResourceException 
 	 */
 	public Instance(String vodmlId, String role) throws UnconsistantResourceException {
