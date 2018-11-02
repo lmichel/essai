@@ -50,31 +50,31 @@
 				<VALUE dmrole="ds:dataset.Dataset.dataProductSubtype" value="Time Series Multiband" />
 				<COMPOSITION dmrole="collections">
 					<INSTANCE dmrole="ds:dataset.DataID.collection" dmtype="ds:dataset.Collection">
-						<VALUE dmrole="ds:dataset.Collection.name" ref="VODML Lite Test Bench" />
+						<VALUE dmrole="ds:dataset.Collection.name" value="VODML Lite Test Bench" />
 					</INSTANCE>
 				</COMPOSITION>
 				<INSTANCE dmrole="ds:dataset.Dataset.curation" dmtype="ds:dataset.Curation">
 					<VALUE dmrole="ds:dataset.Curation.publisherDID" value="ivoa://voldml/lite/project" />
-					<VALUE dmrole="ds:dataset.Curation.version" ref="0.0" />
+					<VALUE dmrole="ds:dataset.Curation.version" value="0.0" />
 					<VALUE dmrole="ds:dataset.Curation.releaseDate" value="2018:11:11" />
 					<VALUE dmrole="ds:dataset.Curation.rights" value="public" />
 					<INSTANCE dmrole="ds:dataset.Curation.publisher" dmtype="ds:dataset.Publisher">
 						<VALUE dmrole="ds:dataset.Publisher.publisherID" value="ivoa://voldml/lite/project" />
 						<INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
-							<VALUE dmrole="ds:party.Party.name" ref="ObAS" />
+							<VALUE dmrole="ds:party.Party.name" value="ObAS" />
 						</INSTANCE>
 					</INSTANCE>
 					<INSTANCE dmrole="ds:dataset.Curation.contact" dmtype="ds:dataset.Contact">
 						<INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
-							<VALUE dmrole="ds:party.Party.name" ref="Laurent" />
+							<VALUE dmrole="ds:party.Party.name" value="Laurent" />
 						</INSTANCE>
 					</INSTANCE>
 					<COMPOSITION dmrole="publications">
 						<INSTANCE dmrole="ds:dataset.Curation.reference" dmtype="ds:dataset.Publication">
-							<VALUE dmrole="ds:dataset.Publication.refCode" ref="AA...123" />
+							<VALUE dmrole="ds:dataset.Publication.refCode" value="AA...123" />
 						</INSTANCE>
 						<INSTANCE dmrole="ds:dataset.Curation.reference" dmtype="ds:dataset.Publication">
-							<VALUE dmrole="ds:dataset.Publication.refCode" ref="AA...234" />
+							<VALUE dmrole="ds:dataset.Publication.refCode" value="AA...234" />
 						</INSTANCE>
 					</COMPOSITION>
 				</INSTANCE>
