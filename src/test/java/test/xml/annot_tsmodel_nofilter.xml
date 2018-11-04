@@ -1,5 +1,11 @@
 <VOTABLE version="1.3" xmlns="http://www.ivoa.net/xml/VOTable/v1.3">
+<!-- 
+	This a demonstrator for the lite version of the VOMDL mapping
+	this file is a copy of annot_tsmodel_filter.out.xml where comments have been removed
+	It has been used to do compact screen shots
 
+    LM 26/10/2018
+ -->
 	<VODML>
 		<MODELS>
 			<MODEL>
@@ -37,11 +43,16 @@
 				</URL>
 			</MODEL>
 		</MODELS>
-
 		<GLOBALS>
-			<INSTANCE dmrole="cube:DataProduct.dataset" dmtype="ds:dataset.Dataset" ID="_ds_">
+			<INSTANCE dmrole="cube:DataProduct.dataset" dmtype="ds:dataset.Dataset"
+				ID="_ds_">
 				<VALUE dmrole="ds:dataset.Dataset.dataProductType" value="TimSeries" />
 				<VALUE dmrole="ds:dataset.Dataset.dataProductSubtype" value="Time Series Multiband" />
+				<COMPOSITION dmrole="collections">
+					<INSTANCE dmrole="ds:dataset.DataID.collection" dmtype="ds:dataset.Collection">
+						<VALUE dmrole="ds:dataset.Collection.name" ref="VODML Lite Test Bench" />
+					</INSTANCE>
+				</COMPOSITION>
 				<INSTANCE dmrole="ds:dataset.Dataset.curation" dmtype="ds:dataset.Curation">
 					<VALUE dmrole="ds:dataset.Curation.publisherDID" value="ivoa://voldml/lite/project" />
 					<VALUE dmrole="ds:dataset.Curation.version" ref="0.0" />
@@ -58,14 +69,14 @@
 							<VALUE dmrole="ds:party.Party.name" ref="Laurent" />
 						</INSTANCE>
 					</INSTANCE>
-					<COLLECTION size="-1" dmrole="publications">
+					<COMPOSITION dmrole="publications">
 						<INSTANCE dmrole="ds:dataset.Curation.reference" dmtype="ds:dataset.Publication">
 							<VALUE dmrole="ds:dataset.Publication.refCode" ref="AA...123" />
 						</INSTANCE>
 						<INSTANCE dmrole="ds:dataset.Curation.reference" dmtype="ds:dataset.Publication">
 							<VALUE dmrole="ds:dataset.Publication.refCode" ref="AA...234" />
 						</INSTANCE>
-					</COLLECTION>
+					</COMPOSITION>
 				</INSTANCE>
 				<INSTANCE dmrole="ds:dataset.Dataset.dataID" dmtype="ds:dataset.DataID">
 					<VALUE dmrole="ds:dataset.DataID.title" value="Gaia TS Mapping Test" />
@@ -79,37 +90,61 @@
 							<VALUE dmrole="ds:party.Party.name" value="VODML-Team" />
 						</INSTANCE>
 					</INSTANCE>
-					<COLLECTION size="-1" dmrole="contributors">
+					<COMPOSITION dmrole="contributors">
 						<INSTANCE dmrole="ds:dataset.DataID.contributor" dmtype="ds:dataset.Contributor">
-							<VALUE dmrole="ds:dataset.Contributor.acknowledgment"
-								value="Thank you guy" />
+							<INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
+								<VALUE dmrole="ds:party.Party.name" value="Laurent Michel" />
+							</INSTANCE>
+							<VALUE dmrole="ds:dataset.Contributor.acknowledgment" value="Thank you guy" />
 						</INSTANCE>
 						<INSTANCE dmrole="ds:dataset.DataID.contributor" dmtype="ds:dataset.Contributor">
+							<INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
+								<VALUE dmrole="ds:party.Party.name" value="Mark Cresitello Dittmar" />
+							</INSTANCE>
 							<VALUE dmrole="ds:dataset.Contributor.acknowledgment"
-								value="Bye bye" />
+								value="I'm pleased to work with you" />
 						</INSTANCE>
-					</COLLECTION>
-					<COLLECTION size="-1" dmrole="collections">
-						<INSTANCE dmrole="ds:dataset.DataID.collection" dmtype="ds:dataset.Collection">
-							<VALUE dmrole="ds:dataset.Collection.name" ref="VODML Lite Test Bench" />
-						</INSTANCE>
-					</COLLECTION>
+					</COMPOSITION>
 				</INSTANCE>
 			</INSTANCE>
-
 			<INSTANCE dmrole="coords:Coordinate.frame" dmtype="coords:domain.time.TimeFrame"
 				ID="timeframe">
 				<INSTANCE dmrole="coords:domain.time.TimeFrame.refPosition"
-					dmtype="coords:domain.space.RefLocation" abstract="true" />
-				<VALUE dmrole="coords:domain.time.TimeFrame.timescale" value="TT" />
-				<INSTANCE dmrole="coords:domain.time.TimeFrame.refDirection"
-					dmtype="coords:domain.space.RefLocation" abstract="true" />
+					dmtype="coords:domain.space.StdRefLocation">
+					<VALUE dmrole="coords:domain.space.StdRefLocation.position"
+						value="BARYCENTER" />
+				</INSTANCE>
+				<INSTANCE dmrole="coords:domain.time.TimeFrame.time0"
+					dmtype="coords:domain.time.JD">
+					<VALUE dmrole="coords:domain.time.JD.date" value="2455197.5" />
+				</INSTANCE>
+				<VALUE dmrole="coords:domain.time.TimeFrame.timescale" value="TCB" />
 			</INSTANCE>
-			<INSTANCE dmrole="ts:PhotometricMeasure.filter" dmtype="photdm:PhotCal" ID="filterG">
+			
+			<INSTANCE dmrole="ts:PhotometricMeasure.filter" dmtype="photdm:PhotCal"
+				ID="filterG">
 				<INSTANCE dmrole="photdm:PhotCal.photometryFilter" dmtype="photdm:PhotometryFilter">
 					<INSTANCE dmrole="photdm:PhotometryFilter.access" dmtype="photdm:Access">
-						<VALUE dmrole="photdm:Access.reference" value="http://svo/filterG" />
-						<VALUE dmrole="photdm:Access.format" value="json" />
+						<VALUE dmrole="photdm:Access.reference" value="http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.G" />
+						<VALUE dmrole="photdm:Access.format" value="xml" />
+					</INSTANCE>
+				</INSTANCE>
+			</INSTANCE>
+			<INSTANCE dmrole="ts:PhotometricMeasure.filter" dmtype="photdm:PhotCal"
+				ID="filterBP">
+				<INSTANCE dmrole="photdm:PhotCal.photometryFilter" dmtype="photdm:PhotometryFilter">
+					<INSTANCE dmrole="photdm:PhotometryFilter.access" dmtype="photdm:Access">
+						<VALUE dmrole="photdm:Access.reference" value="http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.BP" />
+						<VALUE dmrole="photdm:Access.format" value="xml" />
+					</INSTANCE>
+				</INSTANCE>
+			</INSTANCE>
+			<INSTANCE dmrole="ts:PhotometricMeasure.filter" dmtype="photdm:PhotCal"
+				ID="filterRP">
+				<INSTANCE dmrole="photdm:PhotCal.photometryFilter" dmtype="photdm:PhotometryFilter">
+					<INSTANCE dmrole="photdm:PhotometryFilter.access" dmtype="photdm:Access">
+						<VALUE dmrole="photdm:Access.reference" value="http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.RP" />
+						<VALUE dmrole="photdm:Access.format" value="xml" />
 					</INSTANCE>
 				</INSTANCE>
 			</INSTANCE>
@@ -117,46 +152,43 @@
 
 		<TEMPLATES tableref="results">
 			<INSTANCE dmrole="root" dmtype="ts:SimpleTimeSeries">
-				<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_"/>
-				<COLLECTION arraysize="-1" dmrole="data">
+				<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
+				<COMPOSITION dmrole="data">
 					<INSTANCE dmrole="cube:SparseCube.data" dmtype="ts:Record">
 						<INSTANCE dmrole="ts:Record.dataProduct" dmtype="cube:DataProduct">
-							<COLLECTION arraysize="-1" dmrole="coosys">
-								<INSTANCE dmrole="cube:DataProduct.coordSys" dmtype="coords:CoordSys" />
-							</COLLECTION>
-							<INSTANCE dmrole="cube:DataProduct.dataset" tableref="globals" />
+							<COMPOSITION dmrole="coosys">
+								<INSTANCE dmrole="cube:DataProduct.coordSys" dmtype="coords:CoordSys" ref="timeframe"/>
+							</COMPOSITION>
+							<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
 						</INSTANCE>
-
-						<COLLECTION dmrole="observable">
+						<ARRAY dmrole="observable">
 							<INSTANCE dmrole="cube:NDPoint.observable" dmtype="cube:Observable">
 								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
 									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
 										<VALUE dmrole="coords:domain.time.JD.date" ref="time" />
-										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe">
-										</INSTANCE>
+										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe"/>
 										<VALUE dmrole="cube:DataAxis.dependent" value="false" />
 									</INSTANCE>
-									<INSTANCE dmrole="cube:MeasurementAxis.measure"
-										dmtype="ts:PhotometricMeasure">
+									<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="ts:PhotometricMeasure">
 										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
 											<VALUE dmrole="ts:Magnitude.value" ref="mag" />
-											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterG"/>
+											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterG" />
 										</INSTANCE>
 									</INSTANCE>
 									<VALUE dmrole="cube:DataAxis.dependent" value="true" />
 								</INSTANCE>
 							</INSTANCE>
-						</COLLECTION>
+						</ARRAY>
 					</INSTANCE>
-				</COLLECTION>
-				<COLLECTION arraysize="-1" dmrole="coordsys">
-					<INSTANCE dmrole="cube:DataProduct.coordSys" dmtype="coords:CoordSys" />
-				</COLLECTION>
-			</INSTANCE>
+				</COMPOSITION> <!-- End of the SparseCube collection -->
+
+			</INSTANCE> <!-- End of the Simple TS instance -->
 		</TEMPLATES>
 	</VODML>
-
-
+	
+    <!-- 
+        Here starts the VOTABlE provided the ESAC
+     -->
 	<RESOURCE type="results">
 		<TABLE ID="results">
 			<PARAM name="calibLevel" ID="calibLevel" value="3" />
@@ -164,20 +196,17 @@
 			<PARAM name="cont" ID="cont" value="MySelf" />
 			<PARAM name="pubDID" ID="pubDID" value="ivoa://pouet" />
 			<PARAM name="targ" ID="targ" value="M33" />
-			<FIELD datatype="long" name="source_id" utype="meta.id;meta.main">
+			<FIELD datatype="long" name="source_id">
 			</FIELD>
 			<FIELD datatype="long" name="transit_id" ucd="meta.version">
 			</FIELD>
-			<FIELD arraysize="*" datatype="char" name="band" ucd="instr.bandpass"
-				utype="ssa:DataID.Bandpass">
+			<FIELD arraysize="*" datatype="char" name="band" ucd="instr.bandpass">
 			</FIELD>
-			<FIELD datatype="double" name="time" ucd="time.epoch;VOX:Image_MJDateObs"
-				unit="d" utype="spec:Spectrum.Data.TimeAxis.Value">
+			<FIELD datatype="double" name="time" ucd="time.epoch;VOX:Image_MJDateObs" unit="d">
 			</FIELD>
 			<FIELD datatype="float" name="mag" ucd="phot.mag;em.opt" unit="mag">
 			</FIELD>
-			<FIELD datatype="float" name="flux" ucd="em.opt;phot.flux;stat.mean"
-				unit="e-/s" utype="spec:Spectrum.Data.SpectralAxis.Value">
+			<FIELD datatype="float" name="flux" ucd="em.opt;phot.flux;stat.mean" unit="e-/s" >
 			</FIELD>
 			<FIELD datatype="float" name="flux_error" ucd="em.opt;phot.flux;stat.error"
 				unit="e-/s">
