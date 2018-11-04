@@ -181,6 +181,7 @@
 		        This TEMPLATES own the dmrole=root element. It must have one child (INSTANCE or SET>
 		        This child indicates that the client must return one instance of the ts:SimpleTimeSeries class
 		     -->
+	           <SET dmrol="root" groupby="sourceid">
 			<INSTANCE dmrole="root" dmtype="ts:SimpleTimeSeries">
 			    <!--
 			        Reference to the DataSet of this Time Series 
@@ -317,6 +318,7 @@
 				</COMPOSITION> <!-- End of the SparseCube collection -->
 
 			</INSTANCE> <!-- End of the Simple TS instance -->
+		    <SET><!-- End of the set of the Simple TS instance -->
 		</TEMPLATES>
 	</VODML>
 	
