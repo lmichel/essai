@@ -237,7 +237,7 @@ public class DataTableCollection extends MappingNode
 		if( this.rowDataSchemaTemplate == null) {
 			throw new MissingResourceException("Cannot get column roles because there is no data schema template (" + this.nodeId + ")");
 		}
-		return this.rowDataSchemaTemplate.getColumnRoles();
+		return this.rowDataSchema.getColumnRoles();
 	}
 
 
