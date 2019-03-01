@@ -6,6 +6,8 @@ package sample;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import mapping.MappingElement;
 import parser.LiteMappingParser;
@@ -118,9 +120,16 @@ public class TimeSeriesExample {
 
 			MappingElement pointList = sparseCube.getFirstChildByRole("observable");
 			sparseCubeReport.nbPoints = pointList.getLength();
-			MappingElement firstPoint = pointList.getContentElement(0);
-			
+			/*
+			 * Extract the first photometric point for the report
+			 */
+			MappingElement firstPoint = pointList.getContentElement(0);		
 			List<MappingElement> mesures = firstPoint.getSubelementsByRole("meas:CoordMeasure.coord");
+			/*
+			 * Measurments of a photometric point are identified by their roles. 
+			 * To extract time and mag, we have to read all of them and ti check the roles
+			 * This is very inefficient , but this is a consequence of the model design
+			 */
 			for( MappingElement mes: mesures){
 				MappingElement x;
 				if( (x = mes.getContentElement("coords:domain.time.JD.date")) != null ) {
@@ -129,22 +138,33 @@ public class TimeSeriesExample {
 					sparseCubeReport.firstMag = x.getStringValue();
 				} 
 			}
-			sparseCubeReport.filterUrl = firstPoint.getOneSubelementByRole("photdm:Access.reference").getStringValue();
-			
+			/*
+			 * Extract the last photometric point for the report
+			 */
 			MappingElement lastPoint = pointList.getContentElement(sparseCubeReport.nbPoints - 1);
 			mesures = lastPoint.getSubelementsByRole("meas:CoordMeasure.coord");
 			for( MappingElement mes: mesures){
 				MappingElement x;
 				if( (x = mes.getContentElement("coords:domain.time.JD.date")) != null ) {
-					sparseCubeReport.firstTime  = x.getStringValue();
+					sparseCubeReport.lastTime  = x.getStringValue();
 				} else if ( (x = mes.getContentElement("ts:Magnitude.value")) != null ) {
-					sparseCubeReport.firstMag = x.getStringValue();
+					sparseCubeReport.lastMag = x.getStringValue();
 				} 
 			}
 			sparseCubeReport.filterUrl = lastPoint.getOneSubelementByRole("photdm:Access.reference").getStringValue();
+			
+			/*
+			 * The Column mapping binds column numbers with DM roles.
+			 * The table can be quickly read without taking car on the model.
+			 * This might avoid to build an instance for each read row and 
+			 * to compare strings to retrieve the role of each table cell
+			 * (see comment above)
+			 */
+			sparseCubeReport.columnMapping = pointList.getColumnRoles();
 		}
 	}
 	
+
 	/**
 	 * Printout the report all what has been read out of the VOTable
 	 */
@@ -167,15 +187,18 @@ public class TimeSeriesExample {
 		}
 		
 		System.out.println("Sparse Cubes");
+		System.out.println("    nb sparse cubes in the time series:" + this.sparseCubeReports.size());
 		for( SparseCubeReport sparseCubeReport: this.sparseCubeReports){
 			System.out.println("    Sparse Cube");
-			System.out.println("        filter: " + sparseCubeReport.filterUrl);
-			System.out.println("        nb points: " + sparseCubeReport.nbPoints);
-			System.out.println("        1st point: " + sparseCubeReport.firstTime + " " + sparseCubeReport.firstMag);
+			System.out.println("        filter    : " + sparseCubeReport.filterUrl);
+			System.out.println("        nb points : " + sparseCubeReport.nbPoints);
+			System.out.println("        1st point : " + sparseCubeReport.firstTime + " " + sparseCubeReport.firstMag);
 			System.out.println("        last point: " + sparseCubeReport.lastTime + " " + sparseCubeReport.lastMag);
+			System.out.println("    column mapping: (col number -> role)");
+			for( Entry<Integer, String> entry: sparseCubeReport.columnMapping.entrySet()){
+				System.out.println("                    " + entry.getKey() + " -> s" + entry.getValue());
+			}
 		}
-
-
 	}
 
 	/**
@@ -189,6 +212,7 @@ public class TimeSeriesExample {
 		String firstMag;
 		String lastTime;
 		String lastMag;
+		Map<Integer, String> columnMapping;
 	}
 	/**
 	 * Example of the API usage
