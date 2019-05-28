@@ -1,6 +1,210 @@
 
 <?xml version="1.0" encoding="utf-8"?>
 <VOTABLE version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:stc="http://www.ivoa.net/xml/STC/v1.30">
+<VODML>
+	    <!--
+	        Models used by the mapping  
+	     -->
+		<MODELS>
+			<MODEL>
+				<NAME>ivoa</NAME>
+				<URL>http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>coords</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_coords-v2.0.vo-dml.xml
+				</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>meas</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_meas-v2.0.vo-dml.xml
+				</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>photdm-alt</NAME>
+				<URL>http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml-org/models/photdm-alt/PhotDM-alt.vo-dml.xml
+				</URL>
+			</MODEL>
+		</MODELS>
+		<!-- 
+		    Instance set with fixed values (not read in FLEDS or PARAMS)
+		 -->
+		<GLOBALS>
+			<!-- 
+			    Time frame, referenced from each photometric point
+			 -->
+			<INSTANCE dmrole="coords:Coordinate.frame" dmtype="coords:domain.time.TimeFrame"
+				ID="timeframe">
+				<INSTANCE dmrole="coords:domain.time.TimeFrame.refPosition"
+					dmtype="coords:domain.space.StdRefLocation">
+					<VALUE dmrole="coords:domain.space.StdRefLocation.position"
+						value="BARYCENTER" />
+				</INSTANCE>
+				<INSTANCE dmrole="coords:domain.time.TimeFrame.time0"
+					dmtype="coords:domain.time.JD">
+					<VALUE dmrole="coords:domain.time.JD.date" value="2455197.5" />
+				</INSTANCE>
+				<VALUE dmrole="coords:domain.time.TimeFrame.timescale" value="TCB" />
+			</INSTANCE>
+			
+			<INSTANCE dmrole="ts:PhotometricMeasure.filter" dmtype="photdm:PhotCal"
+				ID="filterG">
+				<INSTANCE dmrole="photdm:PhotCal.photometryFilter" dmtype="photdm:PhotometryFilter">
+					<INSTANCE dmrole="photdm:PhotometryFilter.access" dmtype="photdm:Access">
+						<VALUE dmrole="photdm:Access.reference" value="http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.G" />
+						<VALUE dmrole="photdm:Access.format" value="xml" />
+					</INSTANCE>
+				</INSTANCE>
+			</INSTANCE>
+
+
+		</GLOBALS>
+		<!-- 
+		    Mapping of <TABLE ID=results>
+		 -->
+		<TEMPLATES tableref="results">
+		    <!-- 
+		        This TEMPLATES own the dmrole=root element. It must have one child (INSTANCE or SET>
+		        This child indicates that the client must return one instance of the ts:SimpleTimeSeries class
+		     -->
+			<INSTANCE dmrole="root" dmtype="ts:SimpleTimeSeries">
+			    <!--
+			        Reference to the DataSet of this Time Series 
+			     -->
+				<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
+				<!-- 
+				   Data composition: This means the the mapped model supports
+				   several (a collection of) SparseCube instance
+				   These SparseCube are explicitely listed inside the COMPOSITION
+				 -->
+				<COMPOSITION dmrole="data">
+				    <!--
+				        First SparseCube = a reference to the dataset + an array of observables
+				        It is to be noted that the band can only be identified by parsing the filer definition
+				        This one is for the G band
+				     -->
+					<INSTANCE dmrole="cube:SparseCube.data" dmtype="ts:Record">
+					    <!-- 
+					       DataSet reference
+					     -->
+						<INSTANCE dmrole="ts:Record.dataProduct" dmtype="cube:DataProduct">
+							<COMPOSITION dmrole="coosys">
+								<INSTANCE dmrole="cube:DataProduct.coordSys" dmtype="coords:CoordSys" ref="timeframe"/>
+							</COMPOSITION>
+							<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
+						</INSTANCE>
+						<!--
+						    Array of observables
+						    The ARRAY element means the one instance must be produced for each TABLE row. 
+						    The ARRAY element mus have one INSTANCE as child 
+						    One instance of INSTANCE will be generated for each data row
+						    Idf there is no column mapped in that INSTANCE, all returned instances will be identical
+						 -->
+						<ARRAY dmrole="observable">
+						    <!-- 
+						        Instance modeling one row
+						     -->
+							<INSTANCE dmrole="cube:NDPoint.observable" dmtype="cube:Observable">
+							    <!-- 
+							        The filter means that only rows with band = "G" will instanciated in this ARRAY
+							     -->
+								<FILTER key="band" value="G" />
+								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
+									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
+									    <!--
+									       Reference to the "time" column 
+									       A ref in a VALUE can only refer to a FIELD or a PARAM of the current TEMPLATE
+									     -->
+										<VALUE dmrole="coords:domain.time.JD.date" ref="time" />
+										<!-- 
+										    A ref in an INSTANCE can only refer to another INSTANCE 
+										    located anywhere in the VOMDL block
+										 -->
+										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe"/>
+										<VALUE dmrole="cube:DataAxis.dependent" value="false" />
+									</INSTANCE>
+									<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="ts:PhotometricMeasure">
+										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
+											<VALUE dmrole="ts:Magnitude.value" ref="mag" />
+											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterG" />
+										</INSTANCE>
+									</INSTANCE>
+									<VALUE dmrole="cube:DataAxis.dependent" value="true" />
+								</INSTANCE>
+							</INSTANCE>
+						</ARRAY>
+					</INSTANCE>
+				    <!--
+				        Second SparseCube = a reference to the dataset + an array of observables
+				        This one is for the BP band
+				     -->
+					<INSTANCE dmrole="cube:SparseCube.data" dmtype="ts:Record">
+						<INSTANCE dmrole="ts:Record.dataProduct" dmtype="cube:DataProduct">
+							<COMPOSISTION dmrole="coosys">
+								<INSTANCE dmrole="cube:DataProduct.coordSys" dmtype="coords:CoordSys" />
+							</COMPOSISTION>
+							<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
+						</INSTANCE>
+
+						<ARRAY dmrole="observable">
+							<INSTANCE dmrole="cube:NDPoint.observable" dmtype="cube:Observable">
+								<FILTER key="band" value="BP" />
+								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
+									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
+										<VALUE dmrole="coords:domain.time.JD.date" ref="time" />
+										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe"/>
+										<VALUE dmrole="cube:DataAxis.dependent" value="false" />
+									</INSTANCE>
+									<INSTANCE dmrole="cube:MeasurementAxis.measure"
+										dmtype="ts:PhotometricMeasure">
+										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
+											<VALUE dmrole="ts:Magnitude.value" ref="mag" />
+											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterBP" />
+										</INSTANCE>
+									</INSTANCE>
+									<VALUE dmrole="cube:DataAxis.dependent" value="true" />
+								</INSTANCE>
+							</INSTANCE>
+						</ARRAY>
+					</INSTANCE>
+					<!--
+				        Third SparseCube = a reference to the dataset + an array of observables
+				        This one is for the RP band
+				     -->
+					<INSTANCE dmrole="cube:SparseCube.data" dmtype="ts:Record">
+						<INSTANCE dmrole="ts:Record.dataProduct" dmtype="cube:DataProduct">
+							<COMPOSISTION dmrole="coosys">
+								<INSTANCE dmrole="cube:DataProduct.coordSys" dmtype="coords:CoordSys" />
+							</COMPOSISTION>
+							<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
+						</INSTANCE>
+
+						<ARRAY dmrole="observable">
+							<INSTANCE dmrole="cube:NDPoint.observable" dmtype="cube:Observable">
+								<FILTER key="band" value="RP" />
+								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
+									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
+										<VALUE dmrole="coords:domain.time.JD.date" ref="time" />
+										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe" />
+										<VALUE dmrole="cube:DataAxis.dependent" value="false" />
+									</INSTANCE>
+									<INSTANCE dmrole="cube:MeasurementAxis.measure"
+										dmtype="ts:PhotometricMeasure">
+										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
+											<VALUE dmrole="ts:Magnitude.value" ref="mag" />
+											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterRP" />
+										</INSTANCE>
+									</INSTANCE>
+									<VALUE dmrole="cube:DataAxis.dependent" value="true" />
+								</INSTANCE>
+							</INSTANCE>
+						</ARRAY>
+					</INSTANCE>
+				</COMPOSITION> <!-- End of the SparseCube collection -->
+
+			</INSTANCE> <!-- End of the Simple TS instance -->
+		</TEMPLATES>
+</VODML>
   <RESOURCE>
     <TABLE>
       <FIELD name="oid" datatype="long" ucd="meta.id">
