@@ -30,6 +30,13 @@
 		    Instance set with fixed values (not read in FLEDS or PARAMS)
 		 -->
 		<GLOBALS>
+			
+			<INSTANCE dmtype="coords:domain.space.SpaceFrame" ID="_spaceFrame">
+				<VALUE dmrole="coords:domain.space.SpaceFrame.equinox" ref="J2000" />
+				<VALUE dmrole="coords:domain.space.SpaceFrame.spaceRefFrame"
+					value="ICRS" />
+			</INSTANCE>
+
 			<!-- 
 			    Time frame, referenced from each photometric point
 			 -->
@@ -68,9 +75,23 @@
 		        This child indicates that the client must return one instance of the ts:SimpleTimeSeries class
 		     -->
 			<INSTANCE dmrole="root" dmtype="ts:SimpleTimeSeries">
-			    <!--
-			        Reference to the DataSet of this Time Series 
-			     -->
+				<INSTANCE ref="_spaceFrame" />
+				<INSTANCE dmrole="coords:CompositeCoordinate.cmpt" dmtype="coords:CoordValue">
+					<INSTANCE dmrole="coords:CoordValue.axis">
+						<VALUE dmrole="coords:Axis.name" value="ra2000" />
+						<VALUE dmrole="coords:PhysicalCoordValue.cval" value="21.34" />
+					</INSTANCE>
+				</INSTANCE>
+				<INSTANCE dmrole="coords:CompositeCoordinate.cmpt" dmtype="coords:CoordValue">
+					<INSTANCE dmrole="coords:CoordValue.axis">
+						<VALUE dmrole="coords:Axis.name" value="dec2000" />
+						<VALUE dmrole="coords:PhysicalCoordValue.cval" value="-121.34" />
+					</INSTANCE>
+				</INSTANCE>
+
+			        <!--
+			         Reference to the DataSet of this Time Series 
+			        -->
 				<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
 				<!-- 
 				   Data composition: This means the the mapped model supports
