@@ -1,0 +1,10 @@
+ <INSTANCE dmrole="root" dmtype="coords:TimeFrame" ID="TimeFrame_TT">
+    <INSTANCE dmrole="coords:TimeFrame.refDirection" dmtype="coords:StdRefLocation">
+      <VALUE default="BARYCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" ref="@@@@@@"/>
+    </INSTANCE>
+    <INSTANCE dmrole="coords:TimeFrame.refPosition" dmtype="coords:StdRefLocation">
+      <VALUE default="BARYCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" ref="@@@@@@"/>
+    </INSTANCE>
+    <VALUE default="TT" dmrole="coords:TimeFrame.timescale" dmtype="ivoa:string" ref="@@@@@@"/>
+</INSTANCE>
+

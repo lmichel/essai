@@ -1,0 +1,9 @@
+
+<INSTANCE dmrole="root" dmtype="coords:SpaceFrame" ID="SpaceFrame_ICRS">
+   <VALUE default="J2000" dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" ref="@@@@@@"/>
+   <VALUE dmrole="coords:SpaceFrame.planetaryEphem" dmtype="ivoa:string" ref="@@@@@@"/>
+   <VALUE default="ICRS" dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string" ref="@@@@@@"/>
+   <INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
+     <VALUE default="GEOCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" ref="@@@@@@"/>
+   </INSTANCE>
+</INSTANCE>

@@ -1,0 +1,8 @@
+    <INSTANCE dmrole="root" dmtype="meas:Time">
+      <INSTANCE abstr="true" dmrole="meas:Time.coord" dmtype="coords:TimeStamp">
+        <INSTANCE dmrole="coords:Coordinate.frame" ref="TimeFrame_TT"/>
+      </INSTANCE>
+      <COLLECTION size="-1">
+        <INSTANCE dmrole="meas:Measure.error"  ref="SymetricalError"/>
+      </COLLECTION>
+    </INSTANCE>

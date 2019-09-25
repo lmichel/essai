@@ -1,0 +1,19 @@
+    <INSTANCE dmrole="root" dmtype="meas:EquatorialPosition">
+      <COLLECTION size="-1">
+        <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error" ref="SymetricalError"/>
+      </COLLECTION>
+      <INSTANCE dmrole="meas:EquatorialPosition.dec" dmtype="coords:Latitude">
+        <INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+        <INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity">
+          <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
+          <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
+        </INSTANCE>
+      </INSTANCE>
+      <INSTANCE dmrole="meas:EquatorialPosition.ra" dmtype="coords:Longitude">
+        <INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+        <INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity">
+          <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
+          <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
+        </INSTANCE>
+      </INSTANCE>
+    </INSTANCE>

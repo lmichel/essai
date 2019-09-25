@@ -1,0 +1,20 @@
+<INSTANCE dmrole="root" dmtype="meas:GenericMeasure">
+   <INSTANCE abstr="true" dmrole="meas:GenericMeasure.coord" dmtype="coords:GenericCoordValue">
+      <INSTANCE dmrole="coords:GenericCoordValue.axis" dmtype="coords:ContinuousAxis">
+         <INSTANCE dmrole="coords:ContinuousAxis.domainMin" dmtype="ivoa:RealQuantity">
+            <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@" />
+            <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@" />
+         </INSTANCE>
+         <INSTANCE dmrole="coords:ContinuousAxis.domainMax" dmtype="ivoa:RealQuantity">
+            <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@" />
+            <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@" />
+         </INSTANCE>
+         <VALUE dmrole="coords:ContinuousAxis.cyclic" dmtype="ivoa:boolean" ref="@@@@@@" />
+         <VALUE dmrole="coords:Axis.name" dmtype="ivoa:string" ref="@@@@@@" />
+      </INSTANCE>
+      <INSTANCE dmrole="coords:Coordinate.frame" ref="GenericCoordFrame" />
+   </INSTANCE>
+   <COLLECTION size="-1">
+      <INSTANCE dmrole="meas:Measure.error" ref="SymetricalError" />
+   </COLLECTION>
+</INSTANCE>
