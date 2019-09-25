@@ -1,22 +1,30 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from transform import  *
-
+import os, sys
 import xml.etree.ElementTree as ET
+import xml.dom.minidom
+
+print(os.environ['PYTHONPATH'])
+
+from mappingfactory.transform import MappingGenerator
 
             
 def main():
     mapping_generator = MappingGenerator()
-    mapping_generator.parse_vodml_file(filename="../../models/lm_timeseries.vo-dml.xml", model='lm_timeseries')
+    mapping_generator.parse_vodml_file(filename="https://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml", model='meas')
     mapping_generator.resolve_inheritance();
     mapping_generator.resolve_constaints();
     #root_object_id = 'cube:DataProduct'
-    mapping_generator.root_object_id = 'lm_timeseries:TimeSeries'
+    mapping_generator.root_object_id = 'meas:ProperMotion'
+    
+    mapping_generator.concrete_classes = {"coords:SpaceFrame.refPosition": ["coords:StdRefLocation"]}
+
     
  
     #mapping_generator.concrete_classes = {}
-    #mapping_generator.concrete_types={}
+    mapping_generator.concrete_types={"coords:SpaceCoord.cval": "ivoa:RealQuantity"}
+
     mapping_generator.generate_mapping()
     
     for ac in mapping_generator.mapped_abstract_classes :
@@ -39,8 +47,12 @@ def main():
     #print(root_object_id)
     #generate_mapping()
 
-    root = etree.fromstring(mapping_generator.xml_string + "\n")
-    print((etree.tostring(root, pretty_print=True)).decode("utf-8") )
+    #root = ET.fromstring(mapping_generator.xml_string + "\n")
+    #print((ET.tostring(root, pretty_print=True)).decode("utf-8") )
+    
+    xmld = xml.dom.minidom.parseString(mapping_generator.xml_string + "\n")
+    xml_pretty_str = xmld.toprettyxml()
+    print(xml_pretty_str)
 if __name__ == "__main__":
     main()   
     sys.exit()   

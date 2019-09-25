@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from lxml import etree
-from xml.sax.expatreader import AttributesImpl
 import sys, urllib, traceback, re
-from setuptools.command.easy_install import sys_executable
+from mappingfactory import logger
+import urllib.request
+
+
 
 def constant(f):
     def fset(self, value):
@@ -13,37 +15,138 @@ def constant(f):
         return f()
     return property(fget, fset)
 
+
 DEBUG_MODE = False
 class _Const(object):
     @constant
-    def DEBUG():
+    def DEBUG(self):
         return DEBUG_MODE
     @constant
     def WITH_TYPES():
         return True
     @constant
-    def SUBCLASS():
+    def SUBCLASS(self):
         return "SubC" if DEBUG_MODE == True else ""
     @constant
     def SUBTYPE():
         return "SubT" if DEBUG_MODE == True else ""
     @constant
-    def TSUBTYPE():
+    def TSUBTYPE(self):
         return "TSubC" if DEBUG_MODE == True else ""
     
 CONST = _Const()
 
+class VodmlConstraint:    
+    def __init__(self, att_role):
+        self._att_role = att_role
+        self._subsets = []
+        
+    def __str__(self):
+        retour =  "CONSTRAINT "
+        retour += self._att_role + "=>" + str(self._subsets)
+        return retour
+    
+    def add_subset(self, subset):
+        if not subset in self._subsets:
+            self._subsets.append(subset)
+            
+    def add_constraint(self, vodmlcontraint):
+        datatypes = vodmlcontraint.subsets
+        for dt in datatypes:
+            self.add_subset(dt)
+            
+    def __repr__(self):
+        return self.__str__()
+    
+    @property
+    def att_role(self):
+        return self._att_role
+    
+    @property
+    def subsets(self):
+        return self._subsets
+    
+    @property
+    def is_empty(self):
+        return True if len(self._subsets) == 0  else False
+    
+    @property
+    def is_single(self):
+        return True if len(self._subsets) == 1  else False
+
+    @property    
+    def length(self):
+        return len(self._subsets)
+
+    
+class VodmlConstraintDict:    
+    def __init__(self):
+        self._constraints = dict()
+        
+    def __str__(self):
+        retour =  "CONSTRAINTS [ "
+        for r, vc in self._constraints.items():
+            retour += r + ": " + vc.__str__() + " "
+        retour += "]"
+        return retour
+    
+    def __repr__(self):
+        return self.__str__()
+    
+    def add_contraint(self, vodml_contraint):
+        if( vodml_contraint.is_empty ):
+            return
+        if( isinstance(vodml_contraint, list)):
+            raise Exception("===============")
+        if vodml_contraint and not vodml_contraint.is_empty :
+            print("@@@@@@@@@@@ add " + self.__str__())
+            print("@@@@@@@@@@@ add " + vodml_contraint.__str__())
+            att_role = vodml_contraint.att_role
+            subtypes = vodml_contraint.subsets
+            if att_role not in self._constraints.keys():
+                print("1")
+                self._constraints[att_role] = vodml_contraint
+                print("1 " + self._constraints[att_role].__repr__())
+                print("1 " + self.__repr__())
+
+            else :
+                print("2")
+                ar = self._constraints[att_role]
+                print(ar)
+                for st in vodml_contraint.subsets:
+                    if st not in ar.subsets:
+                        ar.add_subset(st) 
+    
+    @property
+    def constraints(self):
+        return self._constraints
+    
+    def keys(self):
+        return self._constraints.keys()
+    
+    def merge(self, vodml_constraint_dict):
+        print("@@@@@@@@@@@ merge 0" + vodml_constraint_dict.__str__())
+        print("@@@@@@@@@@@ merge 1" + self.__str__())
+        for k, vodml_constraint in vodml_constraint_dict.constraints.items():
+            print("@@@@@@@@@@@ merge 1.K" + vodml_constraint.__str__())
+            if k not in self._constraints.keys():
+                self._constraints[k] = vodml_constraint
+            else:
+                self.add_contraint(vodml_constraint)
+        print("@@@@@@@@@@@ merge 2" + self.__str__())
+
+    
 class VodmlObjectType:
     '''
     
     '''
-    def __init__(self, vomdlid, name, superclass, attributes, abstract=False, constraints=dict() ):
+    def __init__(self, vomdlid, name, superclass, attributes, abstract=False, vodml_constraints=VodmlConstraintDict() ):
         self.vodmlid = vomdlid
         self.name = name
         self.superclass = superclass
         self.attributes = attributes
         self.abstract = abstract
-        self.constraints = constraints
+        self.vodml_constraints = vodml_constraints
         
     def __str__(self):
         retour = ""
@@ -55,14 +158,14 @@ class VodmlObjectType:
         retour += self.name + " " + self.vodmlid +"\nATTRIBUTES\n"
         for attribute in self.attributes.values():
             retour += " - " + attribute.__str__()
-        retour += "CONSTRAINTS " + self.constraints.__repr__()
+        retour += "CONSTRAINTS " + self.vodml_constraints.__repr__()
         return retour
     
     def __repr__(self):
         return self.__str__()
-                 
+                     
 class VodmlDataType:
-    def __init__(self, vodmlid, name, ref, superclass, attributes, abstract=False,constraints=dict() ):
+    def __init__(self, vodmlid, name, ref, superclass, attributes, abstract=False,vodml_constraints=VodmlConstraintDict() ):
         '''
         :param vodmlid:
         :type vodmlid:
@@ -76,8 +179,8 @@ class VodmlDataType:
         :type attributes:
         :param abstract:
         :type abstract:
-        :param constraints:
-        :type constraints:
+        :param vodml_constraints:
+        :type vodml_constraints: VodmlConstraintDict
         '''
         self.vodmlid = vodmlid
         self.ref = ref
@@ -85,7 +188,7 @@ class VodmlDataType:
         self.superclass = superclass
         self.attributes = attributes
         self.abstract = abstract
-        self.constraints = constraints
+        self.vodml_constraints = vodml_constraints 
         
     def __str__(self):
         return self.__repr__()
@@ -94,8 +197,8 @@ class VodmlDataType:
         if self.abstract:
             retour += "Abstract "
         retour +=  "DATATYPE " + self.name + " vodmlid=" + self.vodmlid + " ref" + self.ref 
-        retour += "\nATTRIBUTES " + self.attributes.__repr__()
-        retour += "\nCONSTRAINTS " + self.constraints.__repr__()
+        retour += "\n    ATTRIBUTES " + self.attributes.__repr__()
+        retour += "\n    " + self.vodml_constraints.__repr__()
         return retour
         
         
@@ -107,7 +210,7 @@ class VodmlAttribute:
         self.array_size = array_size
         self.is_reference = is_reference
         if dmtype == "":
-            self.log_error(name + " " + vodmlid + " has not dmtype" )
+            logger.info(name + " " + vodmlid + " has not dmtype" )
 
     def __str__(self):
         retour =  "ATTRIBUTE "
@@ -117,16 +220,8 @@ class VodmlAttribute:
     def __repr__(self):
         return self.__str__()
     
-class VodmlConstraint:    
-    def __init__(self, name, datatype):
-        self.name = name
-        self.datatype = datatype
-    def __str__(self):
-        retour =  "CONSTRAINT "
-        retour += self.name + "=>" + self.datatype
-        return retour
-    def __repr__(self):
-        return self.__str__()
+
+
 
 class VodmlImport:
     def __init__(self, name, url):
@@ -180,7 +275,7 @@ class MappingGenerator:
         superclass = ''
         ref = ''
         attributes = dict()
-        constraints = dict()
+        constraints = VodmlConstraintDict()
         abstract = False
         if datatype_tag.get("abstract") == "true":
             abstract = True
@@ -202,12 +297,19 @@ class MappingGenerator:
                     break
             elif datatype_tag_child.tag == "constraint":
                 ct = self.read_constraint(model_name,datatype_tag_child)
-                constraints[ct.name] = ct
+                print(ct)
+                constraints.add_contraint(ct)
+ 
             elif datatype_tag_child.tag == "reference":
                 att = self.read_reference(model_name,datatype_tag_child)
                 attributes[att.vodmlid] = att
        
-        return VodmlDataType(vodmlid, name, ref, superclass, attributes, abstract,constraints)
+        retour = VodmlDataType(vodmlid, name, ref, superclass, attributes, abstract,constraints)
+        if vodmlid == "coords:BinnedCoordValue":
+            print(constraints)
+            print(retour)
+            #sys.exit() 
+        return retour
 
     def read_attribute(self, model_name,attribute_tag):
         dmtype = ''
@@ -240,23 +342,30 @@ class MappingGenerator:
                 
         return VodmlAttribute(vodmlid, name, dmtype, 1, True)
 
-    def read_constraint(self, model_name,attribute_tag):  
+    def read_constraint(self, model_name,constraint_tag):  
         role=""
         datatype = ""  
-        for attribute_tag_child in attribute_tag.findall('*'):
-            if attribute_tag_child.tag == "role":
-                for attribute_tag_sub_child in attribute_tag_child.findall('*'):
-                    if attribute_tag_sub_child.tag == "vodml-ref":
-                        role = attribute_tag_sub_child.text
-            elif attribute_tag_child.tag == "datatype" :
-                for attribute_tag_sub_child in attribute_tag_child.findall('*'):
-                    if attribute_tag_sub_child.tag == "vodml-ref":
-                        datatype = attribute_tag_sub_child.text
-        return VodmlConstraint(role, datatype)
-    
+        retour = None
+        for constraint_tag_child in constraint_tag.findall('*'):
+            if constraint_tag_child.tag == "role":
+                for constraint_tag_sub_child in constraint_tag_child.findall('*'):
+                    if constraint_tag_sub_child.tag == "vodml-ref":
+                        role = constraint_tag_sub_child.text
+
+            elif constraint_tag_child.tag == "datatype":
+                for constraint_tag_sub_child in constraint_tag_child.findall('*'):
+                    if constraint_tag_sub_child.tag == "vodml-ref":
+                        datatype = constraint_tag_sub_child.text
+
+        retour = VodmlConstraint(role)
+        retour.add_subset(datatype)
+        print("read_constraint " + retour.__repr__()   )            
+        return retour        
+
+     
     def read_object_type(self, model_name, object_type_tag):
         attributes = dict()
-        constraints = dict()
+        constraints = VodmlConstraintDict()
         superclass = ''
     
         abstract = False
@@ -284,7 +393,7 @@ class MappingGenerator:
 
             elif object_type_child.tag == "constraint":
                 ct = self.read_constraint(model_name,object_type_child)
-                constraints[ct.name] = ct
+                constraints.add_contraint(ct)
 
         obj = VodmlObjectType(vodmlid, name, superclass, attributes, abstract, constraints)
  
@@ -385,14 +494,12 @@ class MappingGenerator:
     def generate_data_mapping(self, vodml_data_type, vodml_id):
         am = ""
         sc_flag = ""
-        dmtype = ""
+        dmtype = " dmtype='" + vodml_data_type.vodmlid + "'"
         if vodml_data_type.abstract:
             self.mapped_abstract_types.append(vodml_data_type.vodmlid)
             am =  " abstract='true' "
             dmtype = " dmtype='" + vodml_data_type.vodmlid + "'"
-
             if vodml_id in self.concrete_types.keys():
-                #print("take " +  concrete_types[vodml_id] + " instead of " + vodml_data_type.vodmlid)
                 vodml_data_type = self.data_types[self.concrete_types[vodml_id]]
                 sc_flag = "(" + CONST.SUBTYPE  + " " + vodml_data_type.vodmlid + ")" if  CONST.SUBTYPE != "" else ""
                 dmtype = " dmtype='" + sc_flag + vodml_data_type.vodmlid + "'"
@@ -415,7 +522,7 @@ class MappingGenerator:
         '''
         If the same vodmlid is used twice successively, we are likely in forever loop
         such as TimeStamp>TimeFrame..
-        in this case, we put a reference on the classe instead of parsing it again and
+        in this case, we put a reference on the class instead of parsing it again and
         to run in stack overflow
         '''
         if self.last_object_mapped == vodml_object_type.vodmlid:
@@ -424,7 +531,8 @@ class MappingGenerator:
 
         for attribute in vodml_object_type.attributes.values():
             if  attribute.vodmlid not in read_attributes:
-                if in_loop == True or attribute.is_reference == True:
+                if (in_loop == True and attribute.dmtype in self.object_types)  or attribute.is_reference == True:
+                    print(in_loop)
                     self.generate_object_mapping(self.object_types[attribute.dmtype], attribute.vodmlid)
                 else :
                     self.generate_attribute_mapping(attribute)
@@ -439,7 +547,10 @@ class MappingGenerator:
         am = ""
         sc_flag = "";
         type = ""
-
+        print("@@@@@@@@@@@@@@@@ " + vodml_id)
+        if "coords:Coordinate.frame" == vodml_id:
+            print("stop")
+            
         if vodml_id in self.concrete_classes.keys():
             if  isinstance(self.concrete_classes[vodml_id], list):
                 for class_id in self.concrete_classes[vodml_id]:
@@ -494,24 +605,58 @@ class MappingGenerator:
     def resolve_constaints(self):
          for obj in  self.object_types.values():
             for attribute in obj.attributes.values():
-                if attribute.vodmlid in obj.constraints.keys():
-                    new_type = obj.constraints[attribute.vodmlid].datatype
-                    if new_type in self.data_types.keys():
-                        attribute.dmtype = self.data_types[new_type].vodmlid
-                    elif new_type in self.object_types.keys():
-                        attribute.dmtype = self.object_types[new_type].vodmlid
-                    self.log_msg("resolve_constaints", "Constraint found in object type " + obj.vodmlid + " " + attribute.vodmlid + "==>" + new_type)
+                if attribute.vodmlid in obj.vodml_constraints.keys():
+                    print(obj.vodml_constraints.constraints)
+                    vodml_constraint = obj.vodml_constraints.constraints[attribute.vodmlid]
+                    if vodml_constraint.is_single :
+                        new_type = vodml_constraint.subsets[0]
+                        if new_type in self.data_types.keys():
+                            attribute.dmtype = self.data_types[new_type].vodmlid
+                        elif new_type in self.object_types.keys():
+                            attribute.dmtype = self.object_types[new_type].vodmlid
+                            self.log_msg("resolve_constaints", "Constraint found in object type " + obj.vodmlid + " " + attribute.vodmlid + "==>" + new_type)
+                    else:
+                        self.log_msg("resolve_constaints", "Constraint multiple found in object type " + obj.vodmlid + " " + attribute.vodmlid + "==>" + vodml_constraint.subsets)
+
          for obj in  self.data_types.values():
             for attribute in obj.attributes.values():
-                if attribute.vodmlid in obj.constraints.keys():
-                    new_type = obj.constraints[attribute.vodmlid].datatype
-                    if new_type in self.data_types.keys():
-                        attribute.dmtype = self.data_types[new_type].vodmlid
-                    elif new_type in self.object_types.keys():
-                        attribute.dmtype = self.object_types[new_type].vodmlid
-                    self.log_msg("resolve_constaints", "Constraint found in datatype" + obj.vodmlid + " " + attribute.vodmlid + "==>" + new_type)
-                    
-                
+                if attribute.vodmlid in obj.vodml_constraints.keys():
+                    if attribute.vodmlid == "coords:Coordinate.frame" :
+                        print("on y est")
+                    print(obj.vodml_constraints.constraints)
+                    vodml_constraint = obj.vodml_constraints.constraints[attribute.vodmlid]
+                    if vodml_constraint.is_single :
+                        new_type = vodml_constraint.subsets[0]
+                        if new_type in self.data_types.keys():
+                            attribute.dmtype = self.data_types[new_type].vodmlid
+                        elif new_type in self.object_types.keys():
+                            attribute.dmtype = self.object_types[new_type].vodmlid
+                            self.log_msg("resolve_constaints", "Constraint found in data type " + obj.vodmlid + " " + attribute.vodmlid + "==>" + new_type)
+                    else:
+                        self.log_msg("resolve_constaints", "Constraint multiple found in data type " + obj.vodmlid + " " + attribute.vodmlid + "==>" + vodml_constraint.subsets)
+
+    '''
+         for obj in  self.subsets.values():
+            print("===================================")
+            print(obj)
+            for attribute in obj.attributes.values():
+                if attribute.vodmlid in obj.vodml_constraints.keys():
+                    if attribute.vodmlid == "coords:Coordinate.frame" :
+                        print("on y est")
+                    vodml_constraint = obj.vodml_constraints.constraints[attribute.vodmlid]
+                    if vodml_constraint.is_single :
+                        new_type = vodml_constraint.subsets[0]
+                        if new_type in self.subsets.keys():
+                            attribute.dmtype = self.subsets[new_type].vodmlid
+                            print("====================2 " + str(self.subsets[new_type].vodmlid))
+                        elif new_type in self.object_types.keys():
+                            attribute.dmtype = self.object_types[new_type].vodmlid
+                            print("====================1 " + str(self.object_types[new_type].vodmlid))
+                        self.log_msg("resolve_constaints", "Constraint found in datatype " + obj.vodmlid + " " + attribute.vodmlid + "==>" + new_type)
+                    else:
+                        self.log_msg("resolve_constaints", "Constraint multiple found in data type " + obj.vodmlid + " " + attribute.vodmlid + "==>" + vodml_constraint.subsets)
+                   
+    '''               
     def resolve_inheritance(self):
         for obj in  self.data_types.values():
             superclass = obj.superclass
@@ -525,12 +670,19 @@ class MappingGenerator:
                     self.log_error( superclass + " Neither in dataType nor in primitive types")
                 for k,v in sup_obj.attributes.items():
                     obj.attributes[k] = v
-                for k,v in sup_obj.constraints.items():
-                    obj.constraints[k] = v
+                print(sup_obj.vodml_constraints)
+                print("@@@@@@ resolve_inheritance merge data "  +  sup_obj.vodmlid + "  " + obj.vodmlid)
+                obj.vodml_constraints.merge(sup_obj.vodml_constraints)
+
+                #for k,v in sup_obj.vodml_constraints.constraints.items():
+                #    print(sup_obj.vodml_constraints.constraints)
+                #    obj.vodml_constraints.merge(v)
                 superclass = sup_obj.superclass
 
 
-        for obj in  self.object_types.values():
+        #for obj in  self.object_types.values():
+        for vodmlid in self.object_types.keys():
+            obj = self.object_types[vodmlid]
             superclass = obj.superclass
             while superclass != '':
                 sup_obj= None            
@@ -543,8 +695,10 @@ class MappingGenerator:
 
                 for k,v in sup_obj.attributes.items():
                     obj.attributes[k] = v
-                for k,v in sup_obj.constraints.items():
-                    obj.constraints[k] = v
+                #for k,v in sup_obj.vodml_constraints.items():
+                #    obj.vodml_constraints[k] = v
+                print("@@@@@@ resolve_inheritance merge obs " +  sup_obj.vodmlid + "  " + obj.vodmlid)
+                obj.vodml_constraints.merge(sup_obj.vodml_constraints)
                 superclass = sup_obj.superclass
             
     def generate_mapping(self):
