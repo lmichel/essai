@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vo-dml:model xmlns:vo-dml="http://www.ivoa.net/xml/VODML/v1"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ivoa.net/xml/VODML/v1 http://www.ivoa.net/xml/VODML/vo-dml-v1.xsd">
+  <name>cab_sdm</name>
+  <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+  <uri/>
+  <title/>
+  <version>0.x</version>
+  <lastModified>2019-08-27T10:52:41</lastModified>
+  <import>
+    <name>ivoa</name>
+    <url>http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml</url>
+    <documentationURL>https://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/models/ivoa/vo-dml/IVOA-v1.0.html</documentationURL>
+  </import>
+  <import>
+    <name>meas</name>
+    <url>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml</url>
+    <documentationURL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.html</documentationURL>
+  </import>
+  <import>
+    <name>coords</name>
+    <url>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.vo-dml.xml</url>
+    <documentationURL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.html</documentationURL>
+  </import>
+  <enumeration>
+    <vodml-id>LinkSemantic</vodml-id>
+    <name>LinkSemantic</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <literal>
+      <vodml-id>LinkSemantic.VOService</vodml-id>
+      <name>VOService</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    </literal>
+    <literal>
+      <vodml-id>LinkSemantic.VOInstance</vodml-id>
+      <name>VOInstance</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    </literal>
+    <literal>
+      <vodml-id>LinkSemantic.Preview</vodml-id>
+      <name>Preview</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    </literal>
+    <literal>
+      <vodml-id>LinkSemantic.downloadLink</vodml-id>
+      <name>downloadLink</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    </literal>
+    <literal>
+      <vodml-id>LinkSemantic.detection</vodml-id>
+      <name>detection</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    </literal>
+    <literal>
+      <vodml-id>LinkSemantic.compagnon</vodml-id>
+      <name>compagnon</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    </literal>
+    <literal>
+      <vodml-id>LinkSemantic.counterpart</vodml-id>
+      <name>counterpart</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    </literal>
+  </enumeration>
+
+  <objectType>
+    <vodml-id>Source</vodml-id>
+    <name>Source</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <attribute>
+      <vodml-id>Source.identifier</vodml-id>
+      <name>identifier</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <composition>
+      <vodml-id>Source.measure</vodml-id>
+      <name>measure</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>meas:Measure</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>-1</maxOccurs>
+      </multiplicity>
+    </composition>
+    <composition>
+      <vodml-id>Source.link</vodml-id>
+      <name>link</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>cab_sdm:Link</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </composition>
+  </objectType>
+
+  <objectType>
+    <vodml-id>Link</vodml-id>
+    <name>Link</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <attribute>
+      <vodml-id>Link.semantic</vodml-id>
+      <name>semantic</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>cab_sdm:LinkSemantic</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+  </objectType>
+
+  <objectType>
+    <vodml-id>WebUrl</vodml-id>
+    <name>WebUrl</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>cab_sdm:Link</vodml-ref>
+    </extends>
+    <attribute>
+      <vodml-id>WebUrl.ContentType</vodml-id>
+      <name>ContentType</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+      </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+
+      <multiplicity>
+        <minOccurs>1</minOccurs>FVOIn
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>WebUrl.url</vodml-id>
+      <name>url</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:anyURI</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+  </objectType>
+
+  <objectType>
+    <vodml-id>VOService</vodml-id>
+    <name>VOService</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>cab_sdm:WebUrl</vodml-ref>
+    </extends>
+    <attribute>
+      <vodml-id>VOService.vodmlid</vodml-id>
+      <name>vodmlid</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+  </objectType>
+
+  <objectType>
+    <vodml-id>VOInstance</vodml-id>
+    <name>VOInstance</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>cab_sdm:Link</vodml-ref>
+    </extends>
+    <attribute>
+      <vodml-id>VOInstance.vodmlid</vodml-id>
+      <name>vodmlid</name>
+      <description>VO-DML id of the referenced model
+      </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>VOInstance.modelUrl</vodml-id>
+      <name>modelUrl</name>
+      <description>URL on the VO-DML model</description>
+      <datatype>
+        <vodml-ref>ivoa:anyURI</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>VOInstance.modelName</vodml-id>
+      <name>modelName</name>
+      <description>Name of the referenced model</description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>VOInstance.modelDoc</vodml-id>
+      <name>modelDoc</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:anyURI</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <composition>
+      <vodml-id>VOInstance.modelInstance</vodml-id>
+      <name>modelInstance</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>cab_sdm:ModelInstance</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </composition>
+  </objectType>
+
+  <objectType>
+    <vodml-id>ModelInstance</vodml-id>
+    <name>ModelInstance</name>
+    <description>Placeholder for the mapping of the model instance
+ </description>
+  </objectType>
+
+  <objectType>
+    <vodml-id>cabsdmInstance</vodml-id>
+    <name>cabsdmInstance</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>cab_sdm:Link</vodml-ref>
+    </extends>
+    <composition>
+      <vodml-id>cabsdmInstance.source</vodml-id>
+      <name>source</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>cab_sdm:Source</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </composition>
+  </objectType>
+
+  <objectType>
+    <vodml-id>ExtMeasure</vodml-id>
+    <name>ExtMeasure</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>meas:Measure</vodml-ref>
+    </extends>
+  </objectType>
+
+</vo-dml:model>
