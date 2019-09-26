@@ -32,22 +32,6 @@ public class ZdfExplorer {
 	 */
 	private LiteMappingParser liteMappingParser;
 	/**
-	 * Extracted data: dataid tile
-	 */
-	private String title ="";
-	/**
-	 * Extracted data: contributor acknowledgement
-	 */
-	private List<String> contribAck = new ArrayList<>();
-	/**
-	 * Extracted data: timescale
-	 */
-	private String timeScale;
-	/**
-	 * Extracted data: URLs of the photometric filters
-	 */
-	private List<String> filterUrls = new ArrayList<>();
-	/**
 	 * Extracted data: List of individual reports for each SpaeseCube
 	 * {@link SparseCubeReport} is an internal class
 	 */
@@ -99,9 +83,7 @@ public class ZdfExplorer {
 	 * Build a report for each SarseCube
 	 * @throws Exception
 	 */
-	public void exploreData() throws Exception{
-		MappingElement data = this.liteMappingParser.getFirstNodeWithRole("nd_point:TimeSeries.points");
-		
+	public void exploreData() throws Exception{		
 		MappingElement pointArray = this.liteMappingParser.getFirstNodeWithRole("nd_point:TimeSeries.points");
 		this.sparseCubeReport.nbPoints = pointArray.getLength();
 		this.sparseCubeReport.columnMapping = pointArray.getColumnRoles();
