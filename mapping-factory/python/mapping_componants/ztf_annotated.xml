@@ -54,10 +54,10 @@
 			<!-- Time frame (imported from coords) -->
 			<INSTANCE dmrole="" dmtype="coords:TimeFrame" ID="TimeFrame_TT">
 				<INSTANCE dmrole="coords:TimeFrame.refDirection" dmtype="coords:StdRefLocation">
-					<VALUE default="BARYCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
+					<VALUE default="TT" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
 				</INSTANCE>
 				<INSTANCE dmrole="coords:TimeFrame.refPosition" dmtype="coords:StdRefLocation">
-					<VALUE default="BARYCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
+					<VALUE default="HELIOCENTRIC" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
 				</INSTANCE>
 				<VALUE default="TT" dmrole="coords:TimeFrame.timescale" dmtype="ivoa:string"/>
 			</INSTANCE>

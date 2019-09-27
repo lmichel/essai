@@ -133,6 +133,7 @@
 					          set of measurements defined by the LightCurve model (time-stamp + mag)
 					        -->
 							<INSTANCE dmrole="nd_point:TimeSeries.point" dmtype="nd_point:Point">
+								<FILTER key="oid" value="686103400034440" />
 								<!--
 					             Time Stamp : HJD not defined in STC, let's suppose that CAB-MSD supports it
 					            -->

@@ -16,85 +16,90 @@ import parser.LiteMappingParser;
 
 /**
  * This is an example of using the JAVA API to extract data from an annotated VOTable
- * The data extraction only relies on selector based on dmroles
+ * The data extraction only relies on selectors based on dmroles
+ * Developed in the frame of the CAB_MSD proposal
  * 
  * @author laurentmichel
  *
  */
-public class ZdfExplorer {
+public class ZtfExplorer {
 
 	/**
 	 * The file to parse (must be in the classpath)
 	 */
-	public static final String VOTABLE_RESOURCE = "/test/xml/zdf_annotated.xml";
+	public static final String VOTABLE_RESOURCE = "/test/xml/ztf_annotated.xml";
+	/**
+	 * multi-purpose VO-DML role
+	 */
+	public static final String REAL_VALUE ="ivoa:RealQuantity.value";
 	/**
 	 * Instance of the parser providing the API to acces data
 	 */
 	private LiteMappingParser liteMappingParser;
 	/**
 	 * Extracted data: List of individual reports for each SpaeseCube
-	 * {@link SparseCubeReport} is an internal class
+	 * {@link ZtfTimeSeriesReport} is an internal class
 	 */
-	private SparseCubeReport sparseCubeReport = new SparseCubeReport();
+	private ZtfTimeSeriesReport ztfTimeSeriesReport = new ZtfTimeSeriesReport();
 
 	/**
-	 * Contructor: does the data parsing
+	 * Constructor: trigger data parsing
 	 * @throws Exception
 	 */
-	ZdfExplorer() throws Exception{
+	ZtfExplorer() throws Exception{
 		this.initParser();
 	}
 	
 	/**
+	 * Parse the file and build the mapping maps
 	 * @throws Exception
 	 */
 	private void initParser() throws Exception {
-		URL url = ZdfExplorer.class.getResource(VOTABLE_RESOURCE);
+		URL url = ZtfExplorer.class.getResource(VOTABLE_RESOURCE);
 		String sampleName =url.getFile();
 		liteMappingParser = new LiteMappingParser(sampleName);
 	}
 
 	/**
-	 * Extract data from the DataSet component
+	 * Extract the source measurements
 	 * @throws Exception
 	 */
 	public void exploreDataSet() throws Exception{	
-		// Getting the DATASET instance
 		MappingElement dataSet = this.liteMappingParser.getFirstNodeWithRole("cab-msd:Source.identifier");
-		this.sparseCubeReport.sourceId = dataSet.getStringValue();
+		this.ztfTimeSeriesReport.sourceId = dataSet.getStringValue();
 		dataSet = this.liteMappingParser.getFirstNodeWithRole("meas:EquatorialPosition.ra");
-		this.sparseCubeReport.ra = dataSet.getSubelementsByRole("ivoa:RealQuantity.value").get(0).getStringValue();
+		this.ztfTimeSeriesReport.ra = dataSet.getSubelementsByRole(REAL_VALUE).get(0).getStringValue();
 		dataSet = this.liteMappingParser.getFirstNodeWithRole("meas:EquatorialPosition.dec");
-		this.sparseCubeReport.dec = dataSet.getSubelementsByRole("ivoa:RealQuantity.value").get(0).getStringValue();
+		this.ztfTimeSeriesReport.dec = dataSet.getSubelementsByRole(REAL_VALUE).get(0).getStringValue();
 	}
 	
 	/**
-	 * Retrieve the filters used for that TS
+	 * Extract the magnitude filter
 	 * @throws Exception
 	 */
 	public void exploreFilters() throws Exception{
 		MappingElement dataSet = this.liteMappingParser.getFirstNodeWithRole("cab-msd:FilterUrl");
-		this.sparseCubeReport.filterUrl = dataSet.getStringValue();
+		this.ztfTimeSeriesReport.filterUrl = dataSet.getStringValue();
 		dataSet = this.liteMappingParser.getFirstNodeWithRole("cab-msd:Filter.name");
-		this.sparseCubeReport.filterName = dataSet.getStringValue();
+		this.ztfTimeSeriesReport.filterName = dataSet.getStringValue();
 	}
 	
 	/**
-	 * Build a report for each SarseCube
+	 * Extract the time series
 	 * @throws Exception
 	 */
 	public void exploreData() throws Exception{		
 		MappingElement pointArray = this.liteMappingParser.getFirstNodeWithRole("nd_point:TimeSeries.points");
-		this.sparseCubeReport.nbPoints = pointArray.getLength();
-		this.sparseCubeReport.columnMapping = pointArray.getColumnRoles();
-        for( int i=0 ; i<this.sparseCubeReport.nbPoints ; i++ ){
+		this.ztfTimeSeriesReport.nbPoints = pointArray.getLength();
+		this.ztfTimeSeriesReport.columnMapping = pointArray.getColumnRoles();
+        for( int i=0 ; i<this.ztfTimeSeriesReport.nbPoints ; i++ ){
         	MappingElement row = pointArray.getContentElement(i);
-        	this.sparseCubeReport.points.add(
+        	this.ztfTimeSeriesReport.points.add(
         			new Point(
-        					row.getSubelementsByRole("ivoa:RealQuantity.value").get(0).getStringValue(),
+        					row.getSubelementsByRole(REAL_VALUE).get(0).getStringValue(),
         					row.getSubelementsByRole("nd_point:mag.value").get(0).getStringValue()
         					)
-        			);
+        	);
         }
 
 	}
@@ -106,28 +111,28 @@ public class ZdfExplorer {
 	public void printReport(){
 		// Printing the report
 		System.out.println("== Source ==");
-		System.out.println("        id:" + this.sparseCubeReport.sourceId);
-		System.out.println("  position:" + this.sparseCubeReport.ra + " " + this.sparseCubeReport.dec);
+		System.out.println("        id:" + this.ztfTimeSeriesReport.sourceId);
+		System.out.println("  position:" + this.ztfTimeSeriesReport.ra + " " + this.ztfTimeSeriesReport.dec);
 		System.out.println("== Filter ==");
-		System.out.println("      name:" + this.sparseCubeReport.filterName);
-		System.out.println("       url:" + this.sparseCubeReport.filterUrl);
+		System.out.println("      name:" + this.ztfTimeSeriesReport.filterName);
+		System.out.println("       url:" + this.ztfTimeSeriesReport.filterUrl);
 		System.out.println("== Time Series ==");
-		System.out.println("  nb points:" + this.sparseCubeReport.nbPoints);
+		System.out.println("  nb points:" + this.ztfTimeSeriesReport.nbPoints);
 		System.out.print("col mapping: ");
-		for( Entry<Integer, String> entry : this.sparseCubeReport.columnMapping.entrySet()){
+		for( Entry<Integer, String> entry : this.ztfTimeSeriesReport.columnMapping.entrySet()){
 			System.out.print(entry.getKey() + "=>" + entry.getValue() + " ");
 		}
 		System.out.println("");
-		for( Point point : this.sparseCubeReport.points){
+		for( Point point : this.ztfTimeSeriesReport.points){
 			System.out.println(point);
 		}
 	}
 
 	/**
-	 * inner class containing values used to describe ons SparseCube
+	 * Inner classes storing extracted data
 	 * @author laurentmichel
 	 */
-	class SparseCubeReport{
+	class ZtfTimeSeriesReport{
 		String sourceId;
 		String ra;
 		String dec;
@@ -161,7 +166,7 @@ public class ZdfExplorer {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		ZdfExplorer timeSeriesExample = new ZdfExplorer();
+		ZtfExplorer timeSeriesExample = new ZtfExplorer();
 		timeSeriesExample.exploreDataSet();
 		timeSeriesExample.exploreFilters();
 		timeSeriesExample.exploreData();
@@ -169,30 +174,29 @@ public class ZdfExplorer {
 	}
 	
 	/*
-	 * # Scale font and line width (dpi) by changing the size! It will always display stretched.
-set terminal svg size 400,300 enhanced fname 'arial'  fsize 10 butt solid
+	 * 
+# Scale font and line width (dpi) by changing the size! It will always display stretched.
+set terminal svg size 800,600 enhanced background rgb 'white' fname 'arial'  fsize 10 butt solid
 set output 'out.svg'
 
 # Key means label...
 set key inside bottom right
 set xlabel 'Time (HJD)'
-set ylabel 'Magnitude (G)'
-set title 'Time Series'
-set yrange [10:20];
-plot  "data.txt"  using 1:2 title 'Time Series' with lines smooth unique
+set ylabel 'G Magnitude'
+set title 'Model For Source Data: ZTF Demo (L. Michel)'
+set yrange [15:20]
+set xtics rotate font "Courier,12"
+set ytics font "Courier,12"
 
-data.txt
-# This file is called   force.dat
-# Force-Deflection data for a beam and a bar
-# Time    Mag G     
-2458205.0119003966	17.7203445
-2458206.0120819123	17.6563911
-2458207.0147988475	17.655283
-2458207.0236419393	17.6439056
-2458208.0070065474	17.6286964
-2458209.010419121	17.4842987
-2458210.0052784304	17.4736118
-2458211.0110995797	17.6098099
+set label 1 "Source oid = 686103400034440"
+set label 1 at graph 0.04, 0.85 tc lt 3 font "Times-Roman,12"
+set label 2 "{/:Bold Position} = 98.0025 9.87147"
+set label 2 at graph 0.04, 0.78 tc lt 3 font "Times-Roman,12"
+set label 3 '{/:Bold Filter} = G-Band ({/:Italic http://svo.url.filter/zdf/g})'
+set label 3 at graph 0.04, 0.71 tc lt 3 font "Times-Roman,12"
+
+plot  "data.txt"  using 1:2 notitle with lines smooth unique
+
 
 	 */
 }
