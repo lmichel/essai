@@ -1,4 +1,4 @@
-    <INSTANCE dmrole="root" dmtype="meas:EquatorialPosition">
+    <INSTANCE dmrole="@@@@@@" dmtype="meas:EquatorialPosition">
       <COLLECTION size="-1">
         <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error" ref="SymetricalError"/>
       </COLLECTION>
