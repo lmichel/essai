@@ -53,18 +53,15 @@
 			</INSTANCE>
 			<!-- Time frame (imported from coords) -->
 			<INSTANCE dmrole="" dmtype="coords:TimeFrame" ID="TimeFrame_TT">
-				<INSTANCE dmrole="coords:TimeFrame.refDirection" dmtype="coords:StdRefLocation">
-					<VALUE value="BARYCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
-				</INSTANCE>
 				<INSTANCE dmrole="coords:TimeFrame.refPosition" dmtype="coords:StdRefLocation">
-					<VALUE value="BARYCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
+					<VALUE value="HELIOCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
 				</INSTANCE>
 				<VALUE value="TT" dmrole="coords:TimeFrame.timescale" dmtype="ivoa:string"/>
 			</INSTANCE>
 			<!-- G filter definition: ad-hoc because no model yet -->
 			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_G">
 				<VALUE value="G" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
-				<VALUE value="http://svo.url.filter/zdf/g" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/ztf/g" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
 			</INSTANCE>
 		</GLOBALS>
 		<TEMPLATES tableref="xxx">
