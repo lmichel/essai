@@ -82,7 +82,7 @@ public class GroupByProcessor {
 		this.checkGroupSizes(groupedContents);
 		this.checkGroupKeys(groupedContents);
 		/*
-		 * remove the content of all colection which content is grouped
+		 * remove the content of all collection which content is grouped
 		 */
 		this.removeTableCollectionData(tableCollections);
 		/*

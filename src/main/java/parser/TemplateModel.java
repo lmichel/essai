@@ -29,7 +29,7 @@ public class TemplateModel {
 	 */
 	private List<MappingElement> mappingElements = new ArrayList<>();
 	/**
-	 * Pointer the model root element (drmrole==root or dmrole==modelname)
+	 * Pointer on the model root element (drmrole==root or dmrole==modelname)
 	 * Can be null
 	 */
 	private MappingElement rootElement;
@@ -95,6 +95,7 @@ public class TemplateModel {
 		}
 		if( this.groupByProcessor != null && this.rootElement!= null){
 			Map<String, MappingElement> groupedRoots = this.groupByProcessor.run();
+			System.out.println("@@@@@@@@@@@ " + groupedRoots.size());
 			this.rootElement.emptyData();
 
 			for( Entry<String, MappingElement> entry: groupedRoots.entrySet()){
@@ -122,7 +123,6 @@ public class TemplateModel {
 	 */
 	public List<MappingElement> getElementsByRole(String role) throws Exception{
 		List<MappingElement> retour = new ArrayList<>();
-
 		for( MappingElement mappingElement: this.mappingElements){
 			if( role.equalsIgnoreCase(mappingElement.getVodmlRole()) ) {
 				retour .add(mappingElement);

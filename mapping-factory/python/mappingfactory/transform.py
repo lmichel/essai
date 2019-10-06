@@ -18,22 +18,28 @@ def constant(f):
 
 DEBUG_MODE = False
 class _Const(object):
+    DEBUG = DEBUG_MODE
+    WITH_TYPES = True
+    SUBCLASS = "SubC" if DEBUG_MODE == True else ""
+    SUBTYPE = "SubT" if DEBUG_MODE == True else ""
+    TSUBTYPE = "TSubC" if DEBUG_MODE == True else ""
+    '''
     @constant
     def DEBUG(self):
         return DEBUG_MODE
     @constant
-    def WITH_TYPES():
+    def WITH_TYPES(self):
         return True
     @constant
     def SUBCLASS(self):
         return "SubC" if DEBUG_MODE == True else ""
     @constant
-    def SUBTYPE():
+    def SUBTYPE(self):
         return "SubT" if DEBUG_MODE == True else ""
     @constant
     def TSUBTYPE(self):
         return "TSubC" if DEBUG_MODE == True else ""
-    
+    '''
 CONST = _Const()
 
 class VodmlConstraint:    

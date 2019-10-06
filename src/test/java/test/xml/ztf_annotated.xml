@@ -45,16 +45,21 @@
 		<GLOBALS>
 			<!--  Space Frame ICRS -->
 			<INSTANCE dmrole="root" dmtype="coords:SpaceFrame" ID="SpaceFrame_ICRS">
-				<VALUE value="J2000" dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" />
 				<VALUE value="ICRS" dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string"/>
 				<INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
 					<VALUE value="GEOCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string"/>
 				</INSTANCE>
 			</INSTANCE>
 			<!-- Time frame (imported from coords) -->
-			<INSTANCE dmrole="" dmtype="coords:TimeFrame" ID="TimeFrame_TT">
+			<INSTANCE dmrole="" dmtype="coords:TimeFrame" ID="TimeFrame_TT_HELIO">
 				<INSTANCE dmrole="coords:TimeFrame.refPosition" dmtype="coords:StdRefLocation">
 					<VALUE value="HELIOCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
+				</INSTANCE>
+				<VALUE value="TT" dmrole="coords:TimeFrame.timescale" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="coords:TimeFrame" ID="TimeFrame_TT_BARY">
+				<INSTANCE dmrole="coords:TimeFrame.refPosition" dmtype="coords:StdRefLocation">
+					<VALUE value="BARYCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
 				</INSTANCE>
 				<VALUE value="TT" dmrole="coords:TimeFrame.timescale" dmtype="ivoa:string"/>
 			</INSTANCE>
@@ -73,7 +78,7 @@
 				<!--
 			      Set of measurements (imported from STC2) attached to that instance 
 			    -->
-				<COMPOSITION dmrole="cab-msd:Measures">
+				<COMPOSITION dmrole="cab_msd:Source.parameters">
 					<!--
 			          Position not specified in the VOTable: hard coded in default attributes 
 			        -->
@@ -86,18 +91,18 @@
 								</INSTANCE>
 							</INSTANCE>
 						</INSTANCE>
-						<INSTANCE dmrole="meas:EquatorialPosition.dec" dmtype="coords:Latitude">
-							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
-							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity">
-								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="deg"/>
-								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" value="9.87147"/>
-							</INSTANCE>
-						</INSTANCE>
 						<INSTANCE dmrole="meas:EquatorialPosition.ra" dmtype="coords:Longitude">
 							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
 							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity" >
 								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="deg"/>
-								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" value="98.0025"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" value="298.00252119999999"/>
+							</INSTANCE>
+						</INSTANCE>
+						<INSTANCE dmrole="meas:EquatorialPosition.dec" dmtype="coords:Latitude">
+							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity">
+								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="deg"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" value="29.871491800000001"/>
 							</INSTANCE>
 						</INSTANCE>
 					</INSTANCE>
@@ -105,69 +110,69 @@
 				<!--
 				  set of associated data (CAD-MSD links)
 				-->
-				<COMPOSITION dmrole="cab-Links" size="2">
+				<COMPOSITION dmrole="cab_msd:associatedData" size="2">
 					<!--
 				       Web URL link for te data origin
 				    -->
-					<INSTANCE dmrole="cab-msd:link" dmtype="cab-msd:WebUrl">
-						<VALUE dmrole="cab-msd:link.semantic" value="DataOrigin"/>
-						<VALUE dmrole="cab-msd:WebUrl.mime" value="text/xml;vo-table"/>
-						<VALUE dmrole="cab-msd:WebUrl.url" value="https://irsa.ipac.caltech.edu/cgi-bin/ZTF/nph_light_curves?POS=CIRCLE%20298.0025%2029.87147%200.0014&amp;BANDNAME=g"/>
+					<INSTANCE dmrole="cab_msd:associatedData" dmtype="cab-msd:WebEndpoint">
+						<VALUE dmrole="cab-msd:link.semantic" value="Documentation"/>
+						<VALUE dmrole="cab-msd:WebUrl.mime" value="text/html"/>
+						<VALUE dmrole="cab-msd:WebUrl.url" value="https://irsa.ipac.caltech.edu/docs/program_interface/ztf_lightcurve_api.html"/>
 					</INSTANCE>
 					<!--
 			          Associated data links of type VO instance (instances of the LightCurve model)
 			          The model of those instances is given with the instance mapping 
 			        -->
-					<INSTANCE dmrole="cab-msd:link" dmtype="cab-msd:VoInstance">
+					<INSTANCE dmrole="cab_msd:associatedData" dmtype="cab-msd:VOModelInstance">
 						<VALUE dmrole="cab-msd:link.semantic" value="LightCurve"/>
-						<VALUE dmrole="cab-msd:VoInstance.model" value="nd_point"/>
-						<INSTANCE dmrole="cab-msd:VoInstance.Instance"/>
-					    <!--
-			              ARRAY: One instance of  cab-msd:VoInstance per DATATABLE row
-			             -->
-						<ARRAY dmrole="nd_point:TimeSeries.points">
+						<VALUE dmrole="cab-msd:msd:VOModelInstance.name" value="nd_point"/>
+						<VALUE dmrole="cab-msd:msd:VOModelInstance.ivoid" value="ivoa://cab-msd/interop2019/nd_point"/>
+						<INSTANCE dmrole="cab-msd:VoModelInstance.ModelInstance">
 						    <!--
-					          set of measurements defined by the LightCurve model (time-stamp + mag)
-					        -->
-							<INSTANCE dmrole="nd_point:TimeSeries.point" dmtype="nd_point:Point">
-								<FILTER key="oid" value="686103400034440" />
-								<!--
-					             Time Stamp : HJD not defined in STC, let's suppose that CAB-MSD supports it
-					            -->
-								<INSTANCE dmrole="nd_point:TimeStamp" dmtype="cab-msd:HJD">
-									<INSTANCE dmrole="nd_point:TimeStamp.date" dmtype="ivoa:RealQuantity">
-										<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="d"/>
-										<!-- fields have no ID: let's take their names as identifiers -->
-										<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"  ref="hjd" />
-									</INSTANCE>
-									<INSTANCE dmrole="meas:Time.coord" dmtype="coords:TimeStamp">
-										<INSTANCE dmrole="coords:Coordinate.frame" ref="TimeFrame_TT"/>
-									</INSTANCE>
-									<COMPOSITION dmrole="meas:Measure.error" size="1">
-										<INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error" >
-											<INSTANCE dmrole="meas:Error.ranError" dmtype="meas:Symmetrical">
-												<INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-													<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="sec"/>
-													<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" value="1"/>
+				              ARRAY: One instance of  cab-msd:VoInstance per DATATABLE row
+				             -->
+							<ARRAY dmrole="nd_point:points">
+							    <!--
+						          set of measurements defined by the LightCurve model (time-stamp + mag)
+						        -->
+								<INSTANCE dmrole="nd_point:point" dmtype="nd_point:Point">
+									<FILTER key="oid" value="686103400034440" />
+									<!--
+						             Time Stamp : HJD not defined in STC, let's suppose that CAB-MSD supports it
+						            -->
+									<INSTANCE dmrole="nd_point:TimeStamp" dmtype="coords:MJD">
+										<INSTANCE dmrole="nd_point:TimeStamp.date" dmtype="ivoa:RealQuantity">
+											<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="d"/>
+											<!-- fields have no ID: let's take their names as identifiers -->
+											<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"  ref="mjd" />
+											<INSTANCE dmrole="coords:Coordinate.frame" ref="TimeFrame_TT_BARY"/>
+										</INSTANCE>
+										<COMPOSITION dmrole="meas:Measure.error" size="1">
+											<INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error" >
+												<INSTANCE dmrole="meas:Error.ranError" dmtype="meas:Symmetrical">
+													<INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+														<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="sec"/>
+														<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" value="1"/>
+													</INSTANCE>
 												</INSTANCE>
 											</INSTANCE>
-										</INSTANCE>
-									</COMPOSITION>
+										</COMPOSITION>
+									</INSTANCE>
+									<!--
+						       	      Mag : the band is given by the filter
+						            -->
+									<INSTANCE dmrole="nd_point:Mag" dmtype="nd_point:Mag">
+										<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+											<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="mag" />
+											<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_G"/>	
+									    </INSTANCE>
+										<COMPOSITION dmrole="meas:Measure.error" size="1">
+											<INSTANCE dmrole="meas:Measure.error"  ref="magerr"/>
+										</COMPOSITION>
+									</INSTANCE>
 								</INSTANCE>
-								<!--
-					       	      Mag : the band is given by the filter
-					            -->
-								<INSTANCE dmrole="root" dmtype="nd_point:Mag">
-									<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Mag">
-										<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="mag" />
-										<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_G"/>	
-								    </INSTANCE>
-									<COMPOSITION dmrole="meas:Measure.error" size="1">
-										<INSTANCE dmrole="meas:Measure.error"  ref="magerr"/>
-									</COMPOSITION>
-								</INSTANCE>
-							</INSTANCE>
-						</ARRAY>
+							</ARRAY>
+						</INSTANCE>
 					</INSTANCE>
 				</COMPOSITION>
 			</INSTANCE>

@@ -133,6 +133,7 @@ public class MultiInstanceCollection<T extends MappingElement> extends MappingNo
 	public List<MappingElement> getSubelementsByRole(final String role) throws Exception{
 		return this.content.getSubelementsByRole(role);
 	}
+
 	/* (non-Javadoc)
 	 * @see main.mapping.MappingElement#getSubelementsByVodmlId(java.lang.String)
 	 */

@@ -10,24 +10,19 @@ from transform import  *
             
 def main():
     mapping_generator = MappingGenerator()
-    mapping_generator.parse_vodml_file(filename="../../models/cab_sdm.vo-dml.xml", model='cab_sdm')
+    mapping_generator.parse_vodml_file(filename="../../models/cab_msd.vo-dml.xml", model='cab_msd')
     mapping_generator.resolve_inheritance();
     mapping_generator.resolve_constaints();
     #root_object_id = 'cube:DataProduct'
-    mapping_generator.root_object_id = 'cab_sdm:Source'
+    mapping_generator.root_object_id = 'cab_msd:Source'
     
     mapping_generator.concrete_classes = { 
-                                         "cab_sdm:Source.link": ["cab_sdm:WebUrl"
-                                                                 , "cab_sdm:VOService"
-                                                                 , "cab_sdm:VOInstance"
+                                         "cab_msd:Source.associatedData": ["cab_msd:WebEndpoint"
+                                                                 , "cab_msd:VOModelInstance"
                                                                  #, "cab_sdm:cabsdmInstance" stack overflow
                                                                  ],
                                          
-                                         "cab_sdm:Source.measure": ["meas:GenericMeasure"
-                                                                  #  ,"meas:EquatorialPosition"
-                                                                   ,"meas:Polarization"
-                                                                   ,"meas:ProperMotion"
-                                                                 ],
+                                         "cab_msd:Source.parameter": ["meas:GenericMeasure"],
                                          
                                          #"cube:MeasurementAxis.measure": ["ts:PhotometricMeasure", "meas:StdTimeMeasure"]
                                          # , "ts:PhotometricCoord": ["ts:Magnitude", "meas:Time"]

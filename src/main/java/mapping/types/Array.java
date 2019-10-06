@@ -116,7 +116,7 @@ public class Array<T extends MappingElement > extends Type{
 		}
 		return new ArrayList<>(retour);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see main.mapping.MappingElement#getSubelementsByVodmlId(java.lang.String)
 	 */

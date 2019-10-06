@@ -114,6 +114,14 @@ public class LiteMappingParser {
 		}
 	}
 		
+	public TemplateModel getRootElement() throws MissingResourceException{
+		if( this.rootTemplate == null){
+			throw new MissingResourceException("Not Root template in the VOTable");
+		} else {
+			return this.rootTemplate;
+		}
+
+	}
 	/**
 	 * Resolve references in all {@linkplain Instance}s having a ref
 	 * Instances with a ref are replaces with these having the matching ID

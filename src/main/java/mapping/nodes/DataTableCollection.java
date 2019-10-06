@@ -100,7 +100,6 @@ public class DataTableCollection extends MappingNode
 		}
 	}
 
-
 	/* (non-Javadoc)
 	 * @see main.mapping.MappingElement#setMappingFilter(java.lang.String, java.lang.String)
 	 */

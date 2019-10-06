@@ -33,13 +33,19 @@ public class VodmlBlockParserGroupByTest {
 
 	@Test (expected=UnconsistantResourceException.class)
 	public void testProv() throws Exception {
+		System.out.println("====================");
+
 		for( Entry<String, TemplateModel> entry : this.treeBuilder.templates.entrySet()) {
+			System.out.println("====================");
+			try {
 			entry.getValue().setValuesFromTableModel(votableModel);
+			} catch (Exception e) {
+e.printStackTrace();			}
+
 			for( MappingElement mappingElemnt: entry.getValue().getMappingElements() ) {
-				
 				List<MappingElement> rs = mappingElemnt.getSubelementsByRole("timeseries:dataset.DataSet.calib_level");
 				for(MappingElement element : rs ){
-					assertEquals("3",element.getStringValue() );
+					assertEquals("4",element.getStringValue() );
 				}
 				mappingElemnt.setValuesFromTableModel(this.votableModel.getTable(entry.getKey()));
 				rs = mappingElemnt.getSubelementsByRole("timeseries:dataset.DataSet.creator");
