@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VOTABLE version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.ivoa.net/xml/VOTable/v1.3"
+  xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.3 http://www.ivoa.net/xml/VOTable/v1.3">
+ <DESCRIPTION>
+   VizieR Astronomical Server vizier.u-strasbg.fr
+    Date: 2019-09-30T12:26:38 [V1.99+ (14-Oct-2013)]
+   Explanations and Statistics of UCDs:			See LINK below
+   In case of problem, please report to:	cds-question@unistra.fr
+   In this version, NULL integer columns are written as an empty string
+   &lt;TD&gt;&lt;/TD&gt;, explicitely possible from VOTable-1.3
+ </DESCRIPTION>
+<!-- VOTable description at http://www.ivoa.net/Documents/latest/VOT.html -->
+<INFO ID="VERSION" name="votable-version" value="1.99+ (14-Oct-2013)"/>
+<INFO ID="Ref" name="-ref" value="VIZ5d91f4059027"/>
+<INFO ID="MaxTuples" name="-out.max" value="50"/>
+<INFO name="queryParameters" value="30">
+-oc.form=dec
+-out.max=50
+-out.all=2
+-nav=cat:J/A+A/532/A103&amp;tab:{J/A+A/532/A103/IC4665}&amp;key:source=J/A+A/532/A103&amp;HTTPPRM:&amp;
+-c.eq=J2000
+-c.r=  2
+-c.u=arcmin
+-c.geom=r
+-source=J/A+A/532/A103/IC4665
+-order=I
+-out=Mm
+-out=Name
+-out=imag
+-out=zmag
+-out=Zmag
+-out=Ymag
+-out=Jmag
+-out=Hmag
+-out=Kmag
+-out=pmRA
+-out=pmDE
+-out=logL
+-out=Mass
+-out=GCS
+GCS=GCS
+-out=Simbad
+Simbad=Simbad
+-out=RAJ2000
+-out=DEJ2000
+-out.all=2
+</INFO>
+
+<!--
+Execution Reports
+ -->
+
+<RESOURCE ID="yCat_35320103" name="J/A+A/532/A103">
+  <DESCRIPTION>Photometry and proper motions in IC4665 (Lodieu+, 2011)</DESCRIPTION>
+  <COOSYS ID="J2000" system="eq_FK5" equinox="J2000"/>
+  <TABLE ID="J_A_A_532_A103_IC4665" name="J/A+A/532/A103/IC4665">
+    <DESCRIPTION>Coordinates, photometry, proper motions,  and physical parameters for IC4665 stars</DESCRIPTION>
+<!-- Coordinates, photometry, proper motions, and physical parameters for IC4665 stars {\em(tables A1, B1 and C1 of paper)} -->
+
+    <!-- Definitions of GROUPs and FIELDs -->
+
+<!-- +++No column could be found to attach a LINK in table: J/A+A/532/A103/IC4665 -->
+    <FIELD name="Mm" ucd="meta.code.member" datatype="char" arraysize="1"><!-- ucd="CODE_MEMB" -->
+      <DESCRIPTION>Simbad column added by the CDS</DESCRIPTION>
+<!-- {\bf C} for confirmed optical candidate member stars (table A1), {\bf r} for rejected members (table B1), {\bf n} for new candidate members (table C1) -->
+
+    </FIELD>
+    <FIELD name="Name" ucd="meta.id;meta.main" datatype="char" arraysize="18"><!-- ucd="ID_MAIN" -->
+      <DESCRIPTION>Name following IAU nomenclature (G1)</DESCRIPTION>
+
+<!-- No link in: \ifmatch{r}{${Mm}}{\fg{red4}${}}\elsifmatch{n}{${Mm}}{\fg{blue4}${}}\else{${}}\fi -->
+    </FIELD>
+    <FIELD name="imag" ucd="phot.mag;em.opt.I" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_MAG_I" -->
+      <DESCRIPTION>? I-band magnitude from the CFH12K</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="zmag" ucd="phot.mag;em.opt.I" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_GUNN_Z" -->
+      <DESCRIPTION>? z-band magnitude from the CFH12K</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="Zmag" ucd="phot.mag;em.opt.I" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_GUNN_Z" -->
+      <DESCRIPTION>? UKIDSS/Z-band magnitude from UKIDSS GCS DR8</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="Ymag" ucd="phot.mag;em.IR.J" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_MAG_Y" -->
+      <DESCRIPTION>UKIDSS/Y-band magnitude from UKIDSS GCS DR8</DESCRIPTION>
+    </FIELD>
+    <FIELD name="Jmag" ucd="phot.mag;em.IR.J" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_JHN_J" -->
+      <DESCRIPTION>UKIDSS/J-band magnitude from UKIDSS GCS DR8</DESCRIPTION>
+    </FIELD>
+    <FIELD name="Hmag" ucd="phot.mag;em.IR.H" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_JHN_H" -->
+      <DESCRIPTION>UKIDSS/H-band magnitude from UKIDSS GCS DR8</DESCRIPTION>
+    </FIELD>
+    <FIELD name="Kmag" ucd="phot.mag;em.IR.K" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_JHN_K" -->
+      <DESCRIPTION>UKIDSS/K-band magnitude from UKIDSS GCS DR8</DESCRIPTION>
+    </FIELD>
+    <FIELD name="pmRA" ucd="pos.pm;pos.eq.ra" ref="J2000" datatype="double" width="8" precision="2" unit="mas/yr"><!-- ucd="POS_EQ_PMRA" -->
+      <DESCRIPTION>?Proper motion in right ascension</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="pmDE" ucd="pos.pm;pos.eq.dec" ref="J2000" datatype="double" width="8" precision="2" unit="mas/yr"><!-- ucd="POS_EQ_PMDEC" -->
+      <DESCRIPTION>?Proper motion in declination</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="logL" ucd="phys.luminosity" datatype="float" width="5" precision="2" unit="[Lsun]"><!-- ucd="PHYS_LUMINOSITY_GENERAL" -->
+      <DESCRIPTION>?Star luminosity</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="Mass" ucd="phys.mass" datatype="float" width="6" precision="3" unit="Msun"><!-- ucd="PHYS_MASS_MISC" -->
+      <DESCRIPTION>?Star mass</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="GCS" ucd="meta.ref.url" datatype="char" arraysize="3"><!-- ucd="DATA_LINK" -->
+      <DESCRIPTION>Details from UKIDSS-DR8</DESCRIPTION>
+      <LINK href="http://vizier.u-strasbg.fr/viz-bin/VizieR-5?-info=XML&amp;-out.add=.&amp;-source=II/314/gcs8&amp;-c=${+RAJ2000}${+DEJ2000},rs=1.5"/>
+    </FIELD>
+    <FIELD name="Simbad" ucd="meta.ref" datatype="char" arraysize="6*"><!-- ucd="DATA_LINK" -->
+      <DESCRIPTION>Simbad column added by the CDS</DESCRIPTION>
+<!-- ask the {\bf\fg{FireBrick}Simbad} data-base about this object -->
+
+
+<!-- No link in: \ifregexp{[^ ]}{${Name}}{\wSimbad{UGCS J${Name} }{${}}}\else{${}}\fi -->
+    </FIELD>
+    <FIELD name="RAJ2000" ucd="pos.eq.ra;meta.main" ref="J2000" datatype="char" arraysize="11" unit="&quot;h:m:s&quot;"><!-- ucd="POS_EQ_RA_MAIN" -->
+      <DESCRIPTION>Right ascension (J2000.0)</DESCRIPTION>
+    </FIELD>
+    <FIELD name="DEJ2000" ucd="pos.eq.dec;meta.main" ref="J2000" datatype="char" arraysize="11" unit="&quot;d:m:s&quot;"><!-- ucd="POS_EQ_DEC_MAIN" -->
+      <DESCRIPTION>Declination (J2000.0)</DESCRIPTION>
+    </FIELD>
+<DATA><TABLEDATA>
+<TR><TD>C</TD><TD>174205.93+052413.9</TD><TD>15.579</TD><TD>15.029</TD><TD>15.113</TD><TD>14.535</TD><TD>13.849</TD><TD>13.200</TD><TD>12.831</TD><TD>-1.80</TD><TD>-19.56</TD><TD>-1.29</TD><TD>0.448</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 05.93</TD><TD>+05 24 13.9</TD></TR>
+<TR><TD>C</TD><TD>174206.02+051417.9</TD><TD>16.041</TD><TD>15.648</TD><TD>15.720</TD><TD>15.304</TD><TD>14.737</TD><TD>14.173</TD><TD>13.850</TD><TD>-56.48</TD><TD>24.63</TD><TD>-1.67</TD><TD>0.241</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 06.02</TD><TD>+05 14 17.9</TD></TR>
+<TR><TD>C</TD><TD>174209.58+052112.6</TD><TD>16.166</TD><TD>15.678</TD><TD>15.693</TD><TD>15.200</TD><TD>14.587</TD><TD>13.944</TD><TD>13.615</TD><TD>-36.93</TD><TD>-34.57</TD><TD>-1.61</TD><TD>0.267</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 09.58</TD><TD>+05 21 12.6</TD></TR>
+<TR><TD>C</TD><TD>174216.95+052651.3</TD><TD>16.034</TD><TD>15.630</TD><TD>15.670</TD><TD>15.269</TD><TD>14.676</TD><TD>14.082</TD><TD>13.761</TD><TD>-3.44</TD><TD>3.13</TD><TD>-1.65</TD><TD>0.251</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 16.95</TD><TD>+05 26 51.3</TD></TR>
+<TR><TD>C</TD><TD>174217.78+055626.2</TD><TD>17.365</TD><TD>16.630</TD><TD>16.616</TD><TD>16.024</TD><TD>15.344</TD><TD>14.767</TD><TD>14.377</TD><TD>-25.95</TD><TD>-12.29</TD><TD>-1.93</TD><TD>0.160</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 17.78</TD><TD>+05 56 26.2</TD></TR>
+<TR><TD>C</TD><TD>174218.00+054925.5</TD><TD>15.289</TD><TD>14.910</TD><TD>14.923</TD><TD>14.523</TD><TD>13.970</TD><TD>13.353</TD><TD>13.095</TD><TD>-8.36</TD><TD>4.92</TD><TD>-1.34</TD><TD>0.412</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 18.00</TD><TD>+05 49 25.5</TD></TR>
+<TR><TD>C</TD><TD>174218.19+055353.3</TD><TD>17.529</TD><TD>17.028</TD><TD>17.047</TD><TD>16.495</TD><TD>15.845</TD><TD>15.246</TD><TD>14.900</TD><TD>17.51</TD><TD>-8.99</TD><TD>-2.14</TD><TD>0.115</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 18.19</TD><TD>+05 53 53.3</TD></TR>
+<TR><TD>C</TD><TD>174220.29+055556.5</TD><TD>15.271</TD><TD>14.738</TD><TD>14.734</TD><TD>14.267</TD><TD>13.654</TD><TD>13.059</TD><TD>12.740</TD><TD>8.68</TD><TD>2.01</TD><TD>-1.21</TD><TD>0.508</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 20.29</TD><TD>+05 55 56.5</TD></TR>
+<TR><TD>C</TD><TD>174220.79+054635.6</TD><TD>15.921</TD><TD>15.452</TD><TD>15.508</TD><TD>15.061</TD><TD>14.449</TD><TD>13.906</TD><TD>13.586</TD><TD>-27.37</TD><TD>-2.79</TD><TD>-1.55</TD><TD>0.293</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 20.79</TD><TD>+05 46 35.6</TD></TR>
+<TR><TD>C</TD><TD>174221.08+054313.9</TD><TD>17.778</TD><TD>17.168</TD><TD>17.377</TD><TD>16.697</TD><TD>15.988</TD><TD>15.443</TD><TD>15.087</TD><TD>6.06</TD><TD>33.92</TD><TD>-2.20</TD><TD>0.104</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 21.08</TD><TD>+05 43 13.9</TD></TR>
+<TR><TD>C</TD><TD>174223.55+053823.5</TD><TD>15.639</TD><TD>15.256</TD><TD>15.344</TD><TD>14.881</TD><TD>14.291</TD><TD>13.705</TD><TD>13.403</TD><TD>1.01</TD><TD>-31.80</TD><TD>-1.48</TD><TD>0.328</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 23.55</TD><TD>+05 38 23.5</TD></TR>
+<TR><TD>C</TD><TD>174224.89+050606.1</TD><TD>16.825</TD><TD>16.334</TD><TD>16.389</TD><TD>15.827</TD><TD>15.163</TD><TD>14.587</TD><TD>14.272</TD><TD>0.98</TD><TD>-0.62</TD><TD>-1.85</TD><TD>0.181</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 24.89</TD><TD>+05 06 06.1</TD></TR>
+<TR><TD>C</TD><TD>174225.41+062105.3</TD><TD>15.072</TD><TD>14.731</TD><TD>14.731</TD><TD>14.381</TD><TD>13.831</TD><TD>13.177</TD><TD>12.885</TD><TD>-4.17</TD><TD>4.60</TD><TD>-1.29</TD><TD>0.453</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 25.41</TD><TD>+06 21 05.3</TD></TR>
+<TR><TD>C</TD><TD>174225.69+052947.2</TD><TD>17.432</TD><TD>16.926</TD><TD>16.944</TD><TD>16.476</TD><TD>15.847</TD><TD>15.208</TD><TD>14.889</TD><TD>10.33</TD><TD>10.36</TD><TD>-2.14</TD><TD>0.114</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 25.69</TD><TD>+05 29 47.2</TD></TR>
+<TR><TD>C</TD><TD>174226.60+062219.8</TD><TD>15.102</TD><TD>14.745</TD><TD>14.758</TD><TD>14.378</TD><TD>13.873</TD><TD>13.210</TD><TD>12.946</TD><TD>0.05</TD><TD>-6.42</TD><TD>-1.30</TD><TD>0.440</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 26.60</TD><TD>+06 22 19.8</TD></TR>
+<TR><TD>C</TD><TD>174226.93+062014.6</TD><TD>17.247</TD><TD>16.775</TD><TD>16.782</TD><TD>16.238</TD><TD>15.635</TD><TD>15.019</TD><TD>14.640</TD><TD>-4.73</TD><TD>11.58</TD><TD>-2.05</TD><TD>0.132</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 26.93</TD><TD>+06 20 14.6</TD></TR>
+<TR><TD>C</TD><TD>174228.03+052640.7</TD><TD>15.036</TD><TD>14.695</TD><TD>14.683</TD><TD>14.311</TD><TD>13.740</TD><TD>13.129</TD><TD>12.833</TD><TD>4.01</TD><TD>21.98</TD><TD>-1.25</TD><TD>0.481</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 28.03</TD><TD>+05 26 40.7</TD></TR>
+<TR><TD>C</TD><TD>174228.93+055453.8</TD><TD>18.165</TD><TD>17.587</TD><TD>17.691</TD><TD>17.048</TD><TD>16.427</TD><TD>15.888</TD><TD>15.495</TD><TD>28.31</TD><TD>79.04</TD><TD>-2.39</TD><TD>0.078</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 28.93</TD><TD>+05 54 53.8</TD></TR>
+<TR><TD>C</TD><TD>174228.94+062028.0</TD><TD>15.579</TD><TD>15.198</TD><TD>15.234</TD><TD>14.810</TD><TD>14.260</TD><TD>13.592</TD><TD>13.286</TD><TD>2.95</TD><TD>7.72</TD><TD>-1.47</TD><TD>0.336</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 28.94</TD><TD>+06 20 28.0</TD></TR>
+<TR><TD>C</TD><TD>174231.91+061849.5</TD><TD>14.948</TD><TD>14.562</TD><TD>14.560</TD><TD>14.139</TD><TD>13.606</TD><TD>12.988</TD><TD>12.679</TD><TD>-41.07</TD><TD>0.18</TD><TD>-1.19</TD><TD>0.524</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 31.91</TD><TD>+06 18 49.5</TD></TR>
+<TR><TD>C</TD><TD>174247.10+053654.1</TD><TD>19.133</TD><TD>18.352</TD><TD>18.633</TD><TD>17.765</TD><TD>16.982</TD><TD>16.393</TD><TD>16.008</TD><TD>0.00</TD><TD>0.00</TD><TD>-2.65</TD><TD>0.053</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 47.10</TD><TD>+05 36 54.1</TD></TR>
+<TR><TD>C</TD><TD>174247.78+050424.7</TD><TD>15.877</TD><TD>15.480</TD><TD>15.574</TD><TD>15.092</TD><TD>14.493</TD><TD>13.846</TD><TD>13.549</TD><TD>-2.00</TD><TD>1.47</TD><TD>-1.57</TD><TD>0.285</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 47.78</TD><TD>+05 04 24.7</TD></TR>
+<TR><TD>C</TD><TD>174248.13+062301.0</TD><TD>16.189</TD><TD>15.777</TD><TD>15.802</TD><TD>15.357</TD><TD>14.773</TD><TD>14.171</TD><TD>13.881</TD><TD>14.95</TD><TD>-61.52</TD><TD>-1.69</TD><TD>0.236</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 48.13</TD><TD>+06 23 01.0</TD></TR>
+<TR><TD>C</TD><TD>174252.91+050250.9</TD><TD>17.621</TD><TD>17.030</TD><TD>17.140</TD><TD>16.514</TD><TD>15.822</TD><TD>15.282</TD><TD>14.895</TD><TD>-14.13</TD><TD>30.41</TD><TD>-2.13</TD><TD>0.117</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 52.91</TD><TD>+05 02 50.9</TD></TR>
+<TR><TD>C</TD><TD>174256.57+053910.0</TD><TD>15.718</TD><TD>15.255</TD><TD>15.355</TD><TD>14.853</TD><TD>14.232</TD><TD>13.586</TD><TD>13.316</TD><TD>-7.17</TD><TD>-15.04</TD><TD>-1.45</TD><TD>0.342</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 56.57</TD><TD>+05 39 10.0</TD></TR>
+<TR><TD>C</TD><TD>174258.63+053525.0</TD><TD>16.958</TD><TD>16.467</TD><TD>16.542</TD><TD>16.018</TD><TD>15.362</TD><TD>14.774</TD><TD>14.422</TD><TD>-40.12</TD><TD>67.75</TD><TD>-1.94</TD><TD>0.159</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 58.63</TD><TD>+05 35 25.0</TD></TR>
+<TR><TD>C</TD><TD>174259.65+051551.8</TD><TD>17.982</TD><TD>17.432</TD><TD>17.554</TD><TD>17.001</TD><TD>16.342</TD><TD>15.773</TD><TD>15.387</TD><TD>-18.10</TD><TD>-64.98</TD><TD>-2.35</TD><TD>0.083</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 42 59.65</TD><TD>+05 15 51.8</TD></TR>
+<TR><TD>C</TD><TD>174300.12+061930.1</TD><TD>16.624</TD><TD>16.141</TD><TD>16.227</TD><TD>15.733</TD><TD>15.099</TD><TD>14.495</TD><TD>14.150</TD><TD>-18.72</TD><TD>16.50</TD><TD>-1.82</TD><TD>0.189</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 00.12</TD><TD>+06 19 30.1</TD></TR>
+<TR><TD>C</TD><TD>174302.69+051940.6</TD><TD>15.705</TD><TD>15.192</TD><TD>15.310</TD><TD>14.770</TD><TD>14.161</TD><TD>13.620</TD><TD>13.266</TD><TD>-7.03</TD><TD>-93.94</TD><TD>-1.42</TD><TD>0.360</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 02.69</TD><TD>+05 19 40.6</TD></TR>
+<TR><TD>C</TD><TD>174303.52+051251.2</TD><TD>15.898</TD><TD>15.476</TD><TD>15.558</TD><TD>15.105</TD><TD>14.502</TD><TD>13.870</TD><TD>13.549</TD><TD>2.02</TD><TD>-10.21</TD><TD>-1.57</TD><TD>0.283</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 03.52</TD><TD>+05 12 51.2</TD></TR>
+<TR><TD>C</TD><TD>174303.66+050721.5</TD><TD>19.937</TD><TD>18.939</TD><TD>19.545</TD><TD>18.298</TD><TD>17.239</TD><TD>16.603</TD><TD>16.243</TD><TD>0.00</TD><TD>0.00</TD><TD>-2.77</TD><TD>0.046</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 03.66</TD><TD>+05 07 21.5</TD></TR>
+<TR><TD>C</TD><TD>174305.50+051359.5</TD><TD>17.017</TD><TD>16.518</TD><TD>16.617</TD><TD>16.125</TD><TD>15.500</TD><TD>14.966</TD><TD>14.636</TD><TD>-31.88</TD><TD>-27.69</TD><TD>-2.00</TD><TD>0.145</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 05.50</TD><TD>+05 13 59.5</TD></TR>
+<TR><TD>C</TD><TD>174305.70+052909.9</TD><TD>18.017</TD><TD>17.421</TD><TD>17.586</TD><TD>16.944</TD><TD>16.340</TD><TD>15.731</TD><TD>15.371</TD><TD>-22.92</TD><TD>18.79</TD><TD>-2.35</TD><TD>0.083</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 05.70</TD><TD>+05 29 09.9</TD></TR>
+<TR><TD>C</TD><TD>174307.81+050405.6</TD><TD>18.404</TD><TD>17.736</TD><TD>17.981</TD><TD>17.241</TD><TD>16.490</TD><TD>15.854</TD><TD>15.450</TD><TD>-22.23</TD><TD>3.55</TD><TD>-2.42</TD><TD>0.075</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 07.81</TD><TD>+05 04 05.6</TD></TR>
+<TR><TD>C</TD><TD>174308.36+055350.6</TD><TD>17.281</TD><TD>16.771</TD><TD>16.814</TD><TD>16.282</TD><TD>15.616</TD><TD>15.009</TD><TD>14.660</TD><TD>1.72</TD><TD>27.68</TD><TD>-2.04</TD><TD>0.134</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 08.36</TD><TD>+05 53 50.6</TD></TR>
+<TR><TD>C</TD><TD>174310.86+052344.2</TD><TD>16.681</TD><TD>16.188</TD><TD>16.287</TD><TD>15.757</TD><TD>15.138</TD><TD>14.546</TD><TD>14.200</TD><TD>-10.66</TD><TD>-16.64</TD><TD>-1.84</TD><TD>0.184</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 10.86</TD><TD>+05 23 44.2</TD></TR>
+<TR><TD>C</TD><TD>174313.94+061729.5</TD><TD>15.132</TD><TD>14.722</TD><TD>14.718</TD><TD>14.348</TD><TD>13.794</TD><TD>13.144</TD><TD>12.860</TD><TD>63.63</TD><TD>-4.66</TD><TD>-1.27</TD><TD>0.465</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 13.94</TD><TD>+06 17 29.5</TD></TR>
+<TR><TD>C</TD><TD>174314.95+061651.2</TD><TD>16.650</TD><TD>16.164</TD><TD>16.098</TD><TD>15.621</TD><TD>15.017</TD><TD>14.358</TD><TD>13.998</TD><TD>7.96</TD><TD>15.59</TD><TD>-1.78</TD><TD>0.199</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 14.95</TD><TD>+06 16 51.2</TD></TR>
+<TR><TD>C</TD><TD>174317.13+050420.1</TD><TD>17.546</TD><TD>17.028</TD><TD>17.181</TD><TD>16.617</TD><TD>15.947</TD><TD>15.367</TD><TD>14.977</TD><TD>-2.35</TD><TD>-5.35</TD><TD>-2.18</TD><TD>0.107</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 17.13</TD><TD>+05 04 20.1</TD></TR>
+<TR><TD>C</TD><TD>174317.13+054805.4</TD><TD>16.439</TD><TD>16.005</TD><TD>16.018</TD><TD>15.544</TD><TD>14.951</TD><TD>14.339</TD><TD>14.065</TD><TD>-20.46</TD><TD>8.38</TD><TD>-1.76</TD><TD>0.209</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 17.13</TD><TD>+05 48 05.4</TD></TR>
+<TR><TD>C</TD><TD>174317.32+053108.0</TD><TD>15.734</TD><TD>15.311</TD><TD>15.332</TD><TD>14.909</TD><TD>14.314</TD><TD>13.755</TD><TD>13.456</TD><TD>29.21</TD><TD>7.41</TD><TD>-1.49</TD><TD>0.323</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 17.32</TD><TD>+05 31 08.0</TD></TR>
+<TR><TD>C</TD><TD>174317.36+061730.6</TD><TD>16.359</TD><TD>15.909</TD><TD>15.926</TD><TD>15.507</TD><TD>14.890</TD><TD>14.297</TD><TD>13.968</TD><TD>-23.56</TD><TD>15.61</TD><TD>-1.73</TD><TD>0.218</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 17.36</TD><TD>+06 17 30.6</TD></TR>
+<TR><TD>C</TD><TD>174318.81+054300.5</TD><TD>16.328</TD><TD>15.895</TD><TD>15.944</TD><TD>15.503</TD><TD>14.940</TD><TD>14.350</TD><TD>14.097</TD><TD>10.94</TD><TD>18.01</TD><TD>-1.75</TD><TD>0.211</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 18.81</TD><TD>+05 43 00.5</TD></TR>
+<TR><TD>C</TD><TD>174323.27+053823.3</TD><TD>16.305</TD><TD>15.821</TD><TD>15.915</TD><TD>15.375</TD><TD>14.744</TD><TD>14.144</TD><TD>13.852</TD><TD>17.06</TD><TD>5.85</TD><TD>-1.68</TD><TD>0.240</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 23.27</TD><TD>+05 38 23.3</TD></TR>
+<TR><TD>C</TD><TD>174324.18+055114.7</TD><TD>17.339</TD><TD>16.784</TD><TD>16.841</TD><TD>16.207</TD><TD>15.501</TD><TD>14.950</TD><TD>14.589</TD><TD>11.70</TD><TD>-8.02</TD><TD>-2.00</TD><TD>0.144</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 24.18</TD><TD>+05 51 14.7</TD></TR>
+<TR><TD>C</TD><TD>174325.35+052128.5</TD><TD>18.264</TD><TD>17.664</TD><TD>17.763</TD><TD>17.058</TD><TD>16.386</TD><TD>15.803</TD><TD>15.392</TD><TD>-50.22</TD><TD>-46.39</TD><TD>-2.37</TD><TD>0.080</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 25.35</TD><TD>+05 21 28.5</TD></TR>
+<TR><TD>C</TD><TD>174330.63+050217.5</TD><TD>18.312</TD><TD>17.641</TD><TD>17.760</TD><TD>17.144</TD><TD>16.457</TD><TD>15.895</TD><TD>15.563</TD><TD>-19.53</TD><TD>-10.09</TD><TD>-2.40</TD><TD>0.077</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 30.63</TD><TD>+05 02 17.5</TD></TR>
+<TR><TD>C</TD><TD>174331.38+052723.3</TD><TD>17.350</TD><TD>16.854</TD><TD>16.912</TD><TD>16.395</TD><TD>15.779</TD><TD>15.218</TD><TD>14.865</TD><TD>-1.24</TD><TD>7.69</TD><TD>-2.11</TD><TD>0.120</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 31.38</TD><TD>+05 27 23.3</TD></TR>
+<TR><TD>C</TD><TD>174331.39+053403.6</TD><TD>18.705</TD><TD>18.013</TD><TD>18.107</TD><TD>17.431</TD><TD>16.745</TD><TD>16.184</TD><TD>15.753</TD><TD>-904.33</TD><TD>-1413.85</TD><TD>-2.54</TD><TD>0.063</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 31.39</TD><TD>+05 34 03.6</TD></TR>
+<TR><TD>C</TD><TD>174331.77+063945.3</TD><TD>16.149</TD><TD>15.739</TD><TD>15.778</TD><TD>15.317</TD><TD>14.662</TD><TD>13.971</TD><TD>13.697</TD><TD>-2.70</TD><TD>-9.07</TD><TD>-1.64</TD><TD>0.253</TD><TD>GCS</TD><TD>Simbad</TD><TD>17 43 31.77</TD><TD>+06 39 45.3</TD></TR>
+</TABLEDATA></DATA>
+</TABLE>
+<INFO name="matches" value="50">matching records</INFO>
+
+<INFO name="Warning" value="No center provided++++"/>
+<INFO name="Warning" value="skip recno in all column selection"/>
+<INFO name="Warning" value="+++No column for LINK to a row in table: J/A+A/532/A103/IC4665"/>
+<INFO name="Warning" value="truncated result (maxtup=50)"/><INFO name="QUERY_STATUS" value="OVERFLOW">truncated result (maxtup=50)</INFO>
+
+</RESOURCE>
+</VOTABLE>
