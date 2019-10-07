@@ -99,6 +99,14 @@ public class DataTableCollection extends MappingNode
 			return new ArrayList<>();
 		}
 	}
+	
+	/* (non-Javadoc)
+	 * @see mapping.MappingElement#getKeysOfAtomicTypeByValue(java.lang.String)
+	 */
+	@Override
+	public List<String> getKeysOfAtomicTypeByValue(String startWith) throws Exception {
+		return this.rowDataSchemaTemplate.getKeysOfAtomicTypeByValue(startWith);
+	}
 
 	/* (non-Javadoc)
 	 * @see main.mapping.MappingElement#setMappingFilter(java.lang.String, java.lang.String)

@@ -342,7 +342,6 @@ public class VodmlBlockParser {
 		final String role = this.getDmRole(instanceNode);
 		DataTableCollection newElement = null;
 		MappingElement retour;
-		System.out.println(role + " " + instanceNode.getNodeName());
 		if( instanceNode.getNodeName().equalsIgnoreCase(COMPOSITION) || 
 				instanceNode.getAttributes().getNamedItem("arraysize") != null ||
 				instanceNode.getAttributes().getNamedItem("size") != null){

@@ -14,6 +14,7 @@ import com.google.common.base.MoreObjects.ToStringHelper;
 import mapping.MappingElement;
 import parser.LiteMappingParser;
 import parser.TemplateModel;
+import sample.CadmsdExplorer.CabmsdReport;
 
 /**
  * This is an example of using the JAVA API to extract data from an annotated VOTable
@@ -28,7 +29,7 @@ public class IC4665Explorer {
 	/**
 	 * The file to parse (must be in the classpath)
 	 */
-	public static final String VOTABLE_RESOURCE = "/test/xml/PhotAndProperMotionsIC4666_annot.vot";
+	public static final String VOTABLE_RESOURCE = "/test/xml/PhotAndProperMotionsIC4666_annot.xml";
 	/**
 	 * multi-purpose VO-DML role
 	 */
@@ -41,7 +42,7 @@ public class IC4665Explorer {
 	 * Extracted data: List of individual reports for each SpaeseCube
 	 * {@link ParsingReport} is an internal class
 	 */
-	private ParsingReport parsingReport = new ParsingReport();
+	private CabmsdReport parsingReport = new CabmsdReport();
 
 	/**
 	 * Constructor: trigger data parsing
@@ -68,12 +69,47 @@ public class IC4665Explorer {
 	public void exploreDataSet() throws Exception{	
 
 		System.out.println(this.liteMappingParser.getRootElement());
-		TemplateModel me = this.liteMappingParser.getRootElement();
-		for( MappingElement mappingElemnt: me.getMappingElements() ) {
-			System.out.println("cccc");
+		MappingElement pointArray = this.liteMappingParser.getFirstNodeWithRole("cab-msd:Source.sources");
+		System.out.println(this.liteMappingParser.getFirstNodeWithRole("cab-msd:Source.sources"));
+		this.parsingReport.nbPoints =  pointArray.getLength();
+		this.parsingReport.columnMapping = pointArray.getColumnRoles();
+		for(int k: this.parsingReport.columnMapping.keySet()){
+			System.out.println(k + " : " + this.parsingReport.columnMapping.get(k));
 		}
+        for( int i=0 ; i<this.parsingReport.nbPoints ; i++ ){
+        	MappingElement row = pointArray.getContentElement(i);
+        	System.out.println("SOURCE  : " +row.getSubelementsByRole("cab-msd:Source.identifier").get(0).getStringValue());
+        	MappingElement posra = row.getSubelementsByRole("meas:EquatorialPosition.ra").get(0);
+        	MappingElement posdec = row.getSubelementsByRole("meas:EquatorialPosition.dec").get(0);
+        	System.out.println("POSITION: " +posra.getSubelementsByRole("ivoa:RealQuantity.value").get(0).getStringValue()
+        			+ " " 
+        			+ posdec.getSubelementsByRole("ivoa:RealQuantity.value").get(0).getStringValue());
+        	posra = row.getSubelementsByRole("meas:EquatorialPosition.pmra").get(0);
+        	posdec = row.getSubelementsByRole("meas:EquatorialPosition.pmdec").get(0);
+        	System.out.println("P.MOTION: " + posra.getSubelementsByRole("ivoa:RealQuantity.value").get(0).getStringValue()
+        			+ " " 
+        			+ posdec.getSubelementsByRole("ivoa:RealQuantity.value").get(0).getStringValue());
+        	MappingElement mags = row.getSubelementsByRole("nd_point:Mags").get(0);
+        	System.out.print("MAGS    : ");
 
-
+            for( int m=0 ; m<mags.getLength() ; m++){
+            	MappingElement mag = mags.getContentElement(m);
+            	System.out.print(mag.getSubelementsByRole("cab-msd:Filter.name").get(0).getStringValue());
+            	System.out.print("=");
+            	System.out.print(mag.getSubelementsByRole("nd_point:mag.value").get(0).getStringValue());
+            	System.out.print(" ");
+            }
+            System.out.println("");
+        	
+//        	this.parsingReport.points.add(
+//        			new Point(
+//        					row.getSubelementsByRole(REAL_VALUE).get(0).getStringValue(),
+//        					row.getSubelementsByRole("nd_point:mag.value").get(0).getStringValue()
+//        					)
+//        	);
+        }
+	        
+	
 
 //		MappingElement dataSet = this.liteMappingParser.getFirstNodeWithRole("cab-msd:Source.identifier");
 //		this.parsingReport.sourceId = dataSet.getStringValue();
@@ -104,12 +140,17 @@ public class IC4665Explorer {
 		this.parsingReport.columnMapping = pointArray.getColumnRoles();
         for( int i=0 ; i<this.parsingReport.nbPoints ; i++ ){
         	MappingElement row = pointArray.getContentElement(i);
-        	this.parsingReport.points.add(
-        			new Point(
-        					row.getSubelementsByRole(REAL_VALUE).get(0).getStringValue(),
-        					row.getSubelementsByRole("nd_point:mag.value").get(0).getStringValue()
-        					)
-        	);
+        	System.out.println("===== " + row.getSubelementsByRole("nd_point:Mag.coord").size());
+        	for( MappingElement mag: row.getSubelementsByRole("nd_point:Mag.coord")){
+        		System.out.println(mag.getFirstChildByRole("cab-msd:Filter.name").getStringValue() + ": " 
+        	+ mag.getFirstChildByRole("nd_point:mag.value").getStringValue());
+        	}
+//        	this.parsingReport.points.add(
+//        			new Point(
+//        					row.getSubelementsByRole(REAL_VALUE).get(0).getStringValue(),
+//        					row.getSubelementsByRole("nd_point:mag.value").get(0).getStringValue()
+//        					)
+//        	);
         }
 
 	}
@@ -142,7 +183,7 @@ public class IC4665Explorer {
 	 * Inner classes storing extracted data
 	 * @author laurentmichel
 	 */
-	class ParsingReport{
+	class CabmsdReport{
 		String sourceId;
 		String ra;
 		String dec;

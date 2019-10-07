@@ -3,6 +3,7 @@
  */
 package mapping.nodes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -100,6 +101,20 @@ public class MultiInstanceCollection<T extends MappingElement> extends MappingNo
 	public List<MappingElement> getSubelementsWithRef() throws Exception{
 		return this.content.getSubelementsWithRef();
 	}
+	
+	/* (non-Javadoc)
+	 * @see mapping.MappingElement#getKeysOfAtomicTypeByValue(java.lang.String)
+	 */
+	@Override
+	public List<String> getKeysOfAtomicTypeByValue(String startWith) throws Exception {
+		List<String> retour = new ArrayList<String>();
+		for( int i=0 ; i<this.content.getLength() ; i++){
+			retour.addAll(this.content.getContentElement(i).getKeysOfAtomicTypeByValue(startWith));
+		}
+
+		return retour;
+	}
+
 
 
 	/* (non-Javadoc)

@@ -57,25 +57,12 @@ public class GroupByProcessor {
 		 * Retrieve all collection which data must be grouped
 		 * The map key is the role of these collections
 		 */
-		System.out.println("RUN Group by "  
-				+ rootElement.getNodeId().role + " " + rootElement.getClass().getName() );
-
 		Map<String, MappingElement>  tableCollections = this.getTableCollections();
-		for( String key: tableCollections.keySet()){
-			System.out.println("TABLECOLL " + key + " " 
-					+ tableCollections.get(key).getNodeId().role + " " + tableCollections.get(key).getClass().getName());
-		}
 		/*
 		 * Arrange the Collection content as a map of maps.
 		 * The primary keys are the dmrole whereas the secondary keys are the key values
 		 */
 		Map<String, Map<String, Array>> groupedContents = this.getGroupedContent(tableCollections);
-		for( Entry<String, Map<String, Array>> entry: groupedContents.entrySet() ) {
-			System.out.println("GROUDATA " + entry.getKey() );
-			for(String key: entry.getValue().keySet()){
-				System.out.println("  " + key );
-			}
-		}
 		/*
 		 * Check data consistency
 		 */
@@ -93,10 +80,7 @@ public class GroupByProcessor {
 		Set<String> keySet = this.getKeySet(groupedContents);
 		if( keySet != null ){
 			for( String key: keySet){
-				System.out.println("adddd " + key);
 				MappingElement root = deepClone(refRoot);
-				System.out.println("adddd " + key);
-				System.out.println("adddd " + root);
 				/*
 				 * Take the first child of the groupby  collection
 				 */
@@ -129,9 +113,7 @@ public class GroupByProcessor {
 		List<MappingElement> colls = root.getSubelementsByClass(DataTableCollection.class);
 		Map<String, MappingElement> retour = new LinkedHashMap<>();
 		for( MappingElement element: colls){
-			System.out.println("check " +element.getNodeId().role );
 			if( element instanceof DataTableCollection ) {
-				System.out.println("add " +element.getNodeId().role );
 				retour.put(element.getNodeId().role, element);
 			}
 		}
@@ -149,7 +131,6 @@ public class GroupByProcessor {
 	private Map<String, Map<String, Array>> getGroupedContent(Map<String, MappingElement>  tableCollections) throws Exception {
 		Map<String, Map<String, Array>> groupedContents = new LinkedHashMap<>();
 		for( String tableCollectionRole: tableCollections.keySet()){	
-			System.out.println("getGroupedContent " + tableCollectionRole + " " + tableCollections.get(tableCollectionRole).getNodeId().role);
 			Map<String, Array> groupedByContent = tableCollections.get(tableCollectionRole)
 					.groupContentByColumnValue(this.groupByKey);
 			groupedContents.put(tableCollectionRole, groupedByContent);
@@ -243,7 +224,6 @@ public class GroupByProcessor {
 	 * @throws Exception 
 	 */
 	public static  MappingElement deepClone(MappingElement object) throws Exception{
-		System.out.println(object.getClass());
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
 		objectOutputStream.writeObject(object);

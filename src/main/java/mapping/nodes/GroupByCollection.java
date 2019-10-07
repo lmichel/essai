@@ -49,11 +49,11 @@ public class GroupByCollection extends MappingNode {
 	
 	@Override
 	public void addMappingElement(final String key, final MappingElement mappingElement) throws Exception{
-		System.out.println("GBC addMappingElement " + key + "  " + this.getVodmlRole());
 		if( this.content == null ){
 			this.content = (Instance) mappingElement;
 		} else {
-			throw new UnconsistantResourceException("A GroupBy collection can only hots one instance");
+			// This method is invoke for each table row
+			//@@@@@throw new UnconsistantResourceException("A GroupBy collection can only hots one instance");
 		}
 	}
 

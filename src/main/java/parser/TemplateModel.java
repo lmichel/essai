@@ -95,7 +95,6 @@ public class TemplateModel {
 		}
 		if( this.groupByProcessor != null && this.rootElement!= null){
 			Map<String, MappingElement> groupedRoots = this.groupByProcessor.run();
-			System.out.println("@@@@@@@@@@@ " + groupedRoots.size());
 			this.rootElement.emptyData();
 
 			for( Entry<String, MappingElement> entry: groupedRoots.entrySet()){
@@ -109,7 +108,7 @@ public class TemplateModel {
 	 */
 	public int getLength() {
 		if( this.rootElement != null ){
-			return 1;
+			return this.mappingElements.size();
 		} else {
 			return this.mappingElements.size();
 		}

@@ -42,22 +42,109 @@
 				</INSTANCE>
 				<VALUE value="TT" dmrole="coords:TimeFrame.timescale" dmtype="ivoa:string"/>
 			</INSTANCE>
-			<!-- G filter definition: ad-hoc because no model yet -->
-			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_G">
-				<VALUE value="G" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
-				<VALUE value="http://svo.url.filter/ztf/g" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			<!-- I filter definition: ad-hoc because no model yet -->
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_I">
+				<VALUE value="I" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/I" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_z">
+				<VALUE value="z" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/z" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_ZZ">
+				<VALUE value="Z" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/Z" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_Y">
+				<VALUE value="Y" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/Y" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_J">
+				<VALUE value="J" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/J" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_H">
+				<VALUE value="H" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/H" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_K">
+				<VALUE value="K" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/K" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
 			</INSTANCE>
 		</GLOBALS>
 		<TEMPLATES tableref="J_A_A_532_A103_IC4665">
-		<SET dmrole="root" groupby="cab-msd:Source.identifier">
+		<!-- SET dmrole="root" groupby="cab-msd:Source.identifier" -->
  			<INSTANCE dmrole="root" dmtype="cab-msd:Source">
- 			    <ARRAY dmrole="cab-msd:Source">
- 				  <INSTANCE dmrole="root" dmtype="cab-msd:Source">
+ 			    <ARRAY dmrole="cab-msd:Source.sources">
+ 				  <INSTANCE dmrole="cab-msd:Source" dmtype="cab-msd:Source">
+ 				  	<INSTANCE dmrole="meas:EquatorialPosition" dmtype="meas:EquatorialPosition">
+						<INSTANCE dmrole="meas:EquatorialPosition.ra" dmtype="coords:Longitude">
+							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity" >
+								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="deg"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="RAJ2000"/>
+							</INSTANCE>
+						</INSTANCE>
+						<INSTANCE dmrole="meas:EquatorialPosition.dec" dmtype="coords:Latitude">
+							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity">
+								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="deg"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="DEJ2000"/>
+							</INSTANCE>
+						</INSTANCE>
+					</INSTANCE>
+ 				  	<INSTANCE dmrole="meas:ProperMotion" dmtype="meas:ProperMotion">
+						<INSTANCE dmrole="meas:EquatorialPosition.pmra" dmtype="coords:Longitude">
+							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity" >
+								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="mas/year"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="pmRA"/>
+							</INSTANCE>
+						</INSTANCE>
+						<INSTANCE dmrole="meas:EquatorialPosition.pmdec" dmtype="coords:Latitude">
+							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity">
+								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="mas/year"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="pmDE"/>
+							</INSTANCE>
+						</INSTANCE>
+					</INSTANCE>
+ 				  
     				<VALUE dmrole="cab-msd:Source.identifier" dmtype="ivoa:string" ref="Name"/>
+    				<COMPOSITION dmrole="nd_point:Mags" size="3">
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="imag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_I"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="zmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_z"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="ZZmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_ZZ"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="Ymag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_Y"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="Jmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_J"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="Hmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_H"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="Kmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_K"/>	
+						</INSTANCE>
+					</COMPOSITION>
     			  </INSTANCE>
  			    </ARRAY>
 			</INSTANCE>
-		</SET>
+		<!-- /SET -->
 		</TEMPLATES>
 	</VODML>
   
@@ -130,7 +217,7 @@ Execution Reports
 
 <!-- No link in: \ifmatch{r}{${Mm}}{\fg{red4}${}}\elsifmatch{n}{${Mm}}{\fg{blue4}${}}\else{${}}\fi -->
     </FIELD>
-    <FIELD name="imag" ucd="phot.mag;em.opt.I" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_MAG_I" -->
+    <FIELD ID="imag" name="imag" ucd="phot.mag;em.opt.I" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_MAG_I" -->
       <DESCRIPTION>? I-band magnitude from the CFH12K</DESCRIPTION>
       <VALUES null="NaN" />
     </FIELD>
@@ -138,7 +225,7 @@ Execution Reports
       <DESCRIPTION>? z-band magnitude from the CFH12K</DESCRIPTION>
       <VALUES null="NaN" />
     </FIELD>
-    <FIELD name="Zmag" ucd="phot.mag;em.opt.I" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_GUNN_Z" -->
+    <FIELD name="ZZmag" ucd="phot.mag;em.opt.I" datatype="float" width="6" precision="3" unit="mag"><!-- ucd="PHOT_GUNN_Z" -->
       <DESCRIPTION>? UKIDSS/Z-band magnitude from UKIDSS GCS DR8</DESCRIPTION>
       <VALUES null="NaN" />
     </FIELD>
