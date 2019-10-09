@@ -1,20 +1,20 @@
   <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error" ID="SymtricalError">
     <INSTANCE dmrole="meas:Error.ranError" dmtype="meas:Symmetrical">
       <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-        <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
-        <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
+        <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" />
+        <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" />
       </INSTANCE>
     </INSTANCE>
     <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
       <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-        <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
-        <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
+        <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" />
+        <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" />
       </INSTANCE>
     </INSTANCE>
     <INSTANCE dmrole="meas:Error.sysError" dmtype="meas:Symmetrical">
       <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-        <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
-        <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
+        <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" />
+        <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" />
       </INSTANCE>
     </INSTANCE>
   </INSTANCE>

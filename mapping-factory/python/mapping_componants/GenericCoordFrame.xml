@@ -1,5 +1,5 @@
  <INSTANCE dmrole="root" ID="GenericCoordFrame">
-   <VALUE dmrole="coords:GenericCoordFrame.planetaryEphem" dmtype="ivoa:string" ref="@@@@@@"/>
+   <VALUE dmrole="coords:GenericCoordFrame.planetaryEphem" dmtype="ivoa:string" />
    <INSTANCE dmrole="coords:GenericCoordFrame.refPosition" dmtype="coords:StdRefLocation">
      <VALUE default="GEOCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" ref="@@@@@@"/>
    </INSTANCE>

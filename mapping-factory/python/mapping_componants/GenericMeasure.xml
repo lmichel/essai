@@ -2,15 +2,15 @@
    <INSTANCE abstr="true" dmrole="meas:GenericMeasure.coord" dmtype="coords:GenericCoordValue">
       <INSTANCE dmrole="coords:GenericCoordValue.axis" dmtype="coords:ContinuousAxis">
          <INSTANCE dmrole="coords:ContinuousAxis.domainMin" dmtype="ivoa:RealQuantity">
-            <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@" />
-            <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@" />
+            <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"  />
+            <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"  />
          </INSTANCE>
          <INSTANCE dmrole="coords:ContinuousAxis.domainMax" dmtype="ivoa:RealQuantity">
-            <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@" />
-            <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@" />
+            <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" />
+            <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" />
          </INSTANCE>
-         <VALUE dmrole="coords:ContinuousAxis.cyclic" dmtype="ivoa:boolean" ref="@@@@@@" />
-         <VALUE dmrole="coords:Axis.name" dmtype="ivoa:string" ref="@@@@@@" />
+         <VALUE dmrole="coords:ContinuousAxis.cyclic" dmtype="ivoa:boolean"/>
+         <VALUE dmrole="coords:Axis.name" dmtype="ivoa:string" />
       </INSTANCE>
       <INSTANCE dmrole="coords:Coordinate.frame" ref="GenericCoordFrame" />
    </INSTANCE>

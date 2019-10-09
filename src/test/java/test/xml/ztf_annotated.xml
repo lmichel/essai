@@ -148,14 +148,6 @@
 											<INSTANCE dmrole="coords:Coordinate.frame" ref="TimeFrame_TT_BARY"/>
 										</INSTANCE>
 										<COMPOSITION dmrole="meas:Measure.error" size="1">
-											<INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error" >
-												<INSTANCE dmrole="meas:Error.ranError" dmtype="meas:Symmetrical">
-													<INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-														<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="sec"/>
-														<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" value="1"/>
-													</INSTANCE>
-												</INSTANCE>
-											</INSTANCE>
 										</COMPOSITION>
 									</INSTANCE>
 									<!--
