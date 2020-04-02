@@ -138,7 +138,7 @@
 								<INSTANCE dmrole="nd_point:point" dmtype="nd_point:Point">
 									<FILTER key="oid" value="686103400034440" />
 									<!--
-						             Time Stamp : HJD not defined in STC, let's suppose that CAB-MSD supports it
+						             Time Stamp : MJD supported CAB-MSD s
 						            -->
 									<INSTANCE dmrole="nd_point:TimeStamp" dmtype="coords:MJD">
 										<INSTANCE dmrole="nd_point:TimeStamp.date" dmtype="ivoa:RealQuantity">
@@ -147,11 +147,9 @@
 											<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"  ref="mjd" />
 											<INSTANCE dmrole="coords:Coordinate.frame" ref="TimeFrame_TT_BARY"/>
 										</INSTANCE>
-										<COMPOSITION dmrole="meas:Measure.error" size="1">
-										</COMPOSITION>
 									</INSTANCE>
 									<!--
-						       	      Mag : the band is given by the filter
+						       	      Mag : The band is given by the filter
 						            -->
 									<INSTANCE dmrole="nd_point:Mag" dmtype="nd_point:Mag">
 										<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">

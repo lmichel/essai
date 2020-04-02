@@ -1,0 +1,319 @@
+{
+  "VODML": {
+    "GLOBALS": {
+      "Filter_H": {
+        "@ID": "Filter_H",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "H"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/H"
+        }
+      },
+      "Filter_I": {
+        "@ID": "Filter_I",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "I"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/I"
+        }
+      },
+      "Filter_J": {
+        "@ID": "Filter_J",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "J"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/J"
+        }
+      },
+      "Filter_K": {
+        "@ID": "Filter_K",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "K"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/K"
+        }
+      },
+      "Filter_Y": {
+        "@ID": "Filter_Y",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "Y"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/Y"
+        }
+      },
+      "Filter_ZZ": {
+        "@ID": "Filter_ZZ",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "Z"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/Z"
+        }
+      },
+      "Filter_z": {
+        "@ID": "Filter_z",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "z"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/z"
+        }
+      },
+      "SpaceFrame_FK5J2000": {
+        "@ID": "SpaceFrame_FK5J2000",
+        "@dmtype": "coords:SpaceFrame",
+        "coords:SpaceFrame.equinox": {
+          "@dmtype": "coords:Epoch",
+          "@value": "J2000"
+        },
+        "coords:SpaceFrame.refPosition": {
+          "@dmtype": "coords:StdRefLocation",
+          "coords:StdRefLocation.position": {
+            "@dmtype": "ivoa:string",
+            "@value": "GEOCENTER"
+          }
+        },
+        "coords:SpaceFrame.spaceRefFrame": {
+          "@dmtype": "ivoa:string",
+          "@value": "FK5"
+        }
+      },
+      "TimeFrame_TT": {
+        "@ID": "TimeFrame_TT",
+        "@dmtype": "coords:TimeFrame",
+        "coords:TimeFrame.refPosition": {
+          "@dmtype": "coords:StdRefLocation",
+          "coords:StdRefLocation.position": {
+            "@dmtype": "ivoa:string",
+            "@value": "HELIOCENTER"
+          }
+        },
+        "coords:TimeFrame.timescale": {
+          "@dmtype": "ivoa:string",
+          "@value": "TT"
+        }
+      }
+    },
+    "MODELS": {
+      "coords": {
+        "NAME": "coords",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/cab-msd-v1.0.vo-dml.xml"
+      },
+      "ivoa": {
+        "NAME": "ivoa",
+        "URL": "http://www.ivoa.net/xml/VODML/20180519/IVOA-v1.0.vo-dml.xml"
+      },
+      "meas": {
+        "NAME": "meas",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml"
+      }
+    },
+    "root": {
+      "@dmrole": "root",
+      "@dmtype": "cab-msd:Source",
+      "ARRAY": {
+        "cab-msd:Source.sources": [
+          {
+            "@dmrole": "cab-msd:Source",
+            "@dmtype": "cab-msd:Source",
+            "cab-msd:Source.identifier": {
+              "@dmtype": "ivoa:string",
+              "@ref": "Name",
+              "@value": ""
+            },
+            "meas:EquatorialPosition": {
+              "@dmtype": "meas:EquatorialPosition",
+              "meas:EquatorialPosition.dec": {
+                "@dmtype": "coords:Latitude",
+                "coords:Coordinate.frame": {
+                  "@ref": "SpaceFrame_ICRS"
+                },
+                "coords:SpaceCoord.cval": {
+                  "@dmtype": "ivoa:RealQuantity",
+                  "ivoa:Quantity.unit": {
+                    "@dmtype": "ivoa:Unit",
+                    "@value": "deg"
+                  },
+                  "ivoa:RealQuantity.value": {
+                    "@dmtype": "ivoa:real",
+                    "@ref": "DEJ2000",
+                    "@value": ""
+                  }
+                }
+              },
+              "meas:EquatorialPosition.ra": {
+                "@dmtype": "coords:Longitude",
+                "coords:Coordinate.frame": {
+                  "@ref": "SpaceFrame_ICRS"
+                },
+                "coords:SpaceCoord.cval": {
+                  "@dmtype": "ivoa:RealQuantity",
+                  "ivoa:Quantity.unit": {
+                    "@dmtype": "ivoa:Unit",
+                    "@value": "deg"
+                  },
+                  "ivoa:RealQuantity.value": {
+                    "@dmtype": "ivoa:real",
+                    "@ref": "RAJ2000",
+                    "@value": ""
+                  }
+                }
+              }
+            },
+            "meas:ProperMotion": {
+              "@dmtype": "meas:ProperMotion",
+              "meas:EquatorialPosition.pmdec": {
+                "@dmtype": "coords:Latitude",
+                "coords:Coordinate.frame": {
+                  "@ref": "SpaceFrame_ICRS"
+                },
+                "coords:SpaceCoord.cval": {
+                  "@dmtype": "ivoa:RealQuantity",
+                  "ivoa:Quantity.unit": {
+                    "@dmtype": "ivoa:Unit",
+                    "@value": "mas/year"
+                  },
+                  "ivoa:RealQuantity.value": {
+                    "@dmtype": "ivoa:real",
+                    "@ref": "pmDE",
+                    "@value": ""
+                  }
+                }
+              },
+              "meas:EquatorialPosition.pmra": {
+                "@dmtype": "coords:Longitude",
+                "coords:Coordinate.frame": {
+                  "@ref": "SpaceFrame_ICRS"
+                },
+                "coords:SpaceCoord.cval": {
+                  "@dmtype": "ivoa:RealQuantity",
+                  "ivoa:Quantity.unit": {
+                    "@dmtype": "ivoa:Unit",
+                    "@value": "mas/year"
+                  },
+                  "ivoa:RealQuantity.value": {
+                    "@dmtype": "ivoa:real",
+                    "@ref": "pmRA",
+                    "@value": ""
+                  }
+                }
+              }
+            },
+            "nd_point:Mags": [
+              {
+                "@dmrole": "nd_point:Mag.coord",
+                "@dmtype": "nd_point:Coord",
+                "nd_point:Mag.frame": {
+                  "@ref": "Filter_I"
+                },
+                "nd_point:mag.value": {
+                  "@dmtype": "ivoa:real",
+                  "@ref": "imag",
+                  "@value": ""
+                }
+              },
+              {
+                "@dmrole": "nd_point:Mag.coord",
+                "@dmtype": "nd_point:Coord",
+                "nd_point:Mag.frame": {
+                  "@ref": "Filter_z"
+                },
+                "nd_point:mag.value": {
+                  "@dmtype": "ivoa:real",
+                  "@ref": "zmag",
+                  "@value": ""
+                }
+              },
+              {
+                "@dmrole": "nd_point:Mag.coord",
+                "@dmtype": "nd_point:Coord",
+                "nd_point:Mag.frame": {
+                  "@ref": "Filter_ZZ"
+                },
+                "nd_point:mag.value": {
+                  "@dmtype": "ivoa:real",
+                  "@ref": "ZZmag",
+                  "@value": ""
+                }
+              },
+              {
+                "@dmrole": "nd_point:Mag.coord",
+                "@dmtype": "nd_point:Coord",
+                "nd_point:Mag.frame": {
+                  "@ref": "Filter_Y"
+                },
+                "nd_point:mag.value": {
+                  "@dmtype": "ivoa:real",
+                  "@ref": "Ymag",
+                  "@value": ""
+                }
+              },
+              {
+                "@dmrole": "nd_point:Mag.coord",
+                "@dmtype": "nd_point:Coord",
+                "nd_point:Mag.frame": {
+                  "@ref": "Filter_J"
+                },
+                "nd_point:mag.value": {
+                  "@dmtype": "ivoa:real",
+                  "@ref": "Jmag",
+                  "@value": ""
+                }
+              },
+              {
+                "@dmrole": "nd_point:Mag.coord",
+                "@dmtype": "nd_point:Coord",
+                "nd_point:Mag.frame": {
+                  "@ref": "Filter_H"
+                },
+                "nd_point:mag.value": {
+                  "@dmtype": "ivoa:real",
+                  "@ref": "Hmag",
+                  "@value": ""
+                }
+              },
+              {
+                "@dmrole": "nd_point:Mag.coord",
+                "@dmtype": "nd_point:Coord",
+                "nd_point:Mag.frame": {
+                  "@ref": "Filter_K"
+                },
+                "nd_point:mag.value": {
+                  "@dmtype": "ivoa:real",
+                  "@ref": "Kmag",
+                  "@value": ""
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

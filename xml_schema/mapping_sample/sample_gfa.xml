@@ -1,0 +1,306 @@
+	<VODML>
+	    <!--
+	        Models used by the mapping  
+	     -->
+		<MODELS>
+			<MODEL>
+				<NAME>ivoa</NAME>
+				<URL>http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>coords</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_coords-v2.0.vo-dml.xml
+				</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>meas</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_meas-v2.0.vo-dml.xml
+				</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>ds</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/DatasetMetadata/vo-dml/DatasetMetadata-1.0.vo-dml.xml
+				</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>trans</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_trans-v2.0.vo-dml.xml
+				</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>cube</NAME>
+				<URL>http://volute.g-vo.org/svn/trunk/projects/dm/Cube/vo-dml/Cube-1.0.vo-dml.xml
+				</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>photdm-alt</NAME>
+				<URL>http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml-org/models/photdm-alt/PhotDM-alt.vo-dml.xml
+				</URL>
+			</MODEL>
+		</MODELS>
+		<!-- 
+		    Instance set with fixed values (not read in FLEDS or PARAMS)
+		 -->
+		<GLOBALS>
+		    <!-- 
+		        DatasetMetaData instance
+		     -->
+			<INSTANCE dmrole="cube:DataProduct.dataset" dmtype="ds:dataset.Dataset"
+				ID="_ds_">
+				<VALUE dmrole="ds:dataset.Dataset.dataProductType" value="TimSeries" />
+				<VALUE dmrole="ds:dataset.Dataset.dataProductSubtype" value="Time Series Multiband" />
+				<!-- 
+				    Data collection the TS belongs to 
+					The dmrole given to the COMPOSITION is the composition name in the model
+				 -->
+				<COMPOSITION dmrole="collections">
+					<INSTANCE dmrole="ds:dataset.DataID.collection" dmtype="ds:dataset.Collection">
+						<VALUE dmrole="ds:dataset.Collection.name" value="VODML Lite Test Bench" />
+					</INSTANCE>
+				</COMPOSITION>
+				<INSTANCE dmrole="ds:dataset.Dataset.curation" dmtype="ds:dataset.Curation">
+					<VALUE dmrole="ds:dataset.Curation.publisherDID" value="ivoa://voldml/lite/project" />
+					<VALUE dmrole="ds:dataset.Curation.version" ref="0.0" />
+					<VALUE dmrole="ds:dataset.Curation.releaseDate" value="2018:11:11" />
+					<VALUE dmrole="ds:dataset.Curation.rights" value="public" />
+					<INSTANCE dmrole="ds:dataset.Curation.publisher" dmtype="ds:dataset.Publisher">
+						<VALUE dmrole="ds:dataset.Publisher.publisherID" value="ivoa://voldml/lite/project" />
+						<INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
+							<VALUE dmrole="ds:party.Party.name" value="ObAS" />
+						</INSTANCE>
+					</INSTANCE>
+					<INSTANCE dmrole="ds:dataset.Curation.contact" dmtype="ds:dataset.Contact">
+						<INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
+							<VALUE dmrole="ds:party.Party.name" value="Laurent" />
+						</INSTANCE>
+					</INSTANCE>
+					<COMPOSITION dmrole="publications">
+						<INSTANCE dmrole="ds:dataset.Curation.reference" dmtype="ds:dataset.Publication">
+							<VALUE dmrole="ds:dataset.Publication.refCode" value="AA...123" />
+						</INSTANCE>
+						<INSTANCE dmrole="ds:dataset.Curation.reference" dmtype="ds:dataset.Publication">
+							<VALUE dmrole="ds:dataset.Publication.refCode" value="AA...234" />
+						</INSTANCE>
+					</COMPOSITION>
+				</INSTANCE>
+				<INSTANCE dmrole="ds:dataset.Dataset.dataID" dmtype="ds:dataset.DataID">
+					<VALUE dmrole="ds:dataset.DataID.title" value="Gaia TS Mapping Test" />
+					<VALUE dmrole="ds:dataset.DataID.datasetID" value="ivoa://gaia/ts/12345" />
+					<VALUE dmrole="ds:dataset.DataID.creatorDID" value="ivoa://esa/gaia/" />
+					<VALUE dmrole="ds:dataset.DataID.version" value="0.0" />
+					<VALUE dmrole="ds:dataset.DataID.date" value="2018:11:11" />
+					<VALUE dmrole="ds:dataset.DataID.creationType" value="LiteMappingTest" />
+					<INSTANCE dmrole="ds:dataset.DataID.creator" dmtype="ds:dataset.Creator">
+						<INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
+							<VALUE dmrole="ds:party.Party.name" value="VODML-Team" />
+						</INSTANCE>
+					</INSTANCE>
+					<COMPOSITION dmrole="contributors">
+						<INSTANCE dmrole="ds:dataset.DataID.contributor" dmtype="ds:dataset.Contributor">
+							<INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
+								<VALUE dmrole="ds:party.Party.name" value="Laurent Michel" />
+							</INSTANCE>
+							<VALUE dmrole="ds:dataset.Contributor.acknowledgment" value="Thank you guy" />
+						</INSTANCE>
+						<INSTANCE dmrole="ds:dataset.DataID.contributor" dmtype="ds:dataset.Contributor">
+							<INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
+								<VALUE dmrole="ds:party.Party.name" value="Mark Cresitello Dittmar" />
+							</INSTANCE>
+							<VALUE dmrole="ds:dataset.Contributor.acknowledgment"
+								value="I'm pleased to work with you" />
+						</INSTANCE>
+					</COMPOSITION>
+				</INSTANCE>
+			</INSTANCE>
+			<!-- 
+			    Time frame, referenced from each photometric point
+			 -->
+			<INSTANCE dmrole="coords:Coordinate.frame" dmtype="coords:domain.time.TimeFrame"
+				ID="timeframe">
+				<INSTANCE dmrole="coords:domain.time.TimeFrame.refPosition"
+					dmtype="coords:domain.space.StdRefLocation">
+					<VALUE dmrole="coords:domain.space.StdRefLocation.position"
+						value="BARYCENTER" />
+				</INSTANCE>
+				<INSTANCE dmrole="coords:domain.time.TimeFrame.time0"
+					dmtype="coords:domain.time.JD">
+					<VALUE dmrole="coords:domain.time.JD.date" value="2455197.5" />
+				</INSTANCE>
+				<VALUE dmrole="coords:domain.time.TimeFrame.timescale" value="TCB" />
+			</INSTANCE>
+			
+			<INSTANCE dmrole="ts:PhotometricMeasure.filter" dmtype="photdm:PhotCal"
+				ID="filterG">
+				<INSTANCE dmrole="photdm:PhotCal.photometryFilter" dmtype="photdm:PhotometryFilter">
+					<INSTANCE dmrole="photdm:PhotometryFilter.access" dmtype="photdm:Access">
+						<VALUE dmrole="photdm:Access.reference" value="http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.G" />
+						<VALUE dmrole="photdm:Access.format" value="xml" />
+					</INSTANCE>
+				</INSTANCE>
+			</INSTANCE>
+			<INSTANCE dmrole="ts:PhotometricMeasure.filter" dmtype="photdm:PhotCal"
+				ID="filterBP">
+				<INSTANCE dmrole="photdm:PhotCal.photometryFilter" dmtype="photdm:PhotometryFilter">
+					<INSTANCE dmrole="photdm:PhotometryFilter.access" dmtype="photdm:Access">
+						<VALUE dmrole="photdm:Access.reference" value="http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.BP" />
+						<VALUE dmrole="photdm:Access.format" value="xml" />
+					</INSTANCE>
+				</INSTANCE>
+			</INSTANCE>
+			<INSTANCE dmrole="ts:PhotometricMeasure.filter" dmtype="photdm:PhotCal"
+				ID="filterRP">
+				<INSTANCE dmrole="photdm:PhotCal.photometryFilter" dmtype="photdm:PhotometryFilter">
+					<INSTANCE dmrole="photdm:PhotometryFilter.access" dmtype="photdm:Access">
+						<VALUE dmrole="photdm:Access.reference" value="http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.RP" />
+						<VALUE dmrole="photdm:Access.format" value="xml" />
+					</INSTANCE>
+				</INSTANCE>
+			</INSTANCE>
+		</GLOBALS>
+		<!-- 
+		    Mapping of <TABLE ID=results>
+		 -->
+		<TEMPLATES tableref="results">
+		    <!-- 
+		        This TEMPLATES own the dmrole=root element. It must have one child (INSTANCE or SET>
+		        This child indicates that the client must return one instance of the ts:SimpleTimeSeries class
+		     -->
+			<INSTANCE dmrole="root" dmtype="ts:SimpleTimeSeries">
+			    <!--
+			        Reference to the DataSet of this Time Series 
+			     -->
+				<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
+				<!-- 
+				   Data composition: This means the the mapped model supports
+				   several (a collection of) SparseCube instance
+				   These SparseCube are explicitely listed inside the COMPOSITION
+				 -->
+				<COMPOSITION dmrole="data">
+				    <!--
+				        First SparseCube = a reference to the dataset + an array of observables
+				        It is to be noted that the band can only be identified by parsing the filer definition
+				        This one is for the G band
+				     -->
+					<INSTANCE dmrole="cube:SparseCube.data" dmtype="ts:Record">
+					    <!-- 
+					       DataSet reference
+					     -->
+						<INSTANCE dmrole="ts:Record.dataProduct" dmtype="cube:DataProduct">
+							<COMPOSITION dmrole="coosys">
+								<INSTANCE dmrole="cube:DataProduct.coordSys" dmtype="coords:CoordSys" ref="timeframe"/>
+							</COMPOSITION>
+							<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
+						</INSTANCE>
+						<!--
+						    Array of observables
+						    The ARRAY element means the one instance must be produced for each TABLE row. 
+						    The ARRAY element mus have one INSTANCE as child 
+						    One instance of INSTANCE will be generated for each data row
+						    Idf there is no column mapped in that INSTANCE, all returned instances will be identical
+						 -->
+						<ARRAY dmrole="observable">
+						    <!-- 
+						        Instance modeling one row
+						     -->
+							<INSTANCE dmrole="cube:NDPoint.observable" dmtype="cube:Observable">
+							    <!-- 
+							        The filter means that only rows with band = "G" will instanciated in this ARRAY
+							     -->
+								<FILTER name="G_band" key="band" value="G" />
+								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
+									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
+									    <!--
+									       Reference to the "time" column 
+									       A ref in a VALUE can only refer to a FIELD or a PARAM of the current TEMPLATE
+									     -->
+										<VALUE dmrole="coords:domain.time.JD.date" ref="time" dmtype="ivoa:RealQuantity"/>
+										<!-- 
+										    A ref in an INSTANCE can only refer to another INSTANCE 
+										    located anywhere in the VOMDL block
+										 -->
+										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe"/>
+										<VALUE dmrole="cube:DataAxis.dependent" value="false" />
+									</INSTANCE>
+									<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="ts:PhotometricMeasure">
+										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
+											<VALUE dmrole="ts:Magnitude.value" ref="mag" dmtype="ivoa:RealQuantity"/>
+											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterG" />
+										</INSTANCE>
+									</INSTANCE>
+									<VALUE dmrole="cube:DataAxis.dependent" value="true" />
+								</INSTANCE>
+							</INSTANCE>
+						</ARRAY>
+					</INSTANCE>
+				    <!--
+				        Second SparseCube = a reference to the dataset + an array of observables
+				        This one is for the BP band
+				     -->
+					<INSTANCE dmrole="cube:SparseCube.data" dmtype="ts:Record">
+						<INSTANCE dmrole="ts:Record.dataProduct" dmtype="cube:DataProduct">
+							<COMPOSITION dmrole="coosys">
+								<INSTANCE dmrole="cube:DataProduct.coordSys" dmtype="coords:CoordSys" />
+							</COMPOSITION>
+							<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
+						</INSTANCE>
+
+						<ARRAY dmrole="observable">
+							<INSTANCE dmrole="cube:NDPoint.observable" dmtype="cube:Observable">
+								<FILTER name="BP_band" key="band" value="BP" />
+								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
+									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
+										<VALUE dmrole="coords:domain.time.JD.date" ref="time" dmtype="ivoa:RealQuantity"/>
+										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe"/>
+										<VALUE dmrole="cube:DataAxis.dependent" value="false" />
+									</INSTANCE>
+									<INSTANCE dmrole="cube:MeasurementAxis.measure"
+										dmtype="ts:PhotometricMeasure">
+										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
+											<VALUE dmrole="ts:Magnitude.value" ref="mag" dmtype="ivoa:RealQuantity"/>
+											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterBP" />
+										</INSTANCE>
+									</INSTANCE>
+									<VALUE dmrole="cube:DataAxis.dependent" value="true" />
+								</INSTANCE>
+							</INSTANCE>
+						</ARRAY>
+					</INSTANCE>
+					<!--
+				        Third SparseCube = a reference to the dataset + an array of observables
+				        This one is for the RP band
+				     -->
+					<INSTANCE dmrole="cube:SparseCube.data" dmtype="ts:Record">
+						<INSTANCE dmrole="ts:Record.dataProduct" dmtype="cube:DataProduct">
+							<COMPOSITION dmrole="coosys">
+								<INSTANCE dmrole="cube:DataProduct.coordSys" dmtype="coords:CoordSys" />
+							</COMPOSITION>
+							<INSTANCE dmrole="cube:DataProduct.dataset" ref="_ds_" />
+						</INSTANCE>
+
+						<ARRAY dmrole="observable">
+							<INSTANCE dmrole="cube:NDPoint.observable" dmtype="cube:Observable">
+								<FILTER name="RP_band" key="band" value="RP" />
+								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
+									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
+										<VALUE dmrole="coords:domain.time.JD.date" ref="time" dmtype="ivoa:RealQuantity"/>
+										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe" />
+										<VALUE dmrole="cube:DataAxis.dependent" value="false" />
+									</INSTANCE>
+									<INSTANCE dmrole="cube:MeasurementAxis.measure"
+										dmtype="ts:PhotometricMeasure">
+										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
+											<VALUE dmrole="ts:Magnitude.value" ref="mag" dmtype="ivoa:RealQuantity"/>
+											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterRP" />
+										</INSTANCE>
+									</INSTANCE>
+									<VALUE dmrole="cube:DataAxis.dependent" value="true" />
+								</INSTANCE>
+							</INSTANCE>
+						</ARRAY>
+					</INSTANCE>
+				</COMPOSITION> <!-- End of the SparseCube collection -->
+
+			</INSTANCE> <!-- End of the Simple TS instance -->
+		</TEMPLATES>
+	</VODML>
+	

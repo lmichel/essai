@@ -1,0 +1,147 @@
+ <!-- 
+ taken from PhotAndProperMotionsIC4666_annot.xml
+  -->
+  	<VODML>
+		<MODELS>
+			<MODEL>
+				<NAME>meas</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>ivoa</NAME>
+				<URL>http://www.ivoa.net/xml/VODML/20180519/IVOA-v1.0.vo-dml.xml</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>coords</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.vo-dml.xml</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>coords</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/nd_point-v1.0.vo-dml.xml</URL>
+			</MODEL>
+			<MODEL>
+				<NAME>coords</NAME>
+				<URL>https://volute.g-vo.org/svn/trunk/projects/dm/cab-msd-v1.0.vo-dml.xml</URL>
+			</MODEL>
+		</MODELS>
+		<GLOBALS>
+			<!--  Space Frame ICRS -->
+			<INSTANCE dmrole="" dmtype="coords:SpaceFrame" ID="SpaceFrame_FK5J2000">
+				<VALUE value="J2000" dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" />
+				<VALUE value="FK5" dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string"/>
+				<INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
+					<VALUE value="GEOCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string"/>
+				</INSTANCE>
+			</INSTANCE>
+			<!-- Time frame (imported from coords) -->
+			<INSTANCE dmrole="" dmtype="coords:TimeFrame" ID="TimeFrame_TT">
+				<INSTANCE dmrole="coords:TimeFrame.refPosition" dmtype="coords:StdRefLocation">
+					<VALUE value="HELIOCENTER" dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" />
+				</INSTANCE>
+				<VALUE value="TT" dmrole="coords:TimeFrame.timescale" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<!-- I filter definition: ad-hoc because no model yet -->
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_I">
+				<VALUE value="I" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/I" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_z">
+				<VALUE value="z" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/z" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_ZZ">
+				<VALUE value="Z" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/Z" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_Y">
+				<VALUE value="Y" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/Y" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_J">
+				<VALUE value="J" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/J" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_H">
+				<VALUE value="H" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/H" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+			<INSTANCE dmrole="" dmtype="cab-msd:Filter" ID="Filter_K">
+				<VALUE value="K" dmrole="cab-msd:Filter.name" dmtype="ivoa:string"/>
+				<VALUE value="http://svo.url.filter/K" dmrole="cab-msd:FilterUrl" dmtype="ivoa:string"/>
+			</INSTANCE>
+		</GLOBALS>
+		<TEMPLATES tableref="J_A_A_532_A103_IC4665">
+		<!-- SET dmrole="root" groupby="cab-msd:Source.identifier" -->
+ 			<INSTANCE dmrole="root" dmtype="cab-msd:Source">
+ 			    <ARRAY dmrole="cab-msd:Source.sources">
+ 				  <INSTANCE dmrole="cab-msd:Source" dmtype="cab-msd:Source">
+ 				  	<INSTANCE dmrole="meas:EquatorialPosition" dmtype="meas:EquatorialPosition">
+						<INSTANCE dmrole="meas:EquatorialPosition.ra" dmtype="coords:Longitude">
+							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity" >
+								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="deg"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="RAJ2000"/>
+							</INSTANCE>
+						</INSTANCE>
+						<INSTANCE dmrole="meas:EquatorialPosition.dec" dmtype="coords:Latitude">
+							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity">
+								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="deg"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="DEJ2000"/>
+							</INSTANCE>
+						</INSTANCE>
+					</INSTANCE>
+ 				  	<INSTANCE dmrole="meas:ProperMotion" dmtype="meas:ProperMotion">
+						<INSTANCE dmrole="meas:EquatorialPosition.pmra" dmtype="coords:Longitude">
+							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity" >
+								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="mas/year"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="pmRA"/>
+							</INSTANCE>
+						</INSTANCE>
+						<INSTANCE dmrole="meas:EquatorialPosition.pmdec" dmtype="coords:Latitude">
+							<INSTANCE dmrole="coords:Coordinate.frame" ref="SpaceFrame_ICRS"/>
+							<INSTANCE dmrole="coords:SpaceCoord.cval" dmtype="ivoa:RealQuantity">
+								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="mas/year"/>
+								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="pmDE"/>
+							</INSTANCE>
+						</INSTANCE>
+					</INSTANCE>
+ 				  
+    				<VALUE dmrole="cab-msd:Source.identifier" dmtype="ivoa:string" ref="Name"/>
+    				<COMPOSITION dmrole="nd_point:Mags" size="3">
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="imag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_I"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="zmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_z"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="ZZmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_ZZ"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="Ymag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_Y"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="Jmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_J"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="Hmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_H"/>	
+						</INSTANCE>
+						<INSTANCE dmrole="nd_point:Mag.coord" dmtype="nd_point:Coord">
+							<VALUE dmrole="nd_point:mag.value" dmtype="ivoa:real"  ref="Kmag" />
+							<INSTANCE dmrole="nd_point:Mag.frame" ref="Filter_K"/>	
+						</INSTANCE>
+					</COMPOSITION>
+    			  </INSTANCE>
+ 			    </ARRAY>
+			</INSTANCE>
+		<!-- /SET -->
+		</TEMPLATES>
+	</VODML>

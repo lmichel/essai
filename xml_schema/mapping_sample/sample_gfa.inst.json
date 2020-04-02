@@ -1,0 +1,391 @@
+{
+  "VODML": {
+    "GLOBALS": {
+      "coords:Coordinate.frame": {
+        "@ID": "timeframe",
+        "@dmtype": "coords:domain.time.TimeFrame",
+        "coords:domain.time.TimeFrame.refPosition": {
+          "@dmtype": "coords:domain.space.StdRefLocation",
+          "coords:domain.space.StdRefLocation.position": {
+            "@value": "BARYCENTER"
+          }
+        },
+        "coords:domain.time.TimeFrame.time0": {
+          "@dmtype": "coords:domain.time.JD",
+          "coords:domain.time.JD.date": {
+            "@value": "2455197.5"
+          }
+        },
+        "coords:domain.time.TimeFrame.timescale": {
+          "@value": "TCB"
+        }
+      },
+      "cube:DataProduct.dataset": {
+        "@ID": "_ds_",
+        "@dmtype": "ds:dataset.Dataset",
+        "collections": {
+          "@dmrole": "ds:dataset.DataID.collection",
+          "@dmtype": "ds:dataset.Collection",
+          "ds:dataset.Collection.name": {
+            "@value": "VODML Lite Test Bench"
+          }
+        },
+        "ds:dataset.Dataset.curation": {
+          "@dmtype": "ds:dataset.Curation",
+          "ds:dataset.Curation.contact": {
+            "@dmtype": "ds:dataset.Contact",
+            "ds:party.Role.party": {
+              "@dmtype": "ds:party.Individual",
+              "ds:party.Party.name": {
+                "@value": "Laurent"
+              }
+            }
+          },
+          "ds:dataset.Curation.publisher": {
+            "@dmtype": "ds:dataset.Publisher",
+            "ds:dataset.Publisher.publisherID": {
+              "@value": "ivoa://voldml/lite/project"
+            },
+            "ds:party.Role.party": {
+              "@dmtype": "ds:party.Individual",
+              "ds:party.Party.name": {
+                "@value": "ObAS"
+              }
+            }
+          },
+          "ds:dataset.Curation.publisherDID": {
+            "@value": "ivoa://voldml/lite/project"
+          },
+          "ds:dataset.Curation.releaseDate": {
+            "@value": "2018:11:11"
+          },
+          "ds:dataset.Curation.rights": {
+            "@value": "public"
+          },
+          "ds:dataset.Curation.version": {
+            "@ref": "0.0"
+          },
+          "publications": [
+            {
+              "@dmrole": "ds:dataset.Curation.reference",
+              "@dmtype": "ds:dataset.Publication",
+              "ds:dataset.Publication.refCode": {
+                "@value": "AA...123"
+              }
+            },
+            {
+              "@dmrole": "ds:dataset.Curation.reference",
+              "@dmtype": "ds:dataset.Publication",
+              "ds:dataset.Publication.refCode": {
+                "@value": "AA...234"
+              }
+            }
+          ]
+        },
+        "ds:dataset.Dataset.dataID": {
+          "@dmtype": "ds:dataset.DataID",
+          "contributors": [
+            {
+              "@dmrole": "ds:dataset.DataID.contributor",
+              "@dmtype": "ds:dataset.Contributor",
+              "ds:dataset.Contributor.acknowledgment": {
+                "@value": "Thank you guy"
+              },
+              "ds:party.Role.party": {
+                "@dmtype": "ds:party.Individual",
+                "ds:party.Party.name": {
+                  "@value": "Laurent Michel"
+                }
+              }
+            },
+            {
+              "@dmrole": "ds:dataset.DataID.contributor",
+              "@dmtype": "ds:dataset.Contributor",
+              "ds:dataset.Contributor.acknowledgment": {
+                "@value": "I'm pleased to work with you"
+              },
+              "ds:party.Role.party": {
+                "@dmtype": "ds:party.Individual",
+                "ds:party.Party.name": {
+                  "@value": "Mark Cresitello Dittmar"
+                }
+              }
+            }
+          ],
+          "ds:dataset.DataID.creationType": {
+            "@value": "LiteMappingTest"
+          },
+          "ds:dataset.DataID.creator": {
+            "@dmtype": "ds:dataset.Creator",
+            "ds:party.Role.party": {
+              "@dmtype": "ds:party.Individual",
+              "ds:party.Party.name": {
+                "@value": "VODML-Team"
+              }
+            }
+          },
+          "ds:dataset.DataID.creatorDID": {
+            "@value": "ivoa://esa/gaia/"
+          },
+          "ds:dataset.DataID.datasetID": {
+            "@value": "ivoa://gaia/ts/12345"
+          },
+          "ds:dataset.DataID.date": {
+            "@value": "2018:11:11"
+          },
+          "ds:dataset.DataID.title": {
+            "@value": "Gaia TS Mapping Test"
+          },
+          "ds:dataset.DataID.version": {
+            "@value": "0.0"
+          }
+        },
+        "ds:dataset.Dataset.dataProductSubtype": {
+          "@value": "Time Series Multiband"
+        },
+        "ds:dataset.Dataset.dataProductType": {
+          "@value": "TimSeries"
+        }
+      },
+      "ts:PhotometricMeasure.filter": {
+        "@ID": "filterRP",
+        "@dmtype": "photdm:PhotCal",
+        "photdm:PhotCal.photometryFilter": {
+          "@dmtype": "photdm:PhotometryFilter",
+          "photdm:PhotometryFilter.access": {
+            "@dmtype": "photdm:Access",
+            "photdm:Access.format": {
+              "@value": "xml"
+            },
+            "photdm:Access.reference": {
+              "@value": "http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.RP"
+            }
+          }
+        }
+      }
+    },
+    "MODELS": {
+      "coords": {
+        "NAME": "coords",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_coords-v2.0.vo-dml.xml"
+      },
+      "cube": {
+        "NAME": "cube",
+        "URL": "http://volute.g-vo.org/svn/trunk/projects/dm/Cube/vo-dml/Cube-1.0.vo-dml.xml"
+      },
+      "ds": {
+        "NAME": "ds",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/DatasetMetadata/vo-dml/DatasetMetadata-1.0.vo-dml.xml"
+      },
+      "ivoa": {
+        "NAME": "ivoa",
+        "URL": "http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml"
+      },
+      "meas": {
+        "NAME": "meas",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_meas-v2.0.vo-dml.xml"
+      },
+      "photdm-alt": {
+        "NAME": "photdm-alt",
+        "URL": "http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml-org/models/photdm-alt/PhotDM-alt.vo-dml.xml"
+      },
+      "trans": {
+        "NAME": "trans",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_trans-v2.0.vo-dml.xml"
+      }
+    },
+    "root": {
+      "@dmrole": "root",
+      "@dmtype": "ts:SimpleTimeSeries",
+      "cube:DataProduct.dataset": {
+        "@ref": "_ds_"
+      },
+      "data": [
+        {
+          "@dmrole": "cube:SparseCube.data",
+          "@dmtype": "ts:Record",
+          "ARRAY": {
+            "observable": [
+              {
+                "@dmrole": "cube:NDPoint.observable",
+                "@dmtype": "cube:Observable",
+                "FILTER": {
+                  "@key": "band",
+                  "@name": "G_band",
+                  "@value": "G"
+                },
+                "cube:MeasurementAxis.measure": {
+                  "@dmtype": "meas:StdTimeMeasure",
+                  "cube:DataAxis.dependent": {
+                    "@value": "true"
+                  },
+                  "cube:MeasurementAxis.measure": {
+                    "@dmtype": "ts:PhotometricMeasure",
+                    "meas:CoordMeasure.coord": {
+                      "@dmtype": "ts:Magnitude",
+                      "ts:Magnitude.value": {
+                        "@dmtype": "ivoa:RealQuantity",
+                        "@ref": "mag",
+                        "@value": ""
+                      },
+                      "ts:PhotometricMeasure.filter": {
+                        "@ref": "filterG"
+                      }
+                    }
+                  },
+                  "meas:CoordMeasure.coord": {
+                    "@dmtype": "coords:domain.time.JD",
+                    "coords:Coordinate.frame": {
+                      "@ref": "timeframe"
+                    },
+                    "coords:domain.time.JD.date": {
+                      "@dmtype": "ivoa:RealQuantity",
+                      "@ref": "time",
+                      "@value": ""
+                    },
+                    "cube:DataAxis.dependent": {
+                      "@value": "false"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "ts:Record.dataProduct": {
+            "@dmtype": "cube:DataProduct",
+            "coosys": {
+              "@dmrole": "cube:DataProduct.coordSys",
+              "@dmtype": "coords:CoordSys",
+              "@ref": "timeframe"
+            },
+            "cube:DataProduct.dataset": {
+              "@ref": "_ds_"
+            }
+          }
+        },
+        {
+          "@dmrole": "cube:SparseCube.data",
+          "@dmtype": "ts:Record",
+          "ARRAY": {
+            "observable": [
+              {
+                "@dmrole": "cube:NDPoint.observable",
+                "@dmtype": "cube:Observable",
+                "FILTER": {
+                  "@key": "band",
+                  "@name": "BP_band",
+                  "@value": "BP"
+                },
+                "cube:MeasurementAxis.measure": {
+                  "@dmtype": "meas:StdTimeMeasure",
+                  "cube:DataAxis.dependent": {
+                    "@value": "true"
+                  },
+                  "cube:MeasurementAxis.measure": {
+                    "@dmtype": "ts:PhotometricMeasure",
+                    "meas:CoordMeasure.coord": {
+                      "@dmtype": "ts:Magnitude",
+                      "ts:Magnitude.value": {
+                        "@dmtype": "ivoa:RealQuantity",
+                        "@ref": "mag",
+                        "@value": ""
+                      },
+                      "ts:PhotometricMeasure.filter": {
+                        "@ref": "filterBP"
+                      }
+                    }
+                  },
+                  "meas:CoordMeasure.coord": {
+                    "@dmtype": "coords:domain.time.JD",
+                    "coords:Coordinate.frame": {
+                      "@ref": "timeframe"
+                    },
+                    "coords:domain.time.JD.date": {
+                      "@dmtype": "ivoa:RealQuantity",
+                      "@ref": "time",
+                      "@value": ""
+                    },
+                    "cube:DataAxis.dependent": {
+                      "@value": "false"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "ts:Record.dataProduct": {
+            "@dmtype": "cube:DataProduct",
+            "coosys": {
+              "@dmrole": "cube:DataProduct.coordSys",
+              "@dmtype": "coords:CoordSys"
+            },
+            "cube:DataProduct.dataset": {
+              "@ref": "_ds_"
+            }
+          }
+        },
+        {
+          "@dmrole": "cube:SparseCube.data",
+          "@dmtype": "ts:Record",
+          "ARRAY": {
+            "observable": [
+              {
+                "@dmrole": "cube:NDPoint.observable",
+                "@dmtype": "cube:Observable",
+                "FILTER": {
+                  "@key": "band",
+                  "@name": "RP_band",
+                  "@value": "RP"
+                },
+                "cube:MeasurementAxis.measure": {
+                  "@dmtype": "meas:StdTimeMeasure",
+                  "cube:DataAxis.dependent": {
+                    "@value": "true"
+                  },
+                  "cube:MeasurementAxis.measure": {
+                    "@dmtype": "ts:PhotometricMeasure",
+                    "meas:CoordMeasure.coord": {
+                      "@dmtype": "ts:Magnitude",
+                      "ts:Magnitude.value": {
+                        "@dmtype": "ivoa:RealQuantity",
+                        "@ref": "mag",
+                        "@value": ""
+                      },
+                      "ts:PhotometricMeasure.filter": {
+                        "@ref": "filterRP"
+                      }
+                    }
+                  },
+                  "meas:CoordMeasure.coord": {
+                    "@dmtype": "coords:domain.time.JD",
+                    "coords:Coordinate.frame": {
+                      "@ref": "timeframe"
+                    },
+                    "coords:domain.time.JD.date": {
+                      "@dmtype": "ivoa:RealQuantity",
+                      "@ref": "time",
+                      "@value": ""
+                    },
+                    "cube:DataAxis.dependent": {
+                      "@value": "false"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "ts:Record.dataProduct": {
+            "@dmtype": "cube:DataProduct",
+            "coosys": {
+              "@dmrole": "cube:DataProduct.coordSys",
+              "@dmtype": "coords:CoordSys"
+            },
+            "cube:DataProduct.dataset": {
+              "@ref": "_ds_"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
