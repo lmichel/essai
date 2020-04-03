@@ -4,7 +4,6 @@ Created on 26 mars 2020
 @author: laurentmichel
 '''
 import json
-import sys
 from copy import deepcopy
 class Builder():
     '''
@@ -20,11 +19,11 @@ class Builder():
         with open(json_path) as json_file:
             self.json = json.load(json_file)
         
-    def get_elements(self, name, dmrole=None, dmtype=None):
+    def revert_elements(self, name, dmrole=None, dmtype=None):
         root_element = self.json['VODML']
         while True:
             self.retour = None
-            self._get_subelement(root_element, name, dmrole, dmtype)
+            self._revert_subelement(root_element, name, dmrole, dmtype)
             if self.retour is not None:
                 self.retour["node"].pop(name)
                 for k, v in self.retour["newcontent"].items():
@@ -32,11 +31,11 @@ class Builder():
             else:
                 break
             
-    def get_compositions(self, name, default_key=None):
+    def revert_compositions(self, name, default_key=None):
         root_element = self.json['VODML']
         while True:
             self.retour = None
-            self._get_composition(root_element, name, default_key)
+            self._revert_composition(root_element, name, default_key)
             if self.retour is not None:
                 self.retour["node"].pop(name)
                 for k, v in self.retour["newcontent"].items():
@@ -44,31 +43,25 @@ class Builder():
             else:
                 break
             
-    def get_array(self):
+    def revert_array(self):
         root_element = self.json['VODML']
         while True:
             self.retour = None
-            print('look array')
 
-            self._get_composition(root_element, 'ARRAY', None)
+            self._revert_composition(root_element, 'ARRAY', None)
             if self.retour is not None:
-                print('find array')
                 array_container = self.retour["node"]
-                print(array_container)
                 array_node = array_container['ARRAY']
-                print(array_node)
                 array_role = array_node["@dmrole"]
-                print(array_role)
                 array_container['ARRAY'] = {array_role: [array_node['INSTANCE']]}
-                print('got it')
             else:
                 break
     
-    def _get_composition(self, root_element, name, default_key):
+    def _revert_composition(self, root_element, name, default_key):
         if isinstance(root_element, list):
-            for idx, item in enumerate(root_element):
+            for idx, _ in enumerate(root_element):
                 if self.retour is None:
-                    self._get_composition(root_element[idx], name, default_key)
+                    self._revert_composition(root_element[idx], name, default_key)
         elif isinstance(root_element, dict):
             for k, v in root_element.items():
                 if k == name:
@@ -85,13 +78,13 @@ class Builder():
                         except:
                             pass
                 if self.retour is None:
-                    self._get_composition(v, name, default_key)
+                    self._revert_composition(v, name, default_key)
        
-    def _get_subelement(self, root_element, name, dmrole, dmtype):
+    def _revert_subelement(self, root_element, name, dmrole, dmtype):
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 if self.retour is None:
-                    self._get_subelement(root_element[idx], name, dmrole, dmtype)
+                    self._revert_subelement(root_element[idx], name, dmrole, dmtype)
         elif isinstance(root_element, dict):
             for k, v in root_element.items():
                 if k == name:
@@ -112,7 +105,7 @@ class Builder():
                         self.retour = {'node': root_element, "newcontent": newcontent}
 
                 if self.retour is None:
-                    self._get_subelement(v, name, dmrole, dmtype)
+                    self._revert_subelement(v, name, dmrole, dmtype)
                     
     def _add_value_if_needed(self, element):
         keys = element.keys()
@@ -128,7 +121,6 @@ class Builder():
         if default_key is not None:
             return default_key
         new_key = ''
-        print("get keys " + str(element))
         if "@dmrole" in element.keys():
             new_key = element["@dmrole"]
         if new_key == '' and "@ID" in element.keys():
