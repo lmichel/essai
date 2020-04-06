@@ -34,6 +34,7 @@ class Instancier(object):
         self.retour = None
         self.searched_elements = []
         self.searched_ids = []
+        self.searched_types = []
         self.array = None
         self.table_iterators = {}
         self.column_mapping = ColumnMapping()
@@ -118,6 +119,8 @@ class Instancier(object):
                         self.searched_ids.append(root_element[idx])
                     self._get_subelement_by_id(root_element[idx], searched_id)
         elif isinstance(root_element, dict):
+            if self._id_matches(root_element, searched_id):
+                self.searched_ids.append(root_element) 
             for _, v in root_element.items():
                 if isinstance(v, list):
                     for ele in v:
@@ -128,11 +131,40 @@ class Instancier(object):
                     if self._id_matches(v, searched_id):
                         self.searched_ids.append(v)
                     self._get_subelement_by_id(v, searched_id)
+                    
+    def _get_subelement_by_type(self, root_element, searched_type):
+        if isinstance(root_element, list):
+            for idx, _ in enumerate(root_element):
+                if self.retour is None:
+                    if self._type_matches(root_element[idx], searched_type):
+                        self.searched_types.append(root_element[idx])
+                    self._get_subelement_by_type(root_element[idx], searched_type)
+        elif isinstance(root_element, dict):
+            if self._type_matches(root_element, searched_type):
+                self.searched_types.append(root_element) 
+            for _, v in root_element.items():
+                if isinstance(v, list):
+                    for ele in v:
+                        if self._type_matches(ele, searched_type):
+                            self.searched_types.append(ele)
+                        self._get_subelement_by_type(ele, searched_type)
+                elif isinstance(v, dict):  
+                    if self._type_matches(v, searched_type):
+                        self.searched_types.append(v)
+                    self._get_subelement_by_type(v, searched_type)
+
 
     def _id_matches(self, element, searched_id):
         if( isinstance(element, dict) and 
             "@ID" in element.keys() and 
             element["@ID"] == searched_id):
+            return True
+        return False
+    
+    def _type_matches(self, element, searched_type):
+        if( isinstance(element, dict) and 
+            "@dmtype" in element.keys() and 
+            element["@dmtype"] == searched_type):
             return True
         return False
     
@@ -143,10 +175,9 @@ class Instancier(object):
             self.column_mapping.add_entry(element["@ref"], role)
             element["@value"] = "array coucou"
             
-
     def map_columns(self):
         self.column_mapping._map_columns(self.votable)
-           
+                   
     def _get_next_row_instance(self, data_subset=None):
         for key, value in self.table_iterators.items():
             if data_subset is None or data_subset == key:
@@ -168,9 +199,13 @@ class Instancier(object):
     def get_data_subset_keys(self):
         return self.table_iterators.keys()
            
-    def search_instance_by_role(self, searched_role):
+    def search_instance_by_role(self, searched_role, root_element=None):
         self.searched_elements = []
-        self._get_subelement_by_role(self.json['VODML'], searched_role)
+        if root_element is not None:
+            root = root_element
+        else:
+            root = self.json['VODML']
+        self._get_subelement_by_role(root, searched_role)
         
         for idx, ele in enumerate(self.searched_elements):
             if "@ref" in ele.keys():
@@ -178,9 +213,22 @@ class Instancier(object):
                 
         return self.searched_elements
     
-    def search_instance_by_id(self, searched_id):
+    def search_instance_by_id(self, searched_id, root_element=None):
         self.searched_ids = []
-        self._get_subelement_by_id(self.json['VODML'], searched_id)
+        if root_element is not None:
+            root = root_element
+        else:
+            root = self.json['VODML']
+        self._get_subelement_by_id(root, searched_id)
         return self.searched_ids
+    
+    def search_instance_by_type(self, searched_type, root_element=None):
+        self.searched_types = []
+        if root_element is not None:
+            root = root_element
+        else:
+            root = self.json['VODML']
+        self._get_subelement_by_type(root, searched_type)
+        return self.searched_types
 
             
