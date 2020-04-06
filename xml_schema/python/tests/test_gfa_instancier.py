@@ -33,5 +33,31 @@ if __name__ == '__main__':
     print(instance.get_flatten_data_head())
     print(instance.get_data_subset_keys())
     
+    roles_test = ["ds:dataset.Dataset.curation",
+                  "ts:PhotometricMeasure.filter"]
+    for role in roles_test:
+        searched_instances = instance.search_instance_by_role(role)
+        print("element matching dmrole={}".format(role))
+        for ele in searched_instances:
+            print("==============")
+            print(json.dumps(ele, 
+                         indent=2,
+                         sort_keys=True,
+                         cls=MyEncoder))
+            print("==============")
+            
+    ids_test = ["filterG", "filterBP", "filterRP"]
+    for ID in ids_test:
+        print("element matching ID={}".format(ID))
+        searched_ids = instance.search_instance_by_id(ID)
+        for ele in searched_ids:
+            print("==============")
+            print(json.dumps(ele, 
+                         indent=2,
+                         sort_keys=True,
+                         cls=MyEncoder))
+            print("==============")
+    
+    
     
     

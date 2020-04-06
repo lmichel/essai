@@ -13,7 +13,9 @@ class Instancier(object):
     '''
     classdocs
     '''
-    def __init__(self, votable_path, json_inst_path):
+    def __init__(self, votable_path, 
+                 json_inst_path=None , 
+                 json_inst_dict=None):
         '''
         Constructor
         '''
@@ -21,10 +23,17 @@ class Instancier(object):
         self.votable = parse_single_table(self.votable_path)
         self.table = self.votable.to_table()
         
-        self.json_path = json_inst_path
-        with open(self.json_path) as json_file:
-            self.json = json.load(json_file)
+        if json_inst_path is not None:
+            self.json_path = json_inst_path
+            with open(self.json_path) as json_file:
+                self.json = json.load(json_file)
+        else:
+            self.json = json_inst_dict
+            self.json_path = None
+            
         self.retour = None
+        self.searched_elements = []
+        self.searched_ids = []
         self.array = None
         self.table_iterators = {}
         self.column_mapping = ColumnMapping()
@@ -86,6 +95,47 @@ class Instancier(object):
                     self._set_value(v, role=k)
                     self._set_array_subelement_values(v)
      
+    def _get_subelement_by_role(self, root_element, searched_role):
+        if isinstance(root_element, list):
+            for idx, _ in enumerate(root_element):
+                if self.retour is None:
+                    self._get_subelement_by_role(root_element[idx], searched_role)
+        elif isinstance(root_element, dict):
+            for k, v in root_element.items():
+                if k == searched_role:
+                    self.searched_elements.append(v)
+                if isinstance(v, list):
+                    for ele in v:
+                        self._get_subelement_by_role(ele, searched_role)
+                elif isinstance(v, dict):  
+                    self._get_subelement_by_role(v, searched_role)
+                    
+    def _get_subelement_by_id(self, root_element, searched_id):
+        if isinstance(root_element, list):
+            for idx, _ in enumerate(root_element):
+                if self.retour is None:
+                    if self._id_matches(root_element[idx], searched_id):
+                        self.searched_ids.append(root_element[idx])
+                    self._get_subelement_by_id(root_element[idx], searched_id)
+        elif isinstance(root_element, dict):
+            for _, v in root_element.items():
+                if isinstance(v, list):
+                    for ele in v:
+                        if self._id_matches(ele, searched_id):
+                            self.searched_ids.append(ele)
+                        self._get_subelement_by_id(ele, searched_id)
+                elif isinstance(v, dict):  
+                    if self._id_matches(v, searched_id):
+                        self.searched_ids.append(v)
+                    self._get_subelement_by_id(v, searched_id)
+
+    def _id_matches(self, element, searched_id):
+        if( isinstance(element, dict) and 
+            "@ID" in element.keys() and 
+            element["@ID"] == searched_id):
+            return True
+        return False
+    
     def _set_value(self, element, role=None):
         keys = element.keys()
         if ("@dmtype" in keys and "@ref" in keys 
@@ -118,5 +168,19 @@ class Instancier(object):
     def get_data_subset_keys(self):
         return self.table_iterators.keys()
            
- 
+    def search_instance_by_role(self, searched_role):
+        self.searched_elements = []
+        self._get_subelement_by_role(self.json['VODML'], searched_role)
+        
+        for idx, ele in enumerate(self.searched_elements):
+            if "@ref" in ele.keys():
+                self.searched_elements[idx] = self.search_instance_by_id(ele["@ref"])[0]
+                
+        return self.searched_elements
+    
+    def search_instance_by_id(self, searched_id):
+        self.searched_ids = []
+        self._get_subelement_by_id(self.json['VODML'], searched_id)
+        return self.searched_ids
+
             

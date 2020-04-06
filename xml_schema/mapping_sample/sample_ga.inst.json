@@ -1,92 +1,23 @@
 {
   "VODML": {
-    "GLOBALS": {
-      "Filter_H": {
-        "@ID": "Filter_H",
-        "@dmtype": "cab-msd:Filter",
-        "cab-msd:Filter.name": {
-          "@dmtype": "ivoa:string",
-          "@value": "H"
-        },
-        "cab-msd:FilterUrl": {
-          "@dmtype": "ivoa:string",
-          "@value": "http://svo.url.filter/H"
-        }
+    "MODELS": {
+      "coords": {
+        "NAME": "coords",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/cab-msd-v1.0.vo-dml.xml"
       },
-      "Filter_I": {
-        "@ID": "Filter_I",
-        "@dmtype": "cab-msd:Filter",
-        "cab-msd:Filter.name": {
-          "@dmtype": "ivoa:string",
-          "@value": "I"
-        },
-        "cab-msd:FilterUrl": {
-          "@dmtype": "ivoa:string",
-          "@value": "http://svo.url.filter/I"
-        }
+      "ivoa": {
+        "NAME": "ivoa",
+        "URL": "http://www.ivoa.net/xml/VODML/20180519/IVOA-v1.0.vo-dml.xml"
       },
-      "Filter_J": {
-        "@ID": "Filter_J",
-        "@dmtype": "cab-msd:Filter",
-        "cab-msd:Filter.name": {
-          "@dmtype": "ivoa:string",
-          "@value": "J"
-        },
-        "cab-msd:FilterUrl": {
-          "@dmtype": "ivoa:string",
-          "@value": "http://svo.url.filter/J"
-        }
-      },
-      "Filter_K": {
-        "@ID": "Filter_K",
-        "@dmtype": "cab-msd:Filter",
-        "cab-msd:Filter.name": {
-          "@dmtype": "ivoa:string",
-          "@value": "K"
-        },
-        "cab-msd:FilterUrl": {
-          "@dmtype": "ivoa:string",
-          "@value": "http://svo.url.filter/K"
-        }
-      },
-      "Filter_Y": {
-        "@ID": "Filter_Y",
-        "@dmtype": "cab-msd:Filter",
-        "cab-msd:Filter.name": {
-          "@dmtype": "ivoa:string",
-          "@value": "Y"
-        },
-        "cab-msd:FilterUrl": {
-          "@dmtype": "ivoa:string",
-          "@value": "http://svo.url.filter/Y"
-        }
-      },
-      "Filter_ZZ": {
-        "@ID": "Filter_ZZ",
-        "@dmtype": "cab-msd:Filter",
-        "cab-msd:Filter.name": {
-          "@dmtype": "ivoa:string",
-          "@value": "Z"
-        },
-        "cab-msd:FilterUrl": {
-          "@dmtype": "ivoa:string",
-          "@value": "http://svo.url.filter/Z"
-        }
-      },
-      "Filter_z": {
-        "@ID": "Filter_z",
-        "@dmtype": "cab-msd:Filter",
-        "cab-msd:Filter.name": {
-          "@dmtype": "ivoa:string",
-          "@value": "z"
-        },
-        "cab-msd:FilterUrl": {
-          "@dmtype": "ivoa:string",
-          "@value": "http://svo.url.filter/z"
-        }
-      },
-      "SpaceFrame_FK5J2000": {
+      "meas": {
+        "NAME": "meas",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml"
+      }
+    },
+    "globals": [
+      {
         "@ID": "SpaceFrame_FK5J2000",
+        "@dmrole": "",
         "@dmtype": "coords:SpaceFrame",
         "coords:SpaceFrame.equinox": {
           "@dmtype": "coords:Epoch",
@@ -104,8 +35,9 @@
           "@value": "FK5"
         }
       },
-      "TimeFrame_TT": {
+      {
         "@ID": "TimeFrame_TT",
+        "@dmrole": "",
         "@dmtype": "coords:TimeFrame",
         "coords:TimeFrame.refPosition": {
           "@dmtype": "coords:StdRefLocation",
@@ -118,22 +50,99 @@
           "@dmtype": "ivoa:string",
           "@value": "TT"
         }
-      }
-    },
-    "MODELS": {
-      "coords": {
-        "NAME": "coords",
-        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/cab-msd-v1.0.vo-dml.xml"
       },
-      "ivoa": {
-        "NAME": "ivoa",
-        "URL": "http://www.ivoa.net/xml/VODML/20180519/IVOA-v1.0.vo-dml.xml"
+      {
+        "@ID": "Filter_I",
+        "@dmrole": "",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "I"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/I"
+        }
       },
-      "meas": {
-        "NAME": "meas",
-        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml"
+      {
+        "@ID": "Filter_z",
+        "@dmrole": "",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "z"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/z"
+        }
+      },
+      {
+        "@ID": "Filter_ZZ",
+        "@dmrole": "",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "Z"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/Z"
+        }
+      },
+      {
+        "@ID": "Filter_Y",
+        "@dmrole": "",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "Y"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/Y"
+        }
+      },
+      {
+        "@ID": "Filter_J",
+        "@dmrole": "",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "J"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/J"
+        }
+      },
+      {
+        "@ID": "Filter_H",
+        "@dmrole": "",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "H"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/H"
+        }
+      },
+      {
+        "@ID": "Filter_K",
+        "@dmrole": "",
+        "@dmtype": "cab-msd:Filter",
+        "cab-msd:Filter.name": {
+          "@dmtype": "ivoa:string",
+          "@value": "K"
+        },
+        "cab-msd:FilterUrl": {
+          "@dmtype": "ivoa:string",
+          "@value": "http://svo.url.filter/K"
+        }
       }
-    },
+    ],
     "root": {
       "@dmrole": "root",
       "@dmtype": "cab-msd:Source",

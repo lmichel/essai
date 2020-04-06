@@ -6,7 +6,6 @@ path = os.path.dirname(os.path.realpath(__file__))
 
 if path not in sys.path:
     sys.path.append(path + "/../")
-print(sys.path)
 
 
 logger = LoggerSetup.get_logger()

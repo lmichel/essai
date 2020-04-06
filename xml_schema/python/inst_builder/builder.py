@@ -11,13 +11,17 @@ class Builder():
     '''
 
 
-    def __init__(self, json_path):
+    def __init__(self, json_path=None, json_dict=None):
         '''
         Constructor
         '''
-        self.json_path = json_path
-        with open(json_path) as json_file:
-            self.json = json.load(json_file)
+        if  json_path is not None:
+            self.json_path = json_path
+            with open(json_path) as json_file:
+                self.json = json.load(json_file)
+        else:
+            self.json = json_dict
+            self.json_path = None
         
     def revert_elements(self, name, dmrole=None, dmtype=None):
         root_element = self.json['VODML']

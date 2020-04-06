@@ -222,14 +222,14 @@
 							    <!-- 
 							        The filter means that only rows with band = "G" will instanciated in this ARRAY
 							     -->
-								<FILTER key="band" value="G" />
+								<FILTER name="G_band" key="band" value="G" />
 								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
 									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
 									    <!--
 									       Reference to the "time" column 
 									       A ref in a VALUE can only refer to a FIELD or a PARAM of the current TEMPLATE
 									     -->
-										<VALUE dmrole="coords:domain.time.JD.date" ref="time" />
+										<VALUE dmrole="coords:domain.time.JD.date" ref="time" dmtype="ivoa:RealQuantity"/>
 										<!-- 
 										    A ref in an INSTANCE can only refer to another INSTANCE 
 										    located anywhere in the VOMDL block
@@ -239,7 +239,7 @@
 									</INSTANCE>
 									<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="ts:PhotometricMeasure">
 										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
-											<VALUE dmrole="ts:Magnitude.value" ref="mag" />
+											<VALUE dmrole="ts:Magnitude.value" ref="mag" dmtype="ivoa:RealQuantity"/>
 											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterG" />
 										</INSTANCE>
 									</INSTANCE>
@@ -262,17 +262,17 @@
 
 						<ARRAY dmrole="observable">
 							<INSTANCE dmrole="cube:NDPoint.observable" dmtype="cube:Observable">
-								<FILTER key="band" value="BP" />
+								<FILTER name="BP_band" key="band" value="BP" />
 								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
 									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
-										<VALUE dmrole="coords:domain.time.JD.date" ref="time" />
+										<VALUE dmrole="coords:domain.time.JD.date" ref="time" dmtype="ivoa:RealQuantity"/>
 										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe"/>
 										<VALUE dmrole="cube:DataAxis.dependent" value="false" />
 									</INSTANCE>
 									<INSTANCE dmrole="cube:MeasurementAxis.measure"
 										dmtype="ts:PhotometricMeasure">
 										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
-											<VALUE dmrole="ts:Magnitude.value" ref="mag" />
+											<VALUE dmrole="ts:Magnitude.value" ref="mag" dmtype="ivoa:RealQuantity"/>
 											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterBP" />
 										</INSTANCE>
 									</INSTANCE>
@@ -295,17 +295,17 @@
 
 						<ARRAY dmrole="observable">
 							<INSTANCE dmrole="cube:NDPoint.observable" dmtype="cube:Observable">
-								<FILTER key="band" value="RP" />
+								<FILTER name="RP_band" key="band" value="RP" />
 								<INSTANCE dmrole="cube:MeasurementAxis.measure" dmtype="meas:StdTimeMeasure">
 									<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="coords:domain.time.JD">
-										<VALUE dmrole="coords:domain.time.JD.date" ref="time" />
+										<VALUE dmrole="coords:domain.time.JD.date" ref="time" dmtype="ivoa:RealQuantity"/>
 										<INSTANCE dmrole="coords:Coordinate.frame" ref="timeframe" />
 										<VALUE dmrole="cube:DataAxis.dependent" value="false" />
 									</INSTANCE>
 									<INSTANCE dmrole="cube:MeasurementAxis.measure"
 										dmtype="ts:PhotometricMeasure">
 										<INSTANCE dmrole="meas:CoordMeasure.coord" dmtype="ts:Magnitude">
-											<VALUE dmrole="ts:Magnitude.value" ref="mag" />
+											<VALUE dmrole="ts:Magnitude.value" ref="mag" dmtype="ivoa:RealQuantity"/>
 											<INSTANCE dmrole="ts:PhotometricMeasure.filter" ref="filterRP" />
 										</INSTANCE>
 									</INSTANCE>

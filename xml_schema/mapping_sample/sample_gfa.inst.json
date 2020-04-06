@@ -1,27 +1,39 @@
 {
   "VODML": {
-    "GLOBALS": {
-      "coords:Coordinate.frame": {
-        "@ID": "timeframe",
-        "@dmtype": "coords:domain.time.TimeFrame",
-        "coords:domain.time.TimeFrame.refPosition": {
-          "@dmtype": "coords:domain.space.StdRefLocation",
-          "coords:domain.space.StdRefLocation.position": {
-            "@value": "BARYCENTER"
-          }
-        },
-        "coords:domain.time.TimeFrame.time0": {
-          "@dmtype": "coords:domain.time.JD",
-          "coords:domain.time.JD.date": {
-            "@value": "2455197.5"
-          }
-        },
-        "coords:domain.time.TimeFrame.timescale": {
-          "@value": "TCB"
-        }
+    "MODELS": {
+      "coords": {
+        "NAME": "coords",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_coords-v2.0.vo-dml.xml"
       },
-      "cube:DataProduct.dataset": {
+      "cube": {
+        "NAME": "cube",
+        "URL": "http://volute.g-vo.org/svn/trunk/projects/dm/Cube/vo-dml/Cube-1.0.vo-dml.xml"
+      },
+      "ds": {
+        "NAME": "ds",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/DatasetMetadata/vo-dml/DatasetMetadata-1.0.vo-dml.xml"
+      },
+      "ivoa": {
+        "NAME": "ivoa",
+        "URL": "http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml"
+      },
+      "meas": {
+        "NAME": "meas",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_meas-v2.0.vo-dml.xml"
+      },
+      "photdm-alt": {
+        "NAME": "photdm-alt",
+        "URL": "http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml-org/models/photdm-alt/PhotDM-alt.vo-dml.xml"
+      },
+      "trans": {
+        "NAME": "trans",
+        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_trans-v2.0.vo-dml.xml"
+      }
+    },
+    "globals": [
+      {
         "@ID": "_ds_",
+        "@dmrole": "cube:DataProduct.dataset",
         "@dmtype": "ds:dataset.Dataset",
         "collections": {
           "@dmrole": "ds:dataset.DataID.collection",
@@ -147,8 +159,63 @@
           "@value": "TimSeries"
         }
       },
-      "ts:PhotometricMeasure.filter": {
+      {
+        "@ID": "timeframe",
+        "@dmrole": "coords:Coordinate.frame",
+        "@dmtype": "coords:domain.time.TimeFrame",
+        "coords:domain.time.TimeFrame.refPosition": {
+          "@dmtype": "coords:domain.space.StdRefLocation",
+          "coords:domain.space.StdRefLocation.position": {
+            "@value": "BARYCENTER"
+          }
+        },
+        "coords:domain.time.TimeFrame.time0": {
+          "@dmtype": "coords:domain.time.JD",
+          "coords:domain.time.JD.date": {
+            "@value": "2455197.5"
+          }
+        },
+        "coords:domain.time.TimeFrame.timescale": {
+          "@value": "TCB"
+        }
+      },
+      {
+        "@ID": "filterG",
+        "@dmrole": "ts:PhotometricMeasure.filter",
+        "@dmtype": "photdm:PhotCal",
+        "photdm:PhotCal.photometryFilter": {
+          "@dmtype": "photdm:PhotometryFilter",
+          "photdm:PhotometryFilter.access": {
+            "@dmtype": "photdm:Access",
+            "photdm:Access.format": {
+              "@value": "xml"
+            },
+            "photdm:Access.reference": {
+              "@value": "http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.G"
+            }
+          }
+        }
+      },
+      {
+        "@ID": "filterBP",
+        "@dmrole": "ts:PhotometricMeasure.filter",
+        "@dmtype": "photdm:PhotCal",
+        "photdm:PhotCal.photometryFilter": {
+          "@dmtype": "photdm:PhotometryFilter",
+          "photdm:PhotometryFilter.access": {
+            "@dmtype": "photdm:Access",
+            "photdm:Access.format": {
+              "@value": "xml"
+            },
+            "photdm:Access.reference": {
+              "@value": "http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=GAIA/GAIA0.BP"
+            }
+          }
+        }
+      },
+      {
         "@ID": "filterRP",
+        "@dmrole": "ts:PhotometricMeasure.filter",
         "@dmtype": "photdm:PhotCal",
         "photdm:PhotCal.photometryFilter": {
           "@dmtype": "photdm:PhotometryFilter",
@@ -163,37 +230,7 @@
           }
         }
       }
-    },
-    "MODELS": {
-      "coords": {
-        "NAME": "coords",
-        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_coords-v2.0.vo-dml.xml"
-      },
-      "cube": {
-        "NAME": "cube",
-        "URL": "http://volute.g-vo.org/svn/trunk/projects/dm/Cube/vo-dml/Cube-1.0.vo-dml.xml"
-      },
-      "ds": {
-        "NAME": "ds",
-        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/DatasetMetadata/vo-dml/DatasetMetadata-1.0.vo-dml.xml"
-      },
-      "ivoa": {
-        "NAME": "ivoa",
-        "URL": "http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml"
-      },
-      "meas": {
-        "NAME": "meas",
-        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_meas-v2.0.vo-dml.xml"
-      },
-      "photdm-alt": {
-        "NAME": "photdm-alt",
-        "URL": "http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml-org/models/photdm-alt/PhotDM-alt.vo-dml.xml"
-      },
-      "trans": {
-        "NAME": "trans",
-        "URL": "https://volute.g-vo.org/svn/trunk/projects/dm/STC/vo-dml/STC_trans-v2.0.vo-dml.xml"
-      }
-    },
+    ],
     "root": {
       "@dmrole": "root",
       "@dmtype": "ts:SimpleTimeSeries",
