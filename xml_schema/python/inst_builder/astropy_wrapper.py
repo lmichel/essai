@@ -22,8 +22,7 @@ class AstropyWrapper(object):
     def get_space_frame(self, element):
             #ref_location = self.instancier.search_instance_by_role("coords:StdRefLocation.position", 
             #                                                root_element=ele)[0]['@value']
-            #print(ref_location)   
-            
+            #print(ref_location)               
             frame_instance = self.instancier.search_instance_by_type("coords:SpaceFrame", 
                                                             root_element=element)[0]
                                                             
