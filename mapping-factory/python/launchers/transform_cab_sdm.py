@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
+import sys, os
 print(os.environ['PYTHONPATH'])
 
-from transform import  *
-
+from mappingfactory.transform import  MappingGenerator
+from lxml import etree
 
             
 def main():

@@ -1,0 +1,11 @@
+
+<INSTANCE dmrole="cab_msd:Source.associatedData"
+	dmtype="cab_msd:VOModelInstance">
+	<VALUE dmrole="cab_msd:VOModelInstance.ivoid" ref="@@@@@@" />
+	<VALUE dmrole="cab_msd:VOModelInstance.modelUrl" ref="@@@@@@" />
+	<VALUE dmrole="cab_msd:VOModelInstance.modelName" ref="@@@@@@" />
+	<VALUE dmrole="cab_msd:VOModelInstance.modelDoc" ref="@@@@@@" />
+	<INSTANCE dmrole="cab_msd:VOModelInstance.modelInstance"
+		dmtype="cab_msd:ModelInstance" />
+	<VALUE dmrole="cab_msd:AssociatedData.semantic" ref="@@@@@@" />
+</INSTANCE>

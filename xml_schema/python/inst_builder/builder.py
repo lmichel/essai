@@ -30,16 +30,40 @@ class Builder():
             self._revert_subelement(root_element, name, dmrole, dmtype)
             if self.retour is not None:
                 self.retour["node"].pop(name)
+                if name == "COMPOSITION":
+                    print(self.retour["node"])
+                    print(self.retour["newcontent"])
+
                 for k, v in self.retour["newcontent"].items():
                     self.retour["node"][k] = v
             else:
                 break
             
-    def revert_compositions(self, name, default_key=None):
+    def revert_compositions(self, name, dmrole=None, dmtype=None):
         root_element = self.json['VODML']
         while True:
             self.retour = None
-            self._revert_composition(root_element, name, default_key)
+            self._revert_composition(root_element, name, dmrole, dmtype)
+            if self.retour is not None:
+                if name == "COMPOSITION":
+                    print("=========")
+                    print(self.retour["node"])
+                    print(self.retour["newcontent"])
+                    print("xxxxxxxxxxx")
+                self.retour["node"].pop(name)
+
+                print(self.retour["node"])
+                for ele in self.retour["newcontent"]:
+                    for k, v in ele.items():
+                        self.retour["node"][k] = v
+            else:
+                break
+            
+    def revert_sets(self, name, default_key=None):
+        root_element = self.json['VODML']
+        while True:
+            self.retour = None
+            self._revert_set(root_element, name, default_key)
             if self.retour is not None:
                 self.retour["node"].pop(name)
                 for k, v in self.retour["newcontent"].items():
@@ -52,7 +76,7 @@ class Builder():
         while True:
             self.retour = None
 
-            self._revert_composition(root_element, 'ARRAY', None)
+            self._revert_set(root_element, 'ARRAY', None)
             if self.retour is not None:
                 array_container = self.retour["node"]
                 array_node = array_container['ARRAY']
@@ -61,11 +85,11 @@ class Builder():
             else:
                 break
     
-    def _revert_composition(self, root_element, name, default_key):
+    def _revert_set(self, root_element, name, default_key):
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 if self.retour is None:
-                    self._revert_composition(root_element[idx], name, default_key)
+                    self._revert_set(root_element[idx], name, default_key)
         elif isinstance(root_element, dict):
             for k, v in root_element.items():
                 if k == name:
@@ -82,7 +106,7 @@ class Builder():
                         except:
                             pass
                 if self.retour is None:
-                    self._revert_composition(v, name, default_key)
+                    self._revert_set(v, name, default_key)
        
     def _revert_subelement(self, root_element, name, dmrole, dmtype):
         if isinstance(root_element, list):
@@ -111,6 +135,42 @@ class Builder():
                 if self.retour is None:
                     self._revert_subelement(v, name, dmrole, dmtype)
                     
+    def _revert_composition(self, root_element, name, dmrole, dmtype):
+        if isinstance(root_element, list):
+            for idx, _ in enumerate(root_element):
+                if self.retour is None:
+                    self._revert_composition(root_element[idx], name, dmrole, dmtype)
+        elif isinstance(root_element, dict):
+            for k, v in root_element.items():
+                if k == name:
+
+                    if isinstance(v, list):
+                        newcontent = []
+                        for ele in v:
+                            new_key = self._get_key_for_element(ele)
+                            ele_cp = deepcopy(ele)
+                            self._drop_role_if_needed(ele_cp)
+                            if ele_cp:
+                                newcontent.append({new_key: [ele_cp]})
+                            else :
+                                newcontent.append({new_key: []})
+                        self.retour = {'node': root_element, "newcontent": newcontent}
+                    elif isinstance(v, dict):  
+                        newcontent = []
+                        ele_cp = deepcopy(v)
+                        new_key = self._get_key_for_element(ele_cp)
+                        self._drop_role_if_needed(ele_cp)
+
+                        if ele_cp:
+                            newcontent.append({new_key: [ele_cp]})
+                        else :
+                            newcontent.append({new_key: []})
+
+                        self.retour = {'node': root_element, "newcontent": newcontent}
+
+                if self.retour is None:
+                    self._revert_composition(v, name, dmrole, dmtype)
+                    
     def _add_value_if_needed(self, element):
         keys = element.keys()
         if  "@dmtype" in keys and "@ref" in keys and "@value" not in keys:
@@ -120,6 +180,8 @@ class Builder():
         keys = element.keys()
         if  "@dmrole" in keys :
             element.pop("@dmrole")   
+        if  "@size" in keys :
+            element.pop("@size")   
                             
     def _get_key_for_element(self, element, default_key=None):
         if default_key is not None:

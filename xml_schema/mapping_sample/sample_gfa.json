@@ -13,6 +13,7 @@
               "@dmtype": "ds:dataset.Collection",
               "VALUE": {
                 "@dmrole": "ds:dataset.Collection.name",
+                "@dmtype": "ivoa:string",
                 "@value": "VODML Lite Test Bench"
               }
             }
@@ -29,6 +30,7 @@
                     "@dmtype": "ds:dataset.Publication",
                     "VALUE": {
                       "@dmrole": "ds:dataset.Publication.refCode",
+                      "@dmtype": "ivoa:string",
                       "@value": "AA...123"
                     }
                   },
@@ -37,6 +39,7 @@
                     "@dmtype": "ds:dataset.Publication",
                     "VALUE": {
                       "@dmrole": "ds:dataset.Publication.refCode",
+                      "@dmtype": "ivoa:string",
                       "@value": "AA...234"
                     }
                   }
@@ -51,11 +54,13 @@
                     "@dmtype": "ds:party.Individual",
                     "VALUE": {
                       "@dmrole": "ds:party.Party.name",
+                      "@dmtype": "ivoa:string",
                       "@value": "ObAS"
                     }
                   },
                   "VALUE": {
                     "@dmrole": "ds:dataset.Publisher.publisherID",
+                    "@dmtype": "ivoa:string",
                     "@value": "ivoa://voldml/lite/project"
                   }
                 },
@@ -67,6 +72,7 @@
                     "@dmtype": "ds:party.Individual",
                     "VALUE": {
                       "@dmrole": "ds:party.Party.name",
+                      "@dmtype": "ivoa:string",
                       "@value": "Laurent"
                     }
                   }
@@ -75,18 +81,22 @@
               "VALUE": [
                 {
                   "@dmrole": "ds:dataset.Curation.publisherDID",
+                  "@dmtype": "ivoa:string",
                   "@value": "ivoa://voldml/lite/project"
                 },
                 {
                   "@dmrole": "ds:dataset.Curation.version",
+                  "@dmtype": "ivoa:string",
                   "@ref": "0.0"
                 },
                 {
                   "@dmrole": "ds:dataset.Curation.releaseDate",
+                  "@dmtype": "ivoa:string",
                   "@value": "2018:11:11"
                 },
                 {
                   "@dmrole": "ds:dataset.Curation.rights",
+                  "@dmtype": "ivoa:string",
                   "@value": "public"
                 }
               ]
@@ -174,10 +184,12 @@
           "VALUE": [
             {
               "@dmrole": "ds:dataset.Dataset.dataProductType",
+              "@dmtype": "ivoa:string",
               "@value": "TimSeries"
             },
             {
               "@dmrole": "ds:dataset.Dataset.dataProductSubtype",
+              "@dmtype": "ivoa:string",
               "@value": "Time Series Multiband"
             }
           ]

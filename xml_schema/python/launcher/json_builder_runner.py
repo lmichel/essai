@@ -12,13 +12,14 @@ class JsonBuilderRunner:
         self.builder = Builder(json_path=sample_file)
 
     def run(self):
-        self.builder.revert_compositions("GLOBALS",
+        self.builder.revert_sets("GLOBALS",
                                          default_key='globals')
-        self.builder.revert_compositions("COMPOSITION")
-        self.builder.revert_compositions("TEMPLATES",
+        #self.builder.revert_compositions("COMPOSITION")
+        self.builder.revert_sets("TEMPLATES",
                                          default_key='root')
         self.builder.revert_array()
-        self.builder.revert_elements("INSTANCE")
+        self.builder.revert_compositions("COMPOSITION")
+        #self.builder.revert_elements("INSTANCE")
         self.builder.revert_elements("VALUE")
         self.builder.revert_elements("MODEL")
     

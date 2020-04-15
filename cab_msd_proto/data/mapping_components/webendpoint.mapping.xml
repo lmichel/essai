@@ -1,0 +1,7 @@
+
+<INSTANCE dmrole="cab_msd:Source.associatedData"
+	dmtype="cab_msd:WebEndpoint">
+	<VALUE dmrole="cab_msd:WebEndpoint.ContentType" ref="@@@@@@" />
+	<VALUE dmrole="cab_msd:WebEndpoint.url" ref="@@@@@@" />
+	<VALUE dmrole="cab_msd:AssociatedData.semantic" ref="@@@@@@" />
+</INSTANCE>

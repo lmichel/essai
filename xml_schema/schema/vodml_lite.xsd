@@ -1,4 +1,22 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
+version="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:simpleType name="SizeType">
+  <xs:restriction base="xs:integer">
+    <xs:assertion test="$value != 0"/>
+  </xs:restriction>
+</xs:simpleType>
+<xs:complexType name="ProductType">
+  <xs:sequence>
+    <xs:element name="number" type="xs:integer"/>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="size" type="SizeType"/>
+  </xs:sequence>
+  <xs:attribute name="dept" type="xs:string"/>
+  <xs:assert test="(@dept = 'ACC' and number > 500) or
+                   (number &lt; 300)"/>
+</xs:complexType>
+
   <xs:element name="NAME" type="xs:string"/>
   <xs:element name="URL" type="xs:string"/>
   <xs:element name="MODEL">
@@ -12,13 +30,14 @@
   <xs:element name="VALUE">
     <xs:complexType>
       <xs:simpleContent>
-        <xs:extension base="xs:string">
+        <xs:extension base="xs:string">        
           <xs:attribute type="xs:string" name="value" use="optional"/>
-          <xs:attribute type="xs:string" name="dmrole" use="optional"/>
+          <xs:attribute type="xs:string" name="dmrole" use="required"/>
           <xs:attribute type="xs:string" name="dmtype" use="optional"/>
           <xs:attribute type="xs:string" name="ref" use="optional"/>
         </xs:extension>
       </xs:simpleContent>
+ 
     </xs:complexType>
   </xs:element>
   <xs:element name="INSTANCE">
@@ -50,7 +69,8 @@
           </xs:annotation>
         </xs:element>
       </xs:choice>
-      <xs:attribute type="xs:string" name="dmrole" use="optional"/>
+      
+      <xs:attribute type="xs:string" name="dmrole" use="required"/>
       <xs:attribute type="xs:string" name="dmtype" use="optional"/>
       <xs:attribute type="xs:string" name="ID" use="optional"/>
       <xs:attribute type="xs:string" name="ref" use="optional"/>

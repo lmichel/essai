@@ -483,7 +483,7 @@ class MappingGenerator:
         elif attribute.array_size == -1:
             print(attribute.__repr__())
             #sys.exit(1)
-            self.append_xml( "<COLLECTION  size='-1'>")                    
+            self.append_xml( "<COLLECTION  size='-1' dmrole='" + attribute.vodmlid + "'>")                    
             self.generate_single_attribute_mapping(attribute)
             self.append_xml( "</COLLECTION>")
         else:

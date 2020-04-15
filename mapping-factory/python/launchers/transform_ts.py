@@ -13,7 +13,9 @@ the concrete types or classes to use
 
 LM 10/2018
 '''
-from transform import  *
+import sys
+from mappingfactory.transform import  MappingGenerator
+from lxml import etree
             
 def main():
     mapping_generator = MappingGenerator()

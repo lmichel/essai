@@ -9,7 +9,7 @@
   <uri/>
   <title/>
   <version>0.x</version>
-  <lastModified>2019-10-03T13:48:55</lastModified>
+  <lastModified>2020-04-08T10:46:19</lastModified>
   <import>
     <name>ivoa</name>
     <url>http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml</url>
@@ -53,29 +53,29 @@
         </description>
     </literal>
     <literal>
-      <vodml-id>LinkSemantic.downloadLink</vodml-id>
-      <name>downloadLink</name>
+      <vodml-id>LinkSemantic.DownloadLink</vodml-id>
+      <name>DownloadLink</name>
       <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
     </literal>
     <literal>
-      <vodml-id>LinkSemantic.detection</vodml-id>
-      <name>detection</name>
+      <vodml-id>LinkSemantic.Detection</vodml-id>
+      <name>Detection</name>
       <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
     </literal>
     <literal>
-      <vodml-id>LinkSemantic.compagnon</vodml-id>
-      <name>compagnon</name>
+      <vodml-id>LinkSemantic.Compagnon</vodml-id>
+      <name>Compagnon</name>
       <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
     </literal>
     <literal>
-      <vodml-id>LinkSemantic.counterpart</vodml-id>
-      <name>counterpart</name>
+      <vodml-id>LinkSemantic.Counterpart</vodml-id>
+      <name>Counterpart</name>
       <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
@@ -375,6 +375,34 @@
     <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
+    <attribute>
+      <vodml-id>Luminosity.value</vodml-id>
+      <name>value</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:RealQuantity</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>Luminosity.Attribute</vodml-id>
+      <name>Attribute</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:real</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
     <composition>
       <vodml-id>Luminosity.filter</vodml-id>
       <name>filter</name>
@@ -397,6 +425,34 @@
     <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
+    <attribute>
+      <vodml-id>Shape.shape</vodml-id>
+      <name>shape</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>Shape.system</vodml-id>
+      <name>system</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
   </objectType>
 
   <objectType>
@@ -405,6 +461,34 @@
     <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
+    <attribute>
+      <vodml-id>Quality.value</vodml-id>
+      <name>value</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>Quality.system</vodml-id>
+      <name>system</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
   </objectType>
 
   <objectType>
@@ -413,6 +497,10 @@
     <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
+    <constraint>
+      <description>One association at the time
+</description>
+    </constraint>
     <attribute>
       <vodml-id>Parameter.semantic</vodml-id>
       <name>semantic</name>
@@ -421,6 +509,20 @@
         </description>
       <datatype>
         <vodml-ref>cab_msd:ParamSemantic</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>Parameter.ucd</vodml-id>
+      <name>ucd</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
       </datatype>
       <multiplicity>
         <minOccurs>1</minOccurs>
@@ -505,6 +607,34 @@
     <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
+    <attribute>
+      <vodml-id>ToBeDefined.value</vodml-id>
+      <name>value</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:RealQuantity</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>ToBeDefined.error</vodml-id>
+      <name>error</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:real</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
   </objectType>
 
 
@@ -521,6 +651,62 @@
       <description>
           TODO : Missing description : please, update your UML model asap.
         </description>
+      <attribute>
+        <vodml-id>phot_dm.Filter.name</vodml-id>
+        <name>name</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ivoa:string</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>1</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </attribute>
+      <attribute>
+        <vodml-id>phot_dm.Filter.zeroPointFlux</vodml-id>
+        <name>zeroPointFlux</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ivoa:RealQuantity</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>1</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </attribute>
+      <attribute>
+        <vodml-id>phot_dm.Filter.magnitudeSystem</vodml-id>
+        <name>magnitudeSystem</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ivoa:RealQuantity</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>1</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </attribute>
+      <attribute>
+        <vodml-id>phot_dm.Filter.effectiveWavelength</vodml-id>
+        <name>effectiveWavelength</name>
+        <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+        <datatype>
+          <vodml-ref>ivoa:RealQuantity</vodml-ref>
+        </datatype>
+        <multiplicity>
+          <minOccurs>1</minOccurs>
+          <maxOccurs>1</maxOccurs>
+        </multiplicity>
+      </attribute>
     </objectType>
 
   </package>

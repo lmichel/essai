@@ -1,0 +1,35 @@
+
+<INSTANCE dmrole="cab_msd:Source.parameters"
+	dmtype="cab_msd:Parameter">
+	<VALUE dmrole="cab_msd:Parameter.semantic" ref="@@@@@@" />
+	<VALUE dmrole="cab_msd:Parameter.ucd" ref="@@@@@@" />
+	<INSTANCE dmrole="cab_msd:Parameter.luminosity"
+		dmtype="cab_msd:Luminosity">
+		<INSTANCE dmrole="cab_msd:Luminosity.value"
+			dmtype="ivoa:RealQuantity">
+			<VALUE dmrole="ivoa:RealQuantity.value" ref="@@@@@@" />
+			<VALUE dmrole="ivoa:Quantity.unit" ref="@@@@@@" />
+		</INSTANCE>
+		<VALUE dmrole="cab_msd:Luminosity.Attribute" ref="@@@@@@" />
+		<INSTANCE dmrole="cab_msd:Luminosity.filter"
+			dmtype="cab_msd:phot_dm.Filter">
+			<VALUE dmrole="cab_msd:phot_dm.Filter.name" ref="@@@@@@" />
+			<INSTANCE dmrole="cab_msd:phot_dm.Filter.zeroPointFlux"
+				dmtype="ivoa:RealQuantity">
+				<VALUE dmrole="ivoa:RealQuantity.value" ref="@@@@@@" />
+				<VALUE dmrole="ivoa:Quantity.unit" ref="@@@@@@" />
+			</INSTANCE>
+			<INSTANCE dmrole="cab_msd:phot_dm.Filter.magnitudeSystem"
+				dmtype="ivoa:RealQuantity">
+				<VALUE dmrole="ivoa:RealQuantity.value" ref="@@@@@@" />
+				<VALUE dmrole="ivoa:Quantity.unit" ref="@@@@@@" />
+			</INSTANCE>
+			<INSTANCE
+				dmrole="cab_msd:phot_dm.Filter.effectiveWavelength"
+				dmtype="ivoa:RealQuantity">
+				<VALUE dmrole="ivoa:RealQuantity.value" ref="@@@@@@" />
+				<VALUE dmrole="ivoa:Quantity.unit" ref="@@@@@@" />
+			</INSTANCE>
+		</INSTANCE>
+	</INSTANCE>
+</INSTANCE>

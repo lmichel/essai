@@ -26,7 +26,7 @@ for file in dirs:
     sample_file = os.path.join(sample_path, file)
    
     try:
-        validator.validate(sample_file)
+        validator.validate_file(sample_file)
         print(file + ' is Valid')
         with open(sample_file, 'r') as f:
             my_xml = f.read()     
