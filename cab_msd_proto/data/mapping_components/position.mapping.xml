@@ -2,80 +2,56 @@
 	<MODELS>
 		<MODEL>
 			<NAME>ivoa</NAME>
-			<URL>http://www.ivoa.net/xml/VODML/20180519/IVOA-v1.0.vo-dml.xml
-			</URL>
+			<URL>http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml</URL>
 		</MODEL>
 		<MODEL>
 			<NAME>coords</NAME>
 			<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.vo-dml.xml
 			</URL>
 		</MODEL>
+		<MODEL>
+			<NAME>meas</NAME>
+			<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml
+			</URL>
+		</MODEL>
 	</MODELS>
 	<GLOBALS>
-		<INSTANCE ID="CoordSpace" dmrole=""
-			dmtype="coords:SphericalCoordSpace">
-			<COMPOSITION dmrole="coords:CoordSpace.axis" size="2">
-				<INSTANCE dmrole="coords:CoordSpace.axis"
-					dmtype="coords:ContinuousAxis">
-					<INSTANCE dmrole="coords:ContinuousAxis.domainMin"
-						dmtype="ivoa:RealQuantity">
-						<VALUE dmrole="ivoa:RealQuantity.value" value="0" />
-						<VALUE dmrole="ivoa:Quantity.unit" value="deg" />
-					</INSTANCE>
-					<INSTANCE dmrole="coords:ContinuousAxis.domainMax"
-						dmtype="ivoa:RealQuantity">
-						<VALUE dmrole="ivoa:RealQuantity.value" value="360" />
-						<VALUE dmrole="ivoa:Quantity.unit" value="deg" />
-					</INSTANCE>
-					<VALUE dmrole="coords:ContinuousAxis.cyclic" value="true" />
-					<VALUE dmrole="coords:Axis.name" ref="ra" />
-				</INSTANCE>
-				<INSTANCE dmrole="coords:CoordSpace.axis"
-					dmtype="coords:ContinuousAxis">
-					<INSTANCE dmrole="coords:ContinuousAxis.domainMin"
-						dmtype="ivoa:RealQuantity">
-						<VALUE dmrole="ivoa:RealQuantity.value" value="-90" />
-						<VALUE dmrole="ivoa:Quantity.unit" value="deg" />
-					</INSTANCE>
-					<INSTANCE dmrole="coords:ContinuousAxis.domainMax"
-						dmtype="ivoa:RealQuantity">
-						<VALUE dmrole="ivoa:RealQuantity.value" value="+90" />
-						<VALUE dmrole="ivoa:Quantity.unit" value="deg" />
-					</INSTANCE>
-					<VALUE dmrole="coords:ContinuousAxis.cyclic" value="true" />
-					<VALUE dmrole="coords:Axis.name" ref="dec" />
-				</INSTANCE>
-			</COMPOSITION>
-		</INSTANCE>
-
-		<INSTANCE ID="SpaceFrame" dmrole=""
-			dmtype="coords:SpaceFrame">
-			<INSTANCE abstract="true"
-				dmrole="coords:SpaceFrame.refPosition" dmtype="coords:RefLocation" />
-			<VALUE dmrole="coords:SpaceFrame.spaceRefFrame" ref="ICRS" />
+		<INSTANCE ID="SpaceCoordFrame" dmrole="">
+			<INSTANCE dmrole="coords:SpaceFrame.refPosition"
+				dmtype="coords:StdRefLocation">
+				<VALUE dmrole="coords:StdRefLocation.position"
+					dmtype="ivoa:string" ref="@@@@@@" />
+			</INSTANCE>
+			<VALUE dmrole="coords:SpaceFrame.spaceRefFrame"
+				dmtype="ivoa:string" ref="@@@@@@" />
+			<VALUE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch"
+				ref="@@@@@@" />
 		</INSTANCE>
 
 	</GLOBALS>
-	
+
 	<TEMPLATES>
-		<INSTANCE dmrole="root" dmtype="meas:Position">
-			<INSTANCE dmrole="meas:Position.coord" dmtype="coords:Point">
-				<INSTANCE dmrole="coords:Point.axis1"
+		<INSTANCE dmrole="root"
+			dmtype="cab_msd:STCSphericalSkyPosition">
+			<INSTANCE dmrole="cab_msd:STCSphericalSkyPosition.coord"
+				dmtype="cab_msd:STCSphericalPoint">
+				<INSTANCE dmrole="cab_msd:STCSphericalPoint.longitude"
 					dmtype="ivoa:RealQuantity">
-					<VALUE dmrole="ivoa:RealQuantity.value" ref="@@@@@@" />
-					<VALUE dmrole="ivoa:Quantity.unit" ref="deg" />
+					<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+						ref="@@@@@@" />
+					<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+						ref="@@@@@@" />
 				</INSTANCE>
-				<INSTANCE dmrole="coords:Point.axis2"
+				<INSTANCE dmrole="cab_msd:STCSphericalPoint.latitude"
 					dmtype="ivoa:RealQuantity">
-					<VALUE dmrole="ivoa:RealQuantity.value" ref="@@@@@@" />
-					<VALUE dmrole="ivoa:Quantity.unit" ref="deg" />
+					<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+						ref="@@@@@@" />
+					<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+						ref="@@@@@@" />
 				</INSTANCE>
 				<INSTANCE dmrole="coords:Coordinate.coordSys"
 					dmtype="coords:SpaceSys">
-					<INSTANCE dmrole="coords:PhysicalCoordSys.coordSpace"
-						ref="CoordSpace" />
-					<INSTANCE dmrole="coords:PhysicalCoordSys.frame"
-						ref="SpaceFrame" />
+					<INSTANCE ref="SpaceCoordFrame" dmrole="coords:PhysicalCoordSys.frame"/>
 				</INSTANCE>
 			</INSTANCE>
 			<INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
@@ -83,16 +59,20 @@
 					dmtype="meas:Symmetrical">
 					<INSTANCE dmrole="meas:Symmetrical.radius"
 						dmtype="ivoa:RealQuantity">
-						<VALUE dmrole="ivoa:RealQuantity.value" ref="@@@@@@" />
-						<VALUE dmrole="ivoa:Quantity.unit" value="arcsec" />
+						<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+							ref="@@@@@@" />
+						<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+							ref="@@@@@@" />
 					</INSTANCE>
 				</INSTANCE>
 				<INSTANCE dmrole="meas:Error.sysError"
 					dmtype="meas:Symmetrical">
 					<INSTANCE dmrole="meas:Symmetrical.radius"
 						dmtype="ivoa:RealQuantity">
-						<VALUE dmrole="ivoa:RealQuantity.value" ref="@@@@@@" />
-						<VALUE dmrole="ivoa:Quantity.unit" value="arcsec" />
+						<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+							ref="@@@@@@" />
+						<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+							ref="@@@@@@" />
 					</INSTANCE>
 				</INSTANCE>
 			</INSTANCE>

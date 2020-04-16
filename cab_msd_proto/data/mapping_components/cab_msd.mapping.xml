@@ -19,7 +19,7 @@
 	<TEMPLATES>
 		<ARRAY dmrole="root">
 			<INSTANCE dmrole="root" dmtype="cab_msd:Source">
-				<VALUE dmrole="cab_msd:Source.identifier" ref="@@@@@@" />
+				<VALUE dmrole="cab_msd:Source.identifier" dmtype="ivoa:string" ref="@@@@@@" />
 				<COMPOSITION size="-1"
 					dmrole="cab_msd:Source.associatedData">
 				</COMPOSITION>

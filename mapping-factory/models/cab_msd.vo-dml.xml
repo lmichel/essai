@@ -9,7 +9,7 @@
   <uri/>
   <title/>
   <version>0.x</version>
-  <lastModified>2020-04-08T10:46:19</lastModified>
+  <lastModified>2020-04-16T10:45:08</lastModified>
   <import>
     <name>ivoa</name>
     <url>http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml</url>
@@ -124,6 +124,45 @@
         </description>
     </literal>
   </enumeration>
+
+  <dataType>
+    <vodml-id>STCSphericalPoint</vodml-id>
+    <name>STCSphericalPoint</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>coords:Coordinate</vodml-ref>
+    </extends>
+    <attribute>
+      <vodml-id>STCSphericalPoint.longitude</vodml-id>
+      <name>longitude</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:RealQuantity</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>STCSphericalPoint.latitude</vodml-id>
+      <name>latitude</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>ivoa:RealQuantity</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+  </dataType>
 
   <objectType>
     <vodml-id>Source</vodml-id>
@@ -550,7 +589,7 @@
           TODO : Missing description : please, update your UML model asap.
         </description>
       <datatype>
-        <vodml-ref>meas:Measure</vodml-ref>
+        <vodml-ref>coords:Measure</vodml-ref>
       </datatype>
       <multiplicity>
         <minOccurs>0</minOccurs>
@@ -629,6 +668,31 @@
         </description>
       <datatype>
         <vodml-ref>ivoa:real</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+  </objectType>
+
+  <objectType>
+    <vodml-id>STCSphericalSkyPosition</vodml-id>
+    <name>STCSphericalSkyPosition</name>
+    <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+    <extends>
+      <vodml-ref>meas:Measure</vodml-ref>
+    </extends>
+    <attribute>
+      <vodml-id>STCSphericalSkyPosition.coord</vodml-id>
+      <name>coord</name>
+      <description>
+          TODO : Missing description : please, update your UML model asap.
+        </description>
+      <datatype>
+        <vodml-ref>cab_msd:STCSphericalPoint</vodml-ref>
       </datatype>
       <multiplicity>
         <minOccurs>1</minOccurs>
