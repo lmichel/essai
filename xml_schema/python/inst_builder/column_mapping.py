@@ -35,19 +35,22 @@ class ColumnMapping():
                 "ref": field.ref,
                 "id": field.ID,
                 }
-            if field.ref in keys :
+            if field.ID in keys :
+                self.set_value(field.ID, indx, field)
+            elif field.ref in keys :
                 self.set_value(field.ref, indx, field)
-            if field.name in keys:
+            elif field.name in keys:
                 self.set_value(field.name, indx, field)
             indx += 1
             
         indx = -1
         for param in  votable.params:
-            if param.ref in keys :
+            if param.ID in keys :
+                self.set_value(param.ID, indx, field)
+            elif param.ref in keys :
                 self.set_value(param.ref, indx, field)
-            if param.name in keys :
+            elif param.name in keys :
                 self.set_value(param.name, indx, field)
-    
     
     def get_col_index_by_name(self, name):
         for k,v in self.column_ids.items():
