@@ -49,7 +49,10 @@ class TableIterator(object):
         keys = element.keys()
         if ("@dmtype" in keys and "@ref" in keys 
             and "@value" in keys ): #and element["@value"] == "array coucou"):
-            element['@value'] = row[self.column_mapping.get_index(element['@ref'])]
+            val = row[self.column_mapping.get_index(element['@ref'])]
+            if isinstance(val, bytes) is True:
+                    val = val.decode("UTF-8")
+            element['@value'] = val
 
     def _get_next_row(self):
         if self.iter == None:
@@ -86,7 +89,10 @@ class TableIterator(object):
             retour = []
             indexes = self.column_mapping.get_indexes()
             for index in indexes:
-                retour.append(row[index])
+                val = row[index]
+                if isinstance(val, bytes) is True:
+                    val = val.decode("UTF-8")
+                retour.append(val)
             return retour 
         else:
             return None
