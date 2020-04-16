@@ -19,7 +19,7 @@ class JsonBuilderRunner:
                                          default_key='root')
         self.builder.revert_array()
         self.builder.revert_compositions("COMPOSITION")
-        #self.builder.revert_elements("INSTANCE")
+        self.builder.revert_elements("INSTANCE")
         self.builder.revert_elements("VALUE")
         self.builder.revert_elements("MODEL")
     
