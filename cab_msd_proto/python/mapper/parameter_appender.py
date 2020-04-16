@@ -26,12 +26,26 @@ class ParameterAppender:
         self.param_path = param_path
         logger.info("parse %s", self.param_path)
         self.param_tree = etree.parse(self.param_path)
+        
+        self.cab_msd_clean_tree = None
     
     def _get_unique_element(self, elements):
         if len(elements) == 1:
             return elements[0]
         raise Exception("elements must have one item not {}".format(len(elements)))
-          
+    
+    def _clean_tree(self):
+        tree_string = etree.tostring(
+            self.cab_msd_tree)
+                        
+        parser = etree.XMLParser(remove_blank_text=True)
+        self.cab_msd_clean_tree = etree.fromstring (tree_string, parser)
+        
+    def _get_global_instance(self, globals_id):
+        return self._get_unique_element(
+            self.cab_msd_tree.xpath("/VODML/GLOBALS/INSTANCE[@ID='" + globals_id + "']")
+            )
+         
     def add_globals(self):
         cab_msd_globals = self.cab_msd_tree.xpath('/VODML/GLOBALS') 
         param_globals = self.param_tree.xpath('/VODML/GLOBALS') 
@@ -75,6 +89,9 @@ class ParameterAppender:
         block = self._get_unique_element(
             self.cab_msd_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
             )
+        if "ref" in block.attrib.keys():
+            block = self._get_global_instance(block.attrib["ref"])
+
         value_block = self._get_unique_element(
                 block.xpath(".//VALUE[@dmrole='" + value_role + "']")
                 )
@@ -92,8 +109,19 @@ class ParameterAppender:
                 notset_value.attrib.pop("ref")    
                 
     def print(self):
-        print((etree.tostring(
-            self.cab_msd_tree,
-            pretty_print=True)).decode("utf-8") )
-           
+        print(self.tostring() )
         
+    def save(self, filepath):
+        self._clean_tree()
+        with open(filepath, 'wb') as output_file:
+            etree.ElementTree(self.cab_msd_clean_tree).write(
+                output_file, 
+                encoding="utf-8", 
+                xml_declaration=False, 
+                pretty_print=True)
+
+    def tostring(self):
+        self._clean_tree()
+        return (etree.tostring(
+            self.cab_msd_clean_tree,
+            pretty_print=True)).decode("utf-8")    
