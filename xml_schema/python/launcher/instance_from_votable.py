@@ -41,6 +41,18 @@ class InstanceFromVotable:
     def _build_instance(self):
         builder = Builder(json_dict=self.json_block)
 
+        builder.revert_sets("GLOBALS",
+                                         default_key='globals')
+        #self.builder.revert_compositions("COMPOSITION")
+        builder.revert_sets("TEMPLATES",
+                                         default_key='root')
+        builder.revert_array()
+        builder.revert_compositions("COMPOSITION")
+        builder.revert_elements("INSTANCE")
+        builder.revert_elements("VALUE")
+        builder.revert_elements("MODEL")
+
+        """
         builder.revert_compositions("COMPOSITION")
         builder.revert_compositions("TEMPLATES"
                                       , default_key='root')
@@ -48,6 +60,7 @@ class InstanceFromVotable:
         builder.revert_elements("INSTANCE")
         builder.revert_elements("VALUE")
         builder.revert_elements("MODEL")
+        """
         self.json_vodml_block = builder.json
         logger.info("JSON VODML block built")
         
