@@ -4,8 +4,8 @@ Created on 15 avr. 2020
 @author: laurentmichel
 '''
 
-from mapper.constants import PARAM_TEMPLATES
-from mapper.parameter_appender import ParameterAppender
+from product_annoter.mapper.constants import PARAM_TEMPLATES
+from product_annoter.mapper.parameter_appender import ParameterAppender
 class PositionAppender:
     '''
     classdocs
@@ -44,7 +44,8 @@ class PositionAppender:
                         measure_descriptor["errors"]["systematic"]["value"], 
                         measure_descriptor["errors"]["systematic"]["unit"] 
                         ) 
-
+        self.set_notset_value()
+        
     def set_spaceframe(self, frame, equinox):   
         
         self.appender.set_value("coords:PhysicalCoordSys.frame" ,

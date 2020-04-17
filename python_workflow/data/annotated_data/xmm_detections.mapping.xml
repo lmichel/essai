@@ -18,10 +18,10 @@
   <GLOBALS>
     <INSTANCE ID="SpaceCoordFrame" dmrole="">
       <INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
-        <VALUE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" ref="@@@@@@"/>
+        <VALUE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
       </INSTANCE>
       <VALUE dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string" value="ICRS"/>
-      <VALUE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" ref="@@@@@@"/>
+      <VALUE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" value="NoSet"/>
     </INSTANCE>
   </GLOBALS>
   <TEMPLATES>

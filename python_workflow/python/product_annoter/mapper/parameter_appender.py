@@ -3,7 +3,6 @@ Created on 15 avr. 2020
 
 @author: laurentmichel
 '''
-import os
 from lxml import etree
 from tests import logger
 from copy import deepcopy

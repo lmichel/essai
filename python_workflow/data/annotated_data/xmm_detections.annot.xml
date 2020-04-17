@@ -53,7 +53,7 @@
               <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
                 <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
                   <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_poserr_148"/>
+                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_syserrcc_152"/>
                     <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
                   </INSTANCE>
                 </INSTANCE>

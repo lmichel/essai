@@ -1,0 +1,159 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
+version="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:simpleType name="SizeType">
+  <xs:restriction base="xs:integer">
+    <xs:assertion test="$value != 0"/>
+  </xs:restriction>
+</xs:simpleType>
+<xs:complexType name="ProductType">
+  <xs:sequence>
+    <xs:element name="number" type="xs:integer"/>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="size" type="SizeType"/>
+  </xs:sequence>
+  <xs:attribute name="dept" type="xs:string"/>
+  <xs:assert test="(@dept = 'ACC' and number > 500) or
+                   (number &lt; 300)"/>
+</xs:complexType>
+
+  <xs:element name="NAME" type="xs:string"/>
+  <xs:element name="URL" type="xs:string"/>
+  <xs:element name="MODEL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="NAME"/>
+        <xs:element ref="URL"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VALUE">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">        
+          <xs:attribute type="xs:string" name="value" use="optional"/>
+          <xs:attribute type="xs:string" name="dmrole" use="required"/>
+          <xs:attribute type="xs:string" name="dmtype" use="optional"/>
+          <xs:attribute type="xs:string" name="ref" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+ 
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="INSTANCE">
+    <xs:complexType mixed="true">
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="VALUE">
+          <xs:annotation>
+            <xs:documentation>fields have no ID: let's take their names as identifiers</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="INSTANCE">
+          <xs:annotation>
+            <xs:documentation>Time Stamp : MJD supported CAB-MSD s
+						            
+						       	      Mag : The band is given by the filter</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="COMPOSITION">
+          <xs:annotation>
+            <xs:documentation>Set of measurements (imported from STC2) attached to that instance 
+			    
+				  set of associated data (CAD-MSD links)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="FILTER"/>
+        <xs:element ref="ARRAY">
+          <xs:annotation>
+            <xs:documentation>ARRAY: One instance of  cab-msd:VoInstance per DATATABLE row</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      
+      <xs:attribute type="xs:string" name="dmrole" use="required"/>
+      <xs:attribute type="xs:string" name="dmtype" use="optional"/>
+      <xs:attribute type="xs:string" name="ID" use="optional"/>
+      <xs:attribute type="xs:string" name="ref" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="COMPOSITION">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="INSTANCE" maxOccurs="unbounded" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Position not specified in the VOTable: hard coded in default attributes 
+			        
+				       Web URL link for te data origin
+				    
+			          Associated data links of type VO instance (instances of the LightCurve model)
+			          The model of those instances is given with the instance mapping</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="dmrole" use="optional"/>
+      <xs:attribute type="xs:byte" name="size" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FILTER">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="name"/>
+          <xs:attribute type="xs:string" name="key"/>
+          <xs:attribute  name="value"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ARRAY">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="INSTANCE">
+          <xs:annotation>
+            <xs:documentation>set of measurements defined by the LightCurve model (time-stamp + mag)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="dmrole"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MODELS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="MODEL" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GLOBALS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="INSTANCE" maxOccurs="unbounded" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Space Frame ICRS  Time frame (imported from coords)  G filter definition: ad-hoc because no model yet</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TEMPLATES">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="INSTANCE">
+          <xs:annotation>
+            <xs:documentation>One single CAB-MSD instance in the VOTable (for purpose)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="tableref"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VODML">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="MODELS"/>
+        <xs:element ref="GLOBALS"/>
+        <xs:element ref="TEMPLATES"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

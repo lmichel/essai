@@ -4,22 +4,15 @@ Created on 31 mars 2020
 @author: laurentmichel
 '''
 
-import os, json, sys
-path = os.path.dirname(os.path.realpath(__file__)) 
-print(sys.path)
-
-if (path + "/../") not in sys.path:
-    sys.path.append(path + "/../")
-print(sys.path)
-print(path)
-from tests import logger
+import os, json
 from utils.json_encoder import MyEncoder
-from launcher.instance_from_votable import InstanceFromVotable
+from client.launchers.instance_from_votable import InstanceFromVotable
+from tests import data_dir
 
 if __name__ == '__main__':
     base_path = os.path.dirname(os.path.realpath(__file__)) 
-    votable_path = os.path.join(base_path, 
-                                "../../../cab_msd_proto/data/annotated_data",
+    votable_path = os.path.join(data_dir, 
+                                "annotated_data",
                                 "xmm_detections.annot.xml"
                                 )
     instance_from_votable = InstanceFromVotable(votable_path)
