@@ -1,4 +1,5 @@
 '''
+Apply the JSON mapping descriptor for the XMM catalog to the XMM VOTABLE 
 Created on 15 avr. 2020
 
 @author: laurentmichel
@@ -46,7 +47,6 @@ if __name__ == '__main__':
                 appender = PositionAppender(cab_msd_path, position_path)
                 appender.append_measure(measure)
                 print(appender.tostring())
-
                 appender.save(output_mapping_path)
         
         merger = VOTableMerger(raw_votable_path, output_mapping_path, annot_votable_path)

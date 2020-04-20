@@ -1,9 +1,10 @@
 from lxml import etree
-import sys, urllib, traceback, re
+import sys
 import xml.dom.minidom
-from mappingfactory.model_constraints import *
-from mappingfactory.model_components import *
-from mappingfactory import logger
+from mapping_factory.factory.model_constraints import *
+from mapping_factory.factory.model_components import *
+from mapping_factory import logger
+
 import urllib.request
 import copy
 from email.policy import default

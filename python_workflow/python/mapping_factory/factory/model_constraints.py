@@ -1,5 +1,5 @@
-from mappingfactory import logger
-import sys
+from mapping_factory import logger
+
 class VodmlConstraint:    
     def __init__(self, att_role, subset, description):
         self._att_role = att_role

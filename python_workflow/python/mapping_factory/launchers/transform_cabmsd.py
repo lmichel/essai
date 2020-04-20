@@ -1,10 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+'''
 
-import sys, os
+Generates an empty CAB-MSD mapping block
+
+Created on 15 avr. 2020
+
+@author: laurentmichel
+'''
+
+import sys
 from lxml import etree
 
-from mappingfactory.transform import  MappingGenerator
+from mapping_factory.factory.transform import MappingGenerator
 from mapping_factory.launchers import data_dir
             
 def main():

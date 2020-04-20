@@ -3,7 +3,6 @@ Created on 1 avr. 2020
 
 @author: laurentmichel
 '''
-import traceback
 from copy import deepcopy
 
 class TableIterator(object):

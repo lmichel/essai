@@ -3,7 +3,6 @@ Created on 6 avr. 2020
 
 @author: laurentmichel
 '''
-from client.inst_builder.instancier import Instancier
 from astropy.coordinates import Galactic, ICRS, FK5, FK4
 
 class AstropyWrapper(object):

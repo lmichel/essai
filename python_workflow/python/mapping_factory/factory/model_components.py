@@ -1,6 +1,5 @@
-from mappingfactory import  logger
-from mappingfactory.model_constraints import *
-import sys
+from mapping_factory import  logger
+from mapping_factory.factory.model_constraints import *
 
 class VodmlRootType:
     def __init__(self, vodml_type, superclass, attributes, vodml_constraints, abstract=False, ref=""):

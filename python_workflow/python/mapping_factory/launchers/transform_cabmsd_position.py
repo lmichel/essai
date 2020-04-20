@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+'''
+
+Generates a CAB-MSD position measurement  mapping block
+
+Created on 15 avr. 2020
+
+@author: laurentmichel
+'''
 
 import sys
 from lxml import etree
