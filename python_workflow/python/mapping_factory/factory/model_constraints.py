@@ -48,7 +48,6 @@ class VodmlConstraintDict:
     def add_contraint(self, vodml_contraint):
         if vodml_contraint.att_role == "coords:Coordinate.frame":
             logger.error("======== constraint already here")
-            print(vodml_contraint)
         if vodml_contraint.is_subset:
             self._constraints[vodml_contraint.att_role] = vodml_contraint
         else:

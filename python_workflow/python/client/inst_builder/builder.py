@@ -5,6 +5,7 @@ Created on 26 mars 2020
 '''
 import json
 from copy import deepcopy
+
 class Builder():
     '''
     classdocs
@@ -30,10 +31,6 @@ class Builder():
             self._revert_subelement(root_element, name, dmrole, dmtype)
             if self.retour is not None:
                 self.retour["node"].pop(name)
-                if name == "COMPOSITION":
-                    print(self.retour["node"])
-                    print(self.retour["newcontent"])
-
                 for k, v in self.retour["newcontent"].items():
                     self.retour["node"][k] = v
             else:
@@ -45,14 +42,8 @@ class Builder():
             self.retour = None
             self._revert_composition(root_element, name, dmrole, dmtype)
             if self.retour is not None:
-                if name == "COMPOSITION":
-                    print("=========")
-                    print(self.retour["node"])
-                    print(self.retour["newcontent"])
-                    print("xxxxxxxxxxx")
                 self.retour["node"].pop(name)
 
-                print(self.retour["node"])
                 for ele in self.retour["newcontent"]:
                     for k, v in ele.items():
                         self.retour["node"][k] = v

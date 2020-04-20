@@ -6,7 +6,6 @@ Created on 15 avr. 2020
 '''
 import os, sys
 import json
-print(sys.path)
 
 from tests import data_dir
 from tests import logger  

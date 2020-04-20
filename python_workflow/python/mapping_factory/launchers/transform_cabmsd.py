@@ -12,7 +12,7 @@ Created on 15 avr. 2020
 import sys
 from lxml import etree
 
-from mapping_factory.factory.transform import MappingGenerator
+from mapping_factory.factory.maping_generator import MappingGenerator
 from mapping_factory.launchers import data_dir
             
 def main():

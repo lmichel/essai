@@ -12,7 +12,7 @@ Created on 15 avr. 2020
 import sys
 from lxml import etree
 
-from mapping_factory.factory.transform import  MappingGenerator
+from mapping_factory.factory.maping_generator import  MappingGenerator
 from mapping_factory.launchers import data_dir
 
             
@@ -24,14 +24,14 @@ def main():
     mapping_generator.resolve_constaints();
     #root_object_id = 'cube:DataProduct'
     mapping_generator.root_object_id = 'cab_msd:STCSphericalSkyPosition'
-    
+    # set the concrete object types
     mapping_generator.concrete_classes = {
         "coords:SpaceFrame.refPosition": ["coords:StdRefLocation"],
         "coords:Coordinate.coordSys": ["coords:SpaceSys"],
         "coords:PhysicalCoordSys.frame": ["coords:SpaceFrame"],
         "coords:PhysicalCoordSys.coordSpace": ["coords:SphericalCoordSpace"]
         }
-
+    # set the concrete data types
     mapping_generator.concrete_types={
         "coords:Point.axis1": "ivoa:RealQuantity",
         "coords:Point.axis2": "ivoa:RealQuantity",

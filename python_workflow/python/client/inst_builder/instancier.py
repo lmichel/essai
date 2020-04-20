@@ -44,7 +44,7 @@ class Instancier(object):
         self._set_subelement_values(root_element)
 
     def set_array_values(self):
-        self._set_array_subelement_values(self.array)
+        self._set_array_subelement_values(self.array, parent_role=None)
 
     def _set_subelement_values(self, root_element):
         if isinstance(root_element, list):
@@ -82,7 +82,7 @@ class Instancier(object):
                         self._set_value(v)
                         self._set_subelement_values(v)
 
-    def _set_array_subelement_values(self, root_element):
+    def _set_array_subelement_values(self, root_element, parent_role=None):
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 if self.retour is None:
@@ -92,9 +92,9 @@ class Instancier(object):
                 if isinstance(v, list):
                     for ele in v:
                         self._set_array_subelement_values(ele)
-                elif isinstance(v, dict):  
-                    self._set_value(v, role=k)
-                    self._set_array_subelement_values(v)
+                elif isinstance(v, dict): 
+                    self._set_value(v, role=k, parent_role=parent_role)
+                    self._set_array_subelement_values(v, parent_role=k)
      
     def _get_subelement_by_role(self, root_element, searched_role):
         if isinstance(root_element, list):
@@ -168,11 +168,11 @@ class Instancier(object):
             return True
         return False
     
-    def _set_value(self, element, role=None):
+    def _set_value(self, element, role=None, parent_role=None):
         keys = element.keys()
         if ("@dmtype" in keys and "@ref" in keys 
-            and "@value" in keys and element["@value"] == ""):        
-            self.column_mapping.add_entry(element["@ref"], role)
+            and "@value" in keys and element["@value"] == ""):  
+            self.column_mapping.add_entry(element["@ref"], role, parent_role)
             element["@value"] = "array coucou"
             
     def map_columns(self):

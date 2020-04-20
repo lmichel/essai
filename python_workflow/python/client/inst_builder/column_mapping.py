@@ -17,9 +17,10 @@ class ColumnMapping():
         self.column_refs = {}
         self.column_ids = {}
         
-    def add_entry(self, key, role):
+    def add_entry(self, key, role, parent_role=None):
         if key not in self.column_refs.keys():
             self.column_refs[key] = {
+                "parent_role": parent_role, 
                 "role": role, 
                 "index": None, 
                 "field": None
@@ -84,7 +85,7 @@ class ColumnMapping():
     def get_column_head(self):
         retour = []
         for key, v in self.column_refs.items():
-            retour.append("{} (col#{} {})". format(v["role"], v["index"], key))
+            retour.append("{}({}) [col#{} {}]". format(v["parent_role"], v["role"], v["index"], key))
         return retour
     
     def keys(self):
