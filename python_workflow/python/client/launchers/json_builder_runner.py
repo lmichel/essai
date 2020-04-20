@@ -4,7 +4,7 @@ Created on 26 mars 2020
 @author: laurentmichel
 '''
 import json
-from client.inst_builder import Builder
+from client.inst_builder.builder import Builder
 
 class JsonBuilderRunner:
     def __init__(self, sample_file):
