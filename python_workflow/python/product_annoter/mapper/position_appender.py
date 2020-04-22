@@ -39,8 +39,8 @@ class PositionAppender:
                           measure_descriptor["position"]["latitude"], 
                           measure_descriptor["position"]["unit"]
                           ) 
-        self.set_errors(measure_descriptor["errors"]["systematic"]["value"], 
-                        measure_descriptor["errors"]["systematic"]["unit"], 
+        self.set_errors(measure_descriptor["errors"]["random"]["value"], 
+                        measure_descriptor["errors"]["random"]["unit"], 
                         measure_descriptor["errors"]["systematic"]["value"], 
                         measure_descriptor["errors"]["systematic"]["unit"] 
                         ) 

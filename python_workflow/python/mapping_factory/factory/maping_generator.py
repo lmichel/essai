@@ -385,7 +385,7 @@ class MappingGenerator:
         return
              
     def log_error(self, msg):
-        logger.error("FATAL ERROR", msg)
+        logger.error(msg)
         traceback.print_stack()
         sys.exit(1)    
     
@@ -450,11 +450,12 @@ class MappingGenerator:
                 elif superclass in self.primitive_types :
                     sup_obj = self.primitive_types[superclass]
                 else:
-                    self.log_error( superclass + " Neither in dataType nor in primitive types")
+                    print(self.data_types)
+                    self.log_error( str(superclass) + " Neither in dataType nor in primitive types")
                 for k,v in sup_obj.attributes.items():
                     obj.attributes[k] = v
-                logger.info("merge data "  +  sup_obj.vodmlid + "  " + obj.vodmlid)
-                logger.info("Constraint %s".format(sup_obj.vodml_constraints))
+                logger.info("merge data %s %s", sup_obj.vodmlid, obj.vodmlid)
+                logger.info("Constraint %s", sup_obj.vodml_constraints)
 
                 obj.vodml_constraints.merge(sup_obj.vodml_constraints)
 
