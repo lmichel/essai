@@ -3,14 +3,14 @@ Created on 6 avr. 2020
 
 @author: laurentmichel
 '''
-import re, os
+import re, os, sys
 import xmltodict
 
 from mapping_factory.validator.validator import Validator
-from client.inst_builder.builder import Builder
+from client.inst_builder.json_mapping_builder import JsonMappingBuilder
 from client.inst_builder.instancier import Instancier
 from client.launchers import logger, data_dir
-
+from utils.dict_utils import DictUtils
 class InstanceFromVotable:
     
     def __init__(self, votable_path):
@@ -37,7 +37,7 @@ class InstanceFromVotable:
         
     def _build_instance(self):
 
-        builder = Builder(json_dict=self.json_block)
+        builder = JsonMappingBuilder(json_dict=self.json_block)
 
         builder.revert_sets("GLOBALS",
                                          default_key='globals')
@@ -63,21 +63,21 @@ class InstanceFromVotable:
         logger.info("JSON VODML block built")
         
 
-    def _populate_instance(self):
+    def _populate_instance(self, resolve_refs=False):
         self._instancier = Instancier(self.votable_path
                                   , json_inst_dict=self.json_vodml_block)
-        self._instancier.set_element_values()
+        self._instancier.set_element_values(resolve_refs=resolve_refs)
         self._instancier.set_array_values()
         self._instancier.map_columns()
         logger.info("VODML instance created")
 
-    def build_instance(self):
+    def build_instance(self, resolve_refs=False):
         logger.info("Build in memory instance")
 
         self._extract_vodml_block()
         self._validate_vodml_block()
         self._build_instance()
-        self._populate_instance()
+        self._populate_instance(resolve_refs=resolve_refs)
         return self._instancier
 
 

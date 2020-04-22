@@ -6,7 +6,7 @@ Created on 31 mars 2020
 @author: laurentmichel
 '''
 
-import os, json
+import os, json, sys
 from utils.json_encoder import MyEncoder
 from utils.dict_utils import DictUtils
 
@@ -20,7 +20,8 @@ if __name__ == '__main__':
                                 "xmm_detections.annot.xml"
                                 )
     instance_from_votable = InstanceFromVotable(votable_path)
-    instance = instance_from_votable.build_instance()
+    instance = instance_from_votable.build_instance(resolve_refs=True)
+    
     print("=== Mapping of the columns")
     print(instance.get_flatten_data_head())
     #print(instance.get_data_subset_keys())
@@ -32,6 +33,7 @@ if __name__ == '__main__':
             break
         else:
             break
+
     print("=== Second row: instance mode")
     while True:
         inst = instance._get_next_row_instance()

@@ -5,8 +5,10 @@ Created on 26 mars 2020
 '''
 import json
 from copy import deepcopy
+from client.inst_builder import logger
+from utils.dict_utils import DictUtils
 
-class Builder():
+class JsonMappingBuilder():
     '''
     classdocs
     '''
@@ -25,6 +27,7 @@ class Builder():
             self.json_path = None
         
     def revert_elements(self, name, dmrole=None, dmtype=None):
+        logger.info("reverting elements %s - ('%s':{role ...} -> 'role':{})", name, name)
         root_element = self.json['VODML']
         while True:
             self.retour = None
@@ -36,11 +39,18 @@ class Builder():
             else:
                 break
             
+            
     def revert_compositions(self, name, dmrole=None, dmtype=None):
+        logger.info("reverting compositions %s - ('%s':[{role ...} ...] -> 'role':[...])", name, name)
+
         root_element = self.json['VODML']
         while True:
             self.retour = None
             self._revert_composition(root_element, name, dmrole, dmtype)
+            #print("==========")
+            #print(DictUtils.get_pretty_json(self.retour))
+            #print("==========")
+            #sys.exit()
             if self.retour is not None:
                 self.retour["node"].pop(name)
 
@@ -51,6 +61,7 @@ class Builder():
                 break
             
     def revert_sets(self, name, default_key=None):
+        logger.info("reverting sets %s", name)
         root_element = self.json['VODML']
         while True:
             self.retour = None
@@ -63,6 +74,7 @@ class Builder():
                 break
             
     def revert_array(self):
+        logger.info("reverting ARRAYs")
         root_element = self.json['VODML']
         while True:
             self.retour = None
@@ -108,12 +120,53 @@ class Builder():
             for k, v in root_element.items():
                 if k == name:
                     if isinstance(v, list):
+                        #print(DictUtils.get_pretty_json(v))
+                        '''
                         newcontent = {}
+                        ele_array = []
                         for ele in v:
                             new_key = self._get_key_for_element(ele)
-                            newcontent[new_key] = deepcopy(ele)
-                            self._drop_role_if_needed(newcontent[new_key])
-                            self._add_value_if_needed(newcontent[new_key])
+
+                            new_ele  = deepcopy(ele)
+                            self._drop_role_if_needed(new_ele)
+                            self._add_value_if_needed(new_ele)
+                            ele_array.append(new_ele)
+                            
+                        newcontent[new_key] = deepcopy(ele_array)
+                        '''
+                        # if we got an array of objects with all the same role
+                        # we have a composition of instances. In that case that
+                        # role is given the composition object and to object array 
+                        # is given as the composition content
+                        former_key = ""
+                        is_array = True
+                        for ele in v:
+                            new_key = self._get_key_for_element(ele)
+                            if former_key == "":
+                                former_key = new_key
+                            if former_key != new_key:
+                                is_array = False
+                                break 
+                        if is_array is False:
+                            newcontent = {}
+                            for ele in v:
+                                new_key = self._get_key_for_element(ele)
+                                new_ele  = deepcopy(ele)
+                                self._drop_role_if_needed(new_ele)
+                                self._add_value_if_needed(new_ele)                            
+                                newcontent[new_key] = new_ele
+                        else:
+                            logger.info("find a composition of %s with the role=%s", name, former_key)
+                            newcontent = {}
+                            new_array = []
+                            for ele in v:
+                                new_ele  = deepcopy(ele)
+                                #self._drop_role_if_needed(new_ele)
+                                self._add_value_if_needed(new_ele)                            
+                                new_array.append(new_ele)
+                            newcontent[former_key] = new_array
+
+                        
                         self.retour = {'node': root_element, "newcontent": newcontent}
                     elif isinstance(v, dict):  
                         newcontent = {}
@@ -134,6 +187,7 @@ class Builder():
         elif isinstance(root_element, dict):
             for k, v in root_element.items():
                 if k == name:
+                    #print(k)
 
                     if isinstance(v, list):
                         newcontent = []
@@ -142,8 +196,12 @@ class Builder():
                             ele_cp = deepcopy(ele)
                             self._drop_role_if_needed(ele_cp)
                             if ele_cp:
+                                #print("Append 1" + new_key)
+                                #print(DictUtils.get_pretty_json(ele_cp))
+                                #print("===========")
                                 newcontent.append({new_key: [ele_cp]})
                             else :
+                                #print("Append 1 empty" )
                                 newcontent.append({new_key: []})
                         self.retour = {'node': root_element, "newcontent": newcontent}
                     elif isinstance(v, dict):  
@@ -187,10 +245,9 @@ class Builder():
         if new_key == '':
             raise Exception("Cannot compute new key")
         return new_key
-
-    
-    def save_instance(self):        
-            with open(self.json_path.replace(".json", ".inst.json"), 'w') as jsonfile:
-                jsonfile.write(json.dumps(self.json
-                                          , indent=2, sort_keys=True)
-                                          )
+   
+    def save_instance(self):     
+        file_path = self.json_path.replace(".json", ".inst.json")
+        logger.info("save instance in %s", file_path)   
+        with open(file_path, 'w') as jsonfile:
+            jsonfile.write(DictUtils.get_pretty_json(self.json))

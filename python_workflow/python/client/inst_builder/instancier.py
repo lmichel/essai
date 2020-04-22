@@ -8,7 +8,8 @@ from astropy.io.votable import parse_single_table
 from client.inst_builder.column_mapping import ColumnMapping
 from client.inst_builder.table_iterator import TableIterator
 from client.inst_builder.row_filter import RowFilter
-
+from utils.dict_utils import DictUtils
+from copy import deepcopy
 class Instancier(object):
     '''
     classdocs
@@ -39,8 +40,10 @@ class Instancier(object):
         self.table_iterators = {}
         self.column_mapping = ColumnMapping()
 
-    def set_element_values(self):
+    def set_element_values(self, resolve_refs=False):
         root_element = self.json['VODML']
+        if resolve_refs is True:
+            self.resolve_object_references()
         self._set_subelement_values(root_element)
 
     def set_array_values(self):
@@ -153,6 +156,31 @@ class Instancier(object):
                         self.searched_types.append(v)
                     self._get_subelement_by_type(v, searched_type)
 
+    def _get_object_references(self, root_element, replacement_list):
+        if isinstance(root_element, list):
+            for idx, _ in enumerate(root_element):
+                self._get_object_references(root_element[idx], replacement_list)
+        elif isinstance(root_element, dict):
+            if self._is_object_ref(root_element):
+                pass
+            for k , v in root_element.items():
+                if isinstance(v, list):
+                    for ele in v:
+                        self._get_object_references(ele, replacement_list)
+                elif isinstance(v, dict):  
+                    if self._is_object_ref(v):
+                        print("4")
+                        replacement_list.append(
+                            {"node": root_element, 
+                             "key": k, 
+                             "ref": v["@ref"]})
+                        return replacement_list
+                        print(k)
+                        print(DictUtils.get_pretty_json(v))
+                        print(DictUtils.get_pretty_json(root_element))
+                        #self.searched_types.append(v)
+                    self._get_object_references(v, replacement_list)
+        return []            
 
     def _id_matches(self, element, searched_id):
         if( isinstance(element, dict) and 
@@ -165,6 +193,13 @@ class Instancier(object):
         if( isinstance(element, dict) and 
             "@dmtype" in element.keys() and 
             element["@dmtype"] == searched_type):
+            return True
+        return False
+    
+    def _is_object_ref(self, element):
+        if( isinstance(element, dict) and 
+            "@ref" in element.keys() and 
+            "@dmtype" not in element.keys()):
             return True
         return False
     
@@ -213,6 +248,25 @@ class Instancier(object):
                 
         return self.searched_elements
     
+    def resolve_object_references(self):
+        #
+        # resolve object reference
+        # an object reference is something like {"@ref"=xxx}
+        # Refrences are replaced with copies of object looking like
+        #  {"@ID"=xxx ...}
+        #
+        root = self.json
+        while True:
+            replacement_list = []  
+
+            self._get_object_references(root, replacement_list)
+            if len(replacement_list) == 0:
+                break
+            else :
+                for replacement in replacement_list:
+                    instance = self.search_instance_by_id(replacement["ref"], root)[0]
+                    replacement["node"][replacement["key"]] = deepcopy(instance)
+     
     def search_instance_by_id(self, searched_id, root_element=None):
         self.searched_ids = []
         if root_element is not None:
