@@ -1,7 +1,7 @@
 {
 	"parameters": [
-		 {
-		 	"measure": "position",
+		{
+			"measure": "position",
 			"ucd": "pos;meta.main",
 			"semantic": "corrected",
 			"identifier": "namesaada",
@@ -23,6 +23,15 @@
 					"value": "_poserr_148",
 					"unit": "arcsec"
 				}
+			}
+		},
+		{
+			"measure": "status",
+			"ucd": "meta.code.error",
+			"semantic": "computed",
+			"identifier": "namesaada",
+			"status": {
+				"value": "_sum_flag_394"
 			}
 		}
 	],

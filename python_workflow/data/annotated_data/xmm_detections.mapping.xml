@@ -23,6 +23,30 @@
       <VALUE dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string" value="ICRS"/>
       <VALUE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" value="NoSet"/>
     </INSTANCE>
+    <INSTANCE ID="StatusSys" dmrole="" dmtype="cab_msd:STCStatusSys">
+      <COMPOSITION size="5" dmrole="cab_msd:STCStatusSys.statusLabel">
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="0"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="good"/>
+        </INSTANCE>
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="1"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="source parameters may be affected"/>
+        </INSTANCE>
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="2"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="possibly spurious"/>
+        </INSTANCE>
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="3"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="located in a area where spurious detection may occur"/>
+        </INSTANCE>
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="4"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="located in a area where spurious detection may occur and possibly spurious"/>
+        </INSTANCE>
+      </COMPOSITION>
+    </INSTANCE>
   </GLOBALS>
   <TEMPLATES>
     <ARRAY dmrole="root">
@@ -51,7 +75,7 @@
               <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
                 <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
                   <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_syserrcc_152"/>
+                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_poserr_148"/>
                     <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
                   </INSTANCE>
                 </INSTANCE>
@@ -61,6 +85,16 @@
                     <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
                   </INSTANCE>
                 </INSTANCE>
+              </INSTANCE>
+            </INSTANCE>
+          </INSTANCE>
+          <INSTANCE dmrole="cab_msd:Source.parameters" dmtype="cab_msd:Parameter">
+            <VALUE dmrole="cab_msd:Parameter.semantic" dmtype="ivoa:string" value="computed"/>
+            <VALUE dmrole="cab_msd:Parameter.ucd" dmtype="ivoa:string" value="meta.code.error"/>
+            <INSTANCE dmrole="cab_msd:Parameter.measure" dmtype="cab_msd:STCStatus">
+              <INSTANCE dmrole="cab_msd:STCStatus.coord" dmtype="cab_msd:STCStatusState">
+                <VALUE dmrole="cab_msd:STCStatusState.status" dmtype="ivoa:integer" ref="_sum_flag_394"/>
+                <INSTANCE ref="StatusSys" dmrole="coords:Coordinate.coordSys"/>
               </INSTANCE>
             </INSTANCE>
           </INSTANCE>
