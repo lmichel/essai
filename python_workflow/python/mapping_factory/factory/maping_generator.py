@@ -450,7 +450,6 @@ class MappingGenerator:
                 elif superclass in self.primitive_types :
                     sup_obj = self.primitive_types[superclass]
                 else:
-                    print(self.data_types)
                     self.log_error( str(superclass) + " Neither in dataType nor in primitive types")
                 for k,v in sup_obj.attributes.items():
                     obj.attributes[k] = v

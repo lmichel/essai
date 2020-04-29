@@ -7,54 +7,6 @@
 #   git commit -m ".gitignore is now working"
 
 
-Skip to content
-
-    Pull requests
-    Issues
-    Marketplace
-    Explore
-
-    @lmichel
-
-2,718
-74,395
-
-    35,036
-
-github/gitignore
-Code
-Pull requests 154
-Projects 0
-Insights
-gitignore/Global/Eclipse.gitignore
-e833921 on 17 Jun
-@shiftkey shiftkey Merge pull request #2649 from lukoerfer/master
-@shiftkey
-@sherzodv
-@tyutyutyu
-@aroben
-@Utumno
-@segfly
-@drasolka
-@rlee287
-@rafiw
-@raeglan
-@mimibar
-@fhemberger
-@lukoerfer
-@leandrodeleite
-@jcarsique
-@jayvdb
-@harshadsabne
-@gAmUssA
-@DenisGorbachev
-@pangratz
-@defunkt
-@arinto
-@apetresc
-@alexkaratarakis
-57 lines (41 sloc) 754 Bytes
-
 .metadata
 bin/
 tmp/
@@ -120,3 +72,9 @@ local.properties
 *.class
 .classpath
 /.gradle/
+
+*.log
+*.aux
+*.out
+*.toc
+

@@ -70,9 +70,7 @@ class ParameterAppender:
         parameters_block.append(new_param)
 
     def set_ref(self, host_role, value_role,value_ref):
-        print("setref {} {}". format (host_role, value_role))
         blocks = self.cab_msd_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
-        print("got " + host_role)
 
         value_block = None
         for block in blocks:
@@ -81,18 +79,14 @@ class ParameterAppender:
 
             subblocks = block.xpath(".//VALUE[@dmrole='" + value_role + "']")
             for subblock in subblocks:
-                print(subblock.keys())
                 if "ref" not in subblock.keys() or subblock.attrib["ref"].startswith("@@@"):
-                    print("got it")
                     value_block = subblock
                     value_block.attrib["ref"] = value_ref
                     if "value" in value_block.attrib.keys():
                         value_block.attrib.pop("value")
                         
-                    print(self.tostring())
 
                     return
-        print(self.tostring())
         logger.info("%s.%s already set", host_role, value_role)
         return 
 
@@ -111,9 +105,7 @@ class ParameterAppender:
             value_block.attrib.pop("value")
 
     def set_value(self, host_role, value_role, value_value):
-        print("setvalue {} {}". format (host_role, value_role))
         blocks = self.cab_msd_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
-        print("got " + host_role)
 
         value_block = None
         for block in blocks:
@@ -122,18 +114,15 @@ class ParameterAppender:
 
             subblocks = block.xpath(".//VALUE[@dmrole='" + value_role + "']")
             for subblock in subblocks:
-                print(subblock.keys())
                 if "value" not in subblock.keys() or subblock.attrib["value"].startswith("@@@"):
-                    print("got it")
                     value_block = subblock
                     value_block.attrib["value"] = value_value
                     if "ref" in value_block.attrib.keys():
                         value_block.attrib.pop("ref")
                         
-                    print(self.tostring())
 
                     return
-        print(self.tostring())
+        """
         raise Exception()   
         block = self._get_unique_element(
             self.cab_msd_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
@@ -148,6 +137,7 @@ class ParameterAppender:
         value_block.attrib["value"] = value_value
         if "ref" in value_block.attrib.keys():
             value_block.attrib.pop("ref")
+        """
 
     def set_notset_value(self):
         notset_values = self.cab_msd_tree.xpath("//VALUE[@ref='@@@@@@']")

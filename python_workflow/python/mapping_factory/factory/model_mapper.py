@@ -326,8 +326,6 @@ class ModelMapper:
         
     def generate_object_mapping(self, vodml_role,vodml_object_type):
         
-        if vodml_role == "coords:Coordinate.frame":
-            print("eee")
         if vodml_object_type.vodml_constraints.get_nosubset_constraint() :
             ctr = " const='" + vodml_object_type.vodml_constraints.get_nosubset_constraint().description + "' "
         else:
@@ -342,8 +340,6 @@ class ModelMapper:
 
 
         for attribute in vodml_object_type.attributes.values():
-            if attribute.vodmlid ==  "coords:Coordinate.frame":
-                print(attribute)
             if attribute.vodml_type in self.type_filter:
                 attribute.vodml_type = self.type_filter[attribute.vodml_type]
             self.generate_attribute_mapping(attribute)
@@ -364,9 +360,6 @@ class ModelMapper:
         elif attribute.array_size == 1:
             att_element = self._get_vodml_element(attribute.vodml_type)  
             if att_element :              
-                if attribute.vodmlid == "coords:Coordinate.frame":
-                    print(" generate_attribute_mapping " + attribute.__repr__())
-
                 self.generate_object_mapping(attribute.vodmlid, att_element)
             else:
                 self._append_xml( "<VALUE dmrole='" + attribute.vodmlid +  "' dmtype='" + attribute.vodml_type +  "' ref='@@@@@@' " + default + "/>")

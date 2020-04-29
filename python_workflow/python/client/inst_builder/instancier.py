@@ -169,15 +169,11 @@ class Instancier(object):
                         self._get_object_references(ele, replacement_list)
                 elif isinstance(v, dict):  
                     if self._is_object_ref(v):
-                        print("4")
                         replacement_list.append(
                             {"node": root_element, 
                              "key": k, 
                              "ref": v["@ref"]})
                         return replacement_list
-                        print(k)
-                        print(DictUtils.get_pretty_json(v))
-                        print(DictUtils.get_pretty_json(root_element))
                         #self.searched_types.append(v)
                     self._get_object_references(v, replacement_list)
         return []            
