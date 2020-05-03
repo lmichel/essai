@@ -22,7 +22,7 @@ local.properties
 .recommenders
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
-*checkpoints*
+*checkpoint*
 
 # External tool builders
 .externalToolBuilders/
