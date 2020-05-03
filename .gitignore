@@ -10,6 +10,8 @@
 .metadata
 bin/
 tmp/
+*.tar
+*.gz
 *.tmp
 *.bak
 *.swp
@@ -18,6 +20,9 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*checkpoints*
 
 # External tool builders
 .externalToolBuilders/
