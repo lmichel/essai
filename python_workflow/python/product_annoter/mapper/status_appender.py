@@ -12,16 +12,16 @@ class StatusAppender:
     classdocs
     '''
     
-    def __init__(self, cab_msd_path, param_path):
+    def __init__(self, mango_path, param_path):
         '''
         Constructor
         '''
-        self.cab_msd_path = cab_msd_path        
+        self.mango_path = mango_path        
         self.status_path = param_path
         
         self.appender = ParameterAppender(
             PARAM_TEMPLATES.POSITION,
-            self.cab_msd_path,
+            self.mango_path,
             self.status_path
             )
 
@@ -50,8 +50,8 @@ class StatusAppender:
                 equinox);
     
     def set_status(self, status_ref):
-        self.appender.set_ref("cab_msd:STCStatus.coord", 
-                              "cab_msd:STCStatusState.status", 
+        self.appender.set_ref("mango:STCStatus.coord", 
+                              "mango:STCStatusState.status", 
                               status_ref)
             
     def set_param_semantic(self, ucd, semantic):
@@ -59,7 +59,7 @@ class StatusAppender:
 
     def set_identifier(self, identifier_ref):
         self.appender.set_ref("root", 
-                              "cab_msd:Source.identifier", 
+                              "mango:Source.identifier", 
                               identifier_ref)
 
     def set_notset_value(self):

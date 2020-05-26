@@ -6,55 +6,90 @@ Created on 15 avr. 2020
 from lxml import etree
 from tests import logger
 from copy import deepcopy
-
+from product_annoter.mapper.constants import ATTRIBUTE_DEFAULT
 class ParameterAppender:
     '''
     classdocs
     '''
     
-    def __init__(self, param_template, cab_msd_path, param_path):
+    def __init__(self, param_template, mango_path, param_path):
         '''
         Constructor
         '''
         self.param_template = param_template
 
-        self.cab_msd_path = cab_msd_path
-        logger.info("parse %s", self.cab_msd_path)
-        self.cab_msd_tree = etree.parse(self.cab_msd_path)
+        self.mango_path = mango_path
+        logger.info("parse %s", self.mango_path)
+        self.mango_tree = etree.parse(self.mango_path)
         
         self.param_path = param_path
-        logger.info("parse %s", self.param_path)
-        self.param_tree = etree.parse(self.param_path)
+        if self.param_path:
+            logger.info("parse %s", self.param_path)
+            self.param_tree = etree.parse(self.param_path)
+        else:
+            self.param_tree = None
+
         
-        self.cab_msd_clean_tree = None
+        self.mango_clean_tree = None
     
     def _get_unique_element(self, elements):
         if len(elements) == 1:
             return elements[0]
         raise Exception("elements must have one item not {}".format(len(elements)))
     
+    def _is_element_unique  (self, elements):
+        return (len(elements) == 1)
+     
     def _clean_tree(self):
         tree_string = etree.tostring(
-            self.cab_msd_tree)
+            self.mango_tree)
                         
         parser = etree.XMLParser(remove_blank_text=True)
-        self.cab_msd_clean_tree = etree.fromstring (tree_string, parser)
+        self.mango_clean_tree = etree.fromstring (tree_string, parser)
         
     def _get_global_instance(self, globals_id):
         return self._get_unique_element(
-            self.cab_msd_tree.xpath("/VODML/GLOBALS/INSTANCE[@ID='" + globals_id + "']")
+            self.mango_tree.xpath("/VODML/GLOBALS/INSTANCE[@ID='" + globals_id + "']")
             )
+        
+        
+    def add_globals_xx(self, xml_instance):
+        """
+        Add the instances serialized in  xml_instance the GLOBALS blocks
+        The level 0 instances of  xml_instance having the samne ID as one of the child 
+        instances of GLOBALS are ignored (logged)
+        Deeper instances are not supposed to have an ID
+                
+        :param xml_instance: string representation of the block to be added to the GLOBALS
+        :type xml_instance: string
+        """
+        globals_root = self.mango_tree.xpath("/VODML/GLOBALS")
+        new_globals = etree.fromstring(xml_instance)
+        for new_global in new_globals.xpath("/INSTANCE"):
+            if "ID" in new_global.keys() :
+                new_global_id = new_global.attrib["ID"]
+                if len(self.mango_tree.xpath("/VODML/GLOBALS/INSTANCE[@ID='" + new_global_id + "']")) == 0:
+                    logger.info("add instance with ID={} to globals".format(new_global_id))
+                    self._get_unique_element(globals_root).append(new_global)
+                else :
+                    logger.info("instance with ID={} already exists globals".format(new_global_id))
+
+
          
     def add_globals(self):
-        cab_msd_globals = self.cab_msd_tree.xpath('/VODML/GLOBALS') 
+        if not self.param_tree:
+            return
+        mango_globals = self.mango_tree.xpath('/VODML/GLOBALS') 
         param_globals = self.param_tree.xpath('/VODML/GLOBALS') 
         for global_ele in self._get_unique_element(param_globals).getchildren():
             logger.info("Adding globals ID=%s", global_ele.attrib["ID"])
-            self._get_unique_element(cab_msd_globals).append( global_ele )
+            self._get_unique_element(mango_globals).append( global_ele )
             
     def add_param_parameter(self):
+        if not self.param_tree:
+            return
         parameters_block = self._get_unique_element(
-            self.cab_msd_tree.xpath("//COMPOSITION[@dmrole='cab_msd:Source.parameters']")
+            self.mango_tree.xpath("//COMPOSITION[@dmrole='mango:Source.parameters']")
             )
         param_block = self._get_unique_element(
             self.param_tree.xpath("//INSTANCE[@dmrole='root']")
@@ -65,12 +100,12 @@ class ParameterAppender:
             self.param_template
             )
         param_block = deepcopy(param_block)
-        param_block.attrib["dmrole"] = "cab_msd:Parameter.measure"
+        param_block.attrib["dmrole"] = "mango:Parameter.measure"
         new_param.append(param_block)
         parameters_block.append(new_param)
 
-    def set_ref(self, host_role, value_role,value_ref):
-        blocks = self.cab_msd_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
+    def set_ref(self, host_role, value_role, value_ref):
+        blocks = self.mango_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
 
         value_block = None
         for block in blocks:
@@ -82,30 +117,33 @@ class ParameterAppender:
                 if "ref" not in subblock.keys() or subblock.attrib["ref"].startswith("@@@"):
                     value_block = subblock
                     value_block.attrib["ref"] = value_ref
+                    logger.info("Set ref of %s[%s] = %s",host_role, value_role, value_ref)
                     if "value" in value_block.attrib.keys():
+                        logger.info("Remove @value from %s[%s] = %s",host_role, value_role, value_ref)
                         value_block.attrib.pop("value")
                         
 
                     return
-        logger.info("%s.%s already set", host_role, value_role)
-        return 
-
-        block = self._get_unique_element(
-            self.cab_msd_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
-            )
-        value_block = self._get_unique_element(
-                block.xpath(".//VALUE[@dmrole='" + value_role + "']")
-                )
+        logger.info("%s>%s already set", host_role, value_role)
         
-        logger.info("Set ref of %s[%s] = %s",host_role, value_role, value_ref)
-
-        value_block.attrib["ref"] = value_ref
+    def set_dmref(self, host_role, dm_ref):
+        """
+        Set the dmref attribute with dm_ref for all INSTANCES having @dmrole=host_role and @dmref=@@@@@@
         
-        if "value" in value_block.attrib.keys():
-            value_block.attrib.pop("value")
-
+        :param host_role: role of the instance to be modified
+        :type host_role: string
+        :param dm_ref: dm reference 
+        :type dm_ref: string
+        """
+        blocks = self.mango_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
+        for block in blocks:
+            if "dmref" in block.attrib.keys():
+                if block.attrib["dmref"] == ATTRIBUTE_DEFAULT.TO_BE_SET:
+                    block.attrib["dmref"] = dm_ref
+            return
+ 
     def set_value(self, host_role, value_role, value_value):
-        blocks = self.cab_msd_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
+        blocks = self.mango_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
 
         value_block = None
         for block in blocks:
@@ -122,42 +160,26 @@ class ParameterAppender:
                         
 
                     return
-        """
-        raise Exception()   
-        block = self._get_unique_element(
-            self.cab_msd_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
-            )
-        if "ref" in block.attrib.keys():
-            block = self._get_global_instance(block.attrib["ref"])
-
-        value_block = self._get_unique_element(
-                block.xpath(".//VALUE[@dmrole='" + value_role + "']")
-                )
-        logger.info("Set value of %s[%s] = %s",host_role, value_role, value_value)
-        value_block.attrib["value"] = value_value
-        if "ref" in value_block.attrib.keys():
-            value_block.attrib.pop("ref")
-        """
-
+ 
     def set_notset_value(self):
-        notset_values = self.cab_msd_tree.xpath("//VALUE[@ref='@@@@@@']")
+        notset_values = self.mango_tree.xpath("//VALUE[@ref='" + ATTRIBUTE_DEFAULT.TO_BE_SET + "']")
         for notset_value  in notset_values:        
             logger.info("Set value of tag %s as NotSet", notset_value.attrib["dmrole"])
-            notset_value.attrib["value"] = "NoSet"
+            notset_value.attrib["value"] = ATTRIBUTE_DEFAULT.NOT_SET
             if "ref" in notset_value.attrib.keys():        
                 notset_value.attrib.pop("ref")    
                 
     def set_param_semantic(self, ucd, semantic):
         logger.info("set ucd=%s and semantic=%s", ucd, semantic)
-        self.set_value("cab_msd:Source.parameters", "cab_msd:Parameter.ucd", ucd)
-        self.set_value("cab_msd:Source.parameters", "cab_msd:Parameter.semantic", semantic)
+        self.set_value("mango:Source.parameters", "mango:Parameter.ucd", ucd)
+        self.set_value("mango:Source.parameters", "mango:Parameter.semantic", semantic)
         
     def save(self, filepath):
         logger.info("save mapping bloc in %s", filepath)
 
         self._clean_tree()
         with open(filepath, 'wb') as output_file:
-            etree.ElementTree(self.cab_msd_clean_tree).write(
+            etree.ElementTree(self.mango_clean_tree).write(
                 output_file, 
                 encoding="utf-8", 
                 xml_declaration=False, 
@@ -166,5 +188,5 @@ class ParameterAppender:
     def tostring(self):
         self._clean_tree()
         return (etree.tostring(
-            self.cab_msd_clean_tree,
+            self.mango_clean_tree,
             pretty_print=True)).decode("utf-8")    

@@ -9,9 +9,15 @@ from collections import namedtuple
 ParamTemplates = namedtuple('ParamTemplates', ['POSITION'])
 PARAM_TEMPLATES = ParamTemplates(
     """
-    <INSTANCE dmrole="cab_msd:Source.parameters" dmtype="cab_msd:Parameter">
-    <VALUE dmrole="cab_msd:Parameter.semantic" dmtype="ivoa:string" value="@@@@@"/>
-    <VALUE dmrole="cab_msd:Parameter.ucd" dmtype="ivoa:string" value="@@@@@"/>
+    <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+    <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="@@@@@@"/>
+    <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="@@@@@@"/>
     </INSTANCE>
     """
+    )
+
+AttributeDefault = namedtuple('AttributeDefault', ['TO_BE_SET', 'NOT_SET'])
+ATTRIBUTE_DEFAULT = AttributeDefault(
+    "@@@@@@",
+    "NotSet"
     )
