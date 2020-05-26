@@ -1,0 +1,32 @@
+{
+    "identifier": "namesaada",
+	"parameters": [
+		{
+			"measure": "LonLatSkyPosition",
+			"ucd": "pos;meta.main",
+			"semantic": "corrected",
+			"frame": {
+				"frame": "ICRS",
+				"equinox": null
+			},
+			"position": {
+				"longitude": "_ra_146",
+				"latitude": "_dec_147",
+				"unit": "deg"
+			},
+			"errors": {
+				"systematic": {
+					"value": "_syserrcc_152",
+					"unit": "arcsec"
+				},
+				"random": {
+					"value": "_poserr_148",
+					"unit": "arcsec"
+				}
+			}
+		}
+	],
+	"associatedData": {
+		
+	}
+}
