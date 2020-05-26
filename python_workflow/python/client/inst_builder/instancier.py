@@ -157,6 +157,16 @@ class Instancier(object):
                     self._get_subelement_by_type(v, searched_type)
 
     def _get_object_references(self, root_element, replacement_list):
+        """
+        recursive function
+        Looks into root_element for element being references (INSTANCE with @dmref)
+        Objects found are stored in replacement_list
+        
+        :param root_element: Root element for the search
+        :type root_element: XML element
+        :param replacement_list: List of the found elements
+        :type replacement_list: list of {"node": element found, "key": role if thye reference, "dmref": instance reference}
+        """
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 self._get_object_references(root_element[idx], replacement_list)
@@ -172,7 +182,7 @@ class Instancier(object):
                         replacement_list.append(
                             {"node": root_element, 
                              "key": k, 
-                             "ref": v["@ref"]})
+                             "dmref": v["@dmref"]})
                         return replacement_list
                         #self.searched_types.append(v)
                     self._get_object_references(v, replacement_list)
@@ -194,7 +204,7 @@ class Instancier(object):
     
     def _is_object_ref(self, element):
         if( isinstance(element, dict) and 
-            "@ref" in element.keys() and 
+            "@dmref" in element.keys() and 
             "@dmtype" not in element.keys()):
             return True
         return False
@@ -260,7 +270,7 @@ class Instancier(object):
                 break
             else :
                 for replacement in replacement_list:
-                    instance = self.search_instance_by_id(replacement["ref"], root)[0]
+                    instance = self.search_instance_by_id(replacement["dmref"], root)[0]
                     replacement["node"][replacement["key"]] = deepcopy(instance)
      
     def search_instance_by_id(self, searched_id, root_element=None):
