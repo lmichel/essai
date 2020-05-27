@@ -7,5 +7,5 @@
       <VALUE dmrole="mango:stcextend.PhotFilter.magnitudeSystem" dmtype="ivoa:string" value="XMM"/>
       <VALUE dmrole="mango:stcextend.PhotFilter.effectiveWavlength" dmtype="ivoa:real" value="9.75"/>
       <VALUE dmrole="mango:stcextend.PhotFilter.unit" dmtype="ivoa:string" value="KeV"/>
-      <VALUE dmrole="mango:stcextend.PhotFilter.bandWidth" dmtype="ivoa:real" value="3.0"/>
+      <VALUE dmrole="mango:stcextend.PhotFilter.bandWidth" dmtype="ivoa:real" value="4.5"/>
     </INSTANCE>

@@ -136,11 +136,15 @@ class ParameterAppender:
         :type dm_ref: string
         """
         blocks = self.mango_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
+        found = False
         for block in blocks:
             if "dmref" in block.attrib.keys():
                 if block.attrib["dmref"] == ATTRIBUTE_DEFAULT.TO_BE_SET:
+                    logger.info("instance with @role={} to set the dmref={} found".format(host_role, dm_ref))
                     block.attrib["dmref"] = dm_ref
-            return
+                    found = True
+        if found is False:
+            logger.info("Cannot find instance with @role={} to set the dmref={}".format(host_role, dm_ref))
  
     def set_value(self, host_role, value_role, value_value):
         blocks = self.mango_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")

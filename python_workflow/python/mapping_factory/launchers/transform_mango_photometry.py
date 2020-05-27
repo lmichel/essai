@@ -26,10 +26,7 @@ def main():
     mapping_generator.root_object_id = 'mango:stcextend.Photometry'
     # set the concrete object types
     mapping_generator.concrete_classes = {
-        "coords:SpaceFrame.refPosition": ["coords:StdRefLocation"],
-        "coords:Coordinate.coordSys": ["coords:SpaceSys"],
-        "coords:PhysicalCoordSys.frame": ["coords:SpaceFrame"],
-        "coords:PhysicalCoordSys.coordSpace": ["coords:SphericalCoordSpace"]
+        "coords:PhysicalCoordSys.frame": ["mango:stcextend.PhotFilter"],
         }
     # set the concrete data types
     mapping_generator.concrete_types={

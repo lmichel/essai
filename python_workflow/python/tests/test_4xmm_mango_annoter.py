@@ -14,6 +14,7 @@ from product_annoter.mapper.position_appender import PositionAppender
 from product_annoter.mapper.status_appender import StatusAppender  
 from product_annoter.mapper.votable_merger import VOTableMerger
 from product_annoter.mapper.identifier_appender import IdentifierAppender
+from product_annoter.mapper.photometry_appender import PhotometryAppender
       
 if __name__ == '__main__':
         base_path = os.path.dirname(os.path.realpath(__file__)) 
@@ -59,6 +60,12 @@ if __name__ == '__main__':
                 appender.append_measure(measure)
                 #print(appender.tostring())
                 appender.save(output_mapping_path)
-        
+            elif measure["measure"] == "Photometry":
+                logger.info("Photometry found")
+                appender = PhotometryAppender(output_mapping_path, component_path)
+                appender.append_measure(measure)
+                #print(appender.tostring())
+                appender.save(output_mapping_path)
+       
         merger = VOTableMerger(raw_votable_path, output_mapping_path, annot_votable_path)
         merger.insert_mapping()

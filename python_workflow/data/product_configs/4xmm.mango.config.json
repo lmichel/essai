@@ -3,7 +3,7 @@
 	"parameters": [
 		{
 			"measure": "LonLatSkyPosition",
-			"ucd": "pos;meta.main",
+			"ucd": "pos",
 			"semantic": "corrected",
 			"frame": {
 				"frame": "ICRS",
@@ -22,6 +22,24 @@
 				"random": {
 					"value": "_poserr_148",
 					"unit": "arcsec"
+				}
+			}
+		},
+		{
+			"measure": "Photometry",
+			"ucd": "phot.flux",
+			"semantic": "corrected",
+			"frame": {
+				"frame": "EB1"
+			},
+			"luminosity": {
+				"luminosity": "_ep_1_flux_166",
+				"unit": "erg/cm2/sec"
+			},
+			"errors": {
+				"random": {
+					"value": "_ep_1_flux_err_167",
+				"unit": "erg/cm2/sec"
 				}
 			}
 		}
