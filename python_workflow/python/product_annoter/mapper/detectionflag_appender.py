@@ -7,7 +7,7 @@ import os
 from product_annoter.mapper.constants import PARAM_TEMPLATES
 from product_annoter.mapper.parameter_appender import ParameterAppender
 
-class PhotometryAppender:
+class DetectionFlagAppender:
     '''
     classdocs
     '''
@@ -19,7 +19,7 @@ class PhotometryAppender:
         self.mango_path = mango_path    
         self.component_path = component_path  
         self.position_path = os.path.join(component_path, 
-                                          "mango.Photometry.mapping.xml")
+                                          "mango.DetectionFlag.mapping.xml")
         self.appender = ParameterAppender(
             PARAM_TEMPLATES.POSITION,
             self.mango_path,
@@ -33,36 +33,24 @@ class PhotometryAppender:
         self.set_param_semantic(measure_descriptor["ucd"], 
                                 measure_descriptor["semantic"])
         
-        self.set_spaceframe(measure_descriptor["frame"]["frame"])
-        self.set_position(measure_descriptor["luminosity"]["luminosity"]
+        self.set_position(measure_descriptor["coordinate"]["value"]
                           ) 
-        self.set_errors(measure_descriptor["errors"]["random"]["value"], 
-                        measure_descriptor["errors"]["random"]["unit"]
-                        
-                        ) 
+        self.set_spaceframe(measure_descriptor["frame"]["frame"])
+
         self.set_notset_value()
         
     def set_spaceframe(self, frame):   
         with open(os.path.join(self.component_path, "mango.frame." + frame + ".xml")) as xml_file:
             data = xml_file.read()
             self.appender.add_globals_xx(data)
-            self.appender.set_dmref("coords:Coordinate.coordSys", "PhotFrame_" + frame)
+            self.appender.set_dmref("coords:Coordinate.coordSys", "StatusFrame_" + frame)
         return
+
              
-    def set_position(self, luminosity):
-        self.appender.set_ref_or_value("mango:stcextend.Photometry.coord",
-                              "mango:stcextend.PhotometryCoord.luminosity",
-                              luminosity)
-                                     
-    def set_errors(self, err_ref , err_unit):
-        if err_ref is not None:
-            self.appender.set_ref_or_value("meas:Error.statError", 
-                                  "ivoa:RealQuantity.value", 
-                                  err_ref)
-        
-            self.appender.set_ref_or_value("meas:Error.statError", 
-                                    "ivoa:Quantity.unit", 
-                                    err_unit)
+    def set_position(self, value):
+        self.appender.set_ref_or_value("mango:stcextend.Flag.coord", 
+                              "mango:stcextend.FlagCoord.coord", 
+                              value)
             
     def set_param_semantic(self, ucd, semantic):
         self.appender.set_param_semantic(ucd, semantic) 

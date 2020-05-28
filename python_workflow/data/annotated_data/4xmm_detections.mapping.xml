@@ -29,6 +29,42 @@
       <VALUE dmrole="mango:stcextend.PhotFilter.unit" dmtype="ivoa:string" value="KeV"/>
       <VALUE dmrole="mango:stcextend.PhotFilter.bandWidth" dmtype="ivoa:real" value="0.3"/>
     </INSTANCE>
+    <INSTANCE ID="PhotFrame_EB2" dmrole="" dmtype="mango:stcextend.PhotFilter">
+      <VALUE dmrole="mango:stcextend.PhotFilter.name" dmtype="ivoa:string" value="XMM EB2"/>
+      <VALUE dmrole="mango:stcextend.PhotFilter.zeroPointFlux" dmtype="ivoa:real" value="NoSet"/>
+      <VALUE dmrole="mango:stcextend.PhotFilter.magnitudeSystem" dmtype="ivoa:string" value="XMM"/>
+      <VALUE dmrole="mango:stcextend.PhotFilter.effectiveWavlength" dmtype="ivoa:real" value="1.25"/>
+      <VALUE dmrole="mango:stcextend.PhotFilter.unit" dmtype="ivoa:string" value="KeV"/>
+      <VALUE dmrole="mango:stcextend.PhotFilter.bandWidth" dmtype="ivoa:real" value="1.5"/>
+    </INSTANCE>
+    <INSTANCE ID="PhotFrame_HR1" dmrole="" dmtype="mango:stcextend.HRFrame">
+      <INSTANCE dmrole="mango:stcextend.HRFrame.low" dmref="PhotFrame_EB1"/>
+      <INSTANCE dmrole="mango:stcextend.HRFrame.high" dmref="PhotFrame_EB2"/>
+    </INSTANCE>
+    <INSTANCE ID="StatusFrame_DETFLAG" dmrole="" dmtype="cab_msd:STCStatusSys">
+      <COMPOSITION size="5" dmrole="cab_msd:STCStatusSys.statusLabel">
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="0"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="good"/>
+        </INSTANCE>
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="1"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="source parameters may be affected"/>
+        </INSTANCE>
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="2"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="possibly spurious"/>
+        </INSTANCE>
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="3"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="located in a area where spurious detection may occur"/>
+        </INSTANCE>
+        <INSTANCE dmrole="cab_msd:STCStatusSys.statusLabel" dmtype="cab_msd:StatusLabel">
+          <VALUE dmrole="cab_msd:StatusLabel.value" dmtype="ivoa:integer" value="4"/>
+          <VALUE dmrole="cab_msd:StatusLabel.label" dmtype="ivoa:string" value="located in a area where spurious detection may occur and possibly spurious"/>
+        </INSTANCE>
+      </COMPOSITION>
+    </INSTANCE>
   </GLOBALS>
   <TEMPLATES>
     <ARRAY dmrole="root">
@@ -76,6 +112,45 @@
                     <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="erg/cm2/sec"/>
                   </INSTANCE>
                 </INSTANCE>
+              </INSTANCE>
+            </INSTANCE>
+          </INSTANCE>
+          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="computed"/>
+            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
+            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.HardnessRatio">
+              <INSTANCE dmrole="mango:stcextend.HardnessRatio.coord" dmtype="mango:stcextend.HardnessRatioCoord">
+                <VALUE dmrole="mango:stcextend.HardnessRatioCoord.hardnessRatio" dmtype="ivoa:real" value="NotSet"/>
+                <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="PhotFrame_EB1"/>
+              </INSTANCE>
+              <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
+                <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
+                  <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_ep_hr1_err_303"/>
+                    <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="NotSet"/>
+                  </INSTANCE>
+                </INSTANCE>
+              </INSTANCE>
+            </INSTANCE>
+          </INSTANCE>
+          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="obs-parameter"/>
+            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="time.duration;obs.exposure"/>
+            <INSTANCE dmrole="mango:Parameter.measure" dmtype="meas:GenericMeasure">
+              <INSTANCE dmrole="meas:GenericMeasure.coord" dmtype="coords:PhysicalCoordinate">
+                <INSTANCE dmrole="coords:PhysicalCoordinate.cval" dmtype="ivoa:RealQuantity">
+                  <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_pn_1_exp_334"/>
+                  <VALUE dmrole="ivoa:RealQuantity.unit" dmtype="ivoa:Unit" value="sec"/>
+                </INSTANCE>
+              </INSTANCE>
+            </INSTANCE>
+          </INSTANCE>
+          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="computed"/>
+            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="meta.code.qual"/>
+            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Flag">
+              <INSTANCE dmrole="mango:stcextend.Flag.coord" dmtype="mango:stcextend.FlagCoord">
+                <VALUE dmrole="mango:stcextend.FlagCoord.coord" dmtype="ivoa:integer" ref="_sum_flag_394"/>
               </INSTANCE>
             </INSTANCE>
           </INSTANCE>

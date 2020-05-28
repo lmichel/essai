@@ -36,8 +36,7 @@ class PositionAppender:
         self.set_spaceframe(measure_descriptor["frame"]["frame"],
                             measure_descriptor["frame"]["equinox"])
         self.set_position(measure_descriptor["position"]["longitude"], 
-                          measure_descriptor["position"]["latitude"], 
-                          measure_descriptor["position"]["unit"]
+                          measure_descriptor["position"]["latitude"]
                           ) 
         self.set_errors(measure_descriptor["errors"]["random"]["value"], 
                         measure_descriptor["errors"]["random"]["unit"], 
@@ -53,29 +52,29 @@ class PositionAppender:
             self.appender.set_dmref("coords:Coordinate.coordSys", "SpaceFrame_" + frame)
         return
              
-    def set_position(self, ra_ref, dec_ref, pos_unit):
-        self.appender.set_ref("mango:stcextend.LonLatSkyPosition.coord", 
+    def set_position(self, ra_ref, dec_ref):
+        self.appender.set_ref_or_value("mango:stcextend.LonLatSkyPosition.coord", 
                               "mango:stcextend.LonLatPoint.longitude", 
                               ra_ref)
-        self.appender.set_ref("mango:stcextend.LonLatSkyPosition.coord", 
+        self.appender.set_ref_or_value("mango:stcextend.LonLatSkyPosition.coord", 
                               "mango:stcextend.LonLatPoint.latitude", 
                               dec_ref)
                                      
     def set_errors(self, err_ref , err_unit, sys_err_ref, sys_err_unit):
         if err_ref is not None:
-            self.appender.set_ref("meas:Error.statError", 
+            self.appender.set_ref_or_value("meas:Error.statError", 
                                   "ivoa:RealQuantity.value", 
                                   err_ref)
         
-            self.appender.set_value("meas:Error.statError", 
+            self.appender.set_ref_or_value("meas:Error.statError", 
                                     "ivoa:Quantity.unit", 
                                     err_unit)
         if sys_err_ref is not None:
-            self.appender.set_ref("meas:Error.sysError", 
+            self.appender.set_ref_or_value("meas:Error.sysError", 
                                   "ivoa:RealQuantity.value", 
                                   sys_err_ref)
         
-            self.appender.set_value("meas:Error.sysError", 
+            self.appender.set_ref_or_value("meas:Error.sysError", 
                                    "ivoa:Quantity.unit", 
                                 sys_err_unit)
             

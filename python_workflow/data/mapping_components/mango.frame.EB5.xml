@@ -1,7 +1,7 @@
    <!--
    Pseudo filter for the XMM EB5 (7.5 12 KeV) 
     -->
-    <INSTANCE ID="PhotFrame_EB1" dmrole="" dmtype="mango:stcextend.PhotFilter" >
+    <INSTANCE ID="PhotFrame_EB5" dmrole="" dmtype="mango:stcextend.PhotFilter" >
       <VALUE dmrole="mango:stcextend.PhotFilter.name" dmtype="ivoa:string" value="XMM EB5"/>
       <VALUE dmrole="mango:stcextend.PhotFilter.zeroPointFlux" dmtype="ivoa:real" value="NoSet"/>
       <VALUE dmrole="mango:stcextend.PhotFilter.magnitudeSystem" dmtype="ivoa:string" value="XMM"/>

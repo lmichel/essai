@@ -7,7 +7,7 @@ import os
 from product_annoter.mapper.constants import PARAM_TEMPLATES
 from product_annoter.mapper.parameter_appender import ParameterAppender
 
-class PhotometryAppender:
+class HardnessRatioAppender:
     '''
     classdocs
     '''
@@ -19,7 +19,7 @@ class PhotometryAppender:
         self.mango_path = mango_path    
         self.component_path = component_path  
         self.position_path = os.path.join(component_path, 
-                                          "mango.Photometry.mapping.xml")
+                                          "mango.HardnessRatio.mapping.xml")
         self.appender = ParameterAppender(
             PARAM_TEMPLATES.POSITION,
             self.mango_path,
@@ -33,12 +33,16 @@ class PhotometryAppender:
         self.set_param_semantic(measure_descriptor["ucd"], 
                                 measure_descriptor["semantic"])
         
-        self.set_spaceframe(measure_descriptor["frame"]["frame"])
-        self.set_position(measure_descriptor["luminosity"]["luminosity"]
+        frames = measure_descriptor["frame"]["frame"]
+        if type(frames) is list: 
+            for frame in frames:
+                self.set_spaceframe(frame)
+        else:
+            self.set_spaceframe(frames)
+
+        self.set_position(measure_descriptor["coordinate"]["value"]
                           ) 
-        self.set_errors(measure_descriptor["errors"]["random"]["value"], 
-                        measure_descriptor["errors"]["random"]["unit"]
-                        
+        self.set_errors(measure_descriptor["errors"]["random"]["value"]                        
                         ) 
         self.set_notset_value()
         
@@ -54,16 +58,13 @@ class PhotometryAppender:
                               "mango:stcextend.PhotometryCoord.luminosity",
                               luminosity)
                                      
-    def set_errors(self, err_ref , err_unit):
+    def set_errors(self, err_ref ):
         if err_ref is not None:
             self.appender.set_ref_or_value("meas:Error.statError", 
                                   "ivoa:RealQuantity.value", 
                                   err_ref)
         
-            self.appender.set_ref_or_value("meas:Error.statError", 
-                                    "ivoa:Quantity.unit", 
-                                    err_unit)
-            
+             
     def set_param_semantic(self, ucd, semantic):
         self.appender.set_param_semantic(ucd, semantic) 
 

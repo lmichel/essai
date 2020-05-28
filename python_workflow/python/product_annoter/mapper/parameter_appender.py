@@ -104,10 +104,18 @@ class ParameterAppender:
         new_param.append(param_block)
         parameters_block.append(new_param)
 
+    def set_ref_or_value(self, host_role, value_role, value_or_ref):
+        if value_or_ref.startswith("@") is True:
+            self.set_ref(host_role, value_role, value_or_ref.replace("@", ""))
+        else :
+            self.set_value(host_role, value_role, value_or_ref)
+
+
     def set_ref(self, host_role, value_role, value_ref):
         blocks = self.mango_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
 
         value_block = None
+        found = False
         for block in blocks:
             if "ref" in block.attrib.keys():
                 block = self._get_global_instance(block.attrib["ref"])
@@ -119,13 +127,38 @@ class ParameterAppender:
                     value_block.attrib["ref"] = value_ref
                     logger.info("Set ref of %s[%s] = %s",host_role, value_role, value_ref)
                     if "value" in value_block.attrib.keys():
-                        logger.info("Remove @value from %s[%s] = %s",host_role, value_role, value_ref)
+                        logger.info("Remove @value from %s[%s]",host_role, value_role)
                         value_block.attrib.pop("value")
-                        
-
-                    return
-        logger.info("%s>%s already set", host_role, value_role)
+                        found = True
+        if found is False:     
+            logger.info("All %s>%s already set", host_role, value_role)
         
+ 
+    def set_value(self, host_role, value_role, value_value):
+        blocks = self.mango_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
+
+        value_block = None
+        found = False
+        for block in blocks:
+            if "dmref" in block.attrib.keys():
+                block = self._get_global_instance(block.attrib["dmref"])
+
+            subblocks = block.xpath(".//VALUE[@dmrole='" + value_role + "']")
+            for subblock in subblocks:
+                if "value" not in subblock.keys() or subblock.attrib["value"].startswith("@@@"):
+                    value_block = subblock
+                    value_block.attrib["value"] = value_value
+                    logger.info("Set value of %s[%s] = %s",host_role, value_role, value_value)
+                    if "ref" in value_block.attrib.keys():
+                        logger.info("Remove @ref from %s[%s]",host_role, value_role)
+                        value_block.attrib.pop("ref")
+                        found = True
+                        
+        if found is False:     
+            logger.info("All %s>%s already set", host_role, value_role)
+
+                    #return
+
     def set_dmref(self, host_role, dm_ref):
         """
         Set the dmref attribute with dm_ref for all INSTANCES having @dmrole=host_role and @dmref=@@@@@@
@@ -145,25 +178,6 @@ class ParameterAppender:
                     found = True
         if found is False:
             logger.info("Cannot find instance with @role={} to set the dmref={}".format(host_role, dm_ref))
- 
-    def set_value(self, host_role, value_role, value_value):
-        blocks = self.mango_tree.xpath("//INSTANCE[@dmrole='" + host_role + "']")
-
-        value_block = None
-        for block in blocks:
-            if "ref" in block.attrib.keys():
-                block = self._get_global_instance(block.attrib["ref"])
-
-            subblocks = block.xpath(".//VALUE[@dmrole='" + value_role + "']")
-            for subblock in subblocks:
-                if "value" not in subblock.keys() or subblock.attrib["value"].startswith("@@@"):
-                    value_block = subblock
-                    value_block.attrib["value"] = value_value
-                    if "ref" in value_block.attrib.keys():
-                        value_block.attrib.pop("ref")
-                        
-
-                    return
  
     def set_notset_value(self):
         notset_values = self.mango_tree.xpath("//VALUE[@ref='" + ATTRIBUTE_DEFAULT.TO_BE_SET + "']")
