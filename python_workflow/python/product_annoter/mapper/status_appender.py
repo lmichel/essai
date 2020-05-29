@@ -30,7 +30,9 @@ class StatusAppender:
     
     def append_measure(self, measure_descriptor):  
         self.set_param_semantic(measure_descriptor["ucd"], 
-                                measure_descriptor["semantic"])
+                                measure_descriptor["semantic"],
+                                measure_descriptor["description"]
+                                )
         
         self.set_identifier(measure_descriptor["identifier"])
 
@@ -54,8 +56,8 @@ class StatusAppender:
                               "mango:STCStatusState.status", 
                               status_ref)
             
-    def set_param_semantic(self, ucd, semantic):
-        self.appender.set_param_semantic(ucd, semantic) 
+    def set_param_semantic(self, ucd, semantic, description):
+        self.appender.set_param_semantic(ucd, semantic, description) 
 
     def set_identifier(self, identifier_ref):
         self.appender.set_ref("root", 

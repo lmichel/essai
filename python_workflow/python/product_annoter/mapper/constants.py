@@ -12,6 +12,7 @@ PARAM_TEMPLATES = ParamTemplates(
     <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
     <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="@@@@@@"/>
     <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="@@@@@@"/>
+    <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="@@@@@@"/>
     </INSTANCE>
     """
     )

@@ -73,8 +73,9 @@
         <COMPOSITION size="-1" dmrole="mango:Source.associatedData"/>
         <COMPOSITION size="-1" dmrole="mango:Source.parameters">
           <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="corrected"/>
+            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#corrected"/>
             <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos"/>
+            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Corrected position"/>
             <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.LonLatSkyPosition">
               <INSTANCE dmrole="mango:stcextend.LonLatSkyPosition.coord" dmtype="mango:stcextend.LonLatPoint">
                 <VALUE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="_ra_146"/>
@@ -98,8 +99,9 @@
             </INSTANCE>
           </INSTANCE>
           <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="corrected"/>
+            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="Flux in Energy band 1 0.2-0.5KeV (cameras merged)"/>
             <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
+            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="#corrected"/>
             <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Photometry">
               <INSTANCE dmrole="mango:stcextend.Photometry.coord" dmtype="mango:stcextend.PhotometryCoord">
                 <VALUE dmrole="mango:stcextend.PhotometryCoord.luminosity" dmtype="ivoa:real" ref="_ep_1_flux_166"/>
@@ -116,8 +118,9 @@
             </INSTANCE>
           </INSTANCE>
           <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="computed"/>
+            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
             <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
+            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Hardness Ration in Energy band 1 0.2-0.5KeV (cameras merged)"/>
             <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.HardnessRatio">
               <INSTANCE dmrole="mango:stcextend.HardnessRatio.coord" dmtype="mango:stcextend.HardnessRatioCoord">
                 <VALUE dmrole="mango:stcextend.HardnessRatioCoord.hardnessRatio" dmtype="ivoa:real" value="NotSet"/>
@@ -134,8 +137,9 @@
             </INSTANCE>
           </INSTANCE>
           <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="obs-parameter"/>
+            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#obs-parameter"/>
             <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="time.duration;obs.exposure"/>
+            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="PN exposure time in Energy band 1 0.2-0.5KeV"/>
             <INSTANCE dmrole="mango:Parameter.measure" dmtype="meas:GenericMeasure">
               <INSTANCE dmrole="meas:GenericMeasure.coord" dmtype="coords:PhysicalCoordinate">
                 <INSTANCE dmrole="coords:PhysicalCoordinate.cval" dmtype="ivoa:RealQuantity">
@@ -146,8 +150,9 @@
             </INSTANCE>
           </INSTANCE>
           <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="computed"/>
+            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
             <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="meta.code.qual"/>
+            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Summary quality flag"/>
             <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Flag">
               <INSTANCE dmrole="mango:stcextend.Flag.coord" dmtype="mango:stcextend.FlagCoord">
                 <VALUE dmrole="mango:stcextend.FlagCoord.coord" dmtype="ivoa:integer" ref="_sum_flag_394"/>

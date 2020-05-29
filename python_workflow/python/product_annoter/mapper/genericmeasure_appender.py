@@ -31,7 +31,9 @@ class GenericAppender:
     
     def append_measure(self, measure_descriptor):  
         self.set_param_semantic(measure_descriptor["ucd"], 
-                                measure_descriptor["semantic"])
+                                measure_descriptor["semantic"],
+                                measure_descriptor["description"]
+                                )
         
         self.set_position(measure_descriptor["coordinate"]["value"], 
                           measure_descriptor["coordinate"]["unit"]
@@ -49,8 +51,8 @@ class GenericAppender:
                               unit)
                                       
             
-    def set_param_semantic(self, ucd, semantic):
-        self.appender.set_param_semantic(ucd, semantic) 
+    def set_param_semantic(self, ucd, semantic, description):
+        self.appender.set_param_semantic(ucd, semantic, description) 
 
 
     def set_notset_value(self):

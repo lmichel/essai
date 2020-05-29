@@ -187,10 +187,11 @@ class ParameterAppender:
             if "ref" in notset_value.attrib.keys():        
                 notset_value.attrib.pop("ref")    
                 
-    def set_param_semantic(self, ucd, semantic):
+    def set_param_semantic(self, ucd, semantic, description):
         logger.info("set ucd=%s and semantic=%s", ucd, semantic)
         self.set_value("mango:Source.parameters", "mango:Parameter.ucd", ucd)
         self.set_value("mango:Source.parameters", "mango:Parameter.semantic", semantic)
+        self.set_value("mango:Source.parameters", "mango:Parameter.description", description)
         
     def save(self, filepath):
         logger.info("save mapping bloc in %s", filepath)

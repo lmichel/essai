@@ -31,7 +31,9 @@ class HardnessRatioAppender:
     
     def append_measure(self, measure_descriptor):  
         self.set_param_semantic(measure_descriptor["ucd"], 
-                                measure_descriptor["semantic"])
+                                measure_descriptor["semantic"],
+                                measure_descriptor["description"]
+                                )
         
         frames = measure_descriptor["frame"]["frame"]
         if type(frames) is list: 
@@ -65,8 +67,8 @@ class HardnessRatioAppender:
                                   err_ref)
         
              
-    def set_param_semantic(self, ucd, semantic):
-        self.appender.set_param_semantic(ucd, semantic) 
+    def set_param_semantic(self, ucd, semantic, descripton):
+        self.appender.set_param_semantic(ucd, semantic, descripton) 
 
 
     def set_notset_value(self):

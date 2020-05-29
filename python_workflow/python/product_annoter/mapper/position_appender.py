@@ -31,7 +31,9 @@ class PositionAppender:
     
     def append_measure(self, measure_descriptor):  
         self.set_param_semantic(measure_descriptor["ucd"], 
-                                measure_descriptor["semantic"])
+                                measure_descriptor["semantic"],
+                                measure_descriptor["description"]
+                                )
         
         self.set_spaceframe(measure_descriptor["frame"]["frame"],
                             measure_descriptor["frame"]["equinox"])
@@ -78,8 +80,8 @@ class PositionAppender:
                                    "ivoa:Quantity.unit", 
                                 sys_err_unit)
             
-    def set_param_semantic(self, ucd, semantic):
-        self.appender.set_param_semantic(ucd, semantic) 
+    def set_param_semantic(self, ucd, semantic, description):
+        self.appender.set_param_semantic(ucd, semantic, description) 
 
 
     def set_notset_value(self):
