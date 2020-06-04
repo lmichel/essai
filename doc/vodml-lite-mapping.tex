@@ -98,6 +98,40 @@ IVOA architecture \citep{note:VOARCH}.
 
 \section{Use Cases and Requirement}
 
+\subsection{Shy Annotations}
+\begin{itemize}
+   \item Must not alter the original VOTable content
+   \item Reasonably compact
+   \item Reasonably human readable
+   \item Must be parsable without breaking working code
+\end{itemize}
+
+\subsection{Faithful Annotations}
+\begin{itemize}
+   \item The structure of the annotation is faithful to that of the model 
+\end{itemize}
+
+\subsection{Different Usage Levels}
+\begin{itemize}
+   \item Easy to ignore
+   \item Just detect the model on which data are mapped
+   \item Just get the metadata
+   \item Get full model instances for each table row
+\end{itemize}
+
+\subsection{Easy to Build}
+\begin{itemize}
+   \item The mapping structure is independant of the data structure
+   \item Possibility of building components and templates
+\end{itemize}
+
+\subsection{Complex Data Mapping}
+\begin{itemize}
+   \item Multitable
+   \item Column filtering
+   \item Data grouping
+\end{itemize}
+
 This alternative mapping syntax keeps the same basics as the original proposal:
 
 \section{Syntax}
