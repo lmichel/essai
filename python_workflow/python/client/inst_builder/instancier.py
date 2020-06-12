@@ -44,10 +44,28 @@ class Instancier(object):
         root_element = self.json['VODML']
         if resolve_refs is True:
             self.resolve_object_references()
+        self._set_header_values(root_element)
         self._set_subelement_values(root_element)
 
     def set_array_values(self):
         self._set_array_subelement_values(self.array, parent_role=None)
+        
+    def _set_header_values(self, root_element):
+        if isinstance(root_element, list):
+            for idx, _ in enumerate(root_element):
+                if self.retour is None:
+                    self._set_header_values(root_element[idx])
+        elif isinstance(root_element, dict):
+            for k, v in root_element.items():
+                if k == 'ARRAY':
+                    pass
+                else:
+                    if isinstance(v, list):
+                        for ele in v:
+                            self._set_header_values(ele)
+                    elif isinstance(v, dict):  
+                        self._resolve_header_value(v)
+                        self._set_header_values(v)
 
     def _set_subelement_values(self, root_element):
         if isinstance(root_element, list):
@@ -215,27 +233,49 @@ class Instancier(object):
             and "@value" in keys and element["@value"] == ""):  
             self.column_mapping.add_entry(element["@ref"], role, parent_role)
             element["@value"] = "array coucou"
-            
+
+    def _resolve_header_value(self, element, role=None, parent_role=None):
+        keys = element.keys()
+        if ("@dmtype" in keys and "@ref" in keys 
+            and "@value" in keys and element["@value"] == ""):  
+            for param in  self.votable.params:
+                if param.ID ==  element["@ref"]:
+                    element["@value"] = param.value.decode("utf-8") 
+                elif param.name  ==  element["@ref"] :
+                    element["@value"] = param.value.decode("utf-8") 
+      
     def map_columns(self):
         self.column_mapping._map_columns(self.votable)
                    
     def _get_next_row_instance(self, data_subset=None):
-        for key, value in self.table_iterators.items():
-            if data_subset is None or data_subset == key:
-                return value._get_next_row_instance()
-        raise Exception("cannot find data subset " + data_subset)
+        if len(self.table_iterators) > 0 :
+            for key, value in self.table_iterators.items():
+                if data_subset is None or data_subset == key:
+                    return value._get_next_row_instance()
+            raise Exception("cannot find data subset " + data_subset)
+        else:
+            print("No data table")
+            return {}
     
     def _get_next_flatten_row(self, data_subset=None):
-        for key, value in self.table_iterators.items():
-            if data_subset is None or data_subset == key:
-                return value._get_next_flatten_row()
-        raise Exception("cannot find data subset " + data_subset)
-    
+        if len(self.table_iterators) > 0 :
+            for key, value in self.table_iterators.items():
+                if data_subset is None or data_subset == key:
+                    return value._get_next_flatten_row()
+            raise Exception("cannot find data subset " + str(data_subset))
+        else:
+            print("No data table")
+            return {}
+   
     def get_flatten_data_head(self, data_subset=None):
-        for key, value in self.table_iterators.items():
-            if data_subset is None or data_subset == key:
-                return value._get_flatten_data_head()
-        raise Exception("cannot find data subset " + data_subset)
+        if len(self.table_iterators) > 0 :
+            for key, value in self.table_iterators.items():
+                if data_subset is None or data_subset == key:
+                    return value._get_flatten_data_head()
+            raise Exception("cannot find data subset " + str(data_subset))
+        else:
+            print("No data table")
+            return {}
 
     def get_data_subset_keys(self):
         return self.table_iterators.keys()
