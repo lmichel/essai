@@ -6,11 +6,11 @@ Created on 6 avr. 2020
 import re, os, sys
 import xmltodict
 
-from mapping_factory.validator.validator import Validator
+from schema.validator.validator import Validator
 from client.inst_builder.json_mapping_builder import JsonMappingBuilder
 from client.inst_builder.instancier import Instancier
 from client.launchers import logger, data_dir
-from utils.dict_utils import DictUtils
+
 class InstanceFromVotable:
     
     def __init__(self, votable_path):

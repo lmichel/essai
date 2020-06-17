@@ -4,7 +4,7 @@ import traceback
 import json
 import xmltodict
 
-from mapping_factory.validator.validator import Validator
+from schema.validator.validator import Validator
 from mapping_factory.launchers import data_dir
 
 base_path = os.path.dirname(os.path.realpath(__file__)) 
