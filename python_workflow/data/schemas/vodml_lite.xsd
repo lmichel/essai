@@ -120,7 +120,7 @@
 	<xs:element name="COMPOSITION">
 		<xs:complexType>
 			<xs:choice>
-				<xs:element ref="INSTANCE" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="INSTANCE" minOccurs="0" maxOccurs="unbounded" />
 				<xs:element ref="ARRAY" minOccurs="0" maxOccurs="1" />
 			</xs:choice>
 			<xs:attribute type="xs:string" name="dmrole" />
