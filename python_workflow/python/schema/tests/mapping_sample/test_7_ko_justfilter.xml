@@ -9,14 +9,9 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="">
-			<ARRAY dmref="dmref" dmrole="dmrole">
-				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
-					value="dmvalue" />
-			</ARRAY>
-			<ARRAY dmref="dmref" dmrole="dmrole">
-				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
-					value="dmvalue" />
+		<COMPOSITION dmrole="dmrole">
+			<ARRAY>
+				<FILTER  ref="ref" value="value"/>
 			</ARRAY>
 		</COMPOSITION>
 	</TEMPLATES>

@@ -1,14 +1,22 @@
+<!--
+   XML Schema for the VODML lite mapping
+   
+   L. Michel 06/2020 
+-->
 <xs:schema attributeFormDefault="unqualified"
 	elementFormDefault="qualified" version="1.1"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
+    <!--
+      Top level structure of the mapping block 
+     -->
 	<xs:element name="VODML">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="MODELS">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element ref="MODEL" minOccurs="1" maxOccurs="1" />
+							<xs:element ref="MODEL" minOccurs="1" maxOccurs="unbounded" />
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -19,13 +27,19 @@
 		</xs:complexType>
 	</xs:element>
 
+    <!-- 
+      Mapping of the data contained in a particular table
+     -->
 	<xs:element name="TEMPLATES">
 		<xs:complexType>
 			<xs:choice>
-
-				<xs:element ref="ARRAY" minOccurs="0" maxOccurs="1" />
-				<xs:element ref="INST_COMP" />
-
+				<xs:sequence>
+					<xs:element ref="COMPOSITION" minOccurs="0"
+						maxOccurs="1" />
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="INSTANCE" maxOccurs="unbounded" />
+				</xs:sequence>
 			</xs:choice>
 			<xs:attribute type="xs:string" name="table_ref"
 				use="required" />
@@ -33,16 +47,9 @@
 		</xs:complexType>
 	</xs:element>
 
-	<xs:element name="INST_COMP">
-		<xs:complexType>
-			<xs:all>
-				<xs:element ref="COMPOSITION" />
-				<xs:element ref="INSTANCE"  />
-			</xs:all>
-		</xs:complexType>
-	</xs:element>
-
-
+    <!-- 
+      Declaration of one used model
+     -->
 	<xs:element name="MODEL">
 		<xs:complexType>
 			<xs:sequence>
@@ -54,6 +61,9 @@
 		</xs:complexType>
 	</xs:element>
 
+    <!-- 
+      Mapping of the data that have a global scope (e.g. frames)
+     -->
 	<xs:element name="GLOBALS">
 		<xs:complexType>
 			<xs:all>
@@ -63,6 +73,9 @@
 		</xs:complexType>
 	</xs:element>
 
+    <!-- 
+      Mapping of either a Datatype or an Objecttype
+     -->
 	<xs:element name="INSTANCE">
 		<xs:complexType>
 			<xs:all>
@@ -85,6 +98,9 @@
 		</xs:complexType>
 	</xs:element>
 
+	<!--
+	  Atomic attribute 
+	 -->
 	<xs:element name="VALUE">
 		<xs:complexType>
 			<xs:attribute type="xs:string" name="dmrole" />
@@ -98,23 +114,71 @@
 		</xs:complexType>
 	</xs:element>
 
+	<!--
+	  Data list mapping block
+	 -->
 	<xs:element name="COMPOSITION">
 		<xs:complexType>
-			<xs:all>
+			<xs:choice>
 				<xs:element ref="INSTANCE" minOccurs="0" maxOccurs="1" />
 				<xs:element ref="ARRAY" minOccurs="0" maxOccurs="1" />
-			</xs:all>
+			</xs:choice>
 			<xs:attribute type="xs:string" name="dmrole" />
 			<xs:assert test="@dmrole != '' " />
 		</xs:complexType>
 	</xs:element>
-
+	
+	<!-- 
+	  One instance must be created for each selected table row
+	 -->
 	<xs:element name="ARRAY">
 		<xs:complexType>
-			<xs:choice>
-				<xs:element ref="INSTANCE" minOccurs="0" maxOccurs="1" />
-				<xs:element ref="COMPOSITION" minOccurs="0" maxOccurs="1" />
-			</xs:choice>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="FILTER" minOccurs="0" maxOccurs="1" />
+					<xs:element ref="GROUPBY" minOccurs="0" maxOccurs="1" />
+				</xs:choice>
+				<xs:choice>
+					<xs:element ref="INSTANCE" minOccurs="1" maxOccurs="1" />
+					<xs:element ref="COMPOSITION" minOccurs="1"
+						maxOccurs="1" />
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- 
+	  Select table rows with value of the column @ref = @value 
+	 -->
+	<xs:element name="FILTER">
+		<xs:complexType>
+			<xs:attribute type="xs:string" name="ref" />
+			<xs:attribute type="xs:string" name="value" />
+			<xs:assert
+				test="(./@ref and ./@value and @ref != '' and @value != '')" />
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- 
+	  Group table rows by the content of the column @ref 
+	 -->
+	<xs:element name="GROUPBY">
+		<xs:complexType>
+			<xs:attribute type="xs:string" name="ref" />
+			<xs:assert
+				test="(./@ref  and @ref != '')" />
+		</xs:complexType>
+	</xs:element>
+	
+	<!--  
+	  TBC 
+	 -->
+	<xs:element name="FOREIGN_KEY">
+		<xs:complexType>
+			<xs:attribute type="xs:string" name="table_ref" />
+			<xs:attribute type="xs:string" name="dmref" />
+			<xs:assert
+				test="(./@table_ref and ./@dmref and @table_ref != '' and @dmref != '')" />
 		</xs:complexType>
 	</xs:element>
 

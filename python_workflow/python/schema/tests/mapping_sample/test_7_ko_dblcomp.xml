@@ -9,15 +9,16 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="">
-			<ARRAY dmref="dmref" dmrole="dmrole">
-				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
-					value="dmvalue" />
+		<COMPOSITION dmrole="dmrole">
+			<ARRAY>
+				<COMPOSITION dmrole="dmrole">
+					<INSTANCE dmref="dmref" dmrole="dmrole" />
+				</COMPOSITION>
+				<COMPOSITION dmrole="dmrole">
+					<INSTANCE dmref="dmref" dmrole="dmrole" />
+				</COMPOSITION>
 			</ARRAY>
-			<ARRAY dmref="dmref" dmrole="dmrole">
-				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
-					value="dmvalue" />
-			</ARRAY>
+
 		</COMPOSITION>
 	</TEMPLATES>
 </VODML>

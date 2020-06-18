@@ -15,27 +15,15 @@
 					value="dmvalue" />
 			</INSTANCE>
 		</COMPOSITION>
-	</TEMPLATES>
-	<TEMPLATES table_ref="fgdgfddf">
 		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<COMPOSITION dmrole="dmrole">
-				<INSTANCE dmref="dmref" dmrole="dmrole" />
-			</COMPOSITION>
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
-
+		</INSTANCE>
+		<INSTANCE dmref="dmref" dmrole="dmrole">
+			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+				value="dmvalue" />
 		</INSTANCE>
 	</TEMPLATES>
 	<TEMPLATES table_ref="fgdgfddf">
-		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<COMPOSITION dmrole="dmrole">
-				<ARRAY>
-					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</ARRAY>
-			</COMPOSITION>
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
-				value="dmvalue" />
-
-		</INSTANCE>
 	</TEMPLATES>
 </VODML>
