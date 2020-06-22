@@ -17,5 +17,13 @@ class Validator:
         else :
             return self.xmlschema.is_valid(xml_path)
         
-    def validate_string(self, xml_string: str) -> bool:
-        return self.xmlschema.is_valid(xml_string)
+    def validate_string(self, xml_string: str, verbose=False) -> bool:
+        if verbose is True:
+            try :
+                self.xmlschema.validate(xml_string)
+                return True
+            except Exception as e:
+                print(e)
+                return False
+        else :
+            return self.xmlschema.is_valid(xml_string)

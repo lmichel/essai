@@ -1,22 +1,17 @@
-<!--
-   XML Schema for the VODML lite mapping
-   
-   L. Michel 06/2020 
--->
+<!-- XML Schema for the VODML lite mapping L. Michel 06/2020 -->
 <xs:schema attributeFormDefault="unqualified"
 	elementFormDefault="qualified" version="1.1"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <!--
-      Top level structure of the mapping block 
-     -->
+	<!-- Top level structure of the mapping block -->
 	<xs:element name="VODML">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="MODELS">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element ref="MODEL" minOccurs="1" maxOccurs="unbounded" />
+							<xs:element ref="MODEL" minOccurs="1"
+								maxOccurs="unbounded" />
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -27,9 +22,7 @@
 		</xs:complexType>
 	</xs:element>
 
-    <!-- 
-      Mapping of the data contained in a particular table
-     -->
+	<!-- Mapping of the data contained in a particular table -->
 	<xs:element name="TEMPLATES">
 		<xs:complexType>
 			<xs:choice>
@@ -47,9 +40,7 @@
 		</xs:complexType>
 	</xs:element>
 
-    <!-- 
-      Declaration of one used model
-     -->
+	<!-- Declaration of one used model -->
 	<xs:element name="MODEL">
 		<xs:complexType>
 			<xs:sequence>
@@ -61,9 +52,7 @@
 		</xs:complexType>
 	</xs:element>
 
-    <!-- 
-      Mapping of the data that have a global scope (e.g. frames)
-     -->
+	<!-- Mapping of the data that have a global scope (e.g. frames) -->
 	<xs:element name="GLOBALS">
 		<xs:complexType>
 			<xs:all>
@@ -73,9 +62,7 @@
 		</xs:complexType>
 	</xs:element>
 
-    <!-- 
-      Mapping of either a Datatype or an Objecttype
-     -->
+	<!-- Mapping of either a Datatype or an Objecttype -->
 	<xs:element name="INSTANCE">
 		<xs:complexType>
 			<xs:all>
@@ -93,7 +80,7 @@
 			<xs:attribute type="xs:string" name="dmtype" />
 			<xs:attribute type="xs:string" name="ID" />
 			<xs:assert
-				test="(./@dmref and ./@dmrole and not (./@dmtype)) or (./@dmtype and ./@dmrole and not (./@dmref))" />
+				test="(./@dmref and ./@dmrole and not (./@dmtype) and not (./@ID)) or (./@dmtype and ./@dmrole and not (./@dmref) and not (./@ID)) or (./@dmtype and ./@ID and not (./@dmrole))" />
 			<xs:assert
 				test="if (@dmref) then ( @dmref != '') else true()  " />
 			<xs:assert
@@ -102,9 +89,7 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!--
-	  Atomic attribute 
-	 -->
+	<!-- Atomic attribute -->
 	<xs:element name="VALUE">
 		<xs:complexType>
 			<xs:attribute type="xs:string" name="dmrole" />
@@ -114,32 +99,31 @@
 			<xs:assert
 				test="(not(./@ref) and ./@value) or (not(./@value) and ./@ref) or (./@value and ./@ref)" />
 			<xs:assert test="if (@ref) then (@ref != '') else true()  " />
-			<xs:assert test="if (@value) then (@value != '') else true()  " />
+			<xs:assert
+				test="if (@value) then (@value != '') else true()  " />
 			<xs:assert test="@dmrole != '' and @dmtype != ''  " />
 		</xs:complexType>
 	</xs:element>
 
-	<!--
-	  Data list mapping block
-	 -->
+	<!-- Data list mapping block -->
 	<xs:element name="COMPOSITION">
 		<xs:complexType>
 			<xs:choice minOccurs="0" maxOccurs="1">
-				<xs:element ref="INSTANCE"  maxOccurs="unbounded"/>
-				<xs:element ref="ARRAY" minOccurs="0" maxOccurs="unbounded" />
-				<xs:element ref="JOIN" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="INSTANCE" maxOccurs="unbounded" />
+				<xs:element ref="ARRAY" minOccurs="0"
+					maxOccurs="unbounded" />
+				<xs:element ref="JOIN" minOccurs="0"
+					maxOccurs="unbounded" />
 			</xs:choice>
 			<xs:attribute type="xs:string" name="dmrole" />
 			<xs:assert test="@dmrole != '' " />
 			<xs:assert
 				test="(count(./ARRAY) lt 2) and (count(./JOIN) lt 2)" />
-			
+
 		</xs:complexType>
 	</xs:element>
-	
-	<!-- 
-	  One instance must be created for each selected table row
-	 -->
+
+	<!-- One instance must be created for each selected table row -->
 	<xs:element name="ARRAY">
 		<xs:complexType>
 			<xs:sequence>
@@ -156,9 +140,7 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!-- 
-	  Select table rows with value of the column @ref = @value 
-	 -->
+	<!-- Select table rows with value of the column @ref = @value -->
 	<xs:element name="FILTER">
 		<xs:complexType>
 			<xs:attribute type="xs:string" name="ref" />
@@ -167,23 +149,18 @@
 				test="(./@ref and ./@value and @ref != '' and @value != '')" />
 		</xs:complexType>
 	</xs:element>
-	
-	<!-- 
-	  Group table rows by the content of the column @ref 
-	 -->
+
+	<!-- Group table rows by the content of the column @ref -->
 	<xs:element name="GROUPBY">
 		<xs:complexType>
 			<xs:attribute type="xs:string" name="ref" />
-			<xs:assert
-				test="(./@ref  and @ref != '')" />
+			<xs:assert test="(./@ref  and @ref != '')" />
 		</xs:complexType>
 	</xs:element>
-	
-	
-	<!-- 
-	  Join with another table
-	  One instance created for joined row of the secondary table
-	 -->
+
+
+	<!-- Join with another table One instance created for joined row of the 
+		secondary table -->
 	<xs:element name="JOIN">
 		<xs:complexType>
 			<xs:sequence>
@@ -201,10 +178,8 @@
 			<xs:assert test="(./@foreign and @foreign != '' )" />
 		</xs:complexType>
 	</xs:element>
-	
-	<!--
-	 Shortcut 
-	 -->
+
+	<!-- Shortcut -->
 	<xs:element name="SC_REALQUANTITY">
 		<xs:complexType>
 			<xs:attribute type="xs:string" name="dmrole" />
@@ -214,11 +189,12 @@
 			<xs:assert
 				test="(not(./@ref) and ./@value) or (not(./@value) and ./@ref) or (./@value and ./@ref)" />
 			<xs:assert test="if (@ref) then (@ref != '') else true()  " />
-			<xs:assert test="if (@value) then (@value != '') else true()  " />
+			<xs:assert
+				test="if (@value) then (@value != '') else true()  " />
 			<xs:assert test="@dmrole != ''  " />
 			<xs:assert test="@unit  " />
 		</xs:complexType>
 	</xs:element>
-	
-    
+
+
 </xs:schema>

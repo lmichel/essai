@@ -21,32 +21,32 @@
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
-		<INSTANCE ID="dmtype" dmrole="dmrole" dmtype="dmtype">
+		<INSTANCE ID="id"  dmtype="dmtype">
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
-		<INSTANCE ID="dmtype" dmrole="" dmtype="dmtype">
+		<INSTANCE ID="id" dmtype="dmtype">
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
-		<INSTANCE ID="dmtype" dmrole="" dmtype="dmtype">
+		<INSTANCE ID="id"  dmtype="dmtype">
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
-		<INSTANCE ID="dmtype" dmrole="" dmtype="dmtype">
+		<INSTANCE ID="id" dmrole="" dmtype="dmtype">
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 			<SC_REALQUANTITY dmrole="dmrole" value="value"
 				unit="unit" />
 		</INSTANCE>
-		<INSTANCE ID="dmtype" dmrole="" dmtype="dmtype">
+		<INSTANCE ID="id" dmrole="" dmtype="dmtype">
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
-			<INSTANCE ID="dmtype" dmrole="" dmtype="dmtype">
+			<INSTANCE ID="id" dmrole="" dmtype="dmtype">
 				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 					value="dmvalue" />
 				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
