@@ -9,18 +9,18 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<COMPOSITION dmrole="dmrole">
-				<ARRAY>
-					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</ARRAY>
-				<ARRAY>
-					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</ARRAY>
-			</COMPOSITION>
+
+		<INSTANCE ID="dmtype" dmrole="" dmtype="dmtype">
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
-
+			<SC_REALQUANTITY dmrole="dmrole" value="value"
+				unit="unit" />
+			<SC_REALQUANTITY dmrole="dmrole" ref="ref"
+				unit="unit" />
+			<SC_REALQUANTITY dmrole="dmrole" ref="ref"
+				value="value" unit="unit" />
+			<SC_REALQUANTITY dmrole="dmrole" value="value"
+				unit="" />
 		</INSTANCE>
 	</TEMPLATES>
 </VODML>

@@ -9,18 +9,18 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<COMPOSITION dmrole="dmrole">
-				<ARRAY>
+	<TEMPLATES table_ref="fgdgfddf">
+		<COMPOSITION dmrole="dmrole">
+			<JOIN table_ref="table_ref" primary="primary" foreign="foreign">
+				<COMPOSITION dmrole="dmrole">
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</ARRAY>
-				<ARRAY>
+				</COMPOSITION>
+				<COMPOSITION dmrole="dmrole">
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</ARRAY>
-			</COMPOSITION>
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
-				value="dmvalue" />
+				</COMPOSITION>
+			</JOIN>
 
-		</INSTANCE>
+		</COMPOSITION>
+	</TEMPLATES>
 	</TEMPLATES>
 </VODML>

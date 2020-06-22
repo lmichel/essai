@@ -8,8 +8,8 @@ from astropy.io.votable import parse_single_table
 from client.inst_builder.column_mapping import ColumnMapping
 from client.inst_builder.table_iterator import TableIterator
 from client.inst_builder.row_filter import RowFilter
-from utils.dict_utils import DictUtils
 from copy import deepcopy
+
 class Instancier(object):
     '''
     classdocs

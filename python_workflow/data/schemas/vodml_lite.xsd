@@ -83,6 +83,10 @@
 					maxOccurs="unbounded" />
 				<xs:element ref="COMPOSITION" minOccurs="0"
 					maxOccurs="unbounded" />
+				<xs:element ref="INSTANCE" minOccurs="0"
+					maxOccurs="unbounded" />
+				<xs:element ref="SC_REALQUANTITY" minOccurs="0"
+					maxOccurs="unbounded" />
 			</xs:all>
 			<xs:attribute type="xs:string" name="dmref" />
 			<xs:attribute type="xs:string" name="dmrole" />
@@ -110,6 +114,7 @@
 			<xs:assert
 				test="(not(./@ref) and ./@value) or (not(./@value) and ./@ref) or (./@value and ./@ref)" />
 			<xs:assert test="if (@ref) then (@ref != '') else true()  " />
+			<xs:assert test="if (@value) then (@value != '') else true()  " />
 			<xs:assert test="@dmrole != '' and @dmtype != ''  " />
 		</xs:complexType>
 	</xs:element>
@@ -119,12 +124,16 @@
 	 -->
 	<xs:element name="COMPOSITION">
 		<xs:complexType>
-			<xs:choice>
-				<xs:element ref="INSTANCE" minOccurs="0" maxOccurs="unbounded" />
-				<xs:element ref="ARRAY" minOccurs="0" maxOccurs="1" />
+			<xs:choice minOccurs="0" maxOccurs="1">
+				<xs:element ref="INSTANCE"  maxOccurs="unbounded"/>
+				<xs:element ref="ARRAY" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="JOIN" minOccurs="0" maxOccurs="unbounded" />
 			</xs:choice>
 			<xs:attribute type="xs:string" name="dmrole" />
 			<xs:assert test="@dmrole != '' " />
+			<xs:assert
+				test="(count(./ARRAY) lt 2) and (count(./JOIN) lt 2)" />
+			
 		</xs:complexType>
 	</xs:element>
 	
@@ -170,16 +179,46 @@
 		</xs:complexType>
 	</xs:element>
 	
-	<!--  
-	  TBC 
+	
+	<!-- 
+	  Join with another table
+	  One instance created for joined row of the secondary table
 	 -->
-	<xs:element name="FOREIGN_KEY">
+	<xs:element name="JOIN">
 		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="INSTANCE" minOccurs="1" maxOccurs="1" />
+					<xs:element ref="COMPOSITION" minOccurs="1"
+						maxOccurs="1" />
+				</xs:choice>
+			</xs:sequence>
 			<xs:attribute type="xs:string" name="table_ref" />
-			<xs:attribute type="xs:string" name="dmref" />
-			<xs:assert
-				test="(./@table_ref and ./@dmref and @table_ref != '' and @dmref != '')" />
+			<xs:attribute type="xs:string" name="primary" />
+			<xs:attribute type="xs:string" name="foreign" />
+			<xs:assert test="(./@table_ref and @table_ref != '' )" />
+			<xs:assert test="(./@primary and @primary != '' )" />
+			<xs:assert test="(./@foreign and @foreign != '' )" />
 		</xs:complexType>
 	</xs:element>
-
+	
+	<!--
+	 Shortcut 
+	 -->
+	<xs:element name="SC_REALQUANTITY">
+		<xs:complexType>
+			<xs:attribute type="xs:string" name="dmrole" />
+			<xs:attribute type="xs:string" name="ref" />
+			<xs:attribute type="xs:string" name="value" />
+			<xs:attribute type="xs:string" name="unit" />
+			<xs:assert
+				test="(not(./@ref) and ./@value) or (not(./@value) and ./@ref) or (./@value and ./@ref)" />
+			<xs:assert test="if (@ref) then (@ref != '') else true()  " />
+			<xs:assert test="if (@value) then (@value != '') else true()  " />
+			<xs:assert test="@dmrole != ''  " />
+			<xs:assert test="@unit  " />
+		</xs:complexType>
+	</xs:element>
+	
+    
 </xs:schema>
