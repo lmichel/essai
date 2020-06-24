@@ -60,7 +60,7 @@
 			</COMPOSITION>
 		</INSTANCE>
 	</GLOBALS>
-	<TEMPLATES>
+	<TEMPLATES  table_ref='Results'>
 		<INSTANCE dmrole="root" dmtype="cab_msd:STCStatus">
 			<INSTANCE dmrole="cab_msd:STCStatus.coord"
 				dmtype="cab_msd:STCStatusState">

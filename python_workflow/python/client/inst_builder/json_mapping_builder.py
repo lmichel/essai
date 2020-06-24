@@ -60,7 +60,7 @@ class JsonMappingBuilder():
             else:
                 break
             
-    def revert_sets(self, name, default_key=None):
+    def revert_sets_xxxx(self, name, default_key=None):
         logger.info("reverting sets %s", name)
         root_element = self.json['VODML']
         while True:
@@ -73,7 +73,8 @@ class JsonMappingBuilder():
             else:
                 break
             
-    def revert_array(self):
+    def revert_array_2bethrown(self):
+        # Give ARRAYs the same role as its container
         logger.info("reverting ARRAYs")
         root_element = self.json['VODML']
         while True:
@@ -81,14 +82,16 @@ class JsonMappingBuilder():
 
             self._revert_set(root_element, 'ARRAY', None)
             if self.retour is not None:
+                print("============== ")
                 array_container = self.retour["node"]
                 array_node = array_container['ARRAY']
-                array_role = array_node["@dmrole"]
+                array_role = array_node['INSTANCE']["@dmrole"]
                 array_container['ARRAY'] = {array_role: [array_node['INSTANCE']]}
             else:
                 break
     
-    def _revert_set(self, root_element, name, default_key):
+    def _revert_set_2bethrown(self, root_element, name, default_key):
+        print("aaaa")
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 if self.retour is None:
@@ -102,11 +105,15 @@ class JsonMappingBuilder():
                         # the elememt may have been reverted in a precedent pass
                         # It can not be reserved twice
                         try:
+                            print("bbbbbbbbbbb ")
+                            print(DictUtils.get_pretty_json(v))
                             newcontent = {}
-                            new_key = self._get_key_for_element(v, default_key)
+                            new_key = self._get_key_for_element(v["INSTANCE"], default_key)
                             newcontent[new_key] = deepcopy(v["INSTANCE"])
                             self.retour = {'node': root_element, "newcontent": newcontent}
                         except:
+                            import traceback
+                            traceback.print_exc()
                             pass
                 if self.retour is None:
                     self._revert_set(v, name, default_key)

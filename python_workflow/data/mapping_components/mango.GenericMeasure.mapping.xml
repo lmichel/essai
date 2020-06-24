@@ -16,7 +16,7 @@
 		</MODEL>
 	</MODELS>
 	<GLOBALS />
-	<TEMPLATES>
+	<TEMPLATES  table_ref='Results'>
 		<INSTANCE dmrole="root" dmtype="meas:GenericMeasure">
 			<INSTANCE dmrole="meas:GenericMeasure.coord"
 				dmtype="coords:PhysicalCoordinate">

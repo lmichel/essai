@@ -18,7 +18,7 @@
 	<GLOBALS>
 	</GLOBALS>
 
-	<TEMPLATES>
+	<TEMPLATES  table_ref='Results'>
     <INSTANCE dmrole="root" dmtype="mango:stcextend.LonLatSkyPosition">
       <INSTANCE dmrole="mango:stcextend.LonLatSkyPosition.coord" dmtype="mango:stcextend.LonLatPoint">
         <VALUE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="@@@@@@"/>

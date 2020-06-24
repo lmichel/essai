@@ -8,7 +8,10 @@ from astropy.io.votable import parse_single_table
 from client.inst_builder.column_mapping import ColumnMapping
 from client.inst_builder.table_iterator import TableIterator
 from client.inst_builder.row_filter import RowFilter
+from client.inst_builder import logger
+
 from copy import deepcopy
+from utils.dict_utils import DictUtils
 
 class Instancier(object):
     '''
@@ -31,32 +34,42 @@ class Instancier(object):
         else:
             self.json = json_inst_dict
             self.json_path = None
-            
+        
+        #Field block storing the outcome of recursive functions 
         self.retour = None
         self.searched_elements = []
         self.searched_ids = []
         self.searched_types = []
         self.array = None
+        # key = role of the instance within ARRAY value = TableIterator
         self.table_iterators = {}
         self.column_mapping = ColumnMapping()
 
-    def set_element_values(self, resolve_refs=False):
+    def resolve_refs_and_values(self, resolve_refs=False):
         root_element = self.json['VODML']
         if resolve_refs is True:
+            logger.info("Replace object references with referenced object copies")
             self.resolve_object_references()
+        logger.info("Resolve references to PARAMS")
         self._set_header_values(root_element)
-        self._set_subelement_values(root_element)
-
-    def set_array_values(self):
+        logger.info("Set array iterators")
+        self._set_array_iterators(root_element)
+        logger.info("Resolve mapping leaves is an ARRAY block")
         self._set_array_subelement_values(self.array, parent_role=None)
+
         
     def _set_header_values(self, root_element):
+        """
+        The term header refers to the model leaves that must be set with <PARAM> values
+        Recursive function
+        """
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 if self.retour is None:
                     self._set_header_values(root_element[idx])
         elif isinstance(root_element, dict):
             for k, v in root_element.items():
+                # TODO For now PARAMS references in ARRY are not supported
                 if k == 'ARRAY':
                     pass
                 else:
@@ -67,49 +80,55 @@ class Instancier(object):
                         self._resolve_header_value(v)
                         self._set_header_values(v)
 
-    def _set_subelement_values(self, root_element):
+    def _set_array_iterators(self, root_element):
+        """
+        Build and array iterator for each ARRAY element found within root_element
+        """
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 if self.retour is None:
-                    self._set_subelement_values(root_element[idx])
+                    self._set_array_iterators(root_element[idx])
         elif isinstance(root_element, dict):
             for k, v in root_element.items():
                 if k == 'ARRAY':
                     self.array = v 
+                    row_filter = None
+                    iterator_key = None
                     for ro in self.array.keys():
-                        row_filter = None
-                        iterator_key = None
-                        for rok in self.array[ro][0].keys():
-                            if 'FILTER' in self.array[ro][0].keys():
-                                row_filter = RowFilter(self.array[ro][0]['FILTER'])
-                                iterator_key = row_filter.name
-                            else:
-                                iterator_key = rok
-                        
-                        self.table_iterators[iterator_key] = TableIterator(
-                            iterator_key,
-                            self.votable.to_table(), 
-                            self.array[ro],
-                            self.column_mapping,
-                            row_filter=row_filter
-                            )
-                        break
+                        if ro == 'FILTER' :
+                            row_filter = RowFilter(self.array['FILTER'])
+                            iterator_key = row_filter.name
+                            logger.info("Add filter %s", row_filter.name)
+                        else:
+                            iterator_key = ro
+                            logger.info("Set table iterator for object with role=%s", ro)
+                            self.table_iterators[ro] = TableIterator(
+                                iterator_key,
+                                self.votable.to_table(), 
+                                self.array[ro],
+                                self.column_mapping,
+                                row_filter=row_filter
+                                )
                     pass
                 else:
                     if isinstance(v, list):
                         for ele in v:
-                            self._set_subelement_values(ele)
+                            self._set_array_iterators(ele)
                     elif isinstance(v, dict):  
-                        self._set_value(v)
-                        self._set_subelement_values(v)
+                        #self._set_value(v)
+                        self._set_array_iterators(v)
 
-    def _set_array_subelement_values(self, root_element, parent_role=None):
-        if isinstance(root_element, list):
-            for idx, _ in enumerate(root_element):
+    def _set_array_subelement_values(self, array_element, parent_role=None):
+        """
+        Recursive function
+        Takes all @ref of the array_element content and map them the table columns
+        """
+        if isinstance(array_element, list):
+            for idx, _ in enumerate(array_element):
                 if self.retour is None:
-                    self._set_array_subelement_values(root_element[idx])
-        elif isinstance(root_element, dict):
-            for k, v in root_element.items():
+                    self._set_array_subelement_values(array_element[idx])
+        elif isinstance(array_element, dict):
+            for k, v in array_element.items():
                 if isinstance(v, list):
                     for ele in v:
                         self._set_array_subelement_values(ele)
@@ -118,6 +137,9 @@ class Instancier(object):
                     self._set_array_subelement_values(v, parent_role=k)
      
     def _get_subelement_by_role(self, root_element, searched_role):
+        """
+        Store in self.searched_elements all elements with @dmrole=searched_role
+        """
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 if self.retour is None:
@@ -133,6 +155,9 @@ class Instancier(object):
                     self._get_subelement_by_role(v, searched_role)
                     
     def _get_subelement_by_id(self, root_element, searched_id):
+        """
+        Store in self.searched_ids all elements with @ID=searched_id
+        """
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 if self.retour is None:
@@ -154,6 +179,9 @@ class Instancier(object):
                     self._get_subelement_by_id(v, searched_id)
                     
     def _get_subelement_by_type(self, root_element, searched_type):
+        """
+        Store in self.searched_types all elements with @dmtype=searched_type
+        """
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
                 if self.retour is None:
@@ -207,6 +235,9 @@ class Instancier(object):
         return []            
 
     def _id_matches(self, element, searched_id):
+        """
+        Returns True if element[@ID] matches id
+        """
         if( isinstance(element, dict) and 
             "@ID" in element.keys() and 
             element["@ID"] == searched_id):
@@ -214,6 +245,9 @@ class Instancier(object):
         return False
     
     def _type_matches(self, element, searched_type):
+        """
+        Returns True if element[@dmtype] matches searched_type
+        """
         if( isinstance(element, dict) and 
             "@dmtype" in element.keys() and 
             element["@dmtype"] == searched_type):
@@ -221,6 +255,10 @@ class Instancier(object):
         return False
     
     def _is_object_ref(self, element):
+        """
+        Returns True if the element is an object reference
+        <INSTANCE dmref=xxx/>
+        """
         if( isinstance(element, dict) and 
             "@dmref" in element.keys() and 
             "@dmtype" not in element.keys()):
@@ -228,20 +266,35 @@ class Instancier(object):
         return False
     
     def _set_value(self, element, role=None, parent_role=None):
+        """
+        Create a column mapping entry for the element if it is a @ref
+        both role an parent_role are just labels used make more explicit 
+        the string representation of the columns mapping
+        """
         keys = element.keys()
         if ("@dmtype" in keys and "@ref" in keys 
             and "@value" in keys and element["@value"] == ""):  
+            logger.info("Give role %s to the column %s "
+                        , parent_role, element["@ref"])
             self.column_mapping.add_entry(element["@ref"], role, parent_role)
             element["@value"] = "array coucou"
 
-    def _resolve_header_value(self, element, role=None, parent_role=None):
+    def _resolve_header_value(self, element):
+        """
+        Set the @value of element with the value of the <PARAM> having 
+        either a ID or a name matching @ref 
+        """
         keys = element.keys()
         if ("@dmtype" in keys and "@ref" in keys 
             and "@value" in keys and element["@value"] == ""):  
             for param in  self.votable.params:
                 if param.ID ==  element["@ref"]:
+                    logger.info("set element @dmrole=%s with value=%s of PARAM(ID=%s)"
+                                , element["@dmrole"], param.value, element["@ref"])
                     element["@value"] = param.value.decode("utf-8") 
                 elif param.name  ==  element["@ref"] :
+                    logger.info("set element @dmrole=%s with value=%s of PARAM(name=%s)"
+                                , element["@dmrole"], param.value, element["@ref"])
                     element["@value"] = param.value.decode("utf-8") 
       
     def map_columns(self):
@@ -266,7 +319,16 @@ class Instancier(object):
         else:
             print("No data table")
             return {}
-   
+        
+    def rewind(self):
+        if len(self.table_iterators) > 0 :
+            for _, iterator in self.table_iterators.items():
+                iterator._rewind()
+        else:
+            print("No data table")
+            return {}
+
+
     def get_flatten_data_head(self, data_subset=None):
         if len(self.table_iterators) > 0 :
             for key, value in self.table_iterators.items():

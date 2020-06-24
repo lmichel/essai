@@ -29,6 +29,8 @@ class TableIterator(object):
 
         self.iter = None
        
+    def __repr__(self):
+        return "name={} column_mapping={} row_filter={}".format(self.name , self.column_mapping, self.row_filter)
     
     def _get_row_subelement(self, root_element, row):
         if isinstance(root_element, list):
@@ -73,7 +75,9 @@ class TableIterator(object):
             #traceback.print_exc()    
             return None
 
-
+    def _rewind(self):
+        self.iter = None
+        
     def _get_next_row_instance(self):
         row = self._get_next_row()
         if row != None:

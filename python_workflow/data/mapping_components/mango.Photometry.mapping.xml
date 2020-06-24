@@ -14,7 +14,7 @@
     </MODEL>
   </MODELS>
   <GLOBALS/>
-  <TEMPLATES>
+  <TEMPLATES  table_ref='Results'>
     <INSTANCE dmrole="root" dmtype="mango:stcextend.Photometry">
       <INSTANCE dmrole="mango:stcextend.Photometry.coord" dmtype="mango:stcextend.PhotometryCoord">
         <VALUE dmrole="mango:stcextend.PhotometryCoord.luminosity" dmtype="ivoa:real" ref="@@@@@@"/>

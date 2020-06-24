@@ -6,15 +6,17 @@
     </MODEL>
     <MODEL>
       <NAME>coords</NAME>
-      <URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.vo-dml.xml</URL>
+      <URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.vo-dml.xml
+			</URL>
     </MODEL>
     <MODEL>
       <NAME>meas</NAME>
-      <URL>http://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml</URL>
+      <URL>http://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml
+			</URL>
     </MODEL>
   </MODELS>
   <GLOBALS>
-    <INSTANCE ID="SpaceFrame_ICRS" dmrole="">
+    <INSTANCE ID="SpaceFrame_ICRS" dmtype="coords:SpaceFrame">
       <INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
         <VALUE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
       </INSTANCE>
@@ -66,101 +68,103 @@
       </COMPOSITION>
     </INSTANCE>
   </GLOBALS>
-  <TEMPLATES>
-    <ARRAY dmrole="root">
-      <INSTANCE dmrole="root" dmtype="mango:Source">
-        <VALUE dmrole="mango:Source.identifier" dmtype="ivoa:string" ref="namesaada"/>
-        <COMPOSITION size="-1" dmrole="mango:Source.associatedData"/>
-        <COMPOSITION size="-1" dmrole="mango:Source.parameters">
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#corrected"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Corrected position"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.LonLatSkyPosition">
-              <INSTANCE dmrole="mango:stcextend.LonLatSkyPosition.coord" dmtype="mango:stcextend.LonLatPoint">
-                <VALUE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="_ra_146"/>
-                <VALUE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="_dec_147"/>
-                <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="SpaceFrame_ICRS"/>
-              </INSTANCE>
-              <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
-                <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
-                  <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_poserr_148"/>
-                    <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
-                  </INSTANCE>
+  <TEMPLATES table_ref="Results">
+    <COMPOSITION dmrole="root">
+      <ARRAY>
+        <INSTANCE dmrole="root" dmtype="mango:Source">
+          <VALUE dmrole="mango:Source.identifier" dmtype="ivoa:string" ref="namesaada"/>
+          <COMPOSITION size="-1" dmrole="mango:Source.associatedData"/>
+          <COMPOSITION size="-1" dmrole="mango:Source.parameters">
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#corrected"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Corrected position"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.LonLatSkyPosition">
+                <INSTANCE dmrole="mango:stcextend.LonLatSkyPosition.coord" dmtype="mango:stcextend.LonLatPoint">
+                  <VALUE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="_ra_146"/>
+                  <VALUE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="_dec_147"/>
+                  <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="SpaceFrame_ICRS"/>
                 </INSTANCE>
-                <INSTANCE dmrole="meas:Error.sysError" dmtype="meas:Symmetrical">
-                  <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_syserrcc_152"/>
-                    <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
+                <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
+                  <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
+                    <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+                      <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_poserr_148"/>
+                      <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
+                    </INSTANCE>
                   </INSTANCE>
-                </INSTANCE>
-              </INSTANCE>
-            </INSTANCE>
-          </INSTANCE>
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="Flux in Energy band 1 0.2-0.5KeV (cameras merged)"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="#corrected"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Photometry">
-              <INSTANCE dmrole="mango:stcextend.Photometry.coord" dmtype="mango:stcextend.PhotometryCoord">
-                <VALUE dmrole="mango:stcextend.PhotometryCoord.luminosity" dmtype="ivoa:real" ref="_ep_1_flux_166"/>
-                <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="PhotFrame_EB1"/>
-              </INSTANCE>
-              <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
-                <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
-                  <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_ep_1_flux_err_167"/>
-                    <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="erg/cm2/sec"/>
+                  <INSTANCE dmrole="meas:Error.sysError" dmtype="meas:Symmetrical">
+                    <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+                      <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_syserrcc_152"/>
+                      <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
+                    </INSTANCE>
                   </INSTANCE>
                 </INSTANCE>
               </INSTANCE>
             </INSTANCE>
-          </INSTANCE>
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Hardness Ration in Energy band 1 0.2-0.5KeV (cameras merged)"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.HardnessRatio">
-              <INSTANCE dmrole="mango:stcextend.HardnessRatio.coord" dmtype="mango:stcextend.HardnessRatioCoord">
-                <VALUE dmrole="mango:stcextend.HardnessRatioCoord.hardnessRatio" dmtype="ivoa:real" value="NotSet"/>
-                <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="PhotFrame_EB1"/>
-              </INSTANCE>
-              <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
-                <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
-                  <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_ep_hr1_err_303"/>
-                    <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="NotSet"/>
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="Flux in Energy band 1 0.2-0.5KeV (cameras merged)"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="#corrected"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Photometry">
+                <INSTANCE dmrole="mango:stcextend.Photometry.coord" dmtype="mango:stcextend.PhotometryCoord">
+                  <VALUE dmrole="mango:stcextend.PhotometryCoord.luminosity" dmtype="ivoa:real" ref="_ep_1_flux_166"/>
+                  <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="PhotFrame_EB1"/>
+                </INSTANCE>
+                <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
+                  <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
+                    <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+                      <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_ep_1_flux_err_167"/>
+                      <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="erg/cm2/sec"/>
+                    </INSTANCE>
                   </INSTANCE>
                 </INSTANCE>
               </INSTANCE>
             </INSTANCE>
-          </INSTANCE>
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#obs-parameter"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="time.duration;obs.exposure"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="PN exposure time in Energy band 1 0.2-0.5KeV"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="meas:GenericMeasure">
-              <INSTANCE dmrole="meas:GenericMeasure.coord" dmtype="coords:PhysicalCoordinate">
-                <INSTANCE dmrole="coords:PhysicalCoordinate.cval" dmtype="ivoa:RealQuantity">
-                  <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_pn_1_exp_334"/>
-                  <VALUE dmrole="ivoa:RealQuantity.unit" dmtype="ivoa:Unit" value="sec"/>
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Hardness Ration in Energy band 1 0.2-0.5KeV (cameras merged)"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.HardnessRatio">
+                <INSTANCE dmrole="mango:stcextend.HardnessRatio.coord" dmtype="mango:stcextend.HardnessRatioCoord">
+                  <VALUE dmrole="mango:stcextend.HardnessRatioCoord.hardnessRatio" dmtype="ivoa:real" value="NotSet"/>
+                  <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="PhotFrame_EB1"/>
+                </INSTANCE>
+                <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
+                  <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
+                    <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+                      <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_ep_hr1_err_303"/>
+                      <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="NotSet"/>
+                    </INSTANCE>
+                  </INSTANCE>
                 </INSTANCE>
               </INSTANCE>
             </INSTANCE>
-          </INSTANCE>
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="meta.code.qual"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Summary quality flag"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Flag">
-              <INSTANCE dmrole="mango:stcextend.Flag.coord" dmtype="mango:stcextend.FlagCoord">
-                <VALUE dmrole="mango:stcextend.FlagCoord.coord" dmtype="ivoa:integer" ref="_sum_flag_394"/>
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#obs-parameter"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="time.duration;obs.exposure"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="PN exposure time in Energy band 1 0.2-0.5KeV"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="meas:GenericMeasure">
+                <INSTANCE dmrole="meas:GenericMeasure.coord" dmtype="coords:PhysicalCoordinate">
+                  <INSTANCE dmrole="coords:PhysicalCoordinate.cval" dmtype="ivoa:RealQuantity">
+                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_pn_1_exp_334"/>
+                    <VALUE dmrole="ivoa:RealQuantity.unit" dmtype="ivoa:Unit" value="sec"/>
+                  </INSTANCE>
+                </INSTANCE>
               </INSTANCE>
             </INSTANCE>
-          </INSTANCE>
-        </COMPOSITION>
-      </INSTANCE>
-    </ARRAY>
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="meta.code.qual"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Summary quality flag"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Flag">
+                <INSTANCE dmrole="mango:stcextend.Flag.coord" dmtype="mango:stcextend.FlagCoord">
+                  <VALUE dmrole="mango:stcextend.FlagCoord.coord" dmtype="ivoa:integer" ref="_sum_flag_394"/>
+                </INSTANCE>
+              </INSTANCE>
+            </INSTANCE>
+          </COMPOSITION>
+        </INSTANCE>
+      </ARRAY>
+    </COMPOSITION>
   </TEMPLATES>
 </VODML>

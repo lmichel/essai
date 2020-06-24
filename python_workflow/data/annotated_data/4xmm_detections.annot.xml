@@ -8,15 +8,17 @@
     </MODEL>
     <MODEL>
       <NAME>coords</NAME>
-      <URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.vo-dml.xml</URL>
+      <URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.vo-dml.xml
+			</URL>
     </MODEL>
     <MODEL>
       <NAME>meas</NAME>
-      <URL>http://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml</URL>
+      <URL>http://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml
+			</URL>
     </MODEL>
   </MODELS>
   <GLOBALS>
-    <INSTANCE ID="SpaceFrame_ICRS" dmrole="">
+    <INSTANCE ID="SpaceFrame_ICRS" dmtype="coords:SpaceFrame">
       <INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
         <VALUE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
       </INSTANCE>
@@ -68,102 +70,104 @@
       </COMPOSITION>
     </INSTANCE>
   </GLOBALS>
-  <TEMPLATES>
-    <ARRAY dmrole="root">
-      <INSTANCE dmrole="root" dmtype="mango:Source">
-        <VALUE dmrole="mango:Source.identifier" dmtype="ivoa:string" ref="namesaada"/>
-        <COMPOSITION size="-1" dmrole="mango:Source.associatedData"/>
-        <COMPOSITION size="-1" dmrole="mango:Source.parameters">
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#corrected"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Corrected position"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.LonLatSkyPosition">
-              <INSTANCE dmrole="mango:stcextend.LonLatSkyPosition.coord" dmtype="mango:stcextend.LonLatPoint">
-                <VALUE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="_ra_146"/>
-                <VALUE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="_dec_147"/>
-                <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="SpaceFrame_ICRS"/>
-              </INSTANCE>
-              <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
-                <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
-                  <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_poserr_148"/>
-                    <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
-                  </INSTANCE>
+  <TEMPLATES table_ref="Results">
+    <COMPOSITION dmrole="root">
+      <ARRAY>
+        <INSTANCE dmrole="root" dmtype="mango:Source">
+          <VALUE dmrole="mango:Source.identifier" dmtype="ivoa:string" ref="namesaada"/>
+          <COMPOSITION size="-1" dmrole="mango:Source.associatedData"/>
+          <COMPOSITION size="-1" dmrole="mango:Source.parameters">
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#corrected"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Corrected position"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.LonLatSkyPosition">
+                <INSTANCE dmrole="mango:stcextend.LonLatSkyPosition.coord" dmtype="mango:stcextend.LonLatPoint">
+                  <VALUE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="_ra_146"/>
+                  <VALUE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="_dec_147"/>
+                  <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="SpaceFrame_ICRS"/>
                 </INSTANCE>
-                <INSTANCE dmrole="meas:Error.sysError" dmtype="meas:Symmetrical">
-                  <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_syserrcc_152"/>
-                    <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
+                <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
+                  <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
+                    <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+                      <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_poserr_148"/>
+                      <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
+                    </INSTANCE>
                   </INSTANCE>
-                </INSTANCE>
-              </INSTANCE>
-            </INSTANCE>
-          </INSTANCE>
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="Flux in Energy band 1 0.2-0.5KeV (cameras merged)"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="#corrected"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Photometry">
-              <INSTANCE dmrole="mango:stcextend.Photometry.coord" dmtype="mango:stcextend.PhotometryCoord">
-                <VALUE dmrole="mango:stcextend.PhotometryCoord.luminosity" dmtype="ivoa:real" ref="_ep_1_flux_166"/>
-                <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="PhotFrame_EB1"/>
-              </INSTANCE>
-              <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
-                <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
-                  <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_ep_1_flux_err_167"/>
-                    <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="erg/cm2/sec"/>
+                  <INSTANCE dmrole="meas:Error.sysError" dmtype="meas:Symmetrical">
+                    <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+                      <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_syserrcc_152"/>
+                      <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
+                    </INSTANCE>
                   </INSTANCE>
                 </INSTANCE>
               </INSTANCE>
             </INSTANCE>
-          </INSTANCE>
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Hardness Ration in Energy band 1 0.2-0.5KeV (cameras merged)"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.HardnessRatio">
-              <INSTANCE dmrole="mango:stcextend.HardnessRatio.coord" dmtype="mango:stcextend.HardnessRatioCoord">
-                <VALUE dmrole="mango:stcextend.HardnessRatioCoord.hardnessRatio" dmtype="ivoa:real" value="NotSet"/>
-                <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="PhotFrame_EB1"/>
-              </INSTANCE>
-              <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
-                <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
-                  <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_ep_hr1_err_303"/>
-                    <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="NotSet"/>
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="Flux in Energy band 1 0.2-0.5KeV (cameras merged)"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="#corrected"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Photometry">
+                <INSTANCE dmrole="mango:stcextend.Photometry.coord" dmtype="mango:stcextend.PhotometryCoord">
+                  <VALUE dmrole="mango:stcextend.PhotometryCoord.luminosity" dmtype="ivoa:real" ref="_ep_1_flux_166"/>
+                  <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="PhotFrame_EB1"/>
+                </INSTANCE>
+                <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
+                  <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
+                    <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+                      <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_ep_1_flux_err_167"/>
+                      <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="erg/cm2/sec"/>
+                    </INSTANCE>
                   </INSTANCE>
                 </INSTANCE>
               </INSTANCE>
             </INSTANCE>
-          </INSTANCE>
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#obs-parameter"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="time.duration;obs.exposure"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="PN exposure time in Energy band 1 0.2-0.5KeV"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="meas:GenericMeasure">
-              <INSTANCE dmrole="meas:GenericMeasure.coord" dmtype="coords:PhysicalCoordinate">
-                <INSTANCE dmrole="coords:PhysicalCoordinate.cval" dmtype="ivoa:RealQuantity">
-                  <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_pn_1_exp_334"/>
-                  <VALUE dmrole="ivoa:RealQuantity.unit" dmtype="ivoa:Unit" value="sec"/>
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="phot.flux"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Hardness Ration in Energy band 1 0.2-0.5KeV (cameras merged)"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.HardnessRatio">
+                <INSTANCE dmrole="mango:stcextend.HardnessRatio.coord" dmtype="mango:stcextend.HardnessRatioCoord">
+                  <VALUE dmrole="mango:stcextend.HardnessRatioCoord.hardnessRatio" dmtype="ivoa:real" value="NotSet"/>
+                  <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="PhotFrame_EB1"/>
+                </INSTANCE>
+                <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
+                  <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
+                    <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
+                      <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_ep_hr1_err_303"/>
+                      <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="NotSet"/>
+                    </INSTANCE>
+                  </INSTANCE>
                 </INSTANCE>
               </INSTANCE>
             </INSTANCE>
-          </INSTANCE>
-          <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-            <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
-            <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="meta.code.qual"/>
-            <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Summary quality flag"/>
-            <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Flag">
-              <INSTANCE dmrole="mango:stcextend.Flag.coord" dmtype="mango:stcextend.FlagCoord">
-                <VALUE dmrole="mango:stcextend.FlagCoord.coord" dmtype="ivoa:integer" ref="_sum_flag_394"/>
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#obs-parameter"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="time.duration;obs.exposure"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="PN exposure time in Energy band 1 0.2-0.5KeV"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="meas:GenericMeasure">
+                <INSTANCE dmrole="meas:GenericMeasure.coord" dmtype="coords:PhysicalCoordinate">
+                  <INSTANCE dmrole="coords:PhysicalCoordinate.cval" dmtype="ivoa:RealQuantity">
+                    <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_pn_1_exp_334"/>
+                    <VALUE dmrole="ivoa:RealQuantity.unit" dmtype="ivoa:Unit" value="sec"/>
+                  </INSTANCE>
+                </INSTANCE>
               </INSTANCE>
             </INSTANCE>
-          </INSTANCE>
-        </COMPOSITION>
-      </INSTANCE>
-    </ARRAY>
+            <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
+              <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="#computed"/>
+              <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="meta.code.qual"/>
+              <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="Summary quality flag"/>
+              <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.Flag">
+                <INSTANCE dmrole="mango:stcextend.Flag.coord" dmtype="mango:stcextend.FlagCoord">
+                  <VALUE dmrole="mango:stcextend.FlagCoord.coord" dmtype="ivoa:integer" ref="_sum_flag_394"/>
+                </INSTANCE>
+              </INSTANCE>
+            </INSTANCE>
+          </COMPOSITION>
+        </INSTANCE>
+      </ARRAY>
+    </COMPOSITION>
   </TEMPLATES>
 </VODML>
 <DESCRIPTION><![CDATA[
@@ -260,18 +264,18 @@ Archive generated by SAADA: http://saada.u-strasbg.fr
 <FIELD ID="_dr3srcdist_126" name="_dr3srcdist" datatype="char" unit="arcsec">
 <DESCRIPTION>units for column 6</DESCRIPTION>
 </FIELD>
-<FIELD ID="_dr3mult_127" name="_dr3mult" datatype="double"/>
+<FIELD ID="_dr3mult_127" name="_dr3mult" datatype="char"/>
 <FIELD ID="_dr4srcid_128" name="_dr4srcid" datatype="int"/>
 <FIELD ID="_dr4detid_129" name="_dr4detid" datatype="int"/>
-<FIELD ID="_dr4detdist_130" name="_dr4detdist" datatype="double" unit="arcsec">
+<FIELD ID="_dr4detdist_130" name="_dr4detdist" datatype="char" unit="arcsec">
 <DESCRIPTION>units for column 10</DESCRIPTION>
 </FIELD>
-<FIELD ID="_dr4srcdist_131" name="_dr4srcdist" datatype="double" unit="arcsec">
+<FIELD ID="_dr4srcdist_131" name="_dr4srcdist" datatype="char" unit="arcsec">
 <DESCRIPTION>units for column 11</DESCRIPTION>
 </FIELD>
-<FIELD ID="_dr4mult_132" name="_dr4mult" datatype="double"/>
+<FIELD ID="_dr4mult_132" name="_dr4mult" datatype="char"/>
 <FIELD ID="_iauname_133" name="_iauname" datatype="char" arraysize="*"/>
-<FIELD ID="_src_num_134" name="_src_num" datatype="int"/>
+<FIELD ID="_src_num_134" name="_src_num" datatype="char"/>
 <FIELD ID="_obs_id_135" name="_obs_id" datatype="char" arraysize="*"/>
 <FIELD ID="_revolut_136" name="_revolut" datatype="char" arraysize="*" unit="orbit">
 <DESCRIPTION>units for column 16</DESCRIPTION>
@@ -282,7 +286,7 @@ Archive generated by SAADA: http://saada.u-strasbg.fr
 <FIELD ID="_mjd_stop_138" name="_mjd_stop" datatype="double" unit="d">
 <DESCRIPTION>units for column 18</DESCRIPTION>
 </FIELD>
-<FIELD ID="_obs_class_139" name="_obs_class" datatype="int"/>
+<FIELD ID="_obs_class_139" name="_obs_class" datatype="char"/>
 <FIELD ID="_pn_filter_140" name="_pn_filter" datatype="char" arraysize="*"/>
 <FIELD ID="_m1_filter_141" name="_m1_filter" datatype="char" arraysize="*"/>
 <FIELD ID="_m2_filter_142" name="_m2_filter" datatype="char" arraysize="*"/>
@@ -304,13 +308,13 @@ Archive generated by SAADA: http://saada.u-strasbg.fr
 <FIELD ID="_bii_150" name="_bii" datatype="double" unit="deg">
 <DESCRIPTION>units for column 30</DESCRIPTION>
 </FIELD>
-<FIELD ID="_radec_err_151" name="_radec_err" datatype="double" unit="arcsec">
+<FIELD ID="_radec_err_151" name="_radec_err" datatype="char" unit="arcsec">
 <DESCRIPTION>units for column 31</DESCRIPTION>
 </FIELD>
-<FIELD ID="_syserrcc_152" name="_syserrcc" datatype="double" unit="arcsec">
+<FIELD ID="_syserrcc_152" name="_syserrcc" datatype="char" unit="arcsec">
 <DESCRIPTION>units for column 32</DESCRIPTION>
 </FIELD>
-<FIELD ID="_refcat_153" name="_refcat" datatype="int"/>
+<FIELD ID="_refcat_153" name="_refcat" datatype="char"/>
 <FIELD ID="_poscorok_154" name="_poscorok" datatype="boolean"/>
 <FIELD ID="_ra_unc_155" name="_ra_unc" datatype="double" unit="deg">
 <DESCRIPTION>units for column 35</DESCRIPTION>
@@ -318,15 +322,15 @@ Archive generated by SAADA: http://saada.u-strasbg.fr
 <FIELD ID="_dec_unc_156" name="_dec_unc" datatype="double" unit="deg">
 <DESCRIPTION>units for column 36</DESCRIPTION>
 </FIELD>
-<FIELD ID="_ccdpn_157" name="_ccdpn" datatype="int"/>
-<FIELD ID="_pn_rawx_158" name="_pn_rawx" datatype="int"/>
-<FIELD ID="_pn_rawy_159" name="_pn_rawy" datatype="int"/>
-<FIELD ID="_ccdm1_160" name="_ccdm1" datatype="int"/>
-<FIELD ID="_m1_rawx_161" name="_m1_rawx" datatype="int"/>
-<FIELD ID="_m1_rawy_162" name="_m1_rawy" datatype="int"/>
-<FIELD ID="_ccdm2_163" name="_ccdm2" datatype="int"/>
-<FIELD ID="_m2_rawx_164" name="_m2_rawx" datatype="int"/>
-<FIELD ID="_m2_rawy_165" name="_m2_rawy" datatype="int"/>
+<FIELD ID="_ccdpn_157" name="_ccdpn" datatype="char"/>
+<FIELD ID="_pn_rawx_158" name="_pn_rawx" datatype="char"/>
+<FIELD ID="_pn_rawy_159" name="_pn_rawy" datatype="char"/>
+<FIELD ID="_ccdm1_160" name="_ccdm1" datatype="char"/>
+<FIELD ID="_m1_rawx_161" name="_m1_rawx" datatype="char"/>
+<FIELD ID="_m1_rawy_162" name="_m1_rawy" datatype="char"/>
+<FIELD ID="_ccdm2_163" name="_ccdm2" datatype="char"/>
+<FIELD ID="_m2_rawx_164" name="_m2_rawx" datatype="char"/>
+<FIELD ID="_m2_rawy_165" name="_m2_rawy" datatype="char"/>
 <FIELD ID="_ep_1_flux_166" name="_ep_1_flux" datatype="double" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 46</DESCRIPTION>
 </FIELD>
@@ -510,10 +514,10 @@ Archive generated by SAADA: http://saada.u-strasbg.fr
 <FIELD ID="_pn_1_rate_226" name="_pn_1_rate" datatype="double" unit="count/s">
 <DESCRIPTION>units for column 106</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_1_rate_err_227" name="_pn_1_rate_err" datatype="double" unit="count/s">
+<FIELD ID="_pn_1_rate_err_227" name="_pn_1_rate_err" datatype="char" unit="count/s">
 <DESCRIPTION>units for column 107</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_2_rate_228" name="_pn_2_rate" datatype="double" unit="count/s">
+<FIELD ID="_pn_2_rate_228" name="_pn_2_rate" datatype="char" unit="count/s">
 <DESCRIPTION>units for column 108</DESCRIPTION>
 </FIELD>
 <FIELD ID="_pn_2_rate_err_229" name="_pn_2_rate_err" datatype="double" unit="count/s">
@@ -722,146 +726,146 @@ Archive generated by SAADA: http://saada.u-strasbg.fr
 <FIELD ID="_pn_1_exp_334" name="_pn_1_exp" datatype="double" unit="s">
 <DESCRIPTION>units for column 214</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_2_exp_335" name="_pn_2_exp" datatype="double" unit="s">
+<FIELD ID="_pn_2_exp_335" name="_pn_2_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 215</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_3_exp_336" name="_pn_3_exp" datatype="double" unit="s">
+<FIELD ID="_pn_3_exp_336" name="_pn_3_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 216</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_4_exp_337" name="_pn_4_exp" datatype="double" unit="s">
+<FIELD ID="_pn_4_exp_337" name="_pn_4_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 217</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_5_exp_338" name="_pn_5_exp" datatype="double" unit="s">
+<FIELD ID="_pn_5_exp_338" name="_pn_5_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 218</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_1_exp_339" name="_m1_1_exp" datatype="double" unit="s">
+<FIELD ID="_m1_1_exp_339" name="_m1_1_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 219</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_2_exp_340" name="_m1_2_exp" datatype="double" unit="s">
+<FIELD ID="_m1_2_exp_340" name="_m1_2_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 220</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_3_exp_341" name="_m1_3_exp" datatype="double" unit="s">
+<FIELD ID="_m1_3_exp_341" name="_m1_3_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 221</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_4_exp_342" name="_m1_4_exp" datatype="double" unit="s">
+<FIELD ID="_m1_4_exp_342" name="_m1_4_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 222</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_5_exp_343" name="_m1_5_exp" datatype="double" unit="s">
+<FIELD ID="_m1_5_exp_343" name="_m1_5_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 223</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_1_exp_344" name="_m2_1_exp" datatype="double" unit="s">
+<FIELD ID="_m2_1_exp_344" name="_m2_1_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 224</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_2_exp_345" name="_m2_2_exp" datatype="double" unit="s">
+<FIELD ID="_m2_2_exp_345" name="_m2_2_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 225</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_3_exp_346" name="_m2_3_exp" datatype="double" unit="s">
+<FIELD ID="_m2_3_exp_346" name="_m2_3_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 226</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_4_exp_347" name="_m2_4_exp" datatype="double" unit="s">
+<FIELD ID="_m2_4_exp_347" name="_m2_4_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 227</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_5_exp_348" name="_m2_5_exp" datatype="double" unit="s">
+<FIELD ID="_m2_5_exp_348" name="_m2_5_exp" datatype="char" unit="s">
 <DESCRIPTION>units for column 228</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_1_bg_349" name="_pn_1_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_pn_1_bg_349" name="_pn_1_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 229</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_2_bg_350" name="_pn_2_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_pn_2_bg_350" name="_pn_2_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 230</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_3_bg_351" name="_pn_3_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_pn_3_bg_351" name="_pn_3_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 231</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_4_bg_352" name="_pn_4_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_pn_4_bg_352" name="_pn_4_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 232</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_5_bg_353" name="_pn_5_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_pn_5_bg_353" name="_pn_5_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 233</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_1_bg_354" name="_m1_1_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m1_1_bg_354" name="_m1_1_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 234</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_2_bg_355" name="_m1_2_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m1_2_bg_355" name="_m1_2_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 235</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_3_bg_356" name="_m1_3_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m1_3_bg_356" name="_m1_3_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 236</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_4_bg_357" name="_m1_4_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m1_4_bg_357" name="_m1_4_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 237</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_5_bg_358" name="_m1_5_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m1_5_bg_358" name="_m1_5_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 238</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_1_bg_359" name="_m2_1_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m2_1_bg_359" name="_m2_1_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 239</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_2_bg_360" name="_m2_2_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m2_2_bg_360" name="_m2_2_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 240</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_3_bg_361" name="_m2_3_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m2_3_bg_361" name="_m2_3_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 241</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_4_bg_362" name="_m2_4_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m2_4_bg_362" name="_m2_4_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 242</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_5_bg_363" name="_m2_5_bg" datatype="double" unit="count/pixel">
+<FIELD ID="_m2_5_bg_363" name="_m2_5_bg" datatype="char" unit="count/pixel">
 <DESCRIPTION>units for column 243</DESCRIPTION>
 </FIELD>
 <FIELD ID="_pn_pileup_364" name="_pn_pileup" datatype="char"/>
 <FIELD ID="_m1_pileup_365" name="_m1_pileup" datatype="char"/>
 <FIELD ID="_m2_pileup_366" name="_m2_pileup" datatype="char"/>
-<FIELD ID="_pn_1_vig_367" name="_pn_1_vig" datatype="double"/>
-<FIELD ID="_pn_2_vig_368" name="_pn_2_vig" datatype="double"/>
-<FIELD ID="_pn_3_vig_369" name="_pn_3_vig" datatype="double"/>
-<FIELD ID="_pn_4_vig_370" name="_pn_4_vig" datatype="double"/>
-<FIELD ID="_pn_5_vig_371" name="_pn_5_vig" datatype="double"/>
-<FIELD ID="_m1_1_vig_372" name="_m1_1_vig" datatype="double"/>
-<FIELD ID="_m1_2_vig_373" name="_m1_2_vig" datatype="double"/>
-<FIELD ID="_m1_3_vig_374" name="_m1_3_vig" datatype="double"/>
-<FIELD ID="_m1_4_vig_375" name="_m1_4_vig" datatype="double"/>
-<FIELD ID="_m1_5_vig_376" name="_m1_5_vig" datatype="double"/>
-<FIELD ID="_m2_1_vig_377" name="_m2_1_vig" datatype="double"/>
-<FIELD ID="_m2_2_vig_378" name="_m2_2_vig" datatype="double"/>
-<FIELD ID="_m2_3_vig_379" name="_m2_3_vig" datatype="double"/>
-<FIELD ID="_m2_4_vig_380" name="_m2_4_vig" datatype="double"/>
-<FIELD ID="_m2_5_vig_381" name="_m2_5_vig" datatype="double"/>
-<FIELD ID="_pn_ontime_382" name="_pn_ontime" datatype="double" unit="s">
+<FIELD ID="_pn_1_vig_367" name="_pn_1_vig" datatype="char"/>
+<FIELD ID="_pn_2_vig_368" name="_pn_2_vig" datatype="char"/>
+<FIELD ID="_pn_3_vig_369" name="_pn_3_vig" datatype="char"/>
+<FIELD ID="_pn_4_vig_370" name="_pn_4_vig" datatype="char"/>
+<FIELD ID="_pn_5_vig_371" name="_pn_5_vig" datatype="char"/>
+<FIELD ID="_m1_1_vig_372" name="_m1_1_vig" datatype="char"/>
+<FIELD ID="_m1_2_vig_373" name="_m1_2_vig" datatype="char"/>
+<FIELD ID="_m1_3_vig_374" name="_m1_3_vig" datatype="char"/>
+<FIELD ID="_m1_4_vig_375" name="_m1_4_vig" datatype="char"/>
+<FIELD ID="_m1_5_vig_376" name="_m1_5_vig" datatype="char"/>
+<FIELD ID="_m2_1_vig_377" name="_m2_1_vig" datatype="char"/>
+<FIELD ID="_m2_2_vig_378" name="_m2_2_vig" datatype="char"/>
+<FIELD ID="_m2_3_vig_379" name="_m2_3_vig" datatype="char"/>
+<FIELD ID="_m2_4_vig_380" name="_m2_4_vig" datatype="char"/>
+<FIELD ID="_m2_5_vig_381" name="_m2_5_vig" datatype="char"/>
+<FIELD ID="_pn_ontime_382" name="_pn_ontime" datatype="char" unit="s">
 <DESCRIPTION>units for column 262</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_ontime_383" name="_m1_ontime" datatype="double" unit="s">
+<FIELD ID="_m1_ontime_383" name="_m1_ontime" datatype="char" unit="s">
 <DESCRIPTION>units for column 263</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_ontime_384" name="_m2_ontime" datatype="double" unit="s">
+<FIELD ID="_m2_ontime_384" name="_m2_ontime" datatype="char" unit="s">
 <DESCRIPTION>units for column 264</DESCRIPTION>
 </FIELD>
-<FIELD ID="_ep_ontime_385" name="_ep_ontime" datatype="double" unit="s">
+<FIELD ID="_ep_ontime_385" name="_ep_ontime" datatype="char" unit="s">
 <DESCRIPTION>units for column 265</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_offax_386" name="_pn_offax" datatype="double" unit="arcmin">
+<FIELD ID="_pn_offax_386" name="_pn_offax" datatype="char" unit="arcmin">
 <DESCRIPTION>units for column 266</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m1_offax_387" name="_m1_offax" datatype="double" unit="arcmin">
+<FIELD ID="_m1_offax_387" name="_m1_offax" datatype="char" unit="arcmin">
 <DESCRIPTION>units for column 267</DESCRIPTION>
 </FIELD>
-<FIELD ID="_m2_offax_388" name="_m2_offax" datatype="double" unit="arcmin">
+<FIELD ID="_m2_offax_388" name="_m2_offax" datatype="char" unit="arcmin">
 <DESCRIPTION>units for column 268</DESCRIPTION>
 </FIELD>
-<FIELD ID="_ep_offax_389" name="_ep_offax" datatype="double" unit="arcmin">
+<FIELD ID="_ep_offax_389" name="_ep_offax" datatype="char" unit="arcmin">
 <DESCRIPTION>units for column 269</DESCRIPTION>
 </FIELD>
-<FIELD ID="_pn_maskfrac_390" name="_pn_maskfrac" datatype="double"/>
-<FIELD ID="_m1_maskfrac_391" name="_m1_maskfrac" datatype="double"/>
-<FIELD ID="_m2_maskfrac_392" name="_m2_maskfrac" datatype="double"/>
-<FIELD ID="_dist_nn_393" name="_dist_nn" datatype="double" unit="arcsec">
+<FIELD ID="_pn_maskfrac_390" name="_pn_maskfrac" datatype="char"/>
+<FIELD ID="_m1_maskfrac_391" name="_m1_maskfrac" datatype="char"/>
+<FIELD ID="_m2_maskfrac_392" name="_m2_maskfrac" datatype="char"/>
+<FIELD ID="_dist_nn_393" name="_dist_nn" datatype="char" unit="arcsec">
 <DESCRIPTION>units for column 273</DESCRIPTION>
 </FIELD>
 <FIELD ID="_sum_flag_394" name="_sum_flag" datatype="int"/>
-<FIELD ID="_ep_flag_395" name="_ep_flag" datatype="int" arraysize="*"/>
-<FIELD ID="_pn_flag_396" name="_pn_flag" datatype="int" arraysize="*"/>
-<FIELD ID="_m1_flag_397" name="_m1_flag" datatype="int" arraysize="*"/>
-<FIELD ID="_m2_flag_398" name="_m2_flag" datatype="int" arraysize="*"/>
+<FIELD ID="_ep_flag_395" name="_ep_flag" datatype="char" arraysize="*"/>
+<FIELD ID="_pn_flag_396" name="_pn_flag" datatype="char" arraysize="*"/>
+<FIELD ID="_m1_flag_397" name="_m1_flag" datatype="char" arraysize="*"/>
+<FIELD ID="_m2_flag_398" name="_m2_flag" datatype="char" arraysize="*"/>
 <FIELD ID="_tseries_399" name="_tseries" datatype="boolean"/>
 <FIELD ID="_spectra_400" name="_spectra" datatype="boolean"/>
 <FIELD ID="_ep_chi2prob_401" name="_ep_chi2prob" datatype="double"/>
@@ -883,82 +887,82 @@ Archive generated by SAADA: http://saada.u-strasbg.fr
 <FIELD ID="_sc_dec_415" name="_sc_dec" datatype="double" unit="deg">
 <DESCRIPTION>units for column 295</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_poserr_416" name="_sc_poserr" datatype="double" unit="arcsec">
+<FIELD ID="_sc_poserr_416" name="_sc_poserr" datatype="char" unit="arcsec">
 <DESCRIPTION>units for column 296</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_det_ml_417" name="_sc_det_ml" datatype="double"/>
-<FIELD ID="_sc_ep_1_flux_418" name="_sc_ep_1_flux" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_det_ml_417" name="_sc_det_ml" datatype="char"/>
+<FIELD ID="_sc_ep_1_flux_418" name="_sc_ep_1_flux" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 298</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_1_flux_err_419" name="_sc_ep_1_flux_err" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_1_flux_err_419" name="_sc_ep_1_flux_err" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 299</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_2_flux_420" name="_sc_ep_2_flux" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_2_flux_420" name="_sc_ep_2_flux" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 300</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_2_flux_err_421" name="_sc_ep_2_flux_err" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_2_flux_err_421" name="_sc_ep_2_flux_err" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 301</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_3_flux_422" name="_sc_ep_3_flux" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_3_flux_422" name="_sc_ep_3_flux" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 302</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_3_flux_err_423" name="_sc_ep_3_flux_err" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_3_flux_err_423" name="_sc_ep_3_flux_err" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 303</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_4_flux_424" name="_sc_ep_4_flux" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_4_flux_424" name="_sc_ep_4_flux" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 304</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_4_flux_err_425" name="_sc_ep_4_flux_err" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_4_flux_err_425" name="_sc_ep_4_flux_err" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 305</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_5_flux_426" name="_sc_ep_5_flux" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_5_flux_426" name="_sc_ep_5_flux" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 306</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_5_flux_err_427" name="_sc_ep_5_flux_err" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_5_flux_err_427" name="_sc_ep_5_flux_err" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 307</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_8_flux_428" name="_sc_ep_8_flux" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_8_flux_428" name="_sc_ep_8_flux" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 308</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_8_flux_err_429" name="_sc_ep_8_flux_err" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_8_flux_err_429" name="_sc_ep_8_flux_err" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 309</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_9_flux_430" name="_sc_ep_9_flux" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_9_flux_430" name="_sc_ep_9_flux" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 310</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_9_flux_err_431" name="_sc_ep_9_flux_err" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_9_flux_err_431" name="_sc_ep_9_flux_err" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 311</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_hr1_432" name="_sc_hr1" datatype="double"/>
-<FIELD ID="_sc_hr1_err_433" name="_sc_hr1_err" datatype="double"/>
-<FIELD ID="_sc_hr2_434" name="_sc_hr2" datatype="double"/>
-<FIELD ID="_sc_hr2_err_435" name="_sc_hr2_err" datatype="double"/>
-<FIELD ID="_sc_hr3_436" name="_sc_hr3" datatype="double"/>
-<FIELD ID="_sc_hr3_err_437" name="_sc_hr3_err" datatype="double"/>
-<FIELD ID="_sc_hr4_438" name="_sc_hr4" datatype="double"/>
-<FIELD ID="_sc_hr4_err_439" name="_sc_hr4_err" datatype="double"/>
-<FIELD ID="_sc_extent_440" name="_sc_extent" datatype="double" unit="arcsec">
+<FIELD ID="_sc_hr1_432" name="_sc_hr1" datatype="char"/>
+<FIELD ID="_sc_hr1_err_433" name="_sc_hr1_err" datatype="char"/>
+<FIELD ID="_sc_hr2_434" name="_sc_hr2" datatype="char"/>
+<FIELD ID="_sc_hr2_err_435" name="_sc_hr2_err" datatype="char"/>
+<FIELD ID="_sc_hr3_436" name="_sc_hr3" datatype="char"/>
+<FIELD ID="_sc_hr3_err_437" name="_sc_hr3_err" datatype="char"/>
+<FIELD ID="_sc_hr4_438" name="_sc_hr4" datatype="char"/>
+<FIELD ID="_sc_hr4_err_439" name="_sc_hr4_err" datatype="char"/>
+<FIELD ID="_sc_extent_440" name="_sc_extent" datatype="char" unit="arcsec">
 <DESCRIPTION>units for column 320</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ext_err_441" name="_sc_ext_err" datatype="double" unit="arcsec">
+<FIELD ID="_sc_ext_err_441" name="_sc_ext_err" datatype="char" unit="arcsec">
 <DESCRIPTION>units for column 321</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ext_ml_442" name="_sc_ext_ml" datatype="double"/>
+<FIELD ID="_sc_ext_ml_442" name="_sc_ext_ml" datatype="char"/>
 <FIELD ID="_sc_chi2prob_443" name="_sc_chi2prob" datatype="double"/>
 <FIELD ID="_sc_fvar_444" name="_sc_fvar" datatype="double"/>
 <FIELD ID="_sc_fvarerr_445" name="_sc_fvarerr" datatype="double"/>
 <FIELD ID="_sc_var_flag_446" name="_sc_var_flag" datatype="boolean"/>
-<FIELD ID="_sc_sum_flag_447" name="_sc_sum_flag" datatype="double"/>
-<FIELD ID="_sc_ep_8_fmin_448" name="_sc_ep_8_fmin" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_sum_flag_447" name="_sc_sum_flag" datatype="char"/>
+<FIELD ID="_sc_ep_8_fmin_448" name="_sc_ep_8_fmin" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 328</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_8_fmin_err_449" name="_sc_ep_8_fmin_err" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_8_fmin_err_449" name="_sc_ep_8_fmin_err" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 329</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_8_fmax_450" name="_sc_ep_8_fmax" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_8_fmax_450" name="_sc_ep_8_fmax" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 330</DESCRIPTION>
 </FIELD>
-<FIELD ID="_sc_ep_8_fmax_err_451" name="_sc_ep_8_fmax_err" datatype="double" unit="erg/cm**2/s">
+<FIELD ID="_sc_ep_8_fmax_err_451" name="_sc_ep_8_fmax_err" datatype="char" unit="erg/cm**2/s">
 <DESCRIPTION>units for column 331</DESCRIPTION>
 </FIELD>
 <FIELD ID="_mjd_first_452" name="_mjd_first" datatype="double" unit="d">
@@ -967,7 +971,7 @@ Archive generated by SAADA: http://saada.u-strasbg.fr
 <FIELD ID="_mjd_last_453" name="_mjd_last" datatype="double" unit="d">
 <DESCRIPTION>units for column 333</DESCRIPTION>
 </FIELD>
-<FIELD ID="_n_detections_454" name="_n_detections" datatype="int"/>
+<FIELD ID="_n_detections_454" name="_n_detections" datatype="char"/>
 <FIELD ID="_confused_455" name="_confused" datatype="boolean"/>
 <FIELD ID="_high_background_456" name="_high_background" datatype="boolean"/>
 <GROUP name="Native Collection Attributes">

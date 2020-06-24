@@ -1,4 +1,4 @@
-    <INSTANCE ID="SpaceFrame_ICRS" dmrole="">
+    <INSTANCE ID="SpaceFrame_ICRS" dmtype="coords:SpaceFrame">
       <INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
         <VALUE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
       </INSTANCE>

@@ -14,7 +14,7 @@
     </MODEL>
   </MODELS>
   <GLOBALS/>
-  <TEMPLATES>
+  <TEMPLATES  table_ref='Results'>
     <INSTANCE dmrole="root" dmtype="mango:stcextend.HardnessRatio">
       <INSTANCE dmrole="mango:stcextend.HardnessRatio.coord" dmtype="mango:stcextend.HardnessRatioCoord">
         <VALUE dmrole="mango:stcextend.HardnessRatioCoord.hardnessRatio" dmtype="ivoa:real" ref="@@@@@@"/>

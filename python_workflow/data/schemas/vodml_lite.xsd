@@ -116,6 +116,7 @@
 					maxOccurs="unbounded" />
 			</xs:choice>
 			<xs:attribute type="xs:string" name="dmrole" />
+			<xs:attribute type="xs:string" name="size" />
 			<xs:assert test="@dmrole != '' " />
 			<xs:assert
 				test="(count(./ARRAY) lt 2) and (count(./JOIN) lt 2)" />

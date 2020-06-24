@@ -3,7 +3,7 @@ Created on 1 avr. 2020
 
 @author: laurentmichel
 '''
-
+from utils.dict_utils import DictUtils
 class ColumnMapping():
     '''
     classdocs
@@ -16,7 +16,12 @@ class ColumnMapping():
         '''
         self.column_refs = {}
         self.column_ids = {}
-        
+       
+    def __repr__(self):
+        return "column_refs:{} \n column_ids:{}".format(
+            DictUtils.get_pretty_json(self.column_refs),
+            DictUtils.get_pretty_json(self.column_ids))
+    
     def add_entry(self, key, role, parent_role=None):
         if key not in self.column_refs.keys():
             self.column_refs[key] = {
@@ -55,7 +60,10 @@ class ColumnMapping():
     
     def get_col_index_by_name(self, name):
         for k,v in self.column_ids.items():
-            if v["name"] == name:
+            if "id" in v.keys() and v["id"] == name:
+                return k   
+        for k,v in self.column_ids.items():
+            if "name" in v.keys() and v["name"] == name:
                 return k   
         return None
         

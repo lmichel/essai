@@ -10,6 +10,7 @@ from schema.validator.validator import Validator
 from client.inst_builder.json_mapping_builder import JsonMappingBuilder
 from client.inst_builder.instancier import Instancier
 from client.launchers import logger, data_dir
+from utils.dict_utils import DictUtils
 
 class InstanceFromVotable:
     '''
@@ -71,6 +72,7 @@ class InstanceFromVotable:
         builder.revert_elements("MODEL")
 
         self.json_vodml_block = builder.json
+        print(DictUtils.get_pretty_json(self.json_vodml_block))
         logger.info("JSON VODML block built")
         
 

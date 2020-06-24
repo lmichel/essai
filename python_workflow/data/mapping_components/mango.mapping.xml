@@ -1,26 +1,32 @@
 <VODML>
-  <MODELS>
-    <MODEL>
-      <NAME>ivoa</NAME>
-      <URL>http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml</URL>
-    </MODEL>
-    <MODEL>
-      <NAME>coords</NAME>
-      <URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.vo-dml.xml</URL>
-    </MODEL>
-    <MODEL>
-      <NAME>meas</NAME>
-      <URL>http://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml</URL>
-    </MODEL>
-  </MODELS>
-  <GLOBALS/>
-  <TEMPLATES>
-    <ARRAY dmrole="root">
-      <INSTANCE dmrole="root" dmtype="mango:Source">
-        <VALUE dmrole="mango:Source.identifier" dmtype="ivoa:string" ref="@@@@@@"/>
-          <COMPOSITION size="-1" dmrole="mango:Source.associatedData"/>
-          <COMPOSITION size="-1" dmrole="mango:Source.parameters"/>
-       </INSTANCE>
-     </ARRAY>
-  </TEMPLATES>
+	<MODELS>
+		<MODEL>
+			<NAME>ivoa</NAME>
+			<URL>http://www.ivoa.net/xml/VODML/IVOA-v1.vo-dml.xml</URL>
+		</MODEL>
+		<MODEL>
+			<NAME>coords</NAME>
+			<URL>https://volute.g-vo.org/svn/trunk/projects/dm/STC/Coords/vo-dml/STC_coords-v1.0.vo-dml.xml
+			</URL>
+		</MODEL>
+		<MODEL>
+			<NAME>meas</NAME>
+			<URL>http://volute.g-vo.org/svn/trunk/projects/dm/STC/Meas/vo-dml/STC_meas-v1.0.vo-dml.xml
+			</URL>
+		</MODEL>
+	</MODELS>
+	<GLOBALS />
+	<TEMPLATES table_ref='Results'>
+		<COMPOSITION dmrole="root">
+			<ARRAY>
+				<INSTANCE dmrole="root" dmtype="mango:Source">
+					<VALUE dmrole="mango:Source.identifier" dmtype="ivoa:string"
+						ref="@@@@@@" />
+					<COMPOSITION size="-1"
+						dmrole="mango:Source.associatedData" />
+					<COMPOSITION size="-1" dmrole="mango:Source.parameters" />
+				</INSTANCE>
+			</ARRAY>
+		</COMPOSITION>
+	</TEMPLATES>
 </VODML>
