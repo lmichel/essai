@@ -26,9 +26,11 @@ class TestInstance(unittest.TestCase):
         builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
         builder.revert_elements("INSTANCE")
         builder.revert_elements("VALUE")
-        print(DictUtils.get_pretty_json(builder.json["VODML"]["GLOBALS"]))
-        self.assertDictEqual(builder.json["VODML"]["GLOBALS"], DictUtils.read_dict_from_file(json_ref_path), "=======")
-        self.assertTrue(False, "plante")
+        
+        #print(DictUtils.get_pretty_json(builder.json))
+        self.assertDictEqual(builder.json["VODML"]["GLOBALS"]
+                             , DictUtils.read_dict_from_file(json_ref_path)["VODML"]["GLOBALS"]
+                             , "=======")
 
 
 if __name__ == "__main__":

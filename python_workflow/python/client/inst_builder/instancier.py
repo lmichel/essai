@@ -289,12 +289,12 @@ class Instancier(object):
             and "@value" in keys and element["@value"] == ""):  
             for param in  self.votable.params:
                 if param.ID ==  element["@ref"]:
-                    logger.info("set element @dmrole=%s with value=%s of PARAM(ID=%s)"
-                                , element["@dmrole"], param.value, element["@ref"])
+                    logger.info("set element %s with value=%s of PARAM(ID=%s)"
+                                , str(element), param.value, element["@ref"])
                     element["@value"] = param.value.decode("utf-8") 
                 elif param.name  ==  element["@ref"] :
-                    logger.info("set element @dmrole=%s with value=%s of PARAM(name=%s)"
-                                , element["@dmrole"], param.value, element["@ref"])
+                    logger.info("set element%s with value=%s of PARAM(name=%s)"
+                                , str(element), param.value, element["@ref"])
                     element["@value"] = param.value.decode("utf-8") 
       
     def map_columns(self):
