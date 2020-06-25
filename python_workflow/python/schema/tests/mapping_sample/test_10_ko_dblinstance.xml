@@ -8,26 +8,13 @@
 		</MODEL>
 	</MODELS>
 	<GLOBALS />
+
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
+		<GROUPBY ref="ref">
 			<INSTANCE dmref="dmref" dmrole="dmrole">
 				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 					value="dmvalue" />
 			</INSTANCE>
-		</COMPOSITION>
-	</TEMPLATES>
-	<TEMPLATES table_ref="fgdgfddf">
-		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
-				value="dmvalue" />
-		</INSTANCE>
-		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
-				value="dmvalue" />
-		</INSTANCE>
-	</TEMPLATES>
-	<TEMPLATES table_ref="fgdgfddf">
-		<GROUPBY ref="ref">
 			<INSTANCE dmref="dmref" dmrole="dmrole">
 				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
 					value="dmvalue" />
@@ -35,4 +22,3 @@
 		</GROUPBY>
 	</TEMPLATES>
 </VODML>
-	

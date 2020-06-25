@@ -33,12 +33,4 @@
 			</ARRAY>
 		</COMPOSITION>
 	</TEMPLATES>
-	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
-			<ARRAY>
-				<GROUPBY ref="ref"/>
-				<INSTANCE dmref="dmref" dmrole="dmrole" />
-			</ARRAY>
-		</COMPOSITION>
-	</TEMPLATES>
 </VODML>

@@ -31,6 +31,10 @@
 						maxOccurs="1" />
 				</xs:sequence>
 				<xs:sequence>
+					<xs:element ref="GROUPBY" minOccurs="0"
+						maxOccurs="1" />
+				</xs:sequence>
+				<xs:sequence>
 					<xs:element ref="INSTANCE" maxOccurs="unbounded" />
 				</xs:sequence>
 			</xs:choice>
@@ -120,7 +124,6 @@
 			<xs:assert test="@dmrole != '' " />
 			<xs:assert
 				test="(count(./ARRAY) lt 2) and (count(./JOIN) lt 2)" />
-
 		</xs:complexType>
 	</xs:element>
 
@@ -130,7 +133,6 @@
 			<xs:sequence>
 				<xs:choice>
 					<xs:element ref="FILTER" minOccurs="0" maxOccurs="1" />
-					<xs:element ref="GROUPBY" minOccurs="0" maxOccurs="1" />
 				</xs:choice>
 				<xs:choice>
 					<xs:element ref="INSTANCE" minOccurs="1" maxOccurs="1" />
@@ -154,6 +156,16 @@
 	<!-- Group table rows by the content of the column @ref -->
 	<xs:element name="GROUPBY">
 		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="FILTER" minOccurs="0" maxOccurs="1" />
+				</xs:choice>
+				<xs:choice>
+					<xs:element ref="INSTANCE" minOccurs="1" maxOccurs="1" />
+					<xs:element ref="COMPOSITION" minOccurs="1"
+						maxOccurs="1" />
+				</xs:choice>
+			</xs:sequence>
 			<xs:attribute type="xs:string" name="ref" />
 			<xs:assert test="(./@ref  and @ref != '')" />
 		</xs:complexType>

@@ -8,7 +8,7 @@
 		</MODEL>
 	</MODELS>
 	<GLOBALS>
-		<INSTANCE dmref="dmref" dmrole="" ID="id">
+		<INSTANCE dmtype="dmtype" dmrole="" ID="id">
 			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype" value="dmvalue" />
 		</INSTANCE>
 		<INSTANCE dmref="dmref" dmrole="dmrole">
