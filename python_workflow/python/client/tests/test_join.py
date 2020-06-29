@@ -25,7 +25,7 @@ class TestInstance(unittest.TestCase):
         
         builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
         builder.revert_compositions("COMPOSITION")
-        builder.revert_elements("TEMPLATES")
+        builder.revert_templates()
 
         builder.revert_elements("INSTANCE")
         builder.revert_elements("VALUE")
