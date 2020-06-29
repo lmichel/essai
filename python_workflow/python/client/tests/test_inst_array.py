@@ -16,7 +16,8 @@ class TestInstance(unittest.TestCase):
         data_path = os.path.dirname(os.path.realpath(__file__))
         votable_path = os.path.join(data_path, "./data/test_array.xml")
         json_ref_path = os.path.join(data_path, "./data/test_array_1.json")
-        instancier = Instancier(votable_path
+        instancier = Instancier("Results"
+                             , votable_path
                              , json_inst_dict=DictUtils.read_dict_from_file(json_ref_path))
         instancier.resolve_refs_and_values()
 

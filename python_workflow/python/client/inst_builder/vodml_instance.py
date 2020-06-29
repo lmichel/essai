@@ -4,72 +4,94 @@ Created on 31 mars 2020
 @author: laurentmichel
 '''
 import json
-from astropy.io.votable import parse_single_table
+from astropy.io.votable import parse
 from client.inst_builder.column_mapping import ColumnMapping
 from client.inst_builder.table_iterator import TableIterator
-from client.inst_builder.join_iterator import JoinIterator
 from client.inst_builder.row_filter import RowFilter
 from client.inst_builder import logger
-
+from client.launchers.instance_from_votable import InstanceFromVotable
+from client.inst_builder.json_mapping_builder import JsonMappingBuilder
+from client.inst_builder.instancier import Instancier
 from copy import deepcopy
+from utils.dict_utils import DictUtils
 
-class Instancier(object):
+class VodmlInstance(object):
     '''
     classdocs
     '''
-    def __init__(self,
-                 table_name, 
-                 votable_path, 
-                 parsed_table=None,
-                 json_inst_path=None , 
-                 json_inst_dict=None):
-        '''
-        Constructor
-        '''
-        self.table_name = table_name
-        self.votable_path = votable_path
-        if parsed_table is None:
-            logger.info("take the first table")
-            self.votable = parse_single_table(self.votable_path)
-        else:
-            logger.info("take the given parsed table")
-            self.votable = parsed_table
-            
-        self.table = self.votable.to_table()
-        
-        if json_inst_path is not None:
-            self.json_path = json_inst_path
-            with open(self.json_path) as json_file:
-                self.json = json.load(json_file)
-        else:
-            self.json = json_inst_dict
-            self.json_path = None
-        
-        #Field block storing the outcome of recursive functions 
-        self.retour = None
-        self.searched_elements = []
-        self.searched_ids = []
-        self.searched_types = []
-        self.array = None
-        # key = role of the instance contained ARRAY value = TableIterator
-        self.table_iterators = {}
-        self.column_mapping = ColumnMapping()
-        # key = foreign table name value = TableIterator
-        self.join_iterators = {}
-        self.join = None
+    def __init__(self, votable_path):
+        #
+        # One instancier per TEMPLATES
+        # table name taken as keys
+        #
+        self.instanciers = {}
+        self.votable_path = votable_path   
+        #
+        # Dict translation of the <VODML> block
+        #
+        self.json_view = {}       
+        # Convert the XML mapping block in a dictionary
+        self.build_json_view()
+        # Make the dictionary  compliant with JSON mapping syntax
+        self.build_json_mapping()
+        # Build the instancier
+        self.build_instancier_map()
 
-    def resolve_refs_and_values(self, resolve_refs=False):
-        root_element = self.json['VODML']['TEMPLATES'][self.table_name]
-        if resolve_refs is True:
-            logger.info("Replace object references with referenced object copies")
-            self.resolve_object_references()
-        logger.info("Resolve references to PARAMS")
-        self._set_header_values(root_element)
-        logger.info("Set array iterators")
-        self._set_array_iterators(root_element)
-        logger.info("Resolve mapping leaves is an ARRAY block")
-        self._set_array_subelement_values(self.array, parent_role=None)
+        
+    def build_json_view(self):
+        logger.info("Extracting the VODML block")
+        instanceFromVotable = InstanceFromVotable(self.votable_path)
+        instanceFromVotable._extract_vodml_block()
+        logger.info("Validating the VODML block")
+        instanceFromVotable._validate_vodml_block()
+        logger.info("Extracting the raw JSON block")        
+        self.json_view = instanceFromVotable.json_block     
 
+    def build_json_mapping(self):
+        logger.info("Formating the JSON view")
+        builder = JsonMappingBuilder(json_dict=self.json_view )
+        builder.revert_compositions("COMPOSITION")
+        builder.revert_templates()
+        builder.revert_elements("INSTANCE")
+        builder.revert_elements("VALUE")
+        self.json_view = builder.json
+
+    def build_instancier_map(self):
+        logger.info("Looking for tables matching TEMPLATES ")
+        votable = parse(self.votable_path)
+        for template_key in self.json_view["VODML"]["TEMPLATES"].keys():
+            logger.info("Looking for a table matching TEMPLATES %s", template_key)
+
+            name = None
+            parsed_table = None
+            for table in votable.iter_tables():
+                if  template_key == table.ID:
+                    logger.info("Table with ID = %s found", template_key)
+                    name = table.ID
+                    parsed_table = table
+                    break
+            if name == None:
+                for table in votable.iter_tables():
+                    if  template_key == table.name:
+                        logger.info("Table with name = %s found", template_key)
+                        name = table.name
+                        parsed_table = table
+                        break
+            if name == None:
+                raise Exception("Cannot find table with name or ID = " + name)
+            else:
+                logger.info("Add Instancier for table %s", name)
+                self.instanciers[template_key] = Instancier(
+                    template_key,
+                    self.votable_path, 
+                    parsed_table=parsed_table,
+                    json_inst_dict=self.json_view)
+
+    def populate_templates(self, resolve_refs=False):
+        for k,v in self.instanciers.items():
+            logger.info("populate template %s", k)
+            v.resolve_refs_and_values(resolve_refs=resolve_refs)
+            v.map_columns()        
         
     def _set_header_values(self, root_element):
         """
@@ -92,6 +114,7 @@ class Instancier(object):
                     elif isinstance(v, dict):  
                         self._resolve_header_value(v)
                         self._set_header_values(v)
+
 
     def _set_array_iterators(self, root_element):
         """
@@ -122,20 +145,6 @@ class Instancier(object):
                                 self.column_mapping,
                                 row_filter=row_filter
                                 )
-                    pass
-                elif k == 'JOIN':
-                    self.join = v 
-                    iterator_key = self.join["@table_ref"]
-                    logger.info("Set join iterator with table=%s", iterator_key)
-                    for ro in self.join.keys():
-                        self.join_iterators[iterator_key] = JoinIterator(
-                            iterator_key,
-                            self.join["@primary"], 
-                            self.join["@foreign"], 
-                            self.join
-                            )
-                        # JOIN has only one child
-                        break
                     pass
                 else:
                     if isinstance(v, list):
@@ -180,27 +189,6 @@ class Instancier(object):
                         self._get_subelement_by_role(ele, searched_role)
                 elif isinstance(v, dict):  
                     self._get_subelement_by_role(v, searched_role)
-                    
-    def _get_array_container(self, root_element):
-        """
-        """
-        if isinstance(root_element, list):
-            for idx, _ in enumerate(root_element):
-                item = root_element[idx]
-                if self.retour is None:
-                    if isinstance(item, dict) and "ARRAY" in item.keys():
-                        self.searched_elements.append(root_element)
-                    self._get_array_container(item)
-        elif isinstance(root_element, dict):
-            for _, v in root_element.items():
-                if isinstance(v, list):
-                    for ele in v:
-                        if isinstance(ele, dict) and "ARRAY" in ele.keys():
-                            self.searched_elements.append(v)
-                            return v
-                        self._get_array_container(ele)
-                elif isinstance(v, dict):  
-                    self._get_array_container(v)
                     
     def _get_subelement_by_id(self, root_element, searched_id):
         """
@@ -386,31 +374,7 @@ class Instancier(object):
         else:
             print("No data table")
             return {}
-        
-    def get_full_instance(self, resolve_refs=False):
-        if resolve_refs is True:
-            logger.info("Replace object references with referenced object copies")
-            self.resolve_object_references()
-        retour =  deepcopy(self.json['VODML']['TEMPLATES'][self.table_name])
-        self.searched_elements = []
-        self._get_array_container(retour)
-        if len(self.searched_elements) > 0 :
-            self.searched_elements[0][0] = {}
-            cpt = 0
-            inst = None
-            while True:
-                inst = self._get_next_row_instance()
-                if inst is None:
-                    break
-                elif cpt == 0:
-                    self.searched_elements[0][0] = inst 
-                else:
-                    self.searched_elements[0].append(inst) 
-                cpt += 1
 
-
-        return retour
-    
     def get_data_subset_keys(self):
         return self.table_iterators.keys()
            
@@ -456,7 +420,7 @@ class Instancier(object):
         self._get_subelement_by_id(root, searched_id)
         return self.searched_ids
     
-    def search_instance_by_type_trash(self, searched_type, root_element=None):
+    def search_instance_by_type(self, searched_type, root_element=None):
         self.searched_types = []
         if root_element is not None:
             root = root_element

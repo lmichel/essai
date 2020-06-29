@@ -14,6 +14,7 @@ class TestInstance(unittest.TestCase):
 
 
     def test_1(self):
+        self.maxDiff = None
         data_path = os.path.dirname(os.path.realpath(__file__))
         votable_path = os.path.join(data_path, "./data/test_templates.xml")
         json_ref_path = os.path.join(data_path, "./data/test_templates_1.json")
@@ -25,7 +26,7 @@ class TestInstance(unittest.TestCase):
         
         builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
         builder.revert_compositions("COMPOSITION")
-        builder.revert_elements("TEMPLATES")
+        builder.revert_templates()
 
         builder.revert_elements("INSTANCE")
         builder.revert_elements("VALUE")

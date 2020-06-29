@@ -14,7 +14,7 @@ from utils.dict_utils import DictUtils
 
 class InstanceFromVotable:
     '''
-    Translates the mapping block of the inputy VOTable in dictionary where all mapping elements 
+    Translates the mapping block of the input VOTable in dictionary where all mapping elements 
     names are replaced with attribute values
     '''
     def __init__(self, votable_path):

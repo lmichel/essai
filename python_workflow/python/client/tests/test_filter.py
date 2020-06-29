@@ -29,9 +29,9 @@ class TestInstance(unittest.TestCase):
         #builder.revert_array()
 
         builder.revert_compositions("COMPOSITION")
+        builder.revert_templates()
         builder.revert_elements("INSTANCE")
         builder.revert_elements("VALUE")
-
         self.assertDictEqual(json.loads(json.dumps(builder.json))
                              , DictUtils.read_dict_from_file(json_ref_path)
                              , "=======")

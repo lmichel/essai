@@ -11,7 +11,7 @@ from client.launchers.instance_from_votable import InstanceFromVotable
 from tests import logger
 from utils.dict_utils import DictUtils
 
-class TestInstance(unittest.TestCase):
+class TestArray(unittest.TestCase):
 
 
     def test_1(self):
@@ -24,14 +24,15 @@ class TestInstance(unittest.TestCase):
         
         instanceFromVotable._extract_vodml_block()
         instanceFromVotable._validate_vodml_block()
-        
+      
         builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
         #builder.revert_array()
 
         builder.revert_compositions("COMPOSITION")
+        builder.revert_templates()
         builder.revert_elements("INSTANCE")
         builder.revert_elements("VALUE")
-
+        #print(DictUtils.get_pretty_json(builder.json))
         self.assertDictEqual(json.loads(json.dumps(builder.json))
                              , DictUtils.read_dict_from_file(json_ref_path)
                              , "=======")

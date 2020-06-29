@@ -1,0 +1,50 @@
+{
+  "@table_ref": "Results",
+  "root": {
+    "@dmtype": "test.model",
+    "test.header": {
+      "@dmtype": "test.Header",
+      "test.frame": {
+        "@dmref": "SpaceFrame_ICRS"
+      },
+      "test.owner": {
+        "@dmtype": "test.Owner",
+        "test.owner.firstname": {
+          "@dmtype": "string",
+          "@value": "Laurent"
+        },
+        "test.owner.name": {
+          "@dmtype": "string",
+          "@value": "Michel"
+        },
+        "test.title": {
+          "@dmtype": "string",
+          "@ref": "_title",
+          "@value": "TilteReadInParam"
+        }
+      },
+      "test.points": [
+        {
+          "JOIN": {
+            "@foreign": "_foreign",
+            "@primary": "_poserr_148",
+            "@table_ref": "OtherResults",
+            "test:detection": {
+              "@dmtype": "test:Detection",
+              "test:detection.id": {
+                "@dmtype": "ivoa:real",
+                "@ref": "_foreign",
+                "@value": ""
+              },
+              "test:detection.num": {
+                "@dmtype": "ivoa:real",
+                "@ref": "_num_148",
+                "@value": ""
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

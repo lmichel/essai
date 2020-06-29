@@ -25,7 +25,26 @@ class JsonMappingBuilder():
         else:
             self.json = json_dict
             self.json_path = None
+      
+    
+    def revert_templates(self):  
+        logger.info("reverting templates - {TEMPLATES:[{ref_table ...} ] -> 'ref_table':{...}")
         
+        self.revert_elements("TEMPLATES")
+        root_element = self.json['VODML']
+        templates = {}
+        keys = []
+        for k, v in  root_element.items():
+            if k not in ['MODELS', 'GLOBALS']:
+                templates[k] = v
+                keys.append(k)
+        logger.info("Put all TEMPLATES{} in a global TEMPLATES[]")
+       
+        for  k in keys:
+            root_element.pop(k)
+        
+        root_element["TEMPLATES"] = templates
+
     def revert_elements(self, name, dmrole=None, dmtype=None):
         logger.info("reverting elements %s - ('%s':{role ...} -> 'role':{})", name, name)
         root_element = self.json['VODML']
