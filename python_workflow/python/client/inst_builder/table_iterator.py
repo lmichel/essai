@@ -38,7 +38,10 @@ class TableIterator(object):
                 if self.retour is None:
                     self._get_row_subelement(root_element[idx], row)
         elif isinstance(root_element, dict):
-            for _, v in root_element.items():
+            for k , v in root_element.items():
+                # JOIN content is processed by join_iterator
+                if k == 'JOIN':
+                    return
                 if isinstance(v, list):
                     for ele in v:
                         self._get_row_subelement(ele, row)

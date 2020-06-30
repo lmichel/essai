@@ -34,12 +34,12 @@
               "test:detection.id": {
                 "@dmtype": "ivoa:real",
                 "@ref": "_foreign",
-                "@value": ""
+                "@value": "array coucou"
               },
               "test:detection.num": {
                 "@dmtype": "ivoa:real",
                 "@ref": "_num_148",
-                "@value": ""
+                "@value": "array coucou"
               }
             }
           }

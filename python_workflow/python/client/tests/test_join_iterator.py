@@ -14,13 +14,97 @@ class Test(unittest.TestCase):
     def testName(self):
         self.assertEqual(self.join_iterator.instancier.get_flatten_data_head()
                          ,['test:detection(test:detection.id) [col#1 _foreign]', 'test:detection(test:detection.num) [col#0 _num_148]'],"")
+        
+    def testIter_11(self):
+        self.join_iterator.instancier.rewind()
+        self.join_iterator.set_foreignkey_value(1)
+        cpt = 1;
+        while True:
+            inst = self.join_iterator.instancier._get_next_row_instance()
+            if inst != None:
+                self.assertDictEqual(
+                    inst, 
+                    {
+                      "@dmtype": "test:Detection",
+                      "test:detection.id": {
+                        "@dmtype": "ivoa:real",
+                        "@ref": "_foreign",
+                        "@value": 1
+                      },
+                      "test:detection.num": {
+                        "@dmtype": "ivoa:real",
+                        "@ref": "_num_148",
+                        "@value": (10 + cpt)
+                      }
+                    }, 
+                   "")
+                cpt += 1
+            else:
+                break
+            
+    def testIter_12(self):
+        self.join_iterator.instancier.rewind()
+        self.join_iterator.set_foreignkey_value(1)
+        cpt = 1;
+        while True:
+            inst = self.join_iterator.instancier._get_next_flatten_row()
+            if inst != None:
+                self.assertListEqual(
+                    inst, 
+                    [1, (10 + cpt)], 
+                   "")
+                cpt += 1
+            else:
+                break
+
+    def testIter_2(self):
+        self.join_iterator.instancier.rewind()
+        self.join_iterator.set_foreignkey_value(2)
+        cpt = 1;
+        while True:
+            inst = self.join_iterator.instancier._get_next_row_instance()
+            if inst != None:
+                self.assertDictEqual(
+                    inst, 
+                    {
+                      "@dmtype": "test:Detection",
+                      "test:detection.id": {
+                        "@dmtype": "ivoa:real",
+                        "@ref": "_foreign",
+                        "@value": 2
+                      },
+                      "test:detection.num": {
+                        "@dmtype": "ivoa:real",
+                        "@ref": "_num_148",
+                        "@value": (20 + cpt)
+                      }
+                    }, 
+                    "")
+                cpt += 1
+            else:
+                break
+            
+    def testIter_22(self):
+        self.join_iterator.instancier.rewind()
+        self.join_iterator.set_foreignkey_value(2)
+        cpt = 1;
+        while True:
+            inst = self.join_iterator.instancier._get_next_flatten_row()
+            if inst != None:
+                self.assertListEqual(
+                    inst, 
+                    [2, (20 + cpt)], 
+                   "")
+                cpt += 1
+            else:
+                break
+
                                               
     def setUp(self):
         self.data_path = os.path.dirname(os.path.realpath(__file__))
-        self.votable_path = os.path.join(self.data_path, "./data/test_vodml_instance.xml")
+        self.votable_path = os.path.join(self.data_path, "./data/test_joint_instances.xml")
         votable = parse(self.votable_path)
         for table in votable.iter_tables():
-            print(table.name)
             if  "OtherResults" == table.name:
                 self.parsed_table = table
                 self.join_iterator = JoinIterator(
@@ -47,12 +131,6 @@ class Test(unittest.TestCase):
                         }
                     )
                 self.join_iterator.connect_votable(self.parsed_table)
-                
- 
-
-
-
-
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

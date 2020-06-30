@@ -22,6 +22,7 @@ class JoinIterator(object):
         self.json_join_content = json_join_content
         self.instancier = None
         self.parsed_table = None
+        self.row_filter = None
         #print(DictUtils.get_pretty_json(self.json_join_content))
         
     def __repr__(self):
@@ -50,7 +51,7 @@ class JoinIterator(object):
                         "OtherResults": {
                             "@table_ref": self.foreign_table,
                             "root": [
-                                {
+                                    {
                                     "ARRAY": {
                                         "FILTER": {
                                             "@ref": self.foreign_key,
@@ -67,7 +68,12 @@ class JoinIterator(object):
             )
         self.instancier.resolve_refs_and_values(resolve_refs=False)
         self.instancier.map_columns()
+        for _, table_iterator in self.instancier.table_iterators.items():
+            self.row_filter = table_iterator.row_filter
+            break;
 
+    def set_foreignkey_value(self, value):   
+        self.row_filter.value = value
         
     def get_subset_instance(self, key_value):
         self.row_filter = RowFilter({

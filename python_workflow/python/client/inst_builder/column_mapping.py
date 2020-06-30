@@ -19,8 +19,8 @@ class ColumnMapping():
        
     def __repr__(self):
         return "column_refs:{} \n column_ids:{}".format(
-            DictUtils.get_pretty_json(self.column_refs),
-            DictUtils.get_pretty_json(self.column_ids))
+            self.column_refs,
+            self.column_ids)
     
     def add_entry(self, key, role, parent_role=None):
         if key not in self.column_refs.keys():

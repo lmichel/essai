@@ -4,7 +4,7 @@ Created on 31 mars 2020
 @author: laurentmichel
 '''
 import json
-from astropy.io.votable import parse_single_table
+from astropy.io.votable import parse_single_table  
 from client.inst_builder.column_mapping import ColumnMapping
 from client.inst_builder.table_iterator import TableIterator
 from client.inst_builder.join_iterator import JoinIterator
@@ -17,13 +17,9 @@ class Instancier(object):
     '''
     classdocs
     '''
-<<<<<<< HEAD
     def __init__(self,
                  table_name, 
                  votable_path, 
-=======
-    def __init__(self, votable_path, 
->>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
                  parsed_table=None,
                  json_inst_path=None , 
                  json_inst_dict=None):
@@ -31,15 +27,15 @@ class Instancier(object):
         Constructor
         '''
         self.table_name = table_name
-        self.votable_path = votable_path
+        self.parsed_table_path = votable_path
         if parsed_table is None:
             logger.info("take the first table")
-            self.votable = parse_single_table(self.votable_path)
+            self.parsed_table = parse_single_table(self.parsed_table_path)
         else:
             logger.info("take the given parsed table")
-            self.votable = parsed_table
+            self.parsed_table = parsed_table
             
-        self.table = self.votable.to_table()
+        self.table = self.parsed_table.to_table()
         
         if json_inst_path is not None:
             self.json_path = json_inst_path
@@ -121,7 +117,7 @@ class Instancier(object):
                             logger.info("Set table iterator for object with role=%s", ro)
                             self.table_iterators[ro] = TableIterator(
                                 iterator_key,
-                                self.votable.to_table(), 
+                                self.parsed_table.to_table(), 
                                 self.array[ro],
                                 self.column_mapping,
                                 row_filter=row_filter
@@ -141,13 +137,13 @@ class Instancier(object):
                         # JOIN has only one child
                         break
                     pass
-                else:
-                    if isinstance(v, list):
-                        for ele in v:
-                            self._set_array_iterators(ele)
-                    elif isinstance(v, dict):  
-                        #self._set_value(v)
-                        self._set_array_iterators(v)
+                
+                if isinstance(v, list):
+                    for ele in v:
+                        self._set_array_iterators(ele)
+                elif isinstance(v, dict):  
+                    #self._set_value(v)
+                    self._set_array_iterators(v)
 
     def _set_array_subelement_values(self, array_element, parent_role=None):
         """
@@ -160,6 +156,10 @@ class Instancier(object):
                     self._set_array_subelement_values(array_element[idx])
         elif isinstance(array_element, dict):
             for k, v in array_element.items():
+                # Join content refers to others tables, 
+                # it is processed the the join_iterator 
+                if k == "JOIN":
+                    return
                 if isinstance(v, list):
                     for ele in v:
                         self._set_array_subelement_values(ele)
@@ -205,6 +205,27 @@ class Instancier(object):
                         self._get_array_container(ele)
                 elif isinstance(v, dict):  
                     self._get_array_container(v)
+                    
+    def _get_join_container(self, root_element):
+        """
+        """
+        if isinstance(root_element, list):
+            for idx, _ in enumerate(root_element):
+                item = root_element[idx]
+                if self.retour is None:
+                    if isinstance(item, dict) and "JOIN" in item.keys():
+                        self.searched_elements.append(root_element)
+                    self._get_join_container(item)
+        elif isinstance(root_element, dict):
+            for _, v in root_element.items():
+                if isinstance(v, list):
+                    for ele in v:
+                        if isinstance(ele, dict) and "JOIN" in ele.keys():
+                            self.searched_elements.append(v)
+                            return v
+                        self._get_join_container(ele)
+                elif isinstance(v, dict):  
+                    self._get_join_container(v)
                     
     def _get_subelement_by_id(self, root_element, searched_id):
         """
@@ -339,7 +360,7 @@ class Instancier(object):
         keys = element.keys()
         if ("@dmtype" in keys and "@ref" in keys 
             and "@value" in keys and element["@value"] == ""):  
-            for param in  self.votable.params:
+            for param in  self.parsed_table.params:
                 if param.ID ==  element["@ref"]:
                     logger.info("set element %s with value=%s of PARAM(ID=%s)"
                                 , str(element), param.value, element["@ref"])
@@ -350,7 +371,7 @@ class Instancier(object):
                     element["@value"] = param.value.decode("utf-8") 
       
     def map_columns(self):
-        self.column_mapping._map_columns(self.votable)
+        self.column_mapping._map_columns(self.parsed_table)
                    
     def _get_next_row_instance(self, data_subset=None):
         if len(self.table_iterators) > 0 :
@@ -396,6 +417,7 @@ class Instancier(object):
             logger.info("Replace object references with referenced object copies")
             self.resolve_object_references()
         retour =  deepcopy(self.json['VODML']['TEMPLATES'][self.table_name])
+
         self.searched_elements = []
         self._get_array_container(retour)
         if len(self.searched_elements) > 0 :

@@ -43,24 +43,16 @@
 						<VALUE dmrole="test.title" dmtype="string" ref="_title" />
 					</INSTANCE>
 					<COMPOSITION dmrole="test.points">
-						<ARRAY>
-							<INSTANCE dmrole="primary:point" dmtype="Point">
+						<JOIN table_ref="OtherResults" primary="_poserr_148"
+							foreign="_foreign">
+							<INSTANCE dmrole="test:detection"
+								dmtype="test:Detection">
 								<VALUE dmrole="test:detection.num" dmtype="ivoa:real"
-									ref="_poserr_148" />
-								<COMPOSITION dmrole="test.detections">
-									<JOIN table_ref="OtherResults" primary="_poserr_148"
-										foreign="_foreign">
-										<INSTANCE dmrole="test:detection"
-											dmtype="test:Detection">
-											<VALUE dmrole="test:detection.num" dmtype="ivoa:real"
-												ref="_num_148" />
-											<VALUE dmrole="test:detection.id" dmtype="ivoa:real"
-												ref="_foreign" />
-										</INSTANCE>
-									</JOIN>
-								</COMPOSITION>
+									ref="_num_148" />
+								<VALUE dmrole="test:detection.id" dmtype="ivoa:real"
+									ref="_foreign" />
 							</INSTANCE>
-						</ARRAY>
+						</JOIN>
 					</COMPOSITION>
 				</INSTANCE>
 			</INSTANCE>

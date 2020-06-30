@@ -1,6 +1,5 @@
 {
   "VODML": {
-<<<<<<< HEAD
     "GLOBALS": {
       "SpaceFrame_ICRS": {
         "@ID": "SpaceFrame_ICRS",
@@ -22,9 +21,6 @@
         }
       }
     },
-=======
-    "GLOBALS": null,
->>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
     "MODELS": {
       "MODEL": [
         {
@@ -44,7 +40,6 @@
     "TEMPLATES": {
       "OtherResults": {
         "@table_ref": "OtherResults",
-<<<<<<< HEAD
         "test:detections": [
           {
             "ARRAY": {
@@ -59,24 +54,6 @@
                   "@dmtype": "ivoa:real",
                   "@ref": "_num_148",
                   "@value": ""
-=======
-        "meas:Measure.errors": [
-          {
-            "ARRAY": {
-              "meas:Error.statError": {
-                "@dmtype": "meas:Symmetrical",
-                "meas:Symmetrical.radius": {
-                  "@dmtype": "ivoa:RealQuantity",
-                  "ivoa:Quantity.unit": {
-                    "@dmtype": "ivoa:Unit",
-                    "@value": "arcsec"
-                  },
-                  "ivoa:RealQuantity.value": {
-                    "@dmtype": "ivoa:real",
-                    "@ref": "_poserr_148",
-                    "@value": ""
-                  }
->>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
                 }
               }
             }
@@ -85,7 +62,6 @@
       },
       "Results": {
         "@table_ref": "Results",
-<<<<<<< HEAD
         "root": {
           "@dmtype": "test.model",
           "test.header": {
@@ -111,20 +87,34 @@
             },
             "test.points": [
               {
-                "JOIN": {
-                  "@foreign": "_foreign",
-                  "@primary": "_poserr_148",
-                  "@table_ref": "OtherResults",
-                  "test:detection": {
-                    "@dmtype": "test:Detection",
-                    "test:detection.id": {
-                      "@dmtype": "ivoa:real",
-                      "@ref": "_foreign",
-                      "@value": ""
-                    },
+                "ARRAY": {
+                  "primary:point": {
+                    "@dmtype": "Point",
+                    "test.detections": [
+                      {
+                        "JOIN": {
+                          "@foreign": "_foreign",
+                          "@primary": "_poserr_148",
+                          "@table_ref": "OtherResults",
+                          "test:detection": {
+                            "@dmtype": "test:Detection",
+                            "test:detection.id": {
+                              "@dmtype": "ivoa:real",
+                              "@ref": "_foreign",
+                              "@value": ""
+                            },
+                            "test:detection.num": {
+                              "@dmtype": "ivoa:real",
+                              "@ref": "_num_148",
+                              "@value": ""
+                            }
+                          }
+                        }
+                      }
+                    ],
                     "test:detection.num": {
                       "@dmtype": "ivoa:real",
-                      "@ref": "_num_148",
+                      "@ref": "_poserr_148",
                       "@value": ""
                     }
                   }
@@ -133,32 +123,6 @@
             ]
           }
         }
-=======
-        "meas:Measure.errors": [
-          {
-            "JOIN": {
-              "@foreign": "_foreign",
-              "@primary": "_poserr_148",
-              "@table_ref": "OtherResults",
-              "meas:Error.statError": {
-                "@dmtype": "meas:Symmetrical",
-                "meas:Symmetrical.radius": {
-                  "@dmtype": "ivoa:RealQuantity",
-                  "ivoa:Quantity.unit": {
-                    "@dmtype": "ivoa:Unit",
-                    "@value": "arcsec"
-                  },
-                  "ivoa:RealQuantity.value": {
-                    "@dmtype": "ivoa:real",
-                    "@ref": "_foreign_148",
-                    "@value": ""
-                  }
-                }
-              }
-            }
-          }
-        ]
->>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
       }
     }
   }
