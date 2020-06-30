@@ -5,27 +5,17 @@ Created on 22 juin 2020
 '''
 import unittest
 import os
-<<<<<<< HEAD
 import sys
-=======
->>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
 from client.inst_builder.vodml_instance import VodmlInstance
 from tests import logger
 from utils.dict_utils import DictUtils
 
 class TestVodmlInstance(unittest.TestCase):
 
-<<<<<<< HEAD
     
     def test_1(self):
         
         #print(DictUtils.get_pretty_json(self.vodml_instance.json_view))
-=======
-
-    def test_1(self):
-        
-        #print(DictUtils.get_pretty_json(builder.json))
->>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
         self.assertDictEqual(self.vodml_instance.json_view
                              , DictUtils.read_dict_from_file(self.json_ref_path)
                              , "=======")
@@ -35,7 +25,6 @@ class TestVodmlInstance(unittest.TestCase):
         self.assertListEqual(list(self.vodml_instance.instanciers.keys()), 
                              ['Results', 'OtherResults'], 
                              "Instancier keys not matching")
-<<<<<<< HEAD
         
     def test_3(self):
         if self.populated is False:
@@ -94,23 +83,13 @@ class TestVodmlInstance(unittest.TestCase):
                          ,['meas:Symmetrical.radius(ivoa:RealQuantity.value) [col#0 _poserr_148]'],""),
 
     """
-=======
-
-    def test_3(self):
-        self.vodml_instance.populate_templates()
-
->>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
     def setUp(self):
         self.data_path = os.path.dirname(os.path.realpath(__file__))
         self.votable_path = os.path.join(self.data_path, "./data/test_vodml_instance.xml")
         self.json_ref_path = os.path.join(self.data_path, "./data/test_vodml_instance_1.json")
 
         logger.info("processing %s", self.votable_path)
-<<<<<<< HEAD
         self.populated = False
-=======
-        
->>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
         self.vodml_instance = VodmlInstance(self.votable_path)
 
 if __name__ == "__main__":
