@@ -19,6 +19,7 @@
 			</MODEL>
 		</MODELS>
 		<GLOBALS>
+<<<<<<< HEAD
 			<INSTANCE ID="SpaceFrame_ICRS" dmtype="coords:SpaceFrame">
 				<INSTANCE dmrole="coords:SpaceFrame.refPosition"
 					dmtype="coords:StdRefLocation">
@@ -65,6 +66,37 @@
 							ref="_num_148" />
 						<VALUE dmrole="test:detection.id" dmtype="ivoa:real"
 							ref="_foreign" />
+=======
+		</GLOBALS>
+		<TEMPLATES table_ref="Results">
+			<COMPOSITION dmrole="meas:Measure.errors" size="2">
+				<JOIN table_ref="OtherResults" primary="_poserr_148" foreign="_foreign">
+					<INSTANCE dmrole="meas:Error.statError"
+						dmtype="meas:Symmetrical">
+						<INSTANCE dmrole="meas:Symmetrical.radius"
+							dmtype="ivoa:RealQuantity">
+							<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+								ref="_foreign_148" />
+							<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+								value="arcsec" />
+						</INSTANCE>
+					</INSTANCE>
+				</JOIN>
+			</COMPOSITION>
+		</TEMPLATES>
+		<TEMPLATES table_ref="OtherResults">
+			<COMPOSITION dmrole="meas:Measure.errors" size="2">
+				<ARRAY>
+					<INSTANCE dmrole="meas:Error.statError"
+						dmtype="meas:Symmetrical">
+						<INSTANCE dmrole="meas:Symmetrical.radius"
+							dmtype="ivoa:RealQuantity">
+							<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+								ref="_poserr_148" />
+							<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+								value="arcsec" />
+						</INSTANCE>
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
 					</INSTANCE>
 				</ARRAY>
 			</COMPOSITION>
@@ -72,6 +104,7 @@
 	</VODML>
 	<RESOURCE type="results">
 		<TABLE name="Results">
+<<<<<<< HEAD
 			<PARAM ID="_title" value="TilteReadInParam" />
 			<FIELD ID="_poserr_148" name="oidsaada" datatype="long"
 				ucd="meta.id;meta.main" />
@@ -83,10 +116,24 @@
 					<TR>
 						<TD>2</TD>
 					</TR>
+=======
+			<FIELD ID="_poserr_148" name="oidsaada" datatype="long" ucd="meta.id;meta.main"/>
+		
+			<DATA>
+				<TABLEDATA>
+				<TR><TD>1</TD></TR>
+				<TR><TD>2</TD></TR>
+				<TR><TD>3</TD></TR>
+				<TR><TD>4</TD></TR>
+				<TR><TD>5</TD></TR>
+				<TR><TD>6</TD></TR>
+				<TR><TD>7</TD></TR>
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
 				</TABLEDATA>
 			</DATA>
 		</TABLE>
 		<TABLE name="OtherResults">
+<<<<<<< HEAD
 			<PARAM ID="_title" value="TilteReadInParam" />
 			<FIELD ID="_num_148" name="oidsaada" datatype="long"
 				ucd="meta.id;meta.main" />
@@ -110,8 +157,25 @@
 						<TD>22</TD>
 						<TD>2</TD>
 					</TR>
+=======
+			<FIELD ID="_poserr_148" name="oidsaada" datatype="long" ucd="meta.id;meta.main"/>
+		
+			<DATA>
+				<TABLEDATA>
+				<TR><TD>1</TD></TR>
+				<TR><TD>2</TD></TR>
+				<TR><TD>3</TD></TR>
+				<TR><TD>4</TD></TR>
+				<TR><TD>5</TD></TR>
+				<TR><TD>6</TD></TR>
+				<TR><TD>7</TD></TR>
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
 				</TABLEDATA>
 			</DATA>
 		</TABLE>
 	</RESOURCE>
+<<<<<<< HEAD
 </VOTABLE>
+=======
+</VOTABLE>
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073

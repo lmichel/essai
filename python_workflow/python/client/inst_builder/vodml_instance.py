@@ -20,6 +20,7 @@ class VodmlInstance(object):
     classdocs
     '''
     def __init__(self, votable_path):
+<<<<<<< HEAD
         #
         # One instancier per TEMPLATES
         # table name taken as keys
@@ -29,12 +30,19 @@ class VodmlInstance(object):
         #
         # Dict translation of the <VODML> block
         #
+=======
+        self.instanciers = {}
+        self.votable_path = votable_path   
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
         self.json_view = {}       
         # Convert the XML mapping block in a dictionary
         self.build_json_view()
         # Make the dictionary  compliant with JSON mapping syntax
         self.build_json_mapping()
+<<<<<<< HEAD
         # Build the instancier
+=======
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
         self.build_instancier_map()
 
         
@@ -82,16 +90,30 @@ class VodmlInstance(object):
             else:
                 logger.info("Add Instancier for table %s", name)
                 self.instanciers[template_key] = Instancier(
+<<<<<<< HEAD
                     template_key,
+=======
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
                     self.votable_path, 
                     parsed_table=parsed_table,
                     json_inst_dict=self.json_view)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
     def populate_templates(self, resolve_refs=False):
         for k,v in self.instanciers.items():
             logger.info("populate template %s", k)
             v.resolve_refs_and_values(resolve_refs=resolve_refs)
+<<<<<<< HEAD
             v.map_columns()        
+=======
+            v.map_columns()
+
+        
+
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
         
     def _set_header_values(self, root_element):
         """

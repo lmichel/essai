@@ -17,9 +17,13 @@ class Instancier(object):
     '''
     classdocs
     '''
+<<<<<<< HEAD
     def __init__(self,
                  table_name, 
                  votable_path, 
+=======
+    def __init__(self, votable_path, 
+>>>>>>> c66ee1f88ad56faa69d54186270b9ebf5eba0073
                  parsed_table=None,
                  json_inst_path=None , 
                  json_inst_dict=None):
