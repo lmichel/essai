@@ -53,7 +53,6 @@ class TestVodmlInstance(unittest.TestCase):
 
         #print(DictUtils.get_pretty_json(full_dict))
         self.assertDictEqual(full_dict, DictUtils.read_dict_from_file(self.json_ref_path), "")
-       
 
     def test_22(self):
         self.json_ref_path = os.path.join(self.data_path, "./data/test_vodml_instance_22.json")
@@ -62,15 +61,10 @@ class TestVodmlInstance(unittest.TestCase):
             self.vodml_instance.connect_join_iterators()
             self.populated = True
         instancier = self.vodml_instance.instanciers["Results"]
-
-        column_mapping = instancier.table_iterators['primary:point'].column_mapping
-        self.assertListEqual(list(column_mapping.column_refs.keys()), ['_poserr_148'], "")
-        print(column_mapping)
         full_dict = instancier.get_full_instance()
 
         print(DictUtils.get_pretty_json(full_dict))
         self.assertDictEqual(full_dict, DictUtils.read_dict_from_file(self.json_ref_path), "")
-
 
     def setUp(self):
         self.data_path = os.path.dirname(os.path.realpath(__file__))
