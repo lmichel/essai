@@ -377,7 +377,22 @@ class Instancier(object):
         if len(self.table_iterators) > 0 :
             for key, value in self.table_iterators.items():
                 if data_subset is None or data_subset == key:
-                    return value._get_next_row_instance()
+                    next_row_instance = value._get_next_row_instance()
+                    if 'OtherResults' in self.join_iterators.keys():
+                        join_iterator = self.join_iterators['OtherResults']
+                        print(join_iterator)
+                        primary_column = self.column_mapping.get_col_index_by_name(join_iterator.primary_key)
+                        print(primary_column)
+                        print(value.last_row[primary_column])
+                        join_iterator.set_foreignkey_value(value.last_row[primary_column])
+                        while True:
+                            inst = join_iterator.instancier._get_next_row_instance()
+                            if inst != None:
+                                print(inst)
+                            else:
+                                break
+
+                    return next_row_instance
             raise Exception("cannot find data subset " + data_subset)
         else:
             print("No data table")

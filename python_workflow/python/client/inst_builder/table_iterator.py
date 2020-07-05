@@ -22,6 +22,7 @@ class TableIterator(object):
         self.data_table = data_table
         self.column_mapping = column_mapping
         self.row_filter = row_filter
+        self.last_row = None
         if isinstance(array_mapping_block, list):
             self.array_mapping_block = array_mapping_block[0]
         else:
@@ -67,10 +68,14 @@ class TableIterator(object):
         try:
             while True:
                 row = next(self.iter)
-                
-                if row != None:
+                print("11=================================")
+                print(row)
+                if row is not None:
                     if ( self.row_filter is None or 
-                         self.row_filter.row_match(row) == True):
+                        self.row_filter.row_match(row) == True):
+                        self.last_row = row
+                        print(self.last_row )
+                        print("22 =================================")
                         return row
                 else:
                     return None
@@ -83,7 +88,7 @@ class TableIterator(object):
         
     def _get_next_row_instance(self):
         row = self._get_next_row()
-        if row != None:
+        if row is not None:
             self._get_row_subelement(self.array_mapping_block, row) 
             return deepcopy(self.array_mapping_block)
         else:
@@ -91,7 +96,7 @@ class TableIterator(object):
 
     def _get_next_flatten_row(self):
         row = self._get_next_row()
-        if row != None:
+        if row is not None:
             retour = []
             indexes = self.column_mapping.get_indexes()
             for index in indexes:
