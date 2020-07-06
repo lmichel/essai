@@ -70,12 +70,44 @@ infrastructure that enable VO applications.
 
 
 \section{Introduction}
-This standard comes after many discussions in the VO about the syntax to be used to annotate VOTable. 
-The existing mapping based on GROUP works fine with the simplest cases. It has the disadvantage of being based on Utypes which are not clearly connected with the underlying model. Utypes are actually used to represent simple structures. In the current implementations, the client know the data structures (e.g. coordinate system) and pick values within the group to fill them. For now, mone discover or reconstruct a classe hierarchy from groups either. 
-The purpose of the VODML mapping in VOTables is to provide a bridge between the model it refers to and the data. The mapping processing is meant to deliver a model instance set with values taken out the data table. In theory, a perfecly faith mapping should be capable of rendering any model feature. In our opinion this ambitious goal led to a mapping syntax difficult to manage.
-We prefer to discard this round-trip requirement and to keep focused on the client needs and the easiness of the VOTable annotation process.
+There is no VO standard specifying how to map real data on a model. This shortcoming is a bottleneck for interoperability since there is no way to compare datasets from different origins. The model mapping is currently done by using GROUPs. This is satisfactory in many cases but with some limitations however:\begin{enumerate}
+   \item The GROUPs, as they are currently used, do not reflect the complete model structure. The are mostly used to group columns with a loose coupling with the model hierarchy. This prevents the restore complex data structures.
+   \item The identification of the GROUP elements is based on Utypes which are not clearly connected with the underlying model. Utypes are actually used to represent simple structures. In the current implementations, the client knows the data structures (e.g. coordinate system) and pick values within the group to fill them..
+\end{enumerate}
+These limitations were unavoidable while we had no common way to represent  models. It is indeed difficult to imagine a consistant model mapping mechanism if there is no standard serialization schema for those models. The situation changed with the usage of VODML. VODML proposes a robust way to make models machine-readable. With VODML, we can consider a mapping syntax directly derived from the model serialization. There are 2 approaches that might be complementary. 
+\begin{enumerate}
+   \item The first option is to hide the model complexity by flattenning its representation. This is the way GROUPs do work. This approach has the advantage of being compact but it has some strong limitations such as the impossibility of having different elements playing the same role (e.g. 2 position columns in the same table)
+   \item The second option consists in keeping the model structure even if this leads to more complex annotations.
+\end{enumerate}
 
-Our main use case is the annotation  of pre-existing data. This  means the annotation process must succeed whatever the way data are arranged even if they do not contain all quantities requested by the model.  We consider that the client just needs to reconstruct the data hierarchy and to get a full description of the used coordinate systems. For most of the usages (display, plot, match, computation),  complex data hierarchies can be wrapped in 3 data types, the simple values, the tuples and the lists. The mango mapping has been built upon these 3 types with a few others annotations guiding the work of the parser.
+Vodml-instance-vot is based on the second option with a particular concern for the process of archival data annotation. The purpose of the VODML mapping in VOTables is to provide a bridge between the data and the model it refers to. The goal of the mapping processing is to make possible to build instances set with values taken out the data tables. In theory, a perfecly faith mapping should be capable of rendering any model feature. In our opinion this ambitious goal led to a mapping syntax difficult to manage.
+We prefer to discard this round-trip requirement and to keep focused on both client needs and easiness of the annotation process.
+
+Our main use case is the annotation  of pre-existing data. This  means the annotation process must succeed whatever the way data are arranged even if they do not contain all quantities requested by the model.  
+We consider that we have to provide clients with both a data hierarchy view as simple as possibel and an accurate description of the used coordinate systems. 
+For most of the usages (display, plot, match, computation),  complex data hierarchies can be wrapped in 3 basic types, the simple values,  tuples and  lists. Vodml-instance-vot  has been built upon these 3 types with a few others annotations guiding the parser.
+
+These ideas that led to this proposal were first tested in the framework of the TDIG on VOTABLEs containing time series provided by different missions such as Gaia or ZWICKI. Then the syntax has been refined to be used to validate the Mango model on real data.
+
+
+%The identification of the GROUP elements is based on Utypes which are not clearly connected with the underlying model. Utypes are actually used to represent simple structures. In the current implementations, the client knows the data structures (e.g. coordinate system) and pick values within the group to fill them..
+
+
+
+%The current proposal 
+
+
+
+%This standard comes after many discussions in the VO about the syntax to be used to annotate VOTable. 
+%The ideas that led to this proposal were first tested in the framework of the TDIG on VOTABLEs containing time series provided by different missions such as Gaia or ZWICKI. Then the syntax has been refined to be used to validate the Mango model on real data.
+
+%The existing mapping based on GROUP works fine with the simplest cases. It has the disadvantage of being based on Utypes which are not clearly connected with the underlying model. Utypes are actually used to represent simple structures. In the current implementations, the client knows the data structures (e.g. coordinate system) and pick values within the group to fill them.
+
+ %For now, mone discover or reconstruct a classe hierarchy from groups either. 
+%The purpose of the VODML mapping in VOTables is to provide a bridge between the model it refers to and the data. The mapping processing is meant to deliver a model instance set with values taken out the data table. In theory, a perfecly faith mapping should be capable of rendering any model feature. In our opinion this ambitious goal led to a mapping syntax difficult to manage.
+%We prefer to discard this round-trip requirement and to keep focused on the client needs and the easiness of the VOTable annotation process.
+
+%ur main use case is the annotation  of pre-existing data. This  means the annotation process must succeed whatever the way data are arranged even if they do not contain all quantities requested by the model.  We consider that the client just needs to reconstruct the data hierarchy and to get a full description of the used coordinate systems. For most of the usages (display, plot, match, computation),  complex data hierarchies can be wrapped in 3 data types, the simple values, the tuples and the lists. The mango mapping has been built upon these 3 types with a few others annotations guiding the work of the parser.
 
 \lstset{language=XML}
 
