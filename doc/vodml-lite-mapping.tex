@@ -80,11 +80,13 @@ These limitations were unavoidable while we had no common way to represent  mode
    \item The second option consists in keeping the model structure even if this leads to more complex annotations.
 \end{enumerate}
 
+
 Vodml-instance-vot is based on the second option with a particular concern for the process of archival data annotation. The purpose of the VODML mapping in VOTables is to provide a bridge between the data and the model it refers to. The goal of the mapping processing is to make possible to build instances set with values taken out the data tables. In theory, a perfecly faith mapping should be capable of rendering any model feature. In our opinion this ambitious goal led to a mapping syntax difficult to manage.
 We prefer to discard this round-trip requirement and to keep focused on both client needs and easiness of the annotation process.
 
 Our main use case is the annotation  of pre-existing data. This  means the annotation process must succeed whatever the way data are arranged even if they do not contain all quantities requested by the model.  
 We consider that we have to provide clients with both a data hierarchy view as simple as possibel and an accurate description of the used coordinate systems. 
+
 For most of the usages (display, plot, match, computation),  complex data hierarchies can be wrapped in 3 basic types, the simple values,  tuples and  lists. Vodml-instance-vot  has been built upon these 3 types with a few others annotations guiding the parser.
 
 These ideas that led to this proposal were first tested in the framework of the TDIG on VOTABLEs containing time series provided by different missions such as Gaia or ZWICKI. Then the syntax has been refined to be used to validate the Mango model on real data.
