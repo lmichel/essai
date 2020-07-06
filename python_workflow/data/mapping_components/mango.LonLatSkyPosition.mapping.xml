@@ -21,21 +21,21 @@
 	<TEMPLATES  table_ref='Results'>
     <INSTANCE dmrole="root" dmtype="mango:stcextend.LonLatSkyPosition">
       <INSTANCE dmrole="mango:stcextend.LonLatSkyPosition.coord" dmtype="mango:stcextend.LonLatPoint">
-        <VALUE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="@@@@@@"/>
-        <VALUE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="@@@@@@"/>
+        <ATTRIBUTE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="@@@@@@"/>
+        <ATTRIBUTE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="@@@@@@"/>
         <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="@@@@@@"/>
       </INSTANCE>
       <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
         <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
           <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-            <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
-            <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
+            <ATTRIBUTE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
+            <ATTRIBUTE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
           </INSTANCE>
         </INSTANCE>
         <INSTANCE dmrole="meas:Error.sysError" dmtype="meas:Symmetrical">
           <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-            <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
-            <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
+            <ATTRIBUTE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
+            <ATTRIBUTE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
           </INSTANCE>
         </INSTANCE>
       </INSTANCE>

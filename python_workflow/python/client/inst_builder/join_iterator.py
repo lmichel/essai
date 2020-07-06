@@ -54,7 +54,7 @@ class JoinIterator(object):
                             "@table_ref": self.foreign_table,
                             "root": [
                                     {
-                                    "ARRAY": {
+                                    "TABLE_ROW_TEMPLATE": {
                                         "FILTER": {
                                             "@ref": self.foreign_key,
                                             "@value": -1

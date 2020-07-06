@@ -27,7 +27,7 @@
 		<xs:complexType>
 			<xs:choice>
 				<xs:sequence>
-					<xs:element ref="COMPOSITION" minOccurs="0"
+					<xs:element ref="COLLECTION" minOccurs="0"
 						maxOccurs="1" />
 				</xs:sequence>
 				<xs:sequence>
@@ -70,9 +70,9 @@
 	<xs:element name="INSTANCE">
 		<xs:complexType>
 			<xs:all>
-				<xs:element ref="VALUE" minOccurs="0"
+				<xs:element ref="ATTRIBUTE" minOccurs="0"
 					maxOccurs="unbounded" />
-				<xs:element ref="COMPOSITION" minOccurs="0"
+				<xs:element ref="COLLECTION" minOccurs="0"
 					maxOccurs="unbounded" />
 				<xs:element ref="INSTANCE" minOccurs="0"
 					maxOccurs="unbounded" />
@@ -94,7 +94,7 @@
 	</xs:element>
 
 	<!-- Atomic attribute -->
-	<xs:element name="VALUE">
+	<xs:element name="ATTRIBUTE">
 		<xs:complexType>
 			<xs:attribute type="xs:string" name="dmrole" />
 			<xs:attribute type="xs:string" name="dmtype" />
@@ -110,11 +110,11 @@
 	</xs:element>
 
 	<!-- Data list mapping block -->
-	<xs:element name="COMPOSITION">
+	<xs:element name="COLLECTION">
 		<xs:complexType>
 			<xs:choice minOccurs="0" maxOccurs="1">
 				<xs:element ref="INSTANCE" maxOccurs="unbounded" />
-				<xs:element ref="ARRAY" minOccurs="0"
+				<xs:element ref="TABLE_ROW_TEMPLATE" minOccurs="0"
 					maxOccurs="unbounded" />
 				<xs:element ref="JOIN" minOccurs="0"
 					maxOccurs="unbounded" />
@@ -123,12 +123,12 @@
 			<xs:attribute type="xs:string" name="size" />
 			<xs:assert test="@dmrole != '' " />
 			<xs:assert
-				test="(count(./ARRAY) lt 2) and (count(./JOIN) lt 2)" />
+				test="(count(./TABLE_ROW_TEMPLATE) lt 2) and (count(./JOIN) lt 2)" />
 		</xs:complexType>
 	</xs:element>
 
 	<!-- One instance must be created for each selected table row -->
-	<xs:element name="ARRAY">
+	<xs:element name="TABLE_ROW_TEMPLATE">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:choice>
@@ -136,7 +136,7 @@
 				</xs:choice>
 				<xs:choice>
 					<xs:element ref="INSTANCE" minOccurs="1" maxOccurs="1" />
-					<xs:element ref="COMPOSITION" minOccurs="1"
+					<xs:element ref="COLLECTION" minOccurs="1"
 						maxOccurs="1" />
 				</xs:choice>
 			</xs:sequence>
@@ -162,7 +162,7 @@
 				</xs:choice>
 				<xs:choice>
 					<xs:element ref="INSTANCE" minOccurs="1" maxOccurs="1" />
-					<xs:element ref="COMPOSITION" minOccurs="1"
+					<xs:element ref="COLLECTION" minOccurs="1"
 						maxOccurs="1" />
 				</xs:choice>
 			</xs:sequence>
@@ -179,7 +179,7 @@
 			<xs:sequence>
 				<xs:choice>
 					<xs:element ref="INSTANCE" minOccurs="1" maxOccurs="1" />
-					<xs:element ref="COMPOSITION" minOccurs="1"
+					<xs:element ref="COLLECTION" minOccurs="1"
 						maxOccurs="1" />
 				</xs:choice>
 			</xs:sequence>

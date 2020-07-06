@@ -23,9 +23,9 @@
 				dmtype="meas:Symmetrical">
 				<INSTANCE dmrole="meas:Symmetrical.radius"
 					dmtype="ivoa:RealQuantity">
-					<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+					<ATTRIBUTE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
 						ref="_poserr_148" />
-					<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+					<ATTRIBUTE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
 						value="arcsec" />
 				</INSTANCE>
 			</INSTANCE>
@@ -33,9 +33,9 @@
 				dmtype="meas:Symmetrical">
 				<INSTANCE dmrole="meas:Symmetrical.radius"
 					dmtype="ivoa:RealQuantity">
-					<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+					<ATTRIBUTE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
 						ref="_syserrcc_152" />
-					<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+					<ATTRIBUTE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
 						value="arcsec" />
 				</INSTANCE>
 			</INSTANCE>

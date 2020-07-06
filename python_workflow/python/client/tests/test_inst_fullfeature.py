@@ -45,10 +45,10 @@ class TestInstanceFullFeature(unittest.TestCase):
         self.builder = JsonMappingBuilder(json_dict=self.instanceFromVotable.json_block)
         #builder.revert_array()
 
-        self.builder.revert_compositions("COMPOSITION")
+        self.builder.revert_compositions("COLLECTION")
         self.builder.revert_templates()
         self.builder.revert_elements("INSTANCE")
-        self.builder.revert_elements("VALUE")
+        self.builder.revert_elements("ATTRIBUTE")
         #print(DictUtils.get_pretty_json(builder.json))
 
         

@@ -14,13 +14,13 @@ class JsonBuilderRunner:
     def run(self):
         self.builder.revert_sets("GLOBALS",
                                          default_key='globals')
-        #self.builder.revert_compositions("COMPOSITION")
+        #self.builder.revert_compositions("COLLECTION")
         self.builder.revert_sets("TEMPLATES",
                                          default_key='root')
         self.builder.revert_array()
-        self.builder.revert_compositions("COMPOSITION")
+        self.builder.revert_compositions("COLLECTION")
         self.builder.revert_elements("INSTANCE")
-        self.builder.revert_elements("VALUE")
+        self.builder.revert_elements("ATTRIBUTE")
         self.builder.revert_elements("MODEL")
     
     def save(self):

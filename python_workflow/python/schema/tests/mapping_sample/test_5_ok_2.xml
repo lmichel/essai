@@ -9,10 +9,10 @@
 	</MODELS>
 	<GLOBALS>
 		<INSTANCE dmtype="dmtype" dmrole="" ID="id">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype" value="dmvalue" />
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype" value="dmvalue" />
 		</INSTANCE>
 		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<VALUE ref="ref" dmrole="role" dmtype="type" value="dmvalue" />
+			<ATTRIBUTE ref="ref" dmrole="role" dmtype="type" value="dmvalue" />
 		</INSTANCE>
 	</GLOBALS>
 	<TEMPLATES table_ref="fgdgfddf">

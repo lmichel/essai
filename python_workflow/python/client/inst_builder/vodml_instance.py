@@ -52,10 +52,10 @@ class VodmlInstance(object):
     def build_json_mapping(self):
         logger.info("Formating the JSON view")
         builder = JsonMappingBuilder(json_dict=self.json_view )
-        builder.revert_compositions("COMPOSITION")
+        builder.revert_compositions("COLLECTION")
         builder.revert_templates()
         builder.revert_elements("INSTANCE")
-        builder.revert_elements("VALUE")
+        builder.revert_elements("ATTRIBUTE")
         self.json_view = builder.json
 
     def build_instancier_map(self):

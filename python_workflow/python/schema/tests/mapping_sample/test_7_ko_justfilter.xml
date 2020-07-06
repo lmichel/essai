@@ -9,10 +9,10 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
-			<ARRAY>
+		<COLLECTION dmrole="dmrole">
+			<TABLE_ROW_TEMPLATE>
 				<FILTER  ref="ref" value="value"/>
-			</ARRAY>
-		</COMPOSITION>
+			</TABLE_ROW_TEMPLATE>
+		</COLLECTION>
 	</TEMPLATES>
 </VODML>

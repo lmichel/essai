@@ -21,26 +21,26 @@
     <GLOBALS>
         <INSTANCE ID="dataset" dmrole="ds:Dataset" dmtype="ds:Dataset">
             <INSTANCE dmrole="ds:Dataset.dataID" dmtype="ds:Dataset.DataID">
-                <VALUE dmrole="ds:Dataset.DataID.datasetID" value="10.26093/cds/vizier.35650021"/>
+                <ATTRIBUTE dmrole="ds:Dataset.DataID.datasetID" value="10.26093/cds/vizier.35650021"/>
                 <INSTANCE dmrole="ds:Dataset.DataID.creator" dmtype="ds:Dataset.Creator">
                     <INSTANCE dmrole="ds:party.contributor" dmtype="ds:party.Role">
                         <INSTANCE dmrole="ds:party.Party" dmtype="ds:party.Individual">
-                            <VALUE dmrole="ds:party.Party.name" value="Lazorenko"/>
+                            <ATTRIBUTE dmrole="ds:party.Party.name" value="Lazorenko"/>
                         </INSTANCE>
                     </INSTANCE>
                 </INSTANCE>
             </INSTANCE>
             <INSTANCE dmrole="ds:Dataset.curation" dmtype="ds:Dataset.Curation">
-                <VALUE dmrole="ds:Dataset.Curation.publisherDid" value="CDS"/>
+                <ATTRIBUTE dmrole="ds:Dataset.Curation.publisherDid" value="CDS"/>
             </INSTANCE>
         </INSTANCE>
 
         <INSTANCE ID="SpaceFrame_ICRS" dmrole="">
             <INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
-                <VALUE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
+                <ATTRIBUTE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
             </INSTANCE>
-            <VALUE dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string" value="ICRS"/>
-            <VALUE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" value="NoSet"/>
+            <ATTRIBUTE dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string" value="ICRS"/>
+            <ATTRIBUTE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" value="NoSet"/>
         </INSTANCE>
     </GLOBALS>
 
@@ -50,37 +50,37 @@
          plx, e_plx,
     -->
     <TEMPLATES>
-        <ARRAY dmrole="root">
+        <TABLE_ROW_TEMPLATE dmrole="root">
             <INSTANCE dmrole="root" dmtype="mango:Source">
-                <VALUE dmrole="mango:Source.identifier" dmtype="ivoa:string" ref="Seq"/>
-                <COMPOSITION size="-1" dmrole="mango:Source.parameters">
+                <ATTRIBUTE dmrole="mango:Source.identifier" dmtype="ivoa:string" ref="Seq"/>
+                <COLLECTION size="-1" dmrole="mango:Source.parameters">
                     <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Source.Parameter">
-                        <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos"/>
-                        <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="main position"/>
+                        <ATTRIBUTE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos"/>
+                        <ATTRIBUTE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="main position"/>
                         <INSTANCE dmrole="mango:Source.Parameter.measure" dmtype="mango:stcextend.LonLatSkyPosition">
-                            <VALUE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="RAJ2000"/>
-                            <VALUE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="DEJ2000"/>
+                            <ATTRIBUTE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="RAJ2000"/>
+                            <ATTRIBUTE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="DEJ2000"/>
                             <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="SpaceFrame_ICRS"/>
-                            <VALUE dmrole="mango:stcextend.LonLatPoint.longitude.error" dmtype="ivoa:real" ref="e_RAJ2000"/><!-- not existing yet -->
-                            <VALUE dmrole="mango:stcextend.LonLatPoint.latitude.error" dmtype="ivoa:real" ref="e_DEJ2000"/><!-- not existing yet -->
+                            <ATTRIBUTE dmrole="mango:stcextend.LonLatPoint.longitude.error" dmtype="ivoa:real" ref="e_RAJ2000"/><!-- not existing yet -->
+                            <ATTRIBUTE dmrole="mango:stcextend.LonLatPoint.latitude.error" dmtype="ivoa:real" ref="e_DEJ2000"/><!-- not existing yet -->
                         </INSTANCE>
                     </INSTANCE>
 
                     <INSTANCE dmrole="mango:Source.parameters"  dmtype="mango:Source.Parameter">
-                        <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos.pm"/>
-                        <VALUE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="proper motion"/>
+                        <ATTRIBUTE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos.pm"/>
+                        <ATTRIBUTE dmrole="mango:Parameter.description" dmtype="ivoa:string" value="proper motion"/>
                         <INSTANCE dmrole="mango:Source.Parameter.measure" dmtype="mango:stcextend.ProperMotion"> <!-- not existing yet -->
-                            <VALUE dmrole="mango:stcextend.ProperMotion.longitude" dmtype="ivoa:real" ref="pmRA"/>
-                            <VALUE dmrole="mango:stcextend.ProperMotion.latitude" dmtype="ivoa:real" ref="pmDE"/>
+                            <ATTRIBUTE dmrole="mango:stcextend.ProperMotion.longitude" dmtype="ivoa:real" ref="pmRA"/>
+                            <ATTRIBUTE dmrole="mango:stcextend.ProperMotion.latitude" dmtype="ivoa:real" ref="pmDE"/>
                             <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="SpaceFrame_ICRS"/>
-                            <VALUE dmrole="mango:stcextend.ProperMotion.longitude.error" dmtype="ivoa:real" ref="e_pmRA"/>
-                            <VALUE dmrole="mango:stcextend.ProperMotion.latitude.error" dmtype="ivoa:real" ref="e_pmDE"/>
-                            <VALUE dmrole="mango:stcextend.ProperMotion.epoch" dmtype="ivoa:real" ref="Ep"/>
+                            <ATTRIBUTE dmrole="mango:stcextend.ProperMotion.longitude.error" dmtype="ivoa:real" ref="e_pmRA"/>
+                            <ATTRIBUTE dmrole="mango:stcextend.ProperMotion.latitude.error" dmtype="ivoa:real" ref="e_pmDE"/>
+                            <ATTRIBUTE dmrole="mango:stcextend.ProperMotion.epoch" dmtype="ivoa:real" ref="Ep"/>
                         </INSTANCE>
                     </INSTANCE>
-                </COMPOSITION>
+                </COLLECTION>
             </INSTANCE>
-        </ARRAY>
+        </TABLE_ROW_TEMPLATE>
     </TEMPLATES>
 </VODML>
 

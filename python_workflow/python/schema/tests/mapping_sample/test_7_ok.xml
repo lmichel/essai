@@ -9,28 +9,28 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
-			<ARRAY>
-				<COMPOSITION dmrole="dmrole">
+		<COLLECTION dmrole="dmrole">
+			<TABLE_ROW_TEMPLATE>
+				<COLLECTION dmrole="dmrole">
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</COMPOSITION>
-			</ARRAY>
+				</COLLECTION>
+			</TABLE_ROW_TEMPLATE>
 
-		</COMPOSITION>
+		</COLLECTION>
 	</TEMPLATES>
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
-			<ARRAY>
+		<COLLECTION dmrole="dmrole">
+			<TABLE_ROW_TEMPLATE>
 				<INSTANCE dmref="dmref" dmrole="dmrole" />
-			</ARRAY>
-		</COMPOSITION>
+			</TABLE_ROW_TEMPLATE>
+		</COLLECTION>
 	</TEMPLATES>
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
-			<ARRAY>
+		<COLLECTION dmrole="dmrole">
+			<TABLE_ROW_TEMPLATE>
 				<FILTER ref="ref" value="value"/>
 				<INSTANCE dmref="dmref" dmrole="dmrole" />
-			</ARRAY>
-		</COMPOSITION>
+			</TABLE_ROW_TEMPLATE>
+		</COLLECTION>
 	</TEMPLATES>
 </VODML>

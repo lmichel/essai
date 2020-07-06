@@ -58,108 +58,108 @@
                 <!--
 VizieRcatalog entity with attributed agent and activity which generated it
  -->
-                <VALUE dmrole="voprov:Entity.name" dmtype="ivoa:string" ref="cn" />
-                <VALUE dmrole="voprov:Entity.location" dmtype="ivoa:string" ref="cl" />
-                <COMPOSITION size="-1" dmrole="voprov:WasAttributedTo">
+                <ATTRIBUTE dmrole="voprov:Entity.name" dmtype="ivoa:string" ref="cn" />
+                <ATTRIBUTE dmrole="voprov:Entity.location" dmtype="ivoa:string" ref="cl" />
+                <COLLECTION size="-1" dmrole="voprov:WasAttributedTo">
                     <!--
 	Published VizieR catalog attributed to agent CDS
 	 -->
-                    <VALUE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="war" />
+                    <ATTRIBUTE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="war" />
                     <INSTANCE dmrole="voprov:WasAttributedTo.Agent" dmtype="voprov:Agent">
-                        <VALUE dmrole="Agent.name" dmtype="ivoa:string" ref="pn" />
-                        <VALUE dmrole="Agent.type" dmtype="ivoa:string" ref="pt" />
+                        <ATTRIBUTE dmrole="Agent.name" dmtype="ivoa:string" ref="pn" />
+                        <ATTRIBUTE dmrole="Agent.type" dmtype="ivoa:string" ref="pt" />
                     </INSTANCE>
-                </COMPOSITION>
-                <COMPOSITION size="-1" dmrole="voprov:WasGeneratedBy">
+                </COLLECTION>
+                <COLLECTION size="-1" dmrole="voprov:WasGeneratedBy">
                     <!--
 	Catalog publication activity  with  used entities
 	 -->
                     <INSTANCE dmrole="voprov:WasGeneratedBy.Activity" dmtype="voprov:Activity">
-                        <VALUE dmrole="voprov:Activity.name" dmtype="ivoa:string" ref="an" />
-                        <VALUE dmrole="voprov:Activity.comment" dmtype="ivoa:string" ref="ac" />
-                        <COMPOSITION size="-1" dmrole="voprov:WasAssociatedWith">
-                            <VALUE dmrole="voprov:WasAssociatedWith.role" dmtype="ivoa:string" ref="war" />
+                        <ATTRIBUTE dmrole="voprov:Activity.name" dmtype="ivoa:string" ref="an" />
+                        <ATTRIBUTE dmrole="voprov:Activity.comment" dmtype="ivoa:string" ref="ac" />
+                        <COLLECTION size="-1" dmrole="voprov:WasAssociatedWith">
+                            <ATTRIBUTE dmrole="voprov:WasAssociatedWith.role" dmtype="ivoa:string" ref="war" />
                             <INSTANCE dmrole="voprov:WasAttributedTo.Agent" dmtype="voprov:Agent">
-                                <VALUE dmrole="Agent.name" dmtype="ivoa:string" ref="pn" />
-                                <VALUE dmrole="Agent.type" dmtype="ivoa:string" ref="pt" />
+                                <ATTRIBUTE dmrole="Agent.name" dmtype="ivoa:string" ref="pn" />
+                                <ATTRIBUTE dmrole="Agent.type" dmtype="ivoa:string" ref="pt" />
                             </INSTANCE>
-                        </COMPOSITION>
-                        <COMPOSITION size="-1" dmrole="voprov:Used">
+                        </COLLECTION>
+                        <COLLECTION size="-1" dmrole="voprov:Used">
                             <INSTANCE dmrole="voprov:Used.Entity" dmtype="voprov:Entity">
                                 <!--
 			Article entity  followed by  attributed author and editor agents
 			 -->
-                                <VALUE dmrole="Entity.id" dmtype="ivoa:string" ref="ab" />
-                                <VALUE dmrole="Entity.name" dmtype="ivoa:string" ref="at" />
-                                <COMPOSITION size="-1" dmrole="voprov:WasAttributedTo">
+                                <ATTRIBUTE dmrole="Entity.id" dmtype="ivoa:string" ref="ab" />
+                                <ATTRIBUTE dmrole="Entity.name" dmtype="ivoa:string" ref="at" />
+                                <COLLECTION size="-1" dmrole="voprov:WasAttributedTo">
                                     <!--
 				Agent PA Duc was attributed author role for paper and tables
 				 -->
-                                    <VALUE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="ra" />
+                                    <ATTRIBUTE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="ra" />
                                     <INSTANCE dmrole="voprov:WasAttributedTo.Agent" dmtype="voprov:Agent">
-                                        <VALUE dmrole="Agent.name" dmtype="ivoa:string" ref="an" />
-                                        <VALUE dmrole="Agent.type" dmtype="ivoa:string" ref="at" />
+                                        <ATTRIBUTE dmrole="Agent.name" dmtype="ivoa:string" ref="an" />
+                                        <ATTRIBUTE dmrole="Agent.type" dmtype="ivoa:string" ref="at" />
                                     </INSTANCE>
-                                </COMPOSITION>
-                                <COMPOSITION size="-1" dmrole="voprov:WasAttributedTo">
+                                </COLLECTION>
+                                <COLLECTION size="-1" dmrole="voprov:WasAttributedTo">
                                     <!--
 				Agent A and A  was attributed editor role for paper and tables
 				 -->
-                                    <VALUE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="re" />
+                                    <ATTRIBUTE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="re" />
                                     <INSTANCE dmrole="voprov:WasAttributedTo.Agent" dmtype="voprov:Agent">
-                                        <VALUE dmrole="Agent.name" dmtype="ivoa:string" ref="en" />
-                                        <VALUE dmrole="Agent.type" dmtype="ivoa:string" ref="et" />
+                                        <ATTRIBUTE dmrole="Agent.name" dmtype="ivoa:string" ref="en" />
+                                        <ATTRIBUTE dmrole="Agent.type" dmtype="ivoa:string" ref="et" />
                                     </INSTANCE>
-                                </COMPOSITION>
+                                </COLLECTION>
                             </INSTANCE>
                             <INSTANCE dmrole="voprov:Used.Entity" dmtype="voprov:Entity">
                                 <!--
 			Table entity  with  attributed author and editor agents
 			 -->
-                                <VALUE dmrole="Entity.id" dmtype="ivoa:string" ref="ti" />
-                                <VALUE dmrole="Entity.location" dmtype="ivoa:string" ref="tl" />
-                                <COMPOSITION size="-1" dmrole="voprov:WasAttributedTo">
+                                <ATTRIBUTE dmrole="Entity.id" dmtype="ivoa:string" ref="ti" />
+                                <ATTRIBUTE dmrole="Entity.location" dmtype="ivoa:string" ref="tl" />
+                                <COLLECTION size="-1" dmrole="voprov:WasAttributedTo">
                                     <!--
 				Agent PA Duc was attributed author role for paper and tables
 				 -->
-                                    <VALUE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="ra" />
+                                    <ATTRIBUTE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="ra" />
                                     <INSTANCE dmrole="voprov:WasAttributedTo.Agent" dmtype="voprov:Agent">
-                                        <VALUE dmrole="Agent.name" dmtype="ivoa:string" ref="an" />
-                                        <VALUE dmrole="Agent.type" dmtype="ivoa:string" ref="at" />
+                                        <ATTRIBUTE dmrole="Agent.name" dmtype="ivoa:string" ref="an" />
+                                        <ATTRIBUTE dmrole="Agent.type" dmtype="ivoa:string" ref="at" />
                                     </INSTANCE>
-                                </COMPOSITION>
-                                <COMPOSITION size="-1" dmrole="voprov:WasAttributedTo">
+                                </COLLECTION>
+                                <COLLECTION size="-1" dmrole="voprov:WasAttributedTo">
                                     <!--
 				Agent A and A  was attributed editor role for paper and tables
 				 -->
-                                    <VALUE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="re" />
+                                    <ATTRIBUTE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="re" />
                                     <INSTANCE dmrole="voprov:WasAttributedTo.Agent" dmtype="voprov:Agent">
-                                        <VALUE dmrole="Agent.name" dmtype="ivoa:string" ref="en" />
-                                        <VALUE dmrole="Agent.type" dmtype="ivoa:string" ref="et" />
+                                        <ATTRIBUTE dmrole="Agent.name" dmtype="ivoa:string" ref="en" />
+                                        <ATTRIBUTE dmrole="Agent.type" dmtype="ivoa:string" ref="et" />
                                     </INSTANCE>
-                                </COMPOSITION>
+                                </COLLECTION>
                             </INSTANCE>
                             <INSTANCE dmrole="voprov:Used.Entity" dmtype="voprov:Entity">
                                 <!--
 			Filter description entity  with  attributed creator agent
 			 -->
-                                <VALUE dmrole="Entity.id" dmtype="ivoa:string" ref="af" />
-                                <VALUE dmrole="Entity.name" dmtype="ivoa:string" ref="fi" />
-                                <VALUE dmrole="Entity.location" dmtype="ivoa:string" ref="furl" />
-                                <COMPOSITION size="-1" dmrole="voprov:WasAttributedTo">
+                                <ATTRIBUTE dmrole="Entity.id" dmtype="ivoa:string" ref="af" />
+                                <ATTRIBUTE dmrole="Entity.name" dmtype="ivoa:string" ref="fi" />
+                                <ATTRIBUTE dmrole="Entity.location" dmtype="ivoa:string" ref="furl" />
+                                <COLLECTION size="-1" dmrole="voprov:WasAttributedTo">
                                     <!--
 					Agent SVO  was attributed creator role for filter description
 					 -->
-                                    <VALUE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="rc" />
+                                    <ATTRIBUTE dmrole="voprov:WasAttributedTo.role" dmtype="ivoa:string" ref="rc" />
                                     <INSTANCE dmrole="voprov:WasAttributedTo.Agent" dmtype="voprov:Agent">
-                                        <VALUE dmrole="Agent.name" dmtype="ivoa:string" ref="cn" />
-                                        <VALUE dmrole="Agent.type" dmtype="ivoa:string" ref="ct" />
+                                        <ATTRIBUTE dmrole="Agent.name" dmtype="ivoa:string" ref="cn" />
+                                        <ATTRIBUTE dmrole="Agent.type" dmtype="ivoa:string" ref="ct" />
                                     </INSTANCE>
-                                </COMPOSITION>
+                                </COLLECTION>
                             </INSTANCE>
-                        </COMPOSITION>
+                        </COLLECTION>
                     </INSTANCE>
-                </COMPOSITION>
+                </COLLECTION>
             </INSTANCE>
         </TEMPLATES>
     </VODML>
@@ -248,7 +248,7 @@ VizieRcatalog entity with attributed agent and activity which generated it
             <FIELD name="PropDate" ucd="meta.note" datatype="char" arraysize="10" unit="s">
                 <!-- ucd="TIME_DATE" -->
                 <DESCRIPTION>Proprietary period expiry date</DESCRIPTION>
-                <VALUES null=" " />
+                <ATTRIBUTES null=" " />
             </FIELD>
             <FIELD name="Object" ucd="meta.id" datatype="char" arraysize="30*">
                 <!-- ucd="ID_IDENTIFIER" -->
@@ -257,27 +257,27 @@ VizieRcatalog entity with attributed agent and activity which generated it
             <FIELD name="RAJ2000" ucd="pos.eq.ra;meta.main" ref="J2000" datatype="double" width="9" precision="5" unit="deg">
                 <!-- ucd="POS_EQ_RA_MAIN" -->
                 <DESCRIPTION>? Median pointing RA (J2000)</DESCRIPTION>
-                <VALUES null="NaN" />
+                <ATTRIBUTES null="NaN" />
             </FIELD>
             <FIELD name="DEJ2000" ucd="pos.eq.dec;meta.main" ref="J2000" datatype="double" width="9" precision="5" unit="deg">
                 <!-- ucd="POS_EQ_DEC_MAIN" -->
                 <DESCRIPTION>? Median pointing Declination (J2000)</DESCRIPTION>
-                <VALUES null="NaN" />
+                <ATTRIBUTES null="NaN" />
             </FIELD>
             <FIELD name="Obs0" ucd="time.epoch" datatype="char" arraysize="19" unit="s">
                 <!-- ucd="TIME_DATE" -->
                 <DESCRIPTION>? Observation start date (UT)</DESCRIPTION>
-                <VALUES null=" " />
+                <ATTRIBUTES null=" " />
             </FIELD>
             <FIELD name="Obs1" ucd="time.epoch" datatype="char" arraysize="19" unit="s">
                 <!-- ucd="TIME_DATE" -->
                 <DESCRIPTION>? Observation end date (UT)</DESCRIPTION>
-                <VALUES null=" " />
+                <ATTRIBUTES null=" " />
             </FIELD>
             <FIELD name="ObsDur" ucd="time.expo" datatype="int" width="7" unit="s">
                 <!-- ucd="TIME_EXPTIME" -->
                 <DESCRIPTION>? Observation on-time [NULL integer written as an empty string]</DESCRIPTION>
-                <VALUES null="-2147483648" />
+                <ATTRIBUTES null="-2147483648" />
             </FIELD>
             <FIELD name="SASVersion" ucd="stat.fit.param" datatype="char" arraysize="5">
                 <!-- ucd="REDUCT_PARAM" -->

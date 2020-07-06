@@ -19,7 +19,7 @@ class JsonBlockExtractor(object):
         self.json_block = json_block
         
     def search_array_container(self):
-        self._search_array_container("ARRAY", self.json_block)
+        self._search_array_container("TABLE_ROW_TEMPLATE", self.json_block)
         return self.searched_elements
         
     def search_join_container(self):

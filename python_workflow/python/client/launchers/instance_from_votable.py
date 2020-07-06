@@ -62,13 +62,13 @@ class InstanceFromVotable:
 
         builder.revert_sets("GLOBALS",
                                          default_key='globals')
-        #self.builder.revert_compositions("COMPOSITION")
+        #self.builder.revert_compositions("COLLECTION")
         builder.revert_sets("TEMPLATES",
                                          default_key='root')
         builder.revert_array()
-        builder.revert_compositions("COMPOSITION")
+        builder.revert_compositions("COLLECTION")
         builder.revert_elements("INSTANCE")
-        builder.revert_elements("VALUE")
+        builder.revert_elements("ATTRIBUTE")
         builder.revert_elements("MODEL")
 
         self.json_vodml_block = builder.json

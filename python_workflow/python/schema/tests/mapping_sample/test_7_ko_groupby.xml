@@ -9,12 +9,12 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
-			<ARRAY>
+		<COLLECTION dmrole="dmrole">
+			<TABLE_ROW_TEMPLATE>
 				<GROUPBY ref="ref"/>
 				<INSTANCE dmref="dmref" dmrole="dmrole" />
-			</ARRAY>
-		</COMPOSITION>
+			</TABLE_ROW_TEMPLATE>
+		</COLLECTION>
 	</TEMPLATES>
 </VODML>
 	

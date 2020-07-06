@@ -9,7 +9,7 @@
           "INSTANCE": {
             "@dmrole": "meas:Symmetrical.radius",
             "@dmtype": "ivoa:RealQuantity",
-            "VALUE": [
+            "ATTRIBUTE": [
               {
                 "@dmrole": "ivoa:RealQuantity.value",
                 "@dmtype": "ivoa:real",
@@ -29,7 +29,7 @@
           "INSTANCE": {
             "@dmrole": "meas:Symmetrical.radius",
             "@dmtype": "ivoa:RealQuantity",
-            "VALUE": [
+            "ATTRIBUTE": [
               {
                 "@dmrole": "ivoa:RealQuantity.value",
                 "@dmtype": "ivoa:real",

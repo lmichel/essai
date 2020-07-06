@@ -9,7 +9,7 @@
   <GLOBALS/>
   <TEMPLATES table_ref="fgdgfddf">
   	<INSTANCE  dmtype="" dmrole="">
-  	  	<VALUE  ref="ref" dmrole="dmrole" dmtype="dmtype" value="dmvalue"/>
+  	  	<ATTRIBUTE  ref="ref" dmrole="dmrole" dmtype="dmtype" value="dmvalue"/>
   	</INSTANCE>
   </TEMPLATES>
 </VODML>

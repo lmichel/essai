@@ -89,7 +89,7 @@ class ParameterAppender:
         if not self.param_tree:
             return
         parameters_block = self._get_unique_element(
-            self.mango_tree.xpath("//COMPOSITION[@dmrole='mango:Source.parameters']")
+            self.mango_tree.xpath("//COLLECTION[@dmrole='mango:Source.parameters']")
             )
         param_block = self._get_unique_element(
             self.param_tree.xpath("//INSTANCE[@dmrole='root']")
@@ -120,7 +120,7 @@ class ParameterAppender:
             if "ref" in block.attrib.keys():
                 block = self._get_global_instance(block.attrib["ref"])
 
-            subblocks = block.xpath(".//VALUE[@dmrole='" + value_role + "']")
+            subblocks = block.xpath(".//ATTRIBUTE[@dmrole='" + value_role + "']")
             for subblock in subblocks:
                 if "ref" not in subblock.keys() or subblock.attrib["ref"].startswith("@@@"):
                     value_block = subblock
@@ -143,7 +143,7 @@ class ParameterAppender:
             if "dmref" in block.attrib.keys():
                 block = self._get_global_instance(block.attrib["dmref"])
 
-            subblocks = block.xpath(".//VALUE[@dmrole='" + value_role + "']")
+            subblocks = block.xpath(".//ATTRIBUTE[@dmrole='" + value_role + "']")
             for subblock in subblocks:
                 if "value" not in subblock.keys() or subblock.attrib["value"].startswith("@@@"):
                     value_block = subblock
@@ -180,7 +180,7 @@ class ParameterAppender:
             logger.info("Cannot find instance with @role={} to set the dmref={}".format(host_role, dm_ref))
  
     def set_notset_value(self):
-        notset_values = self.mango_tree.xpath("//VALUE[@ref='" + ATTRIBUTE_DEFAULT.TO_BE_SET + "']")
+        notset_values = self.mango_tree.xpath("//ATTRIBUTE[@ref='" + ATTRIBUTE_DEFAULT.TO_BE_SET + "']")
         for notset_value  in notset_values:        
             logger.info("Set value of tag %s as NotSet", notset_value.attrib["dmrole"])
             notset_value.attrib["value"] = ATTRIBUTE_DEFAULT.NOT_SET

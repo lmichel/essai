@@ -22,7 +22,7 @@
         "@table_ref": "LastResults",
         "meas:Measure.errors": [
           {
-            "ARRAY": {
+            "TABLE_ROW_TEMPLATE": {
               "FILTER": {
                 "@ref": "_poserr_148",
                 "@value": "2"
@@ -50,7 +50,7 @@
         "@table_ref": "OtherResults",
         "meas:Measure.errors": [
           {
-            "ARRAY": {
+            "TABLE_ROW_TEMPLATE": {
               "FILTER": {
                 "@ref": "_poserr_148",
                 "@value": "2"
@@ -78,7 +78,7 @@
         "@table_ref": "Results",
         "meas:Measure.errors": [
           {
-            "ARRAY": {
+            "TABLE_ROW_TEMPLATE": {
               "FILTER": {
                 "@ref": "_poserr_148",
                 "@value": "2"

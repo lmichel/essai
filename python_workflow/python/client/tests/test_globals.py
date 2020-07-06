@@ -25,7 +25,7 @@ class TestInstance(unittest.TestCase):
         
         builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
         builder.revert_elements("INSTANCE")
-        builder.revert_elements("VALUE")
+        builder.revert_elements("ATTRIBUTE")
         
         #print(DictUtils.get_pretty_json(builder.json))
         self.assertDictEqual(builder.json["VODML"]["GLOBALS"]

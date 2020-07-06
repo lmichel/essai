@@ -22,12 +22,12 @@
 			<INSTANCE ID="SpaceFrame_ICRS" dmtype="coords:SpaceFrame">
 				<INSTANCE dmrole="coords:SpaceFrame.refPosition"
 					dmtype="coords:StdRefLocation">
-					<VALUE dmrole="coords:StdRefLocation.position"
+					<ATTRIBUTE dmrole="coords:StdRefLocation.position"
 						dmtype="ivoa:string" value="NoSet" />
 				</INSTANCE>
-				<VALUE dmrole="coords:SpaceFrame.spaceRefFrame"
+				<ATTRIBUTE dmrole="coords:SpaceFrame.spaceRefFrame"
 					dmtype="ivoa:string" value="ICRS" />
-				<VALUE dmrole="coords:SpaceFrame.equinox"
+				<ATTRIBUTE dmrole="coords:SpaceFrame.equinox"
 					dmtype="coords:Epoch" value="NoSet" />
 			</INSTANCE>
 		</GLOBALS>
@@ -36,23 +36,23 @@
 				<INSTANCE dmrole="test.header" dmtype="test.Header">
 					<INSTANCE dmrole="test.frame" dmref="SpaceFrame_ICRS" />
 					<INSTANCE dmrole="test.owner" dmtype="test.Owner">
-						<VALUE dmrole="test.owner.name" dmtype="string"
+						<ATTRIBUTE dmrole="test.owner.name" dmtype="string"
 							value="Michel" />
-						<VALUE dmrole="test.owner.firstname" dmtype="string"
+						<ATTRIBUTE dmrole="test.owner.firstname" dmtype="string"
 							value="Laurent" />
-						<VALUE dmrole="test.title" dmtype="string"
+						<ATTRIBUTE dmrole="test.title" dmtype="string"
 							ref="_title" />
 					</INSTANCE>
-					<COMPOSITION dmrole="test.points">
-						<ARRAY>
+					<COLLECTION dmrole="test.points">
+						<TABLE_ROW_TEMPLATE>
 							<INSTANCE dmrole="test.point" dmtype="test.Point">
-								<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+								<ATTRIBUTE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
 									ref="_poserr_148" />
-								<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+								<ATTRIBUTE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
 									value="arcsec" />
 							</INSTANCE>
-						</ARRAY>
-					</COMPOSITION>
+						</TABLE_ROW_TEMPLATE>
+					</COLLECTION>
 				</INSTANCE>
 			</INSTANCE>
 		</TEMPLATES>

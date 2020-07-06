@@ -9,13 +9,13 @@
   <GLOBALS/>
   <TEMPLATES table_ref="fgdgfddf">
   	<INSTANCE  dmref="dmref" dmrole="dmrole">
-  	  	<VALUE  ref="ref" dmrole="dmrole" dmtype="dmtype" value="dmvalue"/>
+  	  	<ATTRIBUTE  ref="ref" dmrole="dmrole" dmtype="dmtype" value="dmvalue"/>
   	</INSTANCE>
   	<INSTANCE  dmrole="dmrole" dmtype="dmtype">
-  	  	<VALUE  dmrole="dmrole" dmtype="dmtype" value="dmvalue"/>
+  	  	<ATTRIBUTE  dmrole="dmrole" dmtype="dmtype" value="dmvalue"/>
   	</INSTANCE>
   	<INSTANCE  dmrole="" dmtype="dmtype">
-  	  	<VALUE  ref="ref" dmrole="dmrole" dmtype="dmtype"/>
+  	  	<ATTRIBUTE  ref="ref" dmrole="dmrole" dmtype="dmtype"/>
   	</INSTANCE>
   </TEMPLATES>
 </VODML>

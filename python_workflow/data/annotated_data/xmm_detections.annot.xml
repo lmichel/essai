@@ -18,43 +18,43 @@
   <GLOBALS>
     <INSTANCE ID="SpaceFrame_ICRS" dmrole="">
       <INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
-        <VALUE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
+        <ATTRIBUTE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
       </INSTANCE>
-      <VALUE dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string" value="ICRS"/>
-      <VALUE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" value="NoSet"/>
+      <ATTRIBUTE dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string" value="ICRS"/>
+      <ATTRIBUTE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" value="NoSet"/>
     </INSTANCE>
   </GLOBALS>
   <TEMPLATES>
     <INSTANCE dmrole="root" dmtype="mango:Source">
-      <VALUE dmrole="mango:Source.identifier" dmtype="ivoa:string" ref="namesaada"/>
-      <COMPOSITION size="-1" dmrole="mango:Source.associatedData"/>
-      <COMPOSITION size="-1" dmrole="mango:Source.parameters">
+      <ATTRIBUTE dmrole="mango:Source.identifier" dmtype="ivoa:string" ref="namesaada"/>
+      <COLLECTION size="-1" dmrole="mango:Source.associatedData"/>
+      <COLLECTION size="-1" dmrole="mango:Source.parameters">
         <INSTANCE dmrole="mango:Source.parameters" dmtype="mango:Parameter">
-          <VALUE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="corrected"/>
-          <VALUE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos;meta.main"/>
+          <ATTRIBUTE dmrole="mango:Parameter.semantic" dmtype="ivoa:string" value="corrected"/>
+          <ATTRIBUTE dmrole="mango:Parameter.ucd" dmtype="ivoa:string" value="pos;meta.main"/>
           <INSTANCE dmrole="mango:Parameter.measure" dmtype="mango:stcextend.LonLatSkyPosition">
             <INSTANCE dmrole="mango:stcextend.LonLatSkyPosition.coord" dmtype="mango:stcextend.LonLatPoint">
-              <VALUE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="_ra_146"/>
-              <VALUE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="_dec_147"/>
+              <ATTRIBUTE dmrole="mango:stcextend.LonLatPoint.longitude" dmtype="ivoa:real" ref="_ra_146"/>
+              <ATTRIBUTE dmrole="mango:stcextend.LonLatPoint.latitude" dmtype="ivoa:real" ref="_dec_147"/>
               <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="SpaceFrame_ICRS"/>
             </INSTANCE>
             <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
               <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
                 <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                  <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_poserr_148"/>
-                  <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
+                  <ATTRIBUTE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_poserr_148"/>
+                  <ATTRIBUTE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
                 </INSTANCE>
               </INSTANCE>
               <INSTANCE dmrole="meas:Error.sysError" dmtype="meas:Symmetrical">
                 <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-                  <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_syserrcc_152"/>
-                  <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
+                  <ATTRIBUTE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="_syserrcc_152"/>
+                  <ATTRIBUTE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" value="arcsec"/>
                 </INSTANCE>
               </INSTANCE>
             </INSTANCE>
           </INSTANCE>
         </INSTANCE>
-      </COMPOSITION>
+      </COLLECTION>
     </INSTANCE>
   </TEMPLATES>
 </VODML>

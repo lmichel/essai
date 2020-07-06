@@ -12,7 +12,7 @@
 	<TEMPLATES table_ref="fgdgfddf">
 		<GROUPBY ref="">
 			<INSTANCE dmref="dmref" dmrole="dmrole">
-				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+				<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 					value="dmvalue" />
 			</INSTANCE>
 		</GROUPBY>

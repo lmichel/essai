@@ -10,17 +10,17 @@
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
+		<COLLECTION dmrole="dmrole">
 			<JOIN table_ref="" primary="primary" foreign="foreign">
-				<COMPOSITION dmrole="dmrole">
+				<COLLECTION dmrole="dmrole">
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</COMPOSITION>
-				<COMPOSITION dmrole="dmrole">
+				</COLLECTION>
+				<COLLECTION dmrole="dmrole">
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</COMPOSITION>
+				</COLLECTION>
 			</JOIN>
 
-		</COMPOSITION>
+		</COLLECTION>
 	</TEMPLATES>
 	</TEMPLATES>
 </VODML>

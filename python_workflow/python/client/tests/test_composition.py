@@ -24,7 +24,7 @@ class TestInstance(unittest.TestCase):
         instanceFromVotable._validate_vodml_block()
         
         builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
-        builder.revert_compositions("COMPOSITION")
+        builder.revert_compositions("COLLECTION")
 
         #print(DictUtils.get_pretty_json(builder.json["VODML"]["TEMPLATES"]))
         self.assertDictEqual(builder.json["VODML"]["TEMPLATES"], DictUtils.read_dict_from_file(json_ref_path), "=======")

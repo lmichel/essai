@@ -17,16 +17,16 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref='Results'>
-		<ARRAY dmrole="root">
+		<TABLE_ROW_TEMPLATE dmrole="root">
 			<INSTANCE dmrole="root" dmtype="cab_msd:Source">
-				<VALUE dmrole="cab_msd:Source.identifier" dmtype="ivoa:string" ref="@@@@@@" />
-				<COMPOSITION size="-1"
+				<ATTRIBUTE dmrole="cab_msd:Source.identifier" dmtype="ivoa:string" ref="@@@@@@" />
+				<COLLECTION size="-1"
 					dmrole="cab_msd:Source.associatedData">
-				</COMPOSITION>
-				<COMPOSITION size="-1"
+				</COLLECTION>
+				<COLLECTION size="-1"
 					dmrole="cab_msd:Source.parameters">
-				</COMPOSITION>
+				</COLLECTION>
 			</INSTANCE>
-		</ARRAY>
+		</TABLE_ROW_TEMPLATE>
 	</TEMPLATES>
 </VODML>

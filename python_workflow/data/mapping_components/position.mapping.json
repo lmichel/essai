@@ -7,13 +7,13 @@
         "INSTANCE": {
           "@dmrole": "coords:SpaceFrame.refPosition",
           "@dmtype": "coords:StdRefLocation",
-          "VALUE": {
+          "ATTRIBUTE": {
             "@dmrole": "coords:StdRefLocation.position",
             "@dmtype": "ivoa:string",
             "@ref": "@@@@@@"
           }
         },
-        "VALUE": [
+        "ATTRIBUTE": [
           {
             "@dmrole": "coords:SpaceFrame.spaceRefFrame",
             "@dmtype": "ivoa:string",
@@ -55,7 +55,7 @@
               {
                 "@dmrole": "cab_msd:STCSphericalPoint.longitude",
                 "@dmtype": "ivoa:RealQuantity",
-                "VALUE": [
+                "ATTRIBUTE": [
                   {
                     "@dmrole": "ivoa:RealQuantity.value",
                     "@dmtype": "ivoa:real",
@@ -71,7 +71,7 @@
               {
                 "@dmrole": "cab_msd:STCSphericalPoint.latitude",
                 "@dmtype": "ivoa:RealQuantity",
-                "VALUE": [
+                "ATTRIBUTE": [
                   {
                     "@dmrole": "ivoa:RealQuantity.value",
                     "@dmtype": "ivoa:real",
@@ -104,7 +104,7 @@
                 "INSTANCE": {
                   "@dmrole": "meas:Symmetrical.radius",
                   "@dmtype": "ivoa:RealQuantity",
-                  "VALUE": [
+                  "ATTRIBUTE": [
                     {
                       "@dmrole": "ivoa:RealQuantity.value",
                       "@dmtype": "ivoa:real",
@@ -124,7 +124,7 @@
                 "INSTANCE": {
                   "@dmrole": "meas:Symmetrical.radius",
                   "@dmtype": "ivoa:RealQuantity",
-                  "VALUE": [
+                  "ATTRIBUTE": [
                     {
                       "@dmrole": "ivoa:RealQuantity.value",
                       "@dmtype": "ivoa:real",

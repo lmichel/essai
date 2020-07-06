@@ -22,12 +22,12 @@
 			<INSTANCE ID="SpaceFrame_ICRS" dmtype="coords:SpaceFrame">
 				<INSTANCE dmrole="coords:SpaceFrame.refPosition"
 					dmtype="coords:StdRefLocation">
-					<VALUE dmrole="coords:StdRefLocation.position"
+					<ATTRIBUTE dmrole="coords:StdRefLocation.position"
 						dmtype="ivoa:string" value="NoSet" />
 				</INSTANCE>
-				<VALUE dmrole="coords:SpaceFrame.spaceRefFrame"
+				<ATTRIBUTE dmrole="coords:SpaceFrame.spaceRefFrame"
 					dmtype="ivoa:string" value="ICRS" />
-				<VALUE dmrole="coords:SpaceFrame.equinox"
+				<ATTRIBUTE dmrole="coords:SpaceFrame.equinox"
 					dmtype="coords:Epoch" value="NoSet" />
 			</INSTANCE>
 		</GLOBALS>
@@ -36,47 +36,46 @@
 				<INSTANCE dmrole="test.header" dmtype="test.Header">
 					<INSTANCE dmrole="test.frame" dmref="SpaceFrame_ICRS" />
 					<INSTANCE dmrole="test.owner" dmtype="test.Owner">
-						<VALUE dmrole="test.owner.name" dmtype="string"
+						<ATTRIBUTE dmrole="test.owner.name" dmtype="string"
 							value="Michel" />
-						<VALUE dmrole="test.owner.firstname" dmtype="string"
+						<ATTRIBUTE dmrole="test.owner.firstname" dmtype="string"
 							value="Laurent" />
-						<VALUE dmrole="test.title" dmtype="string" ref="_title" />
+						<ATTRIBUTE dmrole="test.title" dmtype="string" ref="_title" />
 					</INSTANCE>
-					<COMPOSITION dmrole="test.points">
-						<ARRAY>
+					<COLLECTION dmrole="test.points">
+						<TABLE_ROW_TEMPLATE>
 							<INSTANCE dmrole="primary:point" dmtype="Point">
-								<VALUE dmrole="test:detection.num" dmtype="ivoa:real"
+								<ATTRIBUTE dmrole="test:detection.num" dmtype="ivoa:real"
 									ref="_poserr_148" />
-								<COMPOSITION dmrole="test.detections">
+								<COLLECTION dmrole="test.detections">
 									<JOIN table_ref="OtherResults" primary="_poserr_148"
 										foreign="_foreign">
 										<INSTANCE dmrole="test:detection"
 											dmtype="test:Detection">
-											<VALUE dmrole="test:detection.num" dmtype="ivoa:real"
+											<ATTRIBUTE dmrole="test:detection.num" dmtype="ivoa:real"
 												ref="_num_148" />
-											<VALUE dmrole="test:detection.id" dmtype="ivoa:real"
+											<ATTRIBUTE dmrole="test:detection.id" dmtype="ivoa:real"
 												ref="_foreign" />
 										</INSTANCE>
 									</JOIN>
-								</COMPOSITION>
+								</COLLECTION>
 							</INSTANCE>
-						</ARRAY>
-					</COMPOSITION>
+						</TABLE_ROW_TEMPLATE>
+					</COLLECTION>
 				</INSTANCE>
 			</INSTANCE>
 		</TEMPLATES>
 		<TEMPLATES table_ref="OtherResults">
-			<COMPOSITION dmrole="test:detections">
-				<ARRAY>
+			<COLLECTION dmrole="test:detections">
+				<TABLE_ROW_TEMPLATE>
 					<INSTANCE dmrole="test:detection" dmtype="test:Detection">
-						<VALUE dmrole="test:detection.num" dmtype="ivoa:real"
+						<ATTRIBUTE dmrole="test:detection.num" dmtype="ivoa:real"
 							ref="_num_148" />
-						<VALUE dmrole="test:detection.id" dmtype="ivoa:real"
+						<ATTRIBUTE dmrole="test:detection.id" dmtype="ivoa:real"
 							ref="_foreign" />
-
 					</INSTANCE>
-				</ARRAY>
-			</COMPOSITION>
+				</TABLE_ROW_TEMPLATE>
+			</COLLECTION>
 		</TEMPLATES>
 	</VODML>
 	<RESOURCE type="results">

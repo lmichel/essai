@@ -11,7 +11,7 @@
 	<TEMPLATES table_ref="fgdgfddf">
 
 		<INSTANCE ID="dmtype" dmrole="" dmtype="dmtype">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 			<SC_REALQUANTITY dmrole="dmrole" value="value"
 				unit="unit" />

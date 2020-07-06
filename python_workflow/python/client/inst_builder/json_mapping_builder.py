@@ -93,19 +93,19 @@ class JsonMappingBuilder():
                 break
             
     def revert_array_2bethrown(self):
-        # Give ARRAYs the same role as its container
-        logger.info("reverting ARRAYs")
+        # Give TABLE_ROW_TEMPLATEs the same role as its container
+        logger.info("reverting TABLE_ROW_TEMPLATEs")
         root_element = self.json['VODML']
         while True:
             self.retour = None
 
-            self._revert_set(root_element, 'ARRAY', None)
+            self._revert_set(root_element, 'TABLE_ROW_TEMPLATE', None)
             if self.retour is not None:
                 print("============== ")
                 array_container = self.retour["node"]
-                array_node = array_container['ARRAY']
+                array_node = array_container['TABLE_ROW_TEMPLATE']
                 array_role = array_node['INSTANCE']["@dmrole"]
-                array_container['ARRAY'] = {array_role: [array_node['INSTANCE']]}
+                array_container['TABLE_ROW_TEMPLATE'] = {array_role: [array_node['INSTANCE']]}
             else:
                 break
     

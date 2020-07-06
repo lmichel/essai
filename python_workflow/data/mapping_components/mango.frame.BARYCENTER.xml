@@ -1,6 +1,6 @@
 <INSTANCE ID="TimeFrame_BARYCENTER" dmrole="" dmtype="coords:TimeFrame">
   <INSTANCE dmrole="coords:TimeFrame.refPosition" dmtype="coords:StdRefLocation">
-     <VALUE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="BARYCENTER"/>
+     <ATTRIBUTE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="BARYCENTER"/>
   </INSTANCE>
-  <VALUE dmrole="coords:TimeFrame.timescale" dmtype="ivoa:string" value="TCB"/>
+  <ATTRIBUTE dmrole="coords:TimeFrame.timescale" dmtype="ivoa:string" value="TCB"/>
 </INSTANCE>

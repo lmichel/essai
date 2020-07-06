@@ -9,12 +9,12 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
+		<COLLECTION dmrole="dmrole">
 			<JOIN table_ref="table_ref" primary="primary" foreign="foreign">
 				<INSTANCE dmref="dmref" dmrole="dmrole" />
 				<INSTANCE dmref="dmref" dmrole="dmrole" />
 			</JOIN>
-		</COMPOSITION>
+		</COLLECTION>
 
 	</TEMPLATES>
 </VODML>

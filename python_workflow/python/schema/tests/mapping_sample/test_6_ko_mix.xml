@@ -9,18 +9,18 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
+		<COLLECTION dmrole="dmrole">
 			<INSTANCE dmref="dmref" dmrole="dmrole">
-				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+				<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 					value="dmvalue" />
 			</INSTANCE>
-		</COMPOSITION>
+		</COLLECTION>
 		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
 		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
 	</TEMPLATES>

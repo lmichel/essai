@@ -22,9 +22,9 @@
 				dmtype="coords:PhysicalCoordinate">
 				<INSTANCE dmrole="coords:PhysicalCoordinate.cval"
 					dmtype="ivoa:RealQuantity">
-					<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+					<ATTRIBUTE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
 						ref="@@@@@@" />
-					<VALUE dmrole="ivoa:RealQuantity.unit" dmtype="ivoa:Unit"
+					<ATTRIBUTE dmrole="ivoa:RealQuantity.unit" dmtype="ivoa:Unit"
 						ref="@@@@@@" />
 				</INSTANCE>
 			</INSTANCE>

@@ -9,16 +9,16 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
-			<ARRAY>
-				<COMPOSITION dmrole="dmrole">
+		<COLLECTION dmrole="dmrole">
+			<TABLE_ROW_TEMPLATE>
+				<COLLECTION dmrole="dmrole">
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</COMPOSITION>
-				<COMPOSITION dmrole="dmrole">
+				</COLLECTION>
+				<COLLECTION dmrole="dmrole">
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</COMPOSITION>
-			</ARRAY>
+				</COLLECTION>
+			</TABLE_ROW_TEMPLATE>
 
-		</COMPOSITION>
+		</COLLECTION>
 	</TEMPLATES>
 </VODML>

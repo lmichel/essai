@@ -17,14 +17,14 @@
   <TEMPLATES  table_ref='Results'>
     <INSTANCE dmrole="root" dmtype="mango:stcextend.HardnessRatio">
       <INSTANCE dmrole="mango:stcextend.HardnessRatio.coord" dmtype="mango:stcextend.HardnessRatioCoord">
-        <VALUE dmrole="mango:stcextend.HardnessRatioCoord.hardnessRatio" dmtype="ivoa:real" ref="@@@@@@"/>
+        <ATTRIBUTE dmrole="mango:stcextend.HardnessRatioCoord.hardnessRatio" dmtype="ivoa:real" ref="@@@@@@"/>
         <INSTANCE dmrole="coords:Coordinate.coordSys" dmref="@@@@@@" />
       </INSTANCE>
       <INSTANCE dmrole="meas:Measure.error" dmtype="meas:Error">
         <INSTANCE dmrole="meas:Error.statError" dmtype="meas:Symmetrical">
           <INSTANCE dmrole="meas:Symmetrical.radius" dmtype="ivoa:RealQuantity">
-            <VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
-            <VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
+            <ATTRIBUTE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real" ref="@@@@@@"/>
+            <ATTRIBUTE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit" ref="@@@@@@"/>
           </INSTANCE>
         </INSTANCE>
        </INSTANCE>

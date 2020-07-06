@@ -255,7 +255,7 @@ class MappingGenerator:
         if attribute.array_size != 1:
             ars = "array_size=" +  str(attribute.array_size) 
         if ref in self.primitive_types:
-            self.append_xml( "<VALUE dmrole='" + attribute.vodmlid + "' dmtype='" + ref +  "' " + ars + " ref='@@@@@@'></VALUE>")
+            self.append_xml( "<ATTRIBUTE dmrole='" + attribute.vodmlid + "' dmtype='" + ref +  "' " + ars + " ref='@@@@@@'></ATTRIBUTE>")
         elif ref in self.data_types :
             dt = self.data_types[ref]
             self.generate_data_mapping(dt, attribute.vodmlid)

@@ -10,15 +10,15 @@
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
 		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<COMPOSITION dmrole="dmrole">
-				<ARRAY>
+			<COLLECTION dmrole="dmrole">
+				<TABLE_ROW_TEMPLATE>
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</ARRAY>
-				<ARRAY>
+				</TABLE_ROW_TEMPLATE>
+				<TABLE_ROW_TEMPLATE>
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</ARRAY>
-			</COMPOSITION>
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+				</TABLE_ROW_TEMPLATE>
+			</COLLECTION>
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 
 		</INSTANCE>

@@ -9,15 +9,15 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="dmrole">
-			<ARRAY>
+		<COLLECTION dmrole="dmrole">
+			<TABLE_ROW_TEMPLATE>
 				<GROUPBY  ref="ref"/>
 				<FILTER  ref="ref" value="value"/>			
 				<INSTANCE dmref="dmref" dmrole="dmrole" />
-				<COMPOSITION dmrole="dmrole">
+				<COLLECTION dmrole="dmrole">
 					<INSTANCE dmref="dmref" dmrole="dmrole" />
-				</COMPOSITION>
-			</ARRAY>
-		</COMPOSITION>
+				</COLLECTION>
+			</TABLE_ROW_TEMPLATE>
+		</COLLECTION>
 	</TEMPLATES>
 </VODML>

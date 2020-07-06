@@ -362,7 +362,7 @@ class ModelMapper:
             if att_element :              
                 self.generate_object_mapping(attribute.vodmlid, att_element)
             else:
-                self._append_xml( "<VALUE dmrole='" + attribute.vodmlid +  "' dmtype='" + attribute.vodml_type +  "' ref='@@@@@@' " + default + "/>")
+                self._append_xml( "<ATTRIBUTE dmrole='" + attribute.vodmlid +  "' dmtype='" + attribute.vodml_type +  "' ref='@@@@@@' " + default + "/>")
 
         elif attribute.array_size == -1:
             #sys.exit(1)
@@ -371,7 +371,7 @@ class ModelMapper:
             if att_element :              
                 self.generate_object_mapping(attribute.vodmlid, att_element)
             else:
-                self._append_xml( "<VALUE dmrole='" + attribute.vodmlid +  "' ref='@@@@@@' " + default + " />")
+                self._append_xml( "<ATTRIBUTE dmrole='" + attribute.vodmlid +  "' ref='@@@@@@' " + default + " />")
             
             self._append_xml( "</COLLECTION>")
         else:

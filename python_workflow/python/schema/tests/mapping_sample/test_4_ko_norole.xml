@@ -9,11 +9,11 @@
 	</MODELS>
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
-		<COMPOSITION dmrole="">
+		<COLLECTION dmrole="">
 			<INSTANCE dmref="dmref" dmrole="dmrole">
-				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+				<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 					value="dmvalue" />
 			</INSTANCE>
-		</COMPOSITION>
+		</COLLECTION>
 	</TEMPLATES>
 </VODML>

@@ -28,10 +28,10 @@ class TestInstance(unittest.TestCase):
         builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
         #builder.revert_array()
 
-        builder.revert_compositions("COMPOSITION")
+        builder.revert_compositions("COLLECTION")
         builder.revert_templates()
         builder.revert_elements("INSTANCE")
-        builder.revert_elements("VALUE")
+        builder.revert_elements("ATTRIBUTE")
         self.assertDictEqual(json.loads(json.dumps(builder.json))
                              , DictUtils.read_dict_from_file(json_ref_path)
                              , "=======")

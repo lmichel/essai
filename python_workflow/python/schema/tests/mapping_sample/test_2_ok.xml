@@ -10,46 +10,46 @@
 	<GLOBALS />
 	<TEMPLATES table_ref="fgdgfddf">
 		<INSTANCE dmref="dmref" dmrole="dmrole">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
 		<INSTANCE dmrole="dmrole" dmtype="dmtype">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
 		<INSTANCE dmrole="" dmtype="dmtype">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
 		<INSTANCE ID="id"  dmtype="dmtype">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
 		<INSTANCE ID="id" dmtype="dmtype">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
 		<INSTANCE ID="id"  dmtype="dmtype">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 		</INSTANCE>
 		<INSTANCE ID="id" dmrole="" dmtype="dmtype">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 			<SC_REALQUANTITY dmrole="dmrole" value="value"
 				unit="unit" />
 		</INSTANCE>
 		<INSTANCE ID="id" dmrole="" dmtype="dmtype">
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
-			<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+			<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 				value="dmvalue" />
 			<INSTANCE ID="id" dmrole="" dmtype="dmtype">
-				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+				<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 					value="dmvalue" />
-				<VALUE ref="ref" dmrole="dmrole" dmtype="dmtype"
+				<ATTRIBUTE ref="ref" dmrole="dmrole" dmtype="dmtype"
 					value="dmvalue" />
 			</INSTANCE>
 		</INSTANCE>

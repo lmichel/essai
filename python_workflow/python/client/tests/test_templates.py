@@ -25,11 +25,11 @@ class TestInstance(unittest.TestCase):
         instanceFromVotable._validate_vodml_block()
         
         builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
-        builder.revert_compositions("COMPOSITION")
+        builder.revert_compositions("COLLECTION")
         builder.revert_templates()
 
         builder.revert_elements("INSTANCE")
-        builder.revert_elements("VALUE")
+        builder.revert_elements("ATTRIBUTE")
         
         #print(DictUtils.get_pretty_json(builder.json))
         self.assertDictEqual(builder.json["VODML"]
@@ -47,11 +47,11 @@ class TestInstance(unittest.TestCase):
         instanceFromVotable._validate_vodml_block()
         
         builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
-        builder.revert_compositions("COMPOSITION")
+        builder.revert_compositions("COLLECTION")
         builder.revert_templates()
 
         builder.revert_elements("INSTANCE")
-        builder.revert_elements("VALUE")
+        builder.revert_elements("ATTRIBUTE")
         
         #print(DictUtils.get_pretty_json(builder.json))
         self.assertDictEqual(builder.json["VODML"]

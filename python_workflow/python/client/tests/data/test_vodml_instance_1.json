@@ -42,7 +42,7 @@
         "@table_ref": "OtherResults",
         "test:detections": [
           {
-            "ARRAY": {
+            "TABLE_ROW_TEMPLATE": {
               "test:detection": {
                 "@dmtype": "test:Detection",
                 "test:detection.id": {
@@ -87,7 +87,7 @@
             },
             "test.points": [
               {
-                "ARRAY": {
+                "TABLE_ROW_TEMPLATE": {
                   "primary:point": {
                     "@dmtype": "Point",
                     "test.detections": [

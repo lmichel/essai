@@ -49,7 +49,7 @@ class Instancier(object):
         
         # array block reference 
         self.array = None
-        # key = role of the instance contained ARRAY value = TableIterator
+        # key = role of the instance contained TABLE_ROW_TEMPLATE value = TableIterator
         self.table_iterators = {}
         self.column_mapping = ColumnMapping()
         # key = foreign table name value = TableIterator
@@ -67,8 +67,8 @@ class Instancier(object):
                     self._set_header_values(root_element[idx])
         elif isinstance(root_element, dict):
             for k, v in root_element.items():
-                # TODO For now PARAMS references in ARRY are not supported
-                if k == 'ARRAY':
+                # TODO For now PARAMS references in TABLE_ROW_TEMPLATE are not supported
+                if k == 'TABLE_ROW_TEMPLATE':
                     pass
                 else:
                     if isinstance(v, list):
@@ -80,7 +80,7 @@ class Instancier(object):
 
     def _set_array_iterators(self, root_element):
         """
-        Build and array iterator for each ARRAY element found within root_element
+        Build and array iterator for each TABLE_ROW_TEMPLATE element found within root_element
         """
         if isinstance(root_element, list):
             for idx, _ in enumerate(root_element):
@@ -88,7 +88,7 @@ class Instancier(object):
                     self._set_array_iterators(root_element[idx])
         elif isinstance(root_element, dict):
             for k, v in root_element.items():
-                if k == 'ARRAY':
+                if k == 'TABLE_ROW_TEMPLATE':
                     self.array = v 
                     row_filter = None
                     iterator_key = None
@@ -221,7 +221,7 @@ class Instancier(object):
                    
     def _get_next_row_instance(self, data_subset=None):
         if len(self.table_iterators) > 0 :
-            # One table_iterator par ARRAY block
+            # One table_iterator par TABLE_ROW_TEMPLATE block
             # For now, the case with multiple table_iterator has not been tested
             for key, table_iterator in self.table_iterators.items():
                 if data_subset is None or data_subset == key:
@@ -275,7 +275,7 @@ class Instancier(object):
         self._set_header_values(root_element)
         logger.info("Set array iterators")
         self._set_array_iterators(root_element)
-        logger.info("Resolve mapping leaves is an ARRAY block")
+        logger.info("Resolve mapping leaves is an TABLE_ROW_TEMPLATE block")
         self._set_array_subelement_values(self.array, parent_role=None)
         
     def map_columns(self):
@@ -317,8 +317,6 @@ class Instancier(object):
                 else:
                     json_block_extractor.searched_elements[0].append(inst) 
                 cpt += 1
-
-
         return retour
     
     def get_data_subset_keys(self):
@@ -326,7 +324,7 @@ class Instancier(object):
            
     def search_instance_by_role(self, searched_role, root_element=None):
         """
-        returns a list of elemengt having dmrole = searched_role
+        returns a list of element having dmrole = searched_role
         """
         self.searched_elements = []
         if root_element is not None:
