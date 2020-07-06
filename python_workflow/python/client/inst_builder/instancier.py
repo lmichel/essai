@@ -55,19 +55,6 @@ class Instancier(object):
         # key = foreign table name value = TableIterator
         self.join_iterators = {}
         self.join = None
-
-    def resolve_refs_and_values(self, resolve_refs=False):
-        root_element = self.json['VODML']['TEMPLATES'][self.table_name]
-        if resolve_refs is True:
-            logger.info("Replace object references with referenced object copies")
-            self.resolve_object_references()
-        logger.info("Resolve references to PARAMS")
-        self._set_header_values(root_element)
-        logger.info("Set array iterators")
-        self._set_array_iterators(root_element)
-        logger.info("Resolve mapping leaves is an ARRAY block")
-        self._set_array_subelement_values(self.array, parent_role=None)
-
         
     def _set_header_values(self, root_element):
         """
@@ -278,6 +265,18 @@ class Instancier(object):
         else:
             logger.info("No data table")
             return {}
+
+    def resolve_refs_and_values(self, resolve_refs=False):
+        root_element = self.json['VODML']['TEMPLATES'][self.table_name]
+        if resolve_refs is True:
+            logger.info("Replace object references with referenced object copies")
+            self.resolve_object_references()
+        logger.info("Resolve references to PARAMS")
+        self._set_header_values(root_element)
+        logger.info("Set array iterators")
+        self._set_array_iterators(root_element)
+        logger.info("Resolve mapping leaves is an ARRAY block")
+        self._set_array_subelement_values(self.array, parent_role=None)
         
     def map_columns(self):
         self.column_mapping._map_columns(self.parsed_table)
