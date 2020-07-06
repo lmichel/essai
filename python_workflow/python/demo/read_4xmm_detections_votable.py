@@ -6,12 +6,11 @@ Created on 31 mars 2020
 @author: laurentmichel
 '''
 
-import os, json, sys
-from utils.json_encoder import MyEncoder
+import os
 from utils.dict_utils import DictUtils
+from client.inst_builder.vodml_instance import VodmlInstance
 
-from client.launchers.instance_from_votable import InstanceFromVotable
-from tests import data_dir
+from demo import data_dir
 
 if __name__ == '__main__':
     base_path = os.path.dirname(os.path.realpath(__file__)) 
@@ -19,8 +18,14 @@ if __name__ == '__main__':
                                 "annotated_data",
                                 "4xmm_detections.annot.xml"
                                 )
-    instance_from_votable = InstanceFromVotable(votable_path)
-    instance = instance_from_votable.build_instance(resolve_refs=True)
+    vodml_instance = VodmlInstance(votable_path)
+    vodml_instance.populate_templates()
+    vodml_instance.connect_join_iterators()
+
+    instance = vodml_instance.get_root_element("mango:Source")
+    if instance is None:
+        raise Exception("No root element found")
+    
     
     print("=== Mapping of the columns")
     print(instance.get_flatten_data_head())

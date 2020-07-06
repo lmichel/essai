@@ -8,7 +8,7 @@ from astropy.io.votable import parse
 from client.inst_builder.column_mapping import ColumnMapping
 from client.inst_builder.table_iterator import TableIterator
 from client.inst_builder.row_filter import RowFilter
-from client.inst_builder import logger
+from client.inst_builder import logger, instancier
 from client.launchers.instance_from_votable import InstanceFromVotable
 from client.inst_builder.json_mapping_builder import JsonMappingBuilder
 from client.inst_builder.instancier import Instancier
@@ -105,6 +105,19 @@ class VodmlInstance(object):
                 logger.info("join template %s with template %s", template, target)
                 join_iterator.connect_votable(parse_tables[target])
 
-    
+    def get_root_element(self, root_class):
+        for template,instancier in self.instanciers.items():
+            logger.info("Looking for %s instances in template %s", root_class, template)
+            json_block_extract = JsonBlockExtractor(instancier.json)
+            retour = json_block_extract.search_subelement_by_type(root_class)
+            for block in retour:
+                if "@dmrole" not in block.keys():
+                    logger.info("found (no role)")
+                    return instancier
+                role = block["@dmrole"]
+                if role == "" or role == "root":
+                    logger.info("found with role=%s", role)
+                    return instancier
+        return None
     
  

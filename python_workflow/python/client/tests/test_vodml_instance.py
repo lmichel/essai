@@ -7,7 +7,7 @@ import unittest
 import os
 import sys
 from client.inst_builder.vodml_instance import VodmlInstance
-from tests import logger
+from client.tests import logger
 from utils.dict_utils import DictUtils
 
 class TestVodmlInstance(unittest.TestCase):

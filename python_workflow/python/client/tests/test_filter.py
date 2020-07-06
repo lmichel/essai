@@ -8,7 +8,7 @@ import os
 import json
 from client.inst_builder.json_mapping_builder import JsonMappingBuilder
 from client.launchers.instance_from_votable import InstanceFromVotable
-from tests import logger
+from client.tests import logger
 from utils.dict_utils import DictUtils
 
 class TestInstance(unittest.TestCase):

@@ -120,7 +120,7 @@ class JsonBlockExtractor(object):
             for _, v in root_element.items():
                 if isinstance(v, list):
                     for ele in v:
-                        if self._type_matches(ele, searched_type):
+                        if AttUtils.type_matches(ele, searched_type):
                             self.searched_elements.append(ele)
                         self._search_subelement_by_type(ele, searched_type)
                 elif isinstance(v, dict):  

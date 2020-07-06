@@ -163,7 +163,7 @@ class DictUtils():
     def get_permanent_string(text):
         """
         This method make the string independent of a specific run context
-        It us used to format object in a way they can be checked in unit tests
+        It us used to format object in a way they can be checked in unit demo
         dates values are replaced with DATE
         and the seq_id with SEQID.
         :param text: string to be formated
@@ -178,7 +178,7 @@ class DictUtils():
     def get_permanent_object(dico):
         """
         This method make the object content independent of a specific run context
-        It us used to format object in a way they can be checked in unit tests
+        It us used to format object in a way they can be checked in unit demo
         dates values are replaced with DATE
         and the seq_id with SEQID.
         :param dico: object to be formated
