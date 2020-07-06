@@ -14,6 +14,7 @@ from client.inst_builder.json_mapping_builder import JsonMappingBuilder
 from client.inst_builder.instancier import Instancier
 from copy import deepcopy
 from utils.dict_utils import DictUtils
+from astropy.table._column_mixins import sys
 
 class VodmlInstance(object):
     '''
@@ -355,7 +356,7 @@ class VodmlInstance(object):
                     return value._get_next_row_instance()
             raise Exception("cannot find data subset " + data_subset)
         else:
-            print("No data table")
+            logger.info("No data table")
             return {}
     
     def _get_next_flatten_row(self, data_subset=None):
@@ -365,7 +366,7 @@ class VodmlInstance(object):
                     return value._get_next_flatten_row()
             raise Exception("cannot find data subset " + str(data_subset))
         else:
-            print("No data table")
+            logger.info("No data table")
             return {}
         
     def rewind(self):
@@ -373,7 +374,7 @@ class VodmlInstance(object):
             for _, iterator in self.table_iterators.items():
                 iterator._rewind()
         else:
-            print("No data table")
+            logger.info("No data table")
             return {}
 
 
@@ -384,10 +385,13 @@ class VodmlInstance(object):
                     return value._get_flatten_data_head()
             raise Exception("cannot find data subset " + str(data_subset))
         else:
-            print("No data table")
+            logger.info("No data table")
             return {}
 
     def get_data_subset_keys(self):
+        """
+        Returns the list of templates having an iterator
+        """
         return self.table_iterators.keys()
            
     def search_instance_by_role(self, searched_role, root_element=None):

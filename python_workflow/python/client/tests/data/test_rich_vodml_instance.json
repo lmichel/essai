@@ -54,6 +54,34 @@
               }
             }
           ],
+          "test.spectra": [
+            {
+              "@dmtype": "test:Detection",
+              "test:detection.id": {
+                "@dmtype": "ivoa:real",
+                "@ref": "_foreign",
+                "@value": 1
+              },
+              "test:detection.num": {
+                "@dmtype": "ivoa:string",
+                "@ref": "_spc_148",
+                "@value": "Spectrum 11"
+              }
+            },
+            {
+              "@dmtype": "test:Detection",
+              "test:detection.id": {
+                "@dmtype": "ivoa:real",
+                "@ref": "_foreign",
+                "@value": 1
+              },
+              "test:detection.num": {
+                "@dmtype": "ivoa:string",
+                "@ref": "_spc_148",
+                "@value": "Spectrum 12"
+              }
+            }
+          ],
           "test:detection.num": {
             "@dmtype": "ivoa:real",
             "@ref": "_poserr_148",
@@ -87,6 +115,34 @@
                 "@dmtype": "ivoa:real",
                 "@ref": "_num_148",
                 "@value": 22
+              }
+            }
+          ],
+          "test.spectra": [
+            {
+              "@dmtype": "test:Detection",
+              "test:detection.id": {
+                "@dmtype": "ivoa:real",
+                "@ref": "_foreign",
+                "@value": 2
+              },
+              "test:detection.num": {
+                "@dmtype": "ivoa:string",
+                "@ref": "_spc_148",
+                "@value": "Spectrum 21"
+              }
+            },
+            {
+              "@dmtype": "test:Detection",
+              "test:detection.id": {
+                "@dmtype": "ivoa:real",
+                "@ref": "_foreign",
+                "@value": 2
+              },
+              "test:detection.num": {
+                "@dmtype": "ivoa:string",
+                "@ref": "_spc_148",
+                "@value": "Spectrum 22"
               }
             }
           ],

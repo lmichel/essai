@@ -35,6 +35,28 @@ class TestInstance(unittest.TestCase):
         self.assertDictEqual(builder.json["VODML"]
                              , DictUtils.read_dict_from_file(json_ref_path)["VODML"]
                              , "=======")
+    def test_2(self):
+        self.maxDiff = None
+        data_path = os.path.dirname(os.path.realpath(__file__))
+        votable_path = os.path.join(data_path, "./data/test_multi_templates.xml")
+        json_ref_path = os.path.join(data_path, "./data/test_multi_templates.json")
+        logger.info("extract vodml block from %s", votable_path)
+        instanceFromVotable = InstanceFromVotable(votable_path)
+        
+        instanceFromVotable._extract_vodml_block()
+        instanceFromVotable._validate_vodml_block()
+        
+        builder = JsonMappingBuilder(json_dict=instanceFromVotable.json_block)
+        builder.revert_compositions("COMPOSITION")
+        builder.revert_templates()
+
+        builder.revert_elements("INSTANCE")
+        builder.revert_elements("VALUE")
+        
+        #print(DictUtils.get_pretty_json(builder.json))
+        self.assertDictEqual(builder.json["VODML"]
+                             , DictUtils.read_dict_from_file(json_ref_path)["VODML"]
+                             , "=======")
 
 
 if __name__ == "__main__":

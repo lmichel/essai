@@ -54,6 +54,23 @@
 				</ARRAY>
 			</COMPOSITION>
 		</TEMPLATES>
+		<TEMPLATES table_ref="LastResults">
+			<COMPOSITION dmrole="meas:Measure.errors" size="2">
+				<ARRAY>
+					<FILTER ref="_poserr_148" value="2"/>
+					<INSTANCE dmrole="meas:Error.statError"
+						dmtype="meas:Symmetrical">
+						<INSTANCE dmrole="meas:Symmetrical.radius"
+							dmtype="ivoa:RealQuantity">
+							<VALUE dmrole="ivoa:RealQuantity.value" dmtype="ivoa:real"
+								ref="_poserr_148" />
+							<VALUE dmrole="ivoa:Quantity.unit" dmtype="ivoa:Unit"
+								value="arcsec" />
+						</INSTANCE>
+					</INSTANCE>
+				</ARRAY>
+			</COMPOSITION>
+		</TEMPLATES>
 	</VODML>
 	<RESOURCE type="results">
 		<TABLE name="Results">

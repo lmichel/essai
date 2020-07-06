@@ -68,14 +68,10 @@ class TableIterator(object):
         try:
             while True:
                 row = next(self.iter)
-                print("11=================================")
-                print(row)
                 if row is not None:
                     if ( self.row_filter is None or 
                         self.row_filter.row_match(row) == True):
                         self.last_row = row
-                        print(self.last_row )
-                        print("22 =================================")
                         return row
                 else:
                     return None

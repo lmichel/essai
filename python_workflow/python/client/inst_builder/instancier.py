@@ -9,7 +9,9 @@ from client.inst_builder.column_mapping import ColumnMapping
 from client.inst_builder.table_iterator import TableIterator
 from client.inst_builder.join_iterator import JoinIterator
 from client.inst_builder.row_filter import RowFilter
-from client.inst_builder import logger
+from client.inst_builder import logger, json_block_extractor
+from client.inst_builder.json_block_extractor import JsonBlockExtractor
+from client.inst_builder.att_utils import AttUtils
 
 from copy import deepcopy
 
@@ -45,11 +47,7 @@ class Instancier(object):
             self.json = json_inst_dict
             self.json_path = None
         
-        #Field block storing the outcome of recursive functions 
-        self.retour = None
-        self.searched_elements = []
-        self.searched_ids = []
-        self.searched_types = []
+        # array block reference 
         self.array = None
         # key = role of the instance contained ARRAY value = TableIterator
         self.table_iterators = {}
@@ -166,115 +164,7 @@ class Instancier(object):
                 elif isinstance(v, dict): 
                     self._set_value(v, role=k, parent_role=parent_role)
                     self._set_array_subelement_values(v, parent_role=k)
-     
-    def _get_subelement_by_role(self, root_element, searched_role):
-        """
-        Store in self.searched_elements all elements with @dmrole=searched_role
-        """
-        if isinstance(root_element, list):
-            for idx, _ in enumerate(root_element):
-                if self.retour is None:
-                    self._get_subelement_by_role(root_element[idx], searched_role)
-        elif isinstance(root_element, dict):
-            for k, v in root_element.items():
-                if k == searched_role:
-                    self.searched_elements.append(v)
-                if isinstance(v, list):
-                    for ele in v:
-                        self._get_subelement_by_role(ele, searched_role)
-                elif isinstance(v, dict):  
-                    self._get_subelement_by_role(v, searched_role)
-                    
-    def _get_array_container(self, root_element):
-        """
-        """
-        if isinstance(root_element, list):
-            for idx, _ in enumerate(root_element):
-                item = root_element[idx]
-                if self.retour is None:
-                    if isinstance(item, dict) and "ARRAY" in item.keys():
-                        self.searched_elements.append(root_element)
-                    self._get_array_container(item)
-        elif isinstance(root_element, dict):
-            for _, v in root_element.items():
-                if isinstance(v, list):
-                    for ele in v:
-                        if isinstance(ele, dict) and "ARRAY" in ele.keys():
-                            self.searched_elements.append(v)
-                            return v
-                        self._get_array_container(ele)
-                elif isinstance(v, dict):  
-                    self._get_array_container(v)
-                    
-    def _get_join_container(self, root_element):
-        """
-        """
-        if isinstance(root_element, list):
-            for idx, _ in enumerate(root_element):
-                item = root_element[idx]
-                if self.retour is None:
-                    if isinstance(item, dict) and "JOIN" in item.keys():
-                        self.searched_elements.append(root_element)
-                    self._get_join_container(item)
-        elif isinstance(root_element, dict):
-            for _, v in root_element.items():
-                if isinstance(v, list):
-                    for ele in v:
-                        if isinstance(ele, dict) and "JOIN" in ele.keys():
-                            self.searched_elements.append(v)
-                            return v
-                        self._get_join_container(ele)
-                elif isinstance(v, dict):  
-                    self._get_join_container(v)
-                    
-    def _get_subelement_by_id(self, root_element, searched_id):
-        """
-        Store in self.searched_ids all elements with @ID=searched_id
-        """
-        if isinstance(root_element, list):
-            for idx, _ in enumerate(root_element):
-                if self.retour is None:
-                    if self._id_matches(root_element[idx], searched_id):
-                        self.searched_ids.append(root_element[idx])
-                    self._get_subelement_by_id(root_element[idx], searched_id)
-        elif isinstance(root_element, dict):
-            if self._id_matches(root_element, searched_id):
-                self.searched_ids.append(root_element) 
-            for _, v in root_element.items():
-                if isinstance(v, list):
-                    for ele in v:
-                        if self._id_matches(ele, searched_id):
-                            self.searched_ids.append(ele)
-                        self._get_subelement_by_id(ele, searched_id)
-                elif isinstance(v, dict):  
-                    if self._id_matches(v, searched_id):
-                        self.searched_ids.append(v)
-                    self._get_subelement_by_id(v, searched_id)
-                    
-    def _get_subelement_by_type(self, root_element, searched_type):
-        """
-        Store in self.searched_types all elements with @dmtype=searched_type
-        """
-        if isinstance(root_element, list):
-            for idx, _ in enumerate(root_element):
-                if self.retour is None:
-                    if self._type_matches(root_element[idx], searched_type):
-                        self.searched_types.append(root_element[idx])
-                    self._get_subelement_by_type(root_element[idx], searched_type)
-        elif isinstance(root_element, dict):
-            if self._type_matches(root_element, searched_type):
-                self.searched_types.append(root_element) 
-            for _, v in root_element.items():
-                if isinstance(v, list):
-                    for ele in v:
-                        if self._type_matches(ele, searched_type):
-                            self.searched_types.append(ele)
-                        self._get_subelement_by_type(ele, searched_type)
-                elif isinstance(v, dict):  
-                    if self._type_matches(v, searched_type):
-                        self.searched_types.append(v)
-                    self._get_subelement_by_type(v, searched_type)
-
+                         
     def _get_object_references(self, root_element, replacement_list):
         """
         recursive function
@@ -290,14 +180,14 @@ class Instancier(object):
             for idx, _ in enumerate(root_element):
                 self._get_object_references(root_element[idx], replacement_list)
         elif isinstance(root_element, dict):
-            if self._is_object_ref(root_element):
+            if AttUtils.is_object_ref(root_element):
                 pass
             for k , v in root_element.items():
                 if isinstance(v, list):
                     for ele in v:
                         self._get_object_references(ele, replacement_list)
                 elif isinstance(v, dict):  
-                    if self._is_object_ref(v):
+                    if AttUtils.is_object_ref(v):
                         replacement_list.append(
                             {"node": root_element, 
                              "key": k, 
@@ -307,36 +197,7 @@ class Instancier(object):
                     self._get_object_references(v, replacement_list)
         return []            
 
-    def _id_matches(self, element, searched_id):
-        """
-        Returns True if element[@ID] matches id
-        """
-        if( isinstance(element, dict) and 
-            "@ID" in element.keys() and 
-            element["@ID"] == searched_id):
-            return True
-        return False
-    
-    def _type_matches(self, element, searched_type):
-        """
-        Returns True if element[@dmtype] matches searched_type
-        """
-        if( isinstance(element, dict) and 
-            "@dmtype" in element.keys() and 
-            element["@dmtype"] == searched_type):
-            return True
-        return False
-    
-    def _is_object_ref(self, element):
-        """
-        Returns True if the element is an object reference
-        <INSTANCE dmref=xxx/>
-        """
-        if( isinstance(element, dict) and 
-            "@dmref" in element.keys() and 
-            "@dmtype" not in element.keys()):
-            return True
-        return False
+     
     
     def _set_value(self, element, role=None, parent_role=None):
         """
@@ -370,32 +231,42 @@ class Instancier(object):
                                 , str(element), param.value, element["@ref"])
                     element["@value"] = param.value.decode("utf-8") 
       
-    def map_columns(self):
-        self.column_mapping._map_columns(self.parsed_table)
                    
     def _get_next_row_instance(self, data_subset=None):
         if len(self.table_iterators) > 0 :
-            for key, value in self.table_iterators.items():
+            # One table_iterator par ARRAY block
+            # For now, the case with multiple table_iterator has not been tested
+            for key, table_iterator in self.table_iterators.items():
                 if data_subset is None or data_subset == key:
-                    next_row_instance = value._get_next_row_instance()
-                    if 'OtherResults' in self.join_iterators.keys():
-                        join_iterator = self.join_iterators['OtherResults']
-                        print(join_iterator)
+                    next_row_instance = table_iterator._get_next_row_instance()
+                    if next_row_instance is None:
+                        return  None
+                    
+                    for _, join_iterator in self.join_iterators.items():
                         primary_column = self.column_mapping.get_col_index_by_name(join_iterator.primary_key)
-                        print(primary_column)
-                        print(value.last_row[primary_column])
-                        join_iterator.set_foreignkey_value(value.last_row[primary_column])
-                        while True:
-                            inst = join_iterator.instancier._get_next_row_instance()
-                            if inst != None:
-                                print(inst)
-                            else:
-                                break
+                        join_iterator.set_foreignkey_value(table_iterator.last_row[primary_column])
+                        
+                        json_block_extractor = JsonBlockExtractor(next_row_instance)
+                        json_block_extractor.search_join_container()
+                        
+                        if len(json_block_extractor.searched_elements) > 0 :
+                            json_block_extractor.searched_elements[0][0] = {}
+                            cpt = 0
+                            inst = None
+                            while True:
+                                inst = join_iterator.instancier._get_next_row_instance()
+                                if inst is None:
+                                    break
+                                elif cpt == 0:
+                                    json_block_extractor.searched_elements[0][0] = inst 
+                                else:
+                                    json_block_extractor.searched_elements[0].append(inst) 
+                                cpt += 1
 
                     return next_row_instance
             raise Exception("cannot find data subset " + data_subset)
         else:
-            print("No data table")
+            logger.info("No data table")
             return {}
     
     def _get_next_flatten_row(self, data_subset=None):
@@ -405,17 +276,16 @@ class Instancier(object):
                     return value._get_next_flatten_row()
             raise Exception("cannot find data subset " + str(data_subset))
         else:
-            print("No data table")
+            logger.info("No data table")
             return {}
+        
+    def map_columns(self):
+        self.column_mapping._map_columns(self.parsed_table)
         
     def rewind(self):
         if len(self.table_iterators) > 0 :
             for _, iterator in self.table_iterators.items():
                 iterator._rewind()
-        else:
-            print("No data table")
-            return {}
-
 
     def get_flatten_data_head(self, data_subset=None):
         if len(self.table_iterators) > 0 :
@@ -424,7 +294,7 @@ class Instancier(object):
                     return value._get_flatten_data_head()
             raise Exception("cannot find data subset " + str(data_subset))
         else:
-            print("No data table")
+            logger.info("No data table")
             return {}
         
     def get_full_instance(self, resolve_refs=False):
@@ -433,10 +303,10 @@ class Instancier(object):
             self.resolve_object_references()
         retour =  deepcopy(self.json['VODML']['TEMPLATES'][self.table_name])
 
-        self.searched_elements = []
-        self._get_array_container(retour)
-        if len(self.searched_elements) > 0 :
-            self.searched_elements[0][0] = {}
+        json_block_extractor = JsonBlockExtractor(retour)
+        json_block_extractor.search_array_container()
+        if len(json_block_extractor.searched_elements) > 0 :
+            json_block_extractor.searched_elements[0][0] = {}
             cpt = 0
             inst = None
             while True:
@@ -444,9 +314,9 @@ class Instancier(object):
                 if inst is None:
                     break
                 elif cpt == 0:
-                    self.searched_elements[0][0] = inst 
+                    json_block_extractor.searched_elements[0][0] = inst 
                 else:
-                    self.searched_elements[0].append(inst) 
+                    json_block_extractor.searched_elements[0].append(inst) 
                 cpt += 1
 
 
@@ -456,19 +326,18 @@ class Instancier(object):
         return self.table_iterators.keys()
            
     def search_instance_by_role(self, searched_role, root_element=None):
+        """
+        returns a list of elemengt having dmrole = searched_role
+        """
         self.searched_elements = []
         if root_element is not None:
             root = root_element
         else:
             root = self.json['VODML']
-        self._get_subelement_by_role(root, searched_role)
-        
-        for idx, ele in enumerate(self.searched_elements):
-            if "@ref" in ele.keys():
-                self.searched_elements[idx] = self.search_instance_by_id(ele["@ref"])[0]
-                
-        return self.searched_elements
-    
+            
+        json_block_extractor = JsonBlockExtractor(root)
+        return json_block_extractor.search_subelement_by_role(searched_role)
+
     def resolve_object_references(self):
         #
         # resolve object reference
@@ -494,16 +363,9 @@ class Instancier(object):
             root = root_element
         else:
             root = self.json['VODML']
-        self._get_subelement_by_id(root, searched_id)
-        return self.searched_ids
+        json_block_extractor = JsonBlockExtractor(root)
+        return json_block_extractor.search_subelement_by_id(searched_id)
     
-    def search_instance_by_type_trash(self, searched_type, root_element=None):
-        self.searched_types = []
-        if root_element is not None:
-            root = root_element
-        else:
-            root = self.json['VODML']
-        self._get_subelement_by_type(root, searched_type)
-        return self.searched_types
+     
 
             

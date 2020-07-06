@@ -34,6 +34,7 @@ class TestVodmlInstance(unittest.TestCase):
         self.assertEqual(self.vodml_instance.instanciers["Results"].join_iterators["OtherResults"].__repr__(), 
                              "Join iterator f_table=OtherResults p_key=_poserr_148, f_key=_foreign", 
                              "")
+    
     def test_4(self):
         if self.populated is False:
             self.vodml_instance.populate_templates()
@@ -41,7 +42,7 @@ class TestVodmlInstance(unittest.TestCase):
             self.populated = True
         column_mapping = self.vodml_instance.instanciers["Results"].table_iterators['primary:point'].column_mapping
         self.assertListEqual(list(column_mapping.column_refs.keys()), ['_poserr_148'], "")
-        
+    
     def test_21(self):
         self.json_ref_path = os.path.join(self.data_path, "./data/test_vodml_instance_21.json")
         if self.populated is False:
@@ -53,7 +54,7 @@ class TestVodmlInstance(unittest.TestCase):
 
         #print(DictUtils.get_pretty_json(full_dict))
         self.assertDictEqual(full_dict, DictUtils.read_dict_from_file(self.json_ref_path), "")
-
+    
     def test_22(self):
         self.json_ref_path = os.path.join(self.data_path, "./data/test_vodml_instance_22.json")
         if self.populated is False:
@@ -63,7 +64,7 @@ class TestVodmlInstance(unittest.TestCase):
         instancier = self.vodml_instance.instanciers["Results"]
         full_dict = instancier.get_full_instance()
 
-        print(DictUtils.get_pretty_json(full_dict))
+        #print(DictUtils.get_pretty_json(full_dict))
         self.assertDictEqual(full_dict, DictUtils.read_dict_from_file(self.json_ref_path), "")
 
     def setUp(self):

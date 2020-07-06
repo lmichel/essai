@@ -6,6 +6,7 @@ Created on 30 juin 2020
 from client.inst_builder.table_iterator import TableIterator
 from client.inst_builder.row_filter import RowFilter
 from utils.dict_utils import DictUtils
+from client import logger
 
 class JoinIterator(object):
     '''
@@ -39,6 +40,7 @@ class JoinIterator(object):
                 ack = k
                 acv = self.json_join_content[k]
                 break
+        logger.info("Build instancier for data joint with table %s", self.foreign_table)
         self.instancier = Instancier(
             self.foreign_table,
             None,
@@ -48,7 +50,7 @@ class JoinIterator(object):
                     "MODELS":{},
                     "GLOBALS":{},
                     "TEMPLATES": {
-                        "OtherResults": {
+                        self.foreign_table: {
                             "@table_ref": self.foreign_table,
                             "root": [
                                     {
@@ -74,6 +76,7 @@ class JoinIterator(object):
 
     def set_foreignkey_value(self, value):   
         self.row_filter.value = value
+        self.instancier.rewind()
         
     def get_subset_instance(self, key_value):
         self.row_filter = RowFilter({
