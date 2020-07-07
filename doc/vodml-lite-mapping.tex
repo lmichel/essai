@@ -4,7 +4,7 @@
 \usepackage{array}
 \newcolumntype{L}{>{\centering\arraybackslash}m{3cm}}
 
-\title{Mango Mapping Syntax}
+\title{Vodml-instance-vot}
 
 % see ivoatexDoc for what group names to use here
 \ivoagroup{DM}
@@ -70,7 +70,64 @@ infrastructure that enable VO applications.
 
 
 \section{Introduction}
-There is no VO standard specifying how to map real data on a model. This shortcoming is a bottleneck for interoperability since there is no way to compare datasets from different origins. The model mapping is currently done by using GROUPs. This is satisfactory in many cases but with some limitations however:\begin{enumerate}
+The first purpose of a model is to provide,  for a particular domain, a formal description of the relevant quantities and of the way they are linked together .
+This documentary role facilitates the communication between the stackholders and thus the design of interoperability protocols. 
+
+At data level, the interoperability consists in arranging searched data in a way that a client can understand them without taking care of their origin. So that, the same code can process and compare data coming from different sources.  That way to arrange data is given by the model.
+
+This is not easy to do with VOtables because VOTables are containers. The VOTable schema cannot say how data are mapped onto a model or whether they match any model either. This is not a problem for simple protocol responses (ref) because the VOTable structure is defined by the protocol itself but this is however a big issue for VOTables containing native data such as Vizier queries or TAP response.
+
+The challenge here is to bind native data with a given model in way that a model aware software can see them as model instances while maintaining the possibility to access them in their original forms.
+This is partially done with UTypes that connect FIELDs or PARAMs with model leaves. Unfortunately, there is no standard way to construct UTypes and thus to parse them. This is just because UTypes have been invented at a period when there was no standard way to serialize model.
+
+The VODML (ref) standard, REC since 2016,  is a meta-model that gives a standard way to design VO models and to make them machine-readable. In VODML, model leaves are no longer identified by long strings denoting the path through the model (Utypes) but by their location in the model hierarchy.
+The consequence is that an annotation mechanism based on VODML must be able to reconstruct the model hierarchy. This is very interesting because a copy the model hierarchy with leaves set with real data is nothing else that a model instance which is exactly what we need to be interoperable.
+
+The idea of the VODML mapping is to insert on the top of the VOTable an XML block denoting the model structure and containing references to the actual data.
+So that, to build an model instance, the model-aware client has just to make a copy of that structure and to resolve the references. Other clients can just ignore the mapping block. This approach, has been proposed by (GL and OL). 
+
+We have tested the syntax originally proposed and it turned out that it was not well suited for archival data or for TAP responses where the annotation process must be automated as much as possible (entirely for TAP). 
+
+Vodml-instance-vot is based on the same principles as the original proposal but with a particular concern for the annotation of archival data by keeping focused on both client needs and easiness of the annotation process.
+This requires the syntax to be as simple as possible and as flexible as possible to be usable with a wide range of data sets.
+Vodml-instance-vot  has been built upon 3 basic elements (simple values,  tuples and  lists, like JSON)  plus a few others annotations guiding the parser.
+The connections with the data are setup by XML element attributes, so that the mapping tree just depends on the model but not on the mapped data.
+
+These ideas were first tested in the framework of the TDIG on VOTABLEs containing time series provided by different missions such as Gaia or ZWICKI. Then the syntax has been refined to be used to validate the Mango model on real data.
+
+\iffalse
+ The annotation process 
+
+we though it was woth, has been tested on various data. We reached the conclusion that the annotations was not well suited for archival data.
+
+ 
+
+ UTypes have been replaced with short identifiers which role depends on 
+
+
+This is legacy from a period 
+This is why the Utype based data annotation has been withdrawn
+
+This is partially done with GROUPs that allow to gather FIELDs and PARAMs into hierarchical structures. Unfortunately, the model elements, in the current VOTable spec (ref) are identfied by Utypes. There is no standard way to construct UTypes and this to parse them. In other, client software has to manage UType list. IN fact 
+
+If  
+
+
+This can be achieved at protolol level by having a 1-1 association between protocol and  model. With this approach, used for all VO simple protocols (ref), the query responses have a fixed format to which the data must conform. The VOTable FIELDs and PARAMs are defined by the protocol.
+
+
+associating one model with
+The model can also be used by the data provider to expose data in a view
+This scope can be extended if we make the model machine readable.
+
+
+There is no VO standard specifying how to map real data on a model. 
+This shortcoming is a bottleneck for interoperability since there is no clean way to compare the same quantities but from differents datasets. 
+
+
+The model mapping currently used is based on GROUPs. GROUP is a VOTable feature that allows to gather FIELDs and PARAMs into hierarchical structures. In theory, this could be used to map models. Unfortunately, in VOTables, GROUPS haven been used long time before we a standard  
+
+This is satisfactory in many cases but with some limitations however:\begin{enumerate}
    \item The GROUPs, as they are currently used, do not reflect the complete model structure. The are mostly used to group columns with a loose coupling with the model hierarchy. This prevents the restore complex data structures.
    \item The identification of the GROUP elements is based on Utypes which are not clearly connected with the underlying model. Utypes are actually used to represent simple structures. In the current implementations, the client knows the data structures (e.g. coordinate system) and pick values within the group to fill them..
 \end{enumerate}
@@ -91,7 +148,7 @@ For most of the usages (display, plot, match, computation),  complex data hierar
 
 These ideas that led to this proposal were first tested in the framework of the TDIG on VOTABLEs containing time series provided by different missions such as Gaia or ZWICKI. Then the syntax has been refined to be used to validate the Mango model on real data.
 
-
+\fi
 %The identification of the GROUP elements is based on Utypes which are not clearly connected with the underlying model. Utypes are actually used to represent simple structures. In the current implementations, the client knows the data structures (e.g. coordinate system) and pick values within the group to fill them..
 
 
@@ -201,6 +258,8 @@ The syntax specified in this standard gives rules to build consistant annotation
 
 \subsection{Mapping Block Structure}
 
+\textit{The rules below must be updated accordingly to the XML schema}
+
 The mapping block is outside of the data tables. Its scope is the whole VOTable. Its stucture is given below.
 
 \begin{lstlisting}[caption={INSTANCE bloc example},captionpos=b]
@@ -237,10 +296,10 @@ Contains  \texttt{INSTANCE}s with that can be used everywhere in the \texttt{VOD
   <GLOBALS>
     <INSTANCE ID="SpaceCoordFrame" dmrole="">
       <INSTANCE dmrole="coords:SpaceFrame.refPosition" dmtype="coords:StdRefLocation">
-        <VALUE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
+        <ATTRIBUTE dmrole="coords:StdRefLocation.position" dmtype="ivoa:string" value="NoSet"/>
       </INSTANCE>
-      <VALUE dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string" value="ICRS"/>
-      <VALUE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" value="NoSet"/>
+      <ATTRIBUTE dmrole="coords:SpaceFrame.spaceRefFrame" dmtype="ivoa:string" value="ICRS"/>
+      <ATTRIBUTE dmrole="coords:SpaceFrame.equinox" dmtype="coords:Epoch" value="NoSet"/>
     </INSTANCE>
     <INSTANCE >
       ... 
@@ -272,8 +331,8 @@ There is one \texttt{TEMPLATE} block for each mapped table in the VOTAble
      \begin{tabular}{|p{3cm}|p{7cm}|}
        \hline Child &  Role\\
        \hline  \texttt{INSTANCE}    & The table data are mapped on these instances.  \\              
-       \hline  \texttt{ARRAY}    &  There is one instance per table row. The structure of those instance is given by the ARRAY children \\              
-       \hline  \texttt{COMPOSITION}    &  The table data are mapped on an instance list\\       
+       \hline  \texttt{TABLE\_ROW\_TEMPLATE}    &  There is one instance per table row. The structure of those instance is given by the TABLE\_ROW\_TEMPLATE children \\              
+       \hline  \texttt{COLLECTION}    &  The table data are mapped on an instance list\\       
        \hline 
      \end{tabular}
      \caption{Allowed  \texttt{TEMPLATES} children} 
@@ -297,15 +356,15 @@ Mapping for either object type or a datatype instances.
 
 \begin{lstlisting}[caption={INSTANCE bloc example},captionpos=b]
 <INSTANCE dmrole="ds:dataset.Dataset.dataID" dmtype="ds:dataset.DataID" ID="_ds_">
-    <VALUE dmrole="ds:dataset.DataID.title" value="Gaia TS Mapping Test" />
-    <VALUE dmrole="ds:dataset.DataID.datasetID" value="ivoa://gaia/ts/12345" />
-    <VALUE dmrole="ds:dataset.DataID.creatorDID" value="ivoa://esa/gaia/" />
-    <VALUE dmrole="ds:dataset.DataID.version" value="0.0" />
-    <VALUE dmrole="ds:dataset.DataID.date" value="2018:11:11" />
-    <VALUE dmrole="ds:dataset.DataID.creationType" value="LiteMappingTest" />
+    <ATTRIBUTE dmrole="ds:dataset.DataID.title" value="Gaia TS Mapping Test" />
+    <ATTRIBUTE dmrole="ds:dataset.DataID.datasetID" value="ivoa://gaia/ts/12345" />
+    <ATTRIBUTE dmrole="ds:dataset.DataID.creatorDID" value="ivoa://esa/gaia/" />
+    <ATTRIBUTE dmrole="ds:dataset.DataID.version" value="0.0" />
+    <ATTRIBUTE dmrole="ds:dataset.DataID.date" value="2018:11:11" />
+    <ATTRIBUTE dmrole="ds:dataset.DataID.creationType" value="LiteMappingTest" />
     <INSTANCE dmrole="ds:dataset.DataID.creator" dmtype="ds:dataset.Creator">
         <INSTANCE dmrole="ds:party.Role.party" dmtype="ds:party.Individual">
-            <VALUE dmrole="ds:party.Party.name" value="VODML-Team" />
+            <ATTRIBUTE dmrole="ds:party.Party.name" value="VODML-Team" />
        </INSTANCE>
     </INSTANCE>
 </INSTANCE>
@@ -316,9 +375,9 @@ Mapping for either object type or a datatype instances.
      \begin{tabular}{|p{3cm}|p{7cm}|}
        \hline Child &  Role\\
        \hline  \texttt{INSTANCE}    & Another embedded instance . \\       
-       \hline  \texttt{VALUE}    & Primitive attribute . \\       
-       \hline  \texttt{COMPOSITION}    & Composition with a limited set of  \texttt{INSTANCE} e.g. author list\\      
-       \hline  \texttt{ARRAY}    & Composition with a set of  \texttt{INSTANCE} corresponding each to one row of the data table. \\
+       \hline  \texttt{ATTRIBUTE}    & Primitive attribute . \\       
+       \hline  \texttt{COLLECTION}    & Composition with a limited set of  \texttt{INSTANCE} e.g. author list\\      
+       \hline  \texttt{TABLE\_ROW\_TEMPLATE}    & Composition with a set of  \texttt{INSTANCE} corresponding each to one row of the data table. \\
        \hline  \texttt{FILTER}    & TbC \\
        \hline 
      \end{tabular}
@@ -348,20 +407,20 @@ Mapping for either object type or a datatype instances.
      \caption{Supported attribute patterns for  \texttt{INSTANCE}} 
  \end{table}
 
-\subsection{VALUE}
+\subsection{ATTRIBUTE}
 
-Mapping for primitive attributes. \texttt{VALUE}  are the model leaves that point onto real data. 
+Mapping for primitive attributes. \texttt{ATTRIBUTE}  are the model leaves that point onto real data. 
 
 
-\begin{lstlisting}[caption={VALUE examples},captionpos=b]
+\begin{lstlisting}[caption={ATTRIBUTE examples},captionpos=b]
 <INSTANCE dmrole="model:value.example" dmtype="model:value.Example">
-    <VALUE dmrole="model:preset.value" value="Preset Value" />    
-    <VALUE dmrole="model:ref.value" ref="fieldID" />    
-    <VALUE dmrole="model:reforpreset.value" value="Preset Value" ref="fieldID" />
+    <ATTRIBUTE dmrole="model:preset.value" value="Preset Value" />    
+    <ATTRIBUTE dmrole="model:ref.value" ref="fieldID" />    
+    <ATTRIBUTE dmrole="model:reforpreset.value" value="Preset Value" ref="fieldID" />
  </INSTANCE>
 \end{lstlisting}
 
- \texttt{VALUE}s have no children. 
+ \texttt{ATTRIBUTE}s have no children. 
 
 \begin{table}[ht!]
      \begin{tabular}{|p{1.5cm}|p{4cm}|p{7cm}|}
@@ -373,8 +432,8 @@ Mapping for primitive attributes. \texttt{VALUE}  are the model leaves that poin
        \hline  
       @value  & MUST if no \texttt{@ref } element attribute. \newline MAY if \texttt{@ref} element attribute 
                     & Value of the instance attribute. 
-                     \newline If  \texttt{VALUE} has also a \texttt{@ref}, \texttt{@ref} MUST be resolved first.
-                     \texttt{VALUE}  MUST be taken when \texttt{@ref} cannot be resolved \\
+                     \newline If  \texttt{ATTRIBUTE} has also a \texttt{@ref}, \texttt{@ref} MUST be resolved first.
+                     \texttt{ATTRIBUTE}  MUST be taken when \texttt{@ref} cannot be resolved \\
         \hline
        @ref  & MUST if no \texttt{@value} element attribute. 
                      \newline MAY if \texttt{@value} element attribute 
@@ -386,7 +445,7 @@ Mapping for primitive attributes. \texttt{VALUE}  are the model leaves that poin
                     \\
        \hline 
      \end{tabular}
-     \caption{Supported attributes for  \texttt{VALUE}} 
+     \caption{Supported attributes for  \texttt{ATTRIBUTE}} 
  \end{table}
 
 \begin{table}[ht!]
@@ -399,7 +458,7 @@ Mapping for primitive attributes. \texttt{VALUE}  are the model leaves that poin
                   \newline and the this set in  \texttt{@value} if \texttt{@ref} cannot be resolved\\
     \hline 
   \end{tabular}
-  \caption{Supported attribute patterns for  \texttt{VALUE}} 
+  \caption{Supported attribute patterns for  \texttt{ATTRIBUTE}} 
  \end{table}
 
 \appendix
