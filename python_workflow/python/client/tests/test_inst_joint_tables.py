@@ -11,7 +11,7 @@ from client.inst_builder.join_iterator import JoinIterator
 from client.inst_builder.vodml_instance import VodmlInstance
 from utils.dict_utils import DictUtils
 
-from tests import logger
+from client.tests import logger
 
 class Test(unittest.TestCase):
 
