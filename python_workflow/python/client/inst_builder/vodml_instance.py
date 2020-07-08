@@ -9,8 +9,8 @@ from client.inst_builder.column_mapping import ColumnMapping
 from client.inst_builder.table_iterator import TableIterator
 from client.inst_builder.row_filter import RowFilter
 from client.inst_builder import logger, instancier
-from client.launchers.instance_from_votable import InstanceFromVotable
-from client.inst_builder.json_mapping_builder import JsonMappingBuilder
+from client.translator.instance_from_votable import InstanceFromVotable
+from client.translator.json_mapping_builder import JsonMappingBuilder
 from client.inst_builder.instancier import Instancier
 from client.inst_builder.json_block_extractor import JsonBlockExtractor
 from copy import deepcopy

@@ -6,8 +6,8 @@ Created on 22 juin 2020
 import unittest
 import os
 import json
-from client.inst_builder.json_mapping_builder import JsonMappingBuilder
-from client.launchers.instance_from_votable import InstanceFromVotable
+from client.translator.json_mapping_builder import JsonMappingBuilder
+from client.translator.instance_from_votable import InstanceFromVotable
 from client.tests import logger
 from utils.dict_utils import DictUtils
 
