@@ -22,8 +22,8 @@ class Test(unittest.TestCase):
             self.vodml_instance.populate_templates()
             self.vodml_instance.connect_join_iterators()
             self.populated = True
-        instancier = self.vodml_instance.instanciers["Results"]
-        full_dict = instancier.get_full_instance()
+        table_mapper = self.vodml_instance.table_mappers["Results"]
+        full_dict = table_mapper.get_full_instance()
         print(DictUtils.get_pretty_json(full_dict))
         sys.exit(1)
 

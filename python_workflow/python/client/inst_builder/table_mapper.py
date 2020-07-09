@@ -15,7 +15,7 @@ from client.inst_builder.att_utils import AttUtils
 
 from copy import deepcopy
 
-class Instancier(object):
+class TableMapper(object):
     '''
     classdocs
     '''
@@ -241,7 +241,7 @@ class Instancier(object):
                             cpt = 0
                             inst = None
                             while True:
-                                inst = join_iterator.instancier._get_next_row_instance()
+                                inst = join_iterator.table_mapper._get_next_row_instance()
                                 if inst is None:
                                     break
                                 elif cpt == 0:

@@ -21,17 +21,17 @@ class TestVodmlInstance(unittest.TestCase):
                              , "=======")
         
     def test_2(self):
-        #print(vodml_instance.instanciers.keys())
-        self.assertListEqual(list(self.vodml_instance.instanciers.keys()), 
+        #print(vodml_instance.table_mappers.keys())
+        self.assertListEqual(list(self.vodml_instance.table_mappers.keys()), 
                              ['Results', 'OtherResults'], 
-                             "Instancier keys not matching")
+                             "TableMapper keys not matching")
         
     def test_3(self):
         if self.populated is False:
             self.vodml_instance.populate_templates()
             self.vodml_instance.connect_join_iterators()
             self.populated = True
-        self.assertEqual(self.vodml_instance.instanciers["Results"].join_iterators["OtherResults"].__repr__(), 
+        self.assertEqual(self.vodml_instance.table_mappers["Results"].join_iterators["OtherResults"].__repr__(), 
                              "Join iterator f_table=OtherResults p_key=_poserr_148, f_key=_foreign", 
                              "")
     
@@ -40,7 +40,7 @@ class TestVodmlInstance(unittest.TestCase):
             self.vodml_instance.populate_templates()
             self.vodml_instance.connect_join_iterators()
             self.populated = True
-        column_mapping = self.vodml_instance.instanciers["Results"].table_iterators['primary:point'].column_mapping
+        column_mapping = self.vodml_instance.table_mappers["Results"].table_iterators['primary:point'].column_mapping
         self.assertListEqual(list(column_mapping.column_refs.keys()), ['_poserr_148'], "")
     
     def test_21(self):
@@ -49,8 +49,8 @@ class TestVodmlInstance(unittest.TestCase):
             self.vodml_instance.populate_templates()
             self.vodml_instance.connect_join_iterators()
             self.populated = True
-        instancier = self.vodml_instance.instanciers["OtherResults"]
-        full_dict = instancier.get_full_instance()
+        table_mapper = self.vodml_instance.table_mappers["OtherResults"]
+        full_dict = table_mapper.get_full_instance()
 
         #print(DictUtils.get_pretty_json(full_dict))
         self.assertDictEqual(full_dict, DictUtils.read_dict_from_file(self.json_ref_path), "")
@@ -61,8 +61,8 @@ class TestVodmlInstance(unittest.TestCase):
             self.vodml_instance.populate_templates()
             self.vodml_instance.connect_join_iterators()
             self.populated = True
-        instancier = self.vodml_instance.instanciers["Results"]
-        full_dict = instancier.get_full_instance()
+        table_mapper = self.vodml_instance.table_mappers["Results"]
+        full_dict = table_mapper.get_full_instance()
 
         #print(DictUtils.get_pretty_json(full_dict))
         self.assertDictEqual(full_dict, DictUtils.read_dict_from_file(self.json_ref_path), "")

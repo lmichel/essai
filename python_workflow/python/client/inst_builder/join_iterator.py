@@ -21,7 +21,7 @@ class JoinIterator(object):
         self.primary_key = primary_key
         self.foreign_key = foreign_key
         self.json_join_content = json_join_content
-        self.instancier = None
+        self.table_mapper = None
         self.parsed_table = None
         self.row_filter = None
         #print(DictUtils.get_pretty_json(self.json_join_content))
@@ -31,7 +31,7 @@ class JoinIterator(object):
             self.foreign_table, self.primary_key, self.foreign_key)
         
     def connect_votable(self, parsed_table):
-        from client.inst_builder.instancier import Instancier
+        from client.inst_builder.table_mapper import TableMapper
         self.parsed_table = parsed_table
         ack = None
         acv = None
@@ -40,8 +40,8 @@ class JoinIterator(object):
                 ack = k
                 acv = self.json_join_content[k]
                 break
-        logger.info("Build instancier for data joint with table %s", self.foreign_table)
-        self.instancier = Instancier(
+        logger.info("Build table_mapper for data joint with table %s", self.foreign_table)
+        self.table_mapper = TableMapper(
             self.foreign_table,
             None,
             parsed_table=self.parsed_table,
@@ -68,15 +68,15 @@ class JoinIterator(object):
                     }
                 }
             )
-        self.instancier.resolve_refs_and_values(resolve_refs=False)
-        self.instancier.map_columns()
-        for _, table_iterator in self.instancier.table_iterators.items():
+        self.table_mapper.resolve_refs_and_values(resolve_refs=False)
+        self.table_mapper.map_columns()
+        for _, table_iterator in self.table_mapper.table_iterators.items():
             self.row_filter = table_iterator.row_filter
             break;
 
     def set_foreignkey_value(self, value):   
         self.row_filter.value = value
-        self.instancier.rewind()
+        self.table_mapper.rewind()
         
     def get_subset_instance(self, key_value):
         self.row_filter = RowFilter({

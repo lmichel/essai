@@ -5,7 +5,7 @@ Created on 22 juin 2020
 '''
 import unittest
 import os
-from client.inst_builder.instancier import Instancier
+from client.inst_builder.table_mapper import TableMapper
 from utils.dict_utils import DictUtils
 from client.translator.instance_from_votable import InstanceFromVotable
 from client.translator.json_mapping_builder import JsonMappingBuilder
@@ -15,9 +15,9 @@ class TestInstanceFullFeature(unittest.TestCase):
     def test_1(self):
         self.json_ref_path = os.path.join(self.data_path, "./data/test_inst_fullfeature_1.json")
         self.maxDiff = None
-        self.instancier.resolve_refs_and_values()
-        self.instancier.map_columns()
-        full_dict = self.instancier.get_full_instance()
+        self.table_mapper.resolve_refs_and_values()
+        self.table_mapper.map_columns()
+        full_dict = self.table_mapper.get_full_instance()
         #print(DictUtils.get_pretty_json(full_dict))
         #print( DictUtils.read_dict_from_file(json_ref_path))
         self.assertDictEqual(full_dict, DictUtils.read_dict_from_file(self.json_ref_path), "")  
@@ -25,9 +25,9 @@ class TestInstanceFullFeature(unittest.TestCase):
     def test_2(self):
         self.json_ref_path = os.path.join(self.data_path, "./data/test_inst_fullfeature_2.json")
         self.maxDiff = None
-        self.instancier.resolve_refs_and_values()
-        self.instancier.map_columns()
-        full_dict = self.instancier.get_full_instance(resolve_refs=True)
+        self.table_mapper.resolve_refs_and_values()
+        self.table_mapper.map_columns()
+        full_dict = self.table_mapper.get_full_instance(resolve_refs=True)
         #print(DictUtils.get_pretty_json(full_dict))
         #print( DictUtils.read_dict_from_file(json_ref_path))
         self.assertDictEqual(full_dict, DictUtils.read_dict_from_file(self.json_ref_path), "")        
@@ -52,7 +52,7 @@ class TestInstanceFullFeature(unittest.TestCase):
         #print(DictUtils.get_pretty_json(builder.json))
 
         
-        self.instancier = Instancier("Results"
+        self.table_mapper = TableMapper("Results"
                              , self.votable_path
                              , json_inst_dict=self.builder.json
                                  )

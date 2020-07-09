@@ -11,26 +11,26 @@ class AstropyWrapper(object):
     '''
 
 
-    def __init__(self, instancier):
+    def __init__(self, table_mapper):
         '''
         Constructor
         '''
-        self.instancier = instancier
+        self.table_mapper = table_mapper
         
     
     def get_space_frame(self, element):
-            #ref_location = self.instancier.search_instance_by_role("coords:StdRefLocation.position", 
+            #ref_location = self.table_mapper.search_instance_by_role("coords:StdRefLocation.position", 
             #                                                root_element=ele)[0]['@value']
             #print(ref_location)               
-            frame_instance = self.instancier.search_instance_by_type("coords:SpaceFrame", 
+            frame_instance = self.table_mapper.search_instance_by_type("coords:SpaceFrame", 
                                                             root_element=element)[0]
                                                             
-            ref_frame = self.instancier.search_instance_by_role("coords:SpaceFrame.spaceRefFrame", 
+            ref_frame = self.table_mapper.search_instance_by_role("coords:SpaceFrame.spaceRefFrame", 
                                                             root_element=frame_instance)[0]['@value'].upper()  
             if ref_frame == "Galactic":
                 retour =  Galactic()
             else :
-                ref_equinox = self.instancier.search_instance_by_role("coords:SpaceFrame.equinox", 
+                ref_equinox = self.table_mapper.search_instance_by_role("coords:SpaceFrame.equinox", 
                                                             root_element=frame_instance)[0]['@value'] 
                 if ref_frame == "ICRS":
                     if not ref_equinox :

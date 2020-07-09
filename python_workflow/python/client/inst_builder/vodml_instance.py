@@ -8,10 +8,10 @@ from astropy.io.votable import parse
 from client.inst_builder.column_mapping import ColumnMapping
 from client.inst_builder.table_iterator import TableIterator
 from client.inst_builder.row_filter import RowFilter
-from client.inst_builder import logger, instancier
+from client.inst_builder import logger, table_mapper
 from client.translator.instance_from_votable import InstanceFromVotable
 from client.translator.json_mapping_builder import JsonMappingBuilder
-from client.inst_builder.instancier import Instancier
+from client.inst_builder.table_mapper import TableMapper
 from client.inst_builder.json_block_extractor import JsonBlockExtractor
 from copy import deepcopy
 from utils.dict_utils import DictUtils
@@ -23,10 +23,10 @@ class VodmlInstance(object):
     '''
     def __init__(self, votable_path):
         #
-        # One instancier per TEMPLATES
+        # One table_mapper per TEMPLATES
         # table name taken as keys
         #
-        self.instanciers = {}
+        self.table_mappers = {}
         self.votable_path = votable_path   
         #
         # Dict translation of the <VODML> block
@@ -36,8 +36,8 @@ class VodmlInstance(object):
         self.build_json_view()
         # Make the dictionary  compliant with JSON mapping syntax
         self.build_json_mapping()
-        # Build the instancier
-        self.build_instancier_map()
+        # Build the table_mapper
+        self.build_table_mapper_map()
 
         
     def build_json_view(self):
@@ -58,7 +58,7 @@ class VodmlInstance(object):
         builder.revert_elements("ATTRIBUTE")
         self.json_view = builder.json
 
-    def build_instancier_map(self):
+    def build_table_mapper_map(self):
         logger.info("Looking for tables matching TEMPLATES ")
         votable = parse(self.votable_path)
         for template_key in self.json_view["VODML"]["TEMPLATES"].keys():
@@ -82,42 +82,42 @@ class VodmlInstance(object):
             if name == None:
                 raise Exception("Cannot find table with name or ID = " + name)
             else:
-                logger.info("Add Instancier for table %s", name)
-                self.instanciers[template_key] = Instancier(
+                logger.info("Add TableMapper for table %s", name)
+                self.table_mappers[template_key] = TableMapper(
                     template_key,
                     self.votable_path, 
                     parsed_table=parsed_table,
                     json_inst_dict=self.json_view)
 
     def populate_templates(self, resolve_refs=False):
-        for k,v in self.instanciers.items():
+        for k,v in self.table_mappers.items():
             logger.info("populate template %s", k)
             v.resolve_refs_and_values(resolve_refs=resolve_refs)
             v.map_columns()        
  
     def connect_join_iterators(self):
         parse_tables = {}
-        for template,instancier in self.instanciers.items():
-            parse_tables[template] = instancier.parsed_table
+        for template,table_mapper in self.table_mappers.items():
+            parse_tables[template] = table_mapper.parsed_table
             
-        for template,instancier in self.instanciers.items():
-            for target,join_iterator in instancier.join_iterators.items():
+        for template,table_mapper in self.table_mappers.items():
+            for target,join_iterator in table_mapper.join_iterators.items():
                 logger.info("join template %s with template %s", template, target)
                 join_iterator.connect_votable(parse_tables[target])
 
     def get_root_element(self, root_class):
-        for template,instancier in self.instanciers.items():
+        for template,table_mapper in self.table_mappers.items():
             logger.info("Looking for %s instances in template %s", root_class, template)
-            json_block_extract = JsonBlockExtractor(instancier.json)
+            json_block_extract = JsonBlockExtractor(table_mapper.json)
             retour = json_block_extract.search_subelement_by_type(root_class)
             for block in retour:
                 if "@dmrole" not in block.keys():
                     logger.info("found (no role)")
-                    return instancier
+                    return table_mapper
                 role = block["@dmrole"]
                 if role == "" or role == "root":
                     logger.info("found with role=%s", role)
-                    return instancier
+                    return table_mapper
         return None
     
  

@@ -83,25 +83,25 @@ class InstanceFromVotable:
                              of the referenced instance
         :type resolve_refs: boolean
         '''
-        self._instancier = Instancier(self.votable_path
+        self._table_mapper = TableMapper(self.votable_path
                                   , json_inst_dict=self.json_vodml_block)
-        self._instancier.set_element_values(resolve_refs=resolve_refs)
-        self._instancier.set_array_values()
-        self._instancier.map_columns()
+        self._table_mapper.set_element_values(resolve_refs=resolve_refs)
+        self._table_mapper.set_array_values()
+        self._table_mapper.map_columns()
         logger.info("VODML instance created")
 
     def build_instance(self, resolve_refs=False):
         '''
          This is the public class that must be invoked from outside
          It does the checking and build the model instance that is hosted by 
-         an Instancier instance
+         an TableMapper instance
         :param resolve_refs: Flag for resolving the cross-reference in the mapping. 
                              if true, instance references are replaced with a copy 
                              of the referenced instance
         :type resolve_refs: boolean
-        :return : An Instancier the contains the dictionary representation of the model 
+        :return : An TableMapper the contains the dictionary representation of the model 
                   in addition to some getters 
-        :rtype: Instancier instance
+        :rtype: TableMapper instance
         '''
         logger.info("Build in memory instance")
 
@@ -109,7 +109,7 @@ class InstanceFromVotable:
         self._validate_vodml_block()
         self._build_instance()
         self._populate_instance(resolve_refs=resolve_refs)
-        return self._instancier
+        return self._table_mapper
     """
 
     

@@ -12,15 +12,15 @@ class Test(unittest.TestCase):
 
 
     def testName(self):
-        self.assertEqual(self.join_iterator.instancier.get_flatten_data_head()
+        self.assertEqual(self.join_iterator.table_mapper.get_flatten_data_head()
                          ,['test:detection(test:detection.id) [col#1 _foreign]', 'test:detection(test:detection.num) [col#0 _num_148]'],"")
         
     def testIter_11(self):
-        self.join_iterator.instancier.rewind()
+        self.join_iterator.table_mapper.rewind()
         self.join_iterator.set_foreignkey_value(1)
         cpt = 1;
         while True:
-            inst = self.join_iterator.instancier._get_next_row_instance()
+            inst = self.join_iterator.table_mapper._get_next_row_instance()
             if inst != None:
                 self.assertDictEqual(
                     inst, 
@@ -43,11 +43,11 @@ class Test(unittest.TestCase):
                 break
             
     def testIter_12(self):
-        self.join_iterator.instancier.rewind()
+        self.join_iterator.table_mapper.rewind()
         self.join_iterator.set_foreignkey_value(1)
         cpt = 1;
         while True:
-            inst = self.join_iterator.instancier._get_next_flatten_row()
+            inst = self.join_iterator.table_mapper._get_next_flatten_row()
             if inst != None:
                 self.assertListEqual(
                     inst, 
@@ -58,11 +58,11 @@ class Test(unittest.TestCase):
                 break
 
     def testIter_2(self):
-        self.join_iterator.instancier.rewind()
+        self.join_iterator.table_mapper.rewind()
         self.join_iterator.set_foreignkey_value(2)
         cpt = 1;
         while True:
-            inst = self.join_iterator.instancier._get_next_row_instance()
+            inst = self.join_iterator.table_mapper._get_next_row_instance()
             if inst != None:
                 self.assertDictEqual(
                     inst, 
@@ -85,11 +85,11 @@ class Test(unittest.TestCase):
                 break
             
     def testIter_22(self):
-        self.join_iterator.instancier.rewind()
+        self.join_iterator.table_mapper.rewind()
         self.join_iterator.set_foreignkey_value(2)
         cpt = 1;
         while True:
-            inst = self.join_iterator.instancier._get_next_flatten_row()
+            inst = self.join_iterator.table_mapper._get_next_flatten_row()
             if inst != None:
                 self.assertListEqual(
                     inst, 

@@ -5,7 +5,7 @@ Created on 22 juin 2020
 '''
 import unittest
 import os
-from client.inst_builder.instancier import Instancier
+from client.inst_builder.table_mapper import TableMapper
 from utils.dict_utils import DictUtils
 
 class TestInstance(unittest.TestCase):
@@ -16,35 +16,35 @@ class TestInstance(unittest.TestCase):
         data_path = os.path.dirname(os.path.realpath(__file__))
         votable_path = os.path.join(data_path, "./data/test_array.xml")
         json_ref_path = os.path.join(data_path, "./data/test_array_1.json")
-        instancier = Instancier("Results"
+        table_mapper = TableMapper("Results"
                              , votable_path
                              , json_inst_dict=DictUtils.read_dict_from_file(json_ref_path))
-        instancier.resolve_refs_and_values()
+        table_mapper.resolve_refs_and_values()
 
-        self.assertListEqual([*instancier.table_iterators], ['meas:Error.statError'], "")
-        self.assertDictEqual(instancier.table_iterators['meas:Error.statError'].column_mapping.column_refs
+        self.assertListEqual([*table_mapper.table_iterators], ['meas:Error.statError'], "")
+        self.assertDictEqual(table_mapper.table_iterators['meas:Error.statError'].column_mapping.column_refs
                              , {'_poserr_148': {'parent_role': 'meas:Symmetrical.radius', 'role': 'ivoa:RealQuantity.value', 'index': None, 'field': None}}
                              , "")
         
-        instancier.map_columns()
-        self.assertDictEqual(instancier.table_iterators['meas:Error.statError'].column_mapping.column_ids
+        table_mapper.map_columns()
+        self.assertDictEqual(table_mapper.table_iterators['meas:Error.statError'].column_mapping.column_ids
                              , {0: {'name': 'oidsaada', 'ref': None, 'id': '_poserr_148'}}
                              , "")
 
-        self.assertListEqual(instancier.get_flatten_data_head()
+        self.assertListEqual(table_mapper.get_flatten_data_head()
                          ,['meas:Symmetrical.radius(ivoa:RealQuantity.value) [col#0 _poserr_148]'],""),
         cpt=1
         while True:
-            inst = instancier._get_next_flatten_row()
+            inst = table_mapper._get_next_flatten_row()
             if inst != None:
                 self.assertListEqual(inst, [cpt], "")
                 cpt += 1
             else:
                 break
-        instancier.rewind()
+        table_mapper.rewind()
         cpt=1
         while True:
-            inst = instancier._get_next_row_instance()
+            inst = table_mapper._get_next_row_instance()
             if inst != None:
                 self.assertDictEqual(inst
                                      , {
