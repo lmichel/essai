@@ -98,20 +98,24 @@ This documentary role facilitates the communication between the stackholders and
 
 At data level, interoperability consists in arranging searched data in a way that a client can understand them without taking care of their origin. So that, the same code can process and compare data coming from different sources.  That way to arrange data is given by the model.
 
-This is not easy to do with VOtables because VOTables are containers. The VOTable schema cannot say how data are mapped onto which model or whether they match any model either. This is not an issue for simple protocol responses (ref) because the VOTable structure is defined by the protocol itself but this is however a big issue for VOTables containing native data such as Vizier queries or TAP response.
+This is not done by default with VOtables because VOTables are containers. The VOTable schema cannot say how data are mapped on a given model or whether they match any model at all. This is not an issue for simple protocol responses (ref) because the VOTable structure is defined by the protocol itself but this is however a big issue for VOTables containing native data such as Vizier  or TAP query responses.
 
-The challenge here is to bind native data with a given model in way that a model aware software can see them as model instances while maintaining the possibility to access them in their original forms.
-This is partially done with UTypes that connect FIELDs or PARAMs with model leaves. Unfortunately, there is no standard way to construct UTypes and thus to parse them. This is just because UTypes have been invented at a period when there was no standard way to serialize model.
+The challenge here is to bind native data with a given model in a way that a model aware software can see them as model instances while maintaining the possibility to access them in their original forms.
+This is partially done with UTypes which may connect FIELDs or PARAMs with model leaves in the case of simple tree-views of the model. Unfortunately, there is no more unique  way to buld and parse UTypes in more complex graph views of the model (for example when the instances realize some loops in the model). 
 
-VODML (ref), which is  a REC since 2016,  is a meta-model that gives a standard way to design VO models and to make them machine-readable. In VODML, model leaves are no longer identified by long strings denoting the path through the model, as Utypes do,  but by their location in the model hierarchy.
+%Fb : "This is just because UTypes have been invented at a period when there was no standard way to formally describe  models." Actually it's more complex than that. As long as the model instances are flat or simple trees (charcaterisation) utypes may work. When you have some loops (like in complex Provenace queries) utypes are not enough to map the structure of instances
+
+VODML (ref),  is a meta-model that gives a standard way to design VO models and to make them machine-readable.
+%FB: if we have the reference we don't need "which is a rec since é016"
+In VODML, model leaves are no longer identified by long strings denoting the path through the model, as Utypes do,  but by their location in the model hierarchy.
 The consequence is that an annotation mechanism based on VODML must be able to reconstruct the model hierarchy. This is very interesting because a copy that model hierarchy with leaves set with real data is nothing else that a model instance which is exactly what we need to be interoperable.
 
-The idea of the VODML mapping is to insert on the top of the VOTable an XML block denoting the model structure and containing references to the actual data.
-So that, to build an model instance, the model-aware client has just to make a copy of that structure and to resolve the references. Other clients can just ignore the mapping block. This approach, has been proposed by (GL and OL). 
+The main concept of VODML mapping is to insert on  top of the VOTable an XML block (denoting) following (?)  the model structure and containing references to the actual data.
+In such a way that to build a model instance, the model-aware client only has to make a copy of that structure and to resolve the references. More generic model-unaware clients can just ignore the mapping block. This approach, has been proposed by (GL and OL). 
 
 We have tested the syntax originally proposed and it turned out that it was not well suited for archival data or for TAP responses where the annotation process must be automated as much as possible (entirely for TAP). 
 
-Vodml-instance-vot is based on the same principles as the original proposal but with a particular concern for the annotation of archival data by keeping focused on both client needs and easiness of the annotation process.
+Vodml-instance-vot is based on the same principles as the original proposal but with a particular attention given to the annotation of archival data by keeping focused on both client needs and easiness of the annotation process.
 This requires the syntax to be as simple as possible and as flexible as possible to be usable with a wide range of data sets.
 Vodml-instance-vot  has been built upon 3 basic elements (simple values,  tuples and  lists, like JSON)  plus a few others annotations guiding the parser.
 The connections with the data are setup by XML element attributes, so that the mapping tree just depends on the model but not on the mapped data.
