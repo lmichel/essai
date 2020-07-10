@@ -107,18 +107,24 @@ This is partially done with UTypes which may connect FIELDs or PARAMs with model
 
 VODML (ref),  is a meta-model that gives a standard way to design VO models and to make them machine-readable.
 %FB: if we have the reference we don't need "which is a rec since é016"
-In VODML, model leaves are no longer identified by long strings denoting the path through the model, as Utypes do,  but by their location in the model hierarchy.
-The consequence is that an annotation mechanism based on VODML must be able to reconstruct the model hierarchy. This is very interesting because a copy that model hierarchy with leaves set with real data is nothing else that a model instance which is exactly what we need to be interoperable.
+In VODML, model leaves are  identified by their location in the model hierarchy.
+%FB: see above the actual difference between utype strategy and vodml lite mapping
+The consequence is that an annotation mechanism based on VODML must be able to reconstruct the model hierarchy. 
+%FB : I don't understand at all following sentence "This is very interesting because a copy that model hierarchy with leaves set with real data is nothing else that a model instance which is exactly what we need to be interoperable."
 
 The main concept of VODML mapping is to insert on  top of the VOTable an XML block (denoting) following (?)  the model structure and containing references to the actual data.
-In such a way that to build a model instance, the model-aware client only has to make a copy of that structure and to resolve the references. More generic model-unaware clients can just ignore the mapping block. This approach, has been proposed by (GL and OL). 
+In such a way that in order to build a model instance, a model-aware client only has to make a copy of that structure and to resolve the references. More generic model-unaware clients can just ignore the mapping block. This approach, has been proposed by (GL and OL). 
 
 We have tested the syntax originally proposed and it turned out that it was not well suited for archival data or for TAP responses where the annotation process must be automated as much as possible (entirely for TAP). 
 
 Vodml-instance-vot is based on the same principles as the original proposal but with a particular attention given to the annotation of archival data by keeping focused on both client needs and easiness of the annotation process.
 This requires the syntax to be as simple as possible and as flexible as possible to be usable with a wide range of data sets.
-Vodml-instance-vot  has been built upon 3 basic elements (simple values,  tuples and  lists, like JSON)  plus a few others annotations guiding the parser.
+We must emphasize that we are actually mapping on the data a representation of a peculiar set of instances of the model and not the genral model istself.
+Vodml-instance-vot  has been built upon 3 basic elements  (simple values,  tuples and  lists, like in JSON)
+%FB : I don't understand why they are the basic elements (simple values,  tuples and  lists, like JSON) Is that VALUE, ARRAY?COMPOSITION ?  
+plus a few others annotations guiding the parser.
 The connections with the data are setup by XML element attributes, so that the mapping tree just depends on the model but not on the mapped data.
+%FB : Actually only "ref" attribute ?
 
 These ideas were first tested in the framework of the TDIG on VOTABLEs containing time series provided by different missions such as Gaia or ZWICKI. Then the syntax has been refined to be used to validate the Mango model on real data.
 
@@ -224,21 +230,21 @@ IVOA architecture \citep{note:VOARCH}.
 
 \subsubsection{Client Side}
 \TODO{Put a real use case}
-The mapping is self consistant. The role of the mapping is to give the client all information it needs a reconstruct a datastructure similar to the model one. 
-A model-aware client must be able to do this  this without implementing any code specific to any particular model.  The mapping syntax is independant of the model. The structure of the mapped model is given by the arrangement of the mapping elements, not by the elements them-self
+The mapping is self consistant. The role of the mapping is to give the client all information it needs to reconstruct a datastructure similar to a set of instances of the the model. 
+A model-aware client must be able to do this without implementing any code specific to any particular model.  The mapping syntax is independant of the model. The structure of the mapped model is given by the arrangement of the mapping elements, not by the elements themselves
 .
 
 \subsubsection{Server Side}
-We have identified 3 sorts of servers that could annotate data:
+We have identified 3 types of servers that could annotate data:
 \begin{enumerate}
    \item Mission data provider: the data annotation can be set once forever for each data product at the design phase.
-   \item Archival data provider: The data annotation must be done for each archived datat set. The curator has a little control, on the data format and he/she has to do his best to math data with the model(s) 
-   \item  TAP data provider: In case of TAP services, the annotation process in of charge of the TAP server that must match the queried data with the model quantities.
+   \item Archival data provider: The data annotation must be done for each archived datat set. The curator has a little control, on the data format and he/she has to do his best to match data with the model(s) 
+   \item  TAP data provider: In case of TAP services, the annotation process is in charge of the TAP server that must dynamically  match the queried data with the model quantities for each specific query.
 \end{enumerate}
 
-The goal of the version is to support 1) and 2) with a special attention to facilitate 2). 3) is still an experimental feature at the time of this specification.
+The goal of this version of the specification is to support requirements 1) and 2) with a special attention to make 2) easier. Support of requirement 3) is still an experimental feature at the time  this specification is written.
 
-The annotation process can represent a significant extra work for the curator team that must be limited as much as possible. To do so the mapping syntax is designed to facilitate the use of templates. The structure of the mappinfg DOM does not depends on the way mapped data are arranged. The connection between  real data and mapping is done through XML elements attributes without changing the nature or the location of the mapping elements . 
+The annotation process can represent a significant extra work for the curator team that must be limited as much as possible. To do so the mapping syntax is designed to facilitate the use of templates. The structure of the mapping DOM (??? ) does not depends on the way mapped data are arranged. The connection between  real data and mapping structure is done through XML elements attributes without changing the nature or the location of the mapping elements . 
 
 
 \subsection{Requirements}
@@ -251,27 +257,27 @@ The annotation process can represent a significant extra work for the curator te
 
 \item Different Usage Levels 
 \begin{itemize}
-   \item The data mapping must be easy to be ignored by the client
+   \item The data mapping must be easily ignored by the client
    \item The data mapping must allow clients to easily detect the model on which data are mapped
-   \item The data mapping must allow clients to easily get the metadata (e.g. coordinate systems)
+   \item The data mapping must allow clients to easily get the general metadata (e.g. coordinate systems)
    \item The data mapping must allow clients to get full model instances for each table row
 \end{itemize}
 
 \item Easy to Build 
 \begin{itemize}
    \item The mapping structure must be independant of the data structure
-   \item The mapping syntax should facilitate the building of mapping components and templates.
+   \item The mapping syntax should make  the building of mapping components and templates easy.
 \end{itemize}
 
 \item Complex Data Mapping 
 \begin{itemize}
-   \item The mapping syntax must support to retrieve data over several tables
-   \item The mapping syntax must be able to filter the data rows that are part of the current instance
+   \item The mapping syntax must support to retrieve data spread over several tables
+   \item The mapping syntax must be able to filter data rows which are part of a specific instance
    \item The mapping syntax must be able to group data rows in an set of instances
 \end{itemize}
 \end{itemize}
 
-The syntax specified in this standard gives rules to build consistant annotations for any model. However, it do not prevent to do foolish things, the same way that a programming langage grammar does not prevent against irrelevant software.
+The syntax specified in this standard gives rules to build consistant annotations for any model. However, it do not prevent to do foolish things, in the same way that a programming langage grammar does not prevent people against writing irrelevant software.
 
 
 
