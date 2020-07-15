@@ -23,4 +23,4 @@ It can be explored by running the class `src/main/java/sample/TimeSeriesExample.
 
 # PDF preview
 
-The PDF preview can be seen [here](https://github.com/ivoa-std/vodml-lite-mapping/releases/download/auto-pdf-preview/vodml-lite-mapping-draft.pdf) thanks to the ADQL team who has written a workflow generating it automatically.
+The PDF preview can be seen [here](https://github.com/lmichel/vodml-lite-mapping/releases/download/auto-pdf-preview/vodml-lite-mapping-draft.pdf) thanks to the ADQL team who has written a workflow generating it automatically.
