@@ -1,0 +1,14 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Arviset \harvardand\ Gaudet et~al.]{Arviset, Gaudet \harvardand\
+  the {IVOA} Technical Coordination~Group}{2010}{note:VOARCH}
+Arviset, C., Gaudet, S. \harvardand\ the {IVOA} Technical Coordination~Group
+  \harvardyearleft 2010\harvardyearright , `{IVOA} architecture', {IVOA Note}.
+\newline\url{http://www.ivoa.net/documents/Notes/IVOAArchitecture}
+
+\harvarditem{Bradner}{1997}{std:RFC2119}
+Bradner, S.  \harvardyearleft 1997\harvardyearright , `Key words for use in
+  {RFCs} to indicate requirement levels', RFC 2119.
+\newline\url{http://www.ietf.org/rfc/rfc2119.txt}
+
+\end{thebibliography}
