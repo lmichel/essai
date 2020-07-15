@@ -5,7 +5,9 @@ Created on Jul 6, 2020
 '''
 
 class AttUtils(object):
-
+    """
+    Some static methods doing tests on JSON mapping elements 
+    """
     @staticmethod 
     def id_matches(element, searched_id):     
         """
